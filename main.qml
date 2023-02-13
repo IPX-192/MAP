@@ -66,4 +66,20 @@ Window {
 
     //定位显示区域
 
+    Item {
+        id:mapItem
+        width: 400
+        height: 40
+        anchors.left: title.left
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 200
+
+        Image {
+            anchors.fill: parent
+
+            source: "qrc:/iamge/testMap.png"
+            fillMode:Image.PreserveAspectCrop
+        }
+    }
+
 }
