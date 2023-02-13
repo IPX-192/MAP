@@ -215,4 +215,4 @@ Makefile.Debug
 *.json
 /.vs
 Makefile*
-bin/
+/bin/
