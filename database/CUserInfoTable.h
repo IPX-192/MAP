@@ -10,6 +10,7 @@
 **************************************************/
 
 #include "CAbstractConfigInfo.h"
+#include "../datamanager/CUserInfo.h"
 
 class CUserInfoTable : public CAbstractConfigInfo
 {
@@ -18,6 +19,11 @@ public:
     ~CUserInfoTable();
 
     virtual bool Check_Config_Table();
+
+    bool addUserInfo(const CUserInfo &info);
+    bool delUserInfo(const CUserInfo &info, bool bDeleteAll = false);
+    bool updateUserInfo(const string userID, const CUserInfo &info);
+    bool getAllUserInfo(const string userID, const CUserInfo &info);
 
 private:
     MapSysDatabase *m_pDatabase{nullptr};
