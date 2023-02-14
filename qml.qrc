@@ -18,5 +18,6 @@
         <file>font/MFYueYuan.ttf</file>
         <file>font/PingFang Heavy.ttf</file>
         <file>font/PingFang Regular.ttf</file>
+        <file>iamge/coord.png</file>
     </qresource>
 </RCC>

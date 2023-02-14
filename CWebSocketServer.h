@@ -26,13 +26,25 @@ public:
     //停止服务
     void stopServer();
 
+protected:
+    //获取IP地址
+    QString getLocalIP();
+
+
 signals:
     void sendMeg(QString meg);
+
+
+private:
+
+    //解析标签卡数组
+    void parseLabelMeg(QJsonArray &array);
 
 private slots:
     void onNewConnection();
     void socketDisconnected();
     void processTextMessage(QString message);
+    void processByteArrayMessage(QByteArray array);
 
 
 private:

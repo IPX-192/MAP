@@ -21,6 +21,7 @@ Window {
 
     //顶部栏
     Rectangle{
+
         id:title
         width: parent.width
         height: 80
@@ -70,6 +71,14 @@ Window {
                 anchors.fill: parent
                 onClicked: {
                     systemSettingLoader.visible = !systemSettingLoader.visible
+                    if(systemSettingLoader.visible)
+                    {
+                        hideSetTimer.start()
+                    }
+                    else
+                    {
+                        hideSetTimer.stop()
+                    }
                 }
             }
 
@@ -82,7 +91,7 @@ Window {
             visible: false
             anchors.horizontalCenter: configBtn.horizontalCenter
             anchors.top: configBtn.bottom
-            anchors.topMargin: 30
+            anchors.topMargin: 20
             z:20
             source: "qrc:/SystemConfig.qml"
         }
@@ -90,7 +99,8 @@ Window {
         Connections{
             target: systemSettingLoader.item
             onSetBtnClicked:{
-                console.log("sdadasdasd" + index)
+                systemSettingLoader.visible = false
+                hideSetTimer.stop()
                 if(index === 1)
                 {
                     bSetOrigin = true
@@ -99,7 +109,14 @@ Window {
         }
     }
 
-
+    Timer{
+        id:hideSetTimer
+        repeat: false
+        interval: 5000
+        onTriggered: {
+            systemSettingLoader.visible = false
+        }
+    }
 
 
 
@@ -128,6 +145,15 @@ Window {
             x:40
             y:40
             source: "qrc:/iamge/origin.png"
+        }
+
+        //坐标图片
+        Image {
+            id:coordImg
+            width: 34
+            height: 34
+            anchors.centerIn: parent
+            source: "qrc:/iamge/coord.png"
         }
 
         MouseArea{
