@@ -74,42 +74,45 @@ Window {
             }
 
         }
-    }
 
+        //系统设置菜单
+        Loader
+        {
+            id : systemSettingLoader
+            visible: false
+            anchors.horizontalCenter: configBtn.horizontalCenter
+            anchors.top: configBtn.bottom
+            anchors.topMargin: 30
+            z:20
+            source: "qrc:/SystemConfig.qml"
+        }
 
-    //系统设置菜单
-    Loader
-    {
-        id : systemSettingLoader
-        visible: false
-        anchors.horizontalCenter: configBtn.horizontalCenter
-        anchors.top: configBtn.bottom
-        anchors.topMargin: 30
-        z:20
-        source: "qrc:/SystemConfig.qml"
-    }
-
-    Connections{
-        target: systemSettingLoader.item
-        onSetBtnClicked:{
-            console.log("sdadasdasd" + index)
-            if(index === 1)
-            {
-                bSetOrigin = true
+        Connections{
+            target: systemSettingLoader.item
+            onSetBtnClicked:{
+                console.log("sdadasdasd" + index)
+                if(index === 1)
+                {
+                    bSetOrigin = true
+                }
             }
         }
     }
+
+
+
 
 
     //定位显示区域
 
     Item {
         id:mapItem
-        width: 800
-        height: 400
+        width: 500
+        height: 200
         anchors.left: title.left
+        anchors.leftMargin: 50
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 200
+        anchors.bottomMargin: 100
 
         Image {
             anchors.fill: parent
@@ -122,8 +125,8 @@ Window {
             id:originImg
             width: 25
             height: 25
-            x:200
-            y:200
+            x:40
+            y:40
             source: "qrc:/iamge/origin.png"
         }
 
