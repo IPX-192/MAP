@@ -19,5 +19,7 @@
         <file>font/PingFang Heavy.ttf</file>
         <file>font/PingFang Regular.ttf</file>
         <file>iamge/coord.png</file>
+        <file>UserInfoListView.qml</file>
+
     </qresource>
 </RCC>

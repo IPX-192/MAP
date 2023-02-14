@@ -65,6 +65,7 @@ HEADERS += \
     datamanager/CMapOriginInfo.h \
     datamanager/CTagInfo.h \
     datamanager/CUserInfo.h \
+    datamodel/CTagInfoModel.h \
     datamodel/CUserInfoModel.h
 
 SOURCES += \
@@ -78,5 +79,6 @@ SOURCES += \
         datamanager/CMapOriginInfo.cpp \
         datamanager/CTagInfo.cpp \
         datamanager/CUserInfo.cpp \
+        datamodel/CTagInfoModel.cpp \
         datamodel/CUserInfoModel.cpp \
         main.cpp
