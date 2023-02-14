@@ -21,9 +21,9 @@ Item {
         width: 120
         height: 103
         radius: 10
-        color: "yellow"
+        color: "white"
         border.width: 1
-        border.color: "yellow"
+        border.color: "black"
         anchors.fill: parent
 
         Column
@@ -47,7 +47,7 @@ Item {
                         id: displayText
                         text: qsTr( modelData )
                         font{ pixelSize: 20 ; family: "Microsoft YaHei"; bold: true}
-                        color: "white"
+                        color: "blue"
                         anchors.centerIn: parent
                     }
                     Image {

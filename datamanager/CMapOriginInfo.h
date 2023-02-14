@@ -1,4 +1,4 @@
-﻿#ifndef CMAPORIGININFO_H
+#ifndef CMAPORIGININFO_H
 #define CMAPORIGININFO_H
 
 class CMapOriginInfo {

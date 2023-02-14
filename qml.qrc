@@ -3,5 +3,8 @@
         <file>main.qml</file>
         <file>SystemConfig.qml</file>
         <file>iamge/testMap.png</file>
+        <file>AddUserInfo.qml</file>
+        <file>iamge/log.png</file>
+        <file>iamge/origin.png</file>
     </qresource>
 </RCC>
