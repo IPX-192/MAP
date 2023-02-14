@@ -6,5 +6,17 @@
         <file>AddUserInfo.qml</file>
         <file>iamge/log.png</file>
         <file>iamge/origin.png</file>
+        <file>iamge/usr.png</file>
+        <file>font/Digital-7Mono.TTF</file>
+        <file>font/FZDALTJ.OTF</file>
+        <file>font/HarmonyOS_Sans_Black.ttf</file>
+        <file>font/HarmonyOS_Sans_Bold.ttf</file>
+        <file>font/HarmonyOS_Sans_Light.ttf</file>
+        <file>font/HarmonyOS_Sans_Medium.ttf</file>
+        <file>font/HarmonyOS_Sans_Regular.ttf</file>
+        <file>font/HarmonyOS_Sans_Thin.ttf</file>
+        <file>font/MFYueYuan.ttf</file>
+        <file>font/PingFang Heavy.ttf</file>
+        <file>font/PingFang Regular.ttf</file>
     </qresource>
 </RCC>

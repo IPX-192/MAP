@@ -8,21 +8,30 @@ Window {
     height: 768
     title: qsTr("定位软件")
     property bool bSetOrigin:false
+
+    readonly property string  fontName:  qsTr("Microsoft YaHei")  // 字体名字
+
     //flags: Qt.FramelessWindowHint | Qt.Window
 
+    FontLoader{
+        id: localFont1
+        source: "qrc:/font/MFYueYuan.ttf"
+    }
 
+
+    //顶部栏
     Rectangle{
         id:title
-        width: 100
+        width: parent.width
         height: 50
-        color: "white"
-        anchors.left: parent.left
-        anchors.leftMargin: 50
+        color: "#1E2D5B"
         anchors.top: parent.top
-        anchors.topMargin: 30
+        anchors.topMargin: 10
 
         Image{
             id:logoImg
+            width: 50
+            height: 50
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 20
@@ -35,33 +44,36 @@ Window {
             anchors.left: logoImg.right
             anchors.leftMargin: 30
             text: qsTr("定位系统")
-        }
-    }
-
-    //配置按钮
-
-    Rectangle {
-        id:configBtn
-        width: 50
-        height: width
-        radius: width / 2
-        color: "white"
-        anchors.verticalCenter:title.verticalCenter
-        anchors.left: title.right
-        anchors.leftMargin: 600
-        border.color: "black"
-        Text {
-            anchors.centerIn: parent
-            text: qsTr("配置")
+            font.pixelSize: 26
+            font.family: fontName
+            color: "#FEFEFE"
         }
 
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {
-                systemSettingLoader.visible = !systemSettingLoader.visible
+        //配置按钮
+
+        Rectangle {
+            id:configBtn
+            width: 50
+            height: width
+            radius: width / 2
+            color: "white"
+            anchors.verticalCenter:logoImg.verticalCenter
+            anchors.left: logoImg.right
+            anchors.leftMargin: 500
+            border.color: "black"
+            Text {
+                anchors.centerIn: parent
+                text: qsTr("配置")
             }
-        }
 
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    systemSettingLoader.visible = !systemSettingLoader.visible
+                }
+            }
+
+        }
     }
 
 
@@ -93,8 +105,8 @@ Window {
 
     Item {
         id:mapItem
-        width: 500
-        height: 50
+        width: 800
+        height: 400
         anchors.left: title.left
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 200
@@ -108,10 +120,10 @@ Window {
         //原点图片
         Image{
             id:originImg
-            width: 20
-            height: 20
-            x:20
-            y:20
+            width: 25
+            height: 25
+            x:200
+            y:200
             source: "qrc:/iamge/origin.png"
         }
 
