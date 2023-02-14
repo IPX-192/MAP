@@ -12,9 +12,9 @@ int main(int argc, char *argv[])
 
     MainFrame mainFrame;
 
-    mainFrame.contextToQml(mainFrame.m_objQmlEngine);
-
     QQmlApplicationEngine engine;
+
+    mainFrame.contextToQml(engine);
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

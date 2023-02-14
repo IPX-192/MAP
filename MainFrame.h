@@ -26,8 +26,7 @@ public:
     void initialize();
 
 public:
-    //QML 引擎
-    QQmlApplicationEngine    m_objQmlEngine;
+    //服务器对象
     CWebSocketServer         m_SocketServer;
 
 };

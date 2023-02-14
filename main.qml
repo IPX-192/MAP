@@ -11,6 +11,10 @@ Window {
 
     readonly property string  fontName:  qsTr("Microsoft YaHei")  // 字体名字
 
+    property int originX: 40   //原点X
+
+    property int originY: 40  //原点Y
+
     //flags: Qt.FramelessWindowHint | Qt.Window
 
     FontLoader{
@@ -156,8 +160,8 @@ Window {
             id:originImg
             width: 25
             height: 25
-            x:40
-            y:40
+            x:originX
+            y:originY
             source: "qrc:/iamge/origin.png"
         }
 
@@ -166,7 +170,9 @@ Window {
             id:coordImg
             width: 34
             height: 34
-            anchors.centerIn: parent
+            x:parent.width / 2
+            y:parent.height /2
+            //anchors.centerIn: parent
             source: "qrc:/iamge/coord.png"
         }
 
@@ -190,12 +196,39 @@ Window {
                 {
                     console.log("mouseX " + mouse.x)
                     console.log("mouseY " + mouse.y)
-                    originImg.x = mouseX - originImg.width / 2
-                    originImg.y = mouseY - originImg.height / 2
+                    originX = mouseX - originImg.width / 2
+                    originY = mouseY - originImg.height / 2
                 }
                 else
                 {
                     cursorShape = Qt.ArrowCursor
+                }
+            }
+        }
+
+
+        Connections{
+            target: InterAction
+            //设置人的坐标
+            onSetCurCoord:{
+                console.log("ggggggggggggggggggg" + coordX,coordY)
+                if( originX + originImg.width / 2  + coordX - coordImg.width / 2 < 0)
+                {
+                    coordImg.x = originX + originImg.width / 2  + coordX - coordImg.width / 2
+                }
+                else
+                {
+                    coordImg.x = originX + coordX - coordImg.width / 2
+                }
+
+                if(originY +  originImg.height / 2 +  coordY - coordImg.height / 2 < 0)
+                {
+                    coordImg.y = originY + originImg.height / 2
+                }
+
+                else
+                {
+                    coordImg.y = originY +  originImg.height / 2 +  coordY - coordImg.height / 2
                 }
             }
         }

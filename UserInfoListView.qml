@@ -142,7 +142,7 @@ Item {
         anchors.top: headItem.bottom
         anchors.topMargin: -1
         anchors.left: headItem.left
-        model: UserInfoModel
+        //model: UserInfoModel
         clip: true
         maximumFlickVelocity: itemHeigt * 10
         flickableDirection: Flickable.VerticalFlick

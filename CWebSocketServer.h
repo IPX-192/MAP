@@ -2,6 +2,10 @@
 #define CWEBSOCKETSERVER_H
 
 #include <QObject>
+#include <QQmlContext>
+#include <QString>
+#include <QQmlApplicationEngine>
+#include <QQmlEngine>
 #include <QtWebSockets/QWebSocketServer>
 #include <QtWebSockets/QWebSocket>
 
@@ -26,6 +30,8 @@ public:
     //停止服务
     void stopServer();
 
+    Q_INVOKABLE void test1();
+
 protected:
     //获取IP地址
     QString getLocalIP();
@@ -33,6 +39,8 @@ protected:
 
 signals:
     void sendMeg(QString meg);
+
+    Q_INVOKABLE void setCurCoord(int coordX,int coordY);
 
 
 private:

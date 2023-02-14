@@ -34,12 +34,17 @@ void CWebSocketServer::startServer()
     //开始服务
     int i_port = 8195;
     m_WebSocketServer->listen(QHostAddress::Any,i_port);
-
+    qDebug()<<"ttttttttttttttttttttttt";
 }
 
 void CWebSocketServer::stopServer()
 {
     m_WebSocketServer->close();
+}
+
+void CWebSocketServer::test1()
+{
+
 }
 
 QString CWebSocketServer::getLocalIP()
@@ -115,6 +120,9 @@ void CWebSocketServer::parseLabelMeg(QJsonArray &array)
 
     //查询人的信息
     qDebug()<<"*********tagId****"<<tagId;
+
+    //显示坐标位置
+    emit setCurCoord(coordX,coordY);
 }
 
 //连接成功
