@@ -1,13 +1,5 @@
-﻿#ifndef CMAPORIGINCONFIG_H
-#define CMAPORIGINCONFIG_H
-
-/*************************************************
-  <类    名>    CMapOriginConfig
-  <功能描述>     地图配置
-
-  <作    者>    tcy
-  <时    间>    2023-02-13
-**************************************************/
+﻿#ifndef CMAPORIGININFO_H
+#define CMAPORIGININFO_H
 
 class CMapOriginInfo {
 public:
@@ -29,4 +21,4 @@ private:
     int m_iPosZ;
 };
 
-#endif // CMAPORIGINCONFIG_H
+#endif // CMAPORIGININFO_H
