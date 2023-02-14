@@ -16,7 +16,11 @@ public:
     bool addUserInfo(const CUserInfo &info);
     bool delUserInfo(const CUserInfo &info, bool bDeleteAll = false);
     bool updateUserInfo(const string userID, const CUserInfo &info);
-    bool getAllUserInfo(const string userID, const CUserInfo &info);
+    bool getAllUserInfo(vector<CUserInfo> &vecUsers);
+    bool getUserInfoByID(const string &strUserID, CUserInfo &info);
+
+    //判断账号是否可用
+    bool checkUserIDAvailability(const string &strUserID);
 
 private:
     MapSysDatabase *m_pDatabase{nullptr};

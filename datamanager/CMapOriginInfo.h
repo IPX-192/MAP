@@ -1,6 +1,5 @@
-﻿#ifndef CMAPORIGINCONFIG_H
-#define CMAPORIGINCONFIG_H
-
+#ifndef CMAPORIGININFO_H
+#define CMAPORIGININFO_H
 
 class CMapOriginInfo {
 public:
@@ -22,4 +21,4 @@ private:
     int m_iPosZ;
 };
 
-#endif // CMAPORIGINCONFIG_H
+#endif // CMAPORIGININFO_H
