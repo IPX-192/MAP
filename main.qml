@@ -2,24 +2,38 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 
 Window {
+
     visible: true
-    width: 1024
+    width: 1270
     height: 768
     title: qsTr("定位软件")
+    property bool bSetOrigin:false
+    //flags: Qt.FramelessWindowHint | Qt.Window
 
 
     Rectangle{
         id:title
         width: 100
         height: 50
-        color: "red"
+        color: "white"
         anchors.left: parent.left
         anchors.leftMargin: 50
         anchors.top: parent.top
         anchors.topMargin: 30
 
+        Image{
+            id:logoImg
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 20
+            source: "qrc:/iamge/log.png"
+        }
+
         Text {
-            anchors.centerIn: parent
+            id:titeText
+            anchors.verticalCenter: logoImg.verticalCenter
+            anchors.left: logoImg.right
+            anchors.leftMargin: 30
             text: qsTr("定位系统")
         }
     }
@@ -63,22 +77,72 @@ Window {
         source: "qrc:/SystemConfig.qml"
     }
 
+    Connections{
+        target: systemSettingLoader.item
+        onSetBtnClicked:{
+            console.log("sdadasdasd" + index)
+            if(index === 1)
+            {
+                bSetOrigin = true
+            }
+        }
+    }
+
 
     //定位显示区域
 
     Item {
         id:mapItem
-        width: 400
-        height: 40
+        width: 500
+        height: 50
         anchors.left: title.left
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 200
 
         Image {
             anchors.fill: parent
-
             source: "qrc:/iamge/testMap.png"
             fillMode:Image.PreserveAspectCrop
+        }
+
+        //原点图片
+        Image{
+            id:originImg
+            width: 20
+            height: 20
+            x:20
+            y:20
+            source: "qrc:/iamge/origin.png"
+        }
+
+        MouseArea{
+            anchors.fill: parent
+            hoverEnabled: true
+            onEntered: {
+                //如果设置原点，改变鼠标样式
+                if(bSetOrigin)
+                {
+                    cursorShape = Qt. CrossCursor
+                }
+                else
+                {
+                    cursorShape = Qt.ArrowCursor
+                }
+            }
+            onClicked: {
+                //如果设置原点,设置原点
+                if(bSetOrigin)
+                {
+                    console.log("mouseX " + mouse.x)
+                    console.log("mouseY " + mouse.y)
+                    originImg.x = mouseX - originImg.width / 2
+                    originImg.y = mouseY - originImg.height / 2
+                }
+                else
+                {
+                    cursorShape = Qt.ArrowCursor
+                }
+            }
         }
     }
 
