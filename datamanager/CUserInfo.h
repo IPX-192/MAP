@@ -1,14 +1,6 @@
 ﻿#ifndef CUSERINFO_H
 #define CUSERINFO_H
 
-/*************************************************
-  <类    名>    CUserInfo
-  <功能描述>     用户信息类
-
-  <作    者>    tcy
-  <时    间>    2023-02-13
-**************************************************/
-
 #include <string>
 using namespace std;
 
