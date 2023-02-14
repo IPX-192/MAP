@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Window 2.12
 
 Window {
@@ -99,12 +99,23 @@ Window {
         }
     }
 
+    //表格
+    Rectangle {
+        width: 500
+        height: 300
+        anchors.right: parent.right
+        anchors.rightMargin: 50
+        anchors.top: title.bottom
+        anchors.topMargin: 20
+        color: "lightblue"
 
-
+        UserInfoListView {
+            anchors.fill: parent
+        }
+    }
 
 
     //定位显示区域
-
     Item {
         id:mapItem
         width: 500

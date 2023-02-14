@@ -1,6 +1,8 @@
-#include <QGuiApplication>
+﻿#include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "MainFrame.h"
+#include "datamodel/CUserInfoModel.h"
+#include "datamodel/CTagInfoModel.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,6 +22,12 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
+
+    CUserInfoModel m_userDataModel;
+    engine.rootContext()->setContextProperty( "UserInfoModel", &m_userDataModel );
+
+    CTagInfoModel m_tagDataModel;
+    engine.rootContext()->setContextProperty( "TagInfoModel", &m_tagDataModel );
 
     return app.exec();
 }
