@@ -61,7 +61,11 @@ HEADERS += \
     database/CMapOriginConfig.h \
     database/CTagInfoTable.h \
     database/CUserInfoTable.h \
-    database/mapsysdatabase.hpp
+    database/mapsysdatabase.hpp \
+    datamanager/CMapOriginInfo.h \
+    datamanager/CTagInfo.h \
+    datamanager/CUserInfo.h \
+    datamodel/CUserInfoModel.h
 
 SOURCES += \
         CWebSocketServer.cpp \
@@ -71,4 +75,8 @@ SOURCES += \
         database/CTagInfoTable.cpp \
         database/CUserInfoTable.cpp \
         database/mapsysdatabase.cpp \
+        datamanager/CMapOriginInfo.cpp \
+        datamanager/CTagInfo.cpp \
+        datamanager/CUserInfo.cpp \
+        datamodel/CUserInfoModel.cpp \
         main.cpp

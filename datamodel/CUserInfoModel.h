@@ -1,0 +1,4 @@
+﻿#ifndef CUSERINFOMODEL_H
+#define CUSERINFOMODEL_H
+
+#endif // CUSERINFOMODEL_H
