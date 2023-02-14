@@ -13,6 +13,7 @@ public:
     virtual bool Check_Config_Table();
 
     bool getMapOriginConfig(CMapOriginInfo &info);
+    bool updateMapOriginConfig(const CMapOriginInfo &info);
 
 private:
     MapSysDatabase *m_pDatabase{nullptr};
