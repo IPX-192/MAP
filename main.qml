@@ -23,8 +23,8 @@ Window {
     Rectangle{
         id:title
         width: parent.width
-        height: 50
-        color: "#1E2D5B"
+        height: 80
+        color: "#2E529B"
         anchors.top: parent.top
         anchors.topMargin: 10
 
@@ -42,9 +42,9 @@ Window {
             id:titeText
             anchors.verticalCenter: logoImg.verticalCenter
             anchors.left: logoImg.right
-            anchors.leftMargin: 30
+            anchors.leftMargin: 20
             text: qsTr("定位系统")
-            font.pixelSize: 26
+            font.pixelSize: 22
             font.family: fontName
             color: "#FEFEFE"
         }
