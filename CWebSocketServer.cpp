@@ -178,6 +178,8 @@ void CWebSocketServer::processTextMessage(QString message)
 //数据是JSON格式，解析后判断是基站相关还是标签卡相关(对象包括数组）
 void CWebSocketServer::processByteArrayMessage(QByteArray array)
 {
+
+    qDebug()<<array;
     QJsonObject groupObj;
     QJsonDocument m_document;
 

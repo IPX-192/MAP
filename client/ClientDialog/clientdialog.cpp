@@ -20,15 +20,15 @@ ClientDialog::ClientDialog(const QUrl &url,bool debug,QWidget *parent)
     : QWidget(parent),m_url(url),m_debug(debug)
 {
     //layout1
-    QLabel *iplabel = new QLabel("IPåœ°å€");
+    QLabel *iplabel = new QLabel("IPµØÖ·");
     m_iplineedit =new QLineEdit;
-    m_iplineedit->setText("192.168.56.1");
-    QLabel *portlabel =new QLabel("ç«¯å£");
+    m_iplineedit->setText("192.168.0.105");
+    QLabel *portlabel =new QLabel("¶Ë¿Ú");
     m_portspinbox = new QSpinBox;
     m_portspinbox->setRange(0,65535);
     m_portspinbox->setValue(8195);
-    m_linkbutton = new QPushButton("è¿æ¥");
-    m_disconnectbutton = new QPushButton("æ–­å¼€");
+    m_linkbutton = new QPushButton("Á¬½Ó");
+    m_disconnectbutton = new QPushButton("¶Ï¿ª");
     pButtonGroup = new QButtonGroup();
     pButtonGroup->setExclusive(true);
     m_linkbutton->setCheckable(true);
@@ -45,21 +45,21 @@ ClientDialog::ClientDialog(const QUrl &url,bool debug,QWidget *parent)
     qhboxlayout1->addWidget(m_disconnectbutton);
 
     //layout2
-    QLabel *sendmessagelabel = new QLabel("å‘é€æ¶ˆæ¯");
+    QLabel *sendmessagelabel = new QLabel("·¢ËÍÏûÏ¢");
     QHBoxLayout *qhboxlayout2 = new QHBoxLayout;
     qhboxlayout2->addWidget(sendmessagelabel);
 
     //layout3
     m_sendmessagetextedit = new QTextEdit;
     m_sendmessagetextedit->setFixedHeight(50);
-    m_sendbutton = new QPushButton("å‘é€");
+    m_sendbutton = new QPushButton("·¢ËÍ");
     m_sendbutton->setFixedHeight(50);
     QHBoxLayout *qhboxlayout3 = new QHBoxLayout;
     qhboxlayout3->addWidget(m_sendmessagetextedit);
     qhboxlayout3->addWidget(m_sendbutton);
 
     //layout4
-    QLabel *receivemessagelabel = new QLabel("æ¥æ”¶æ¶ˆæ¯");
+    QLabel *receivemessagelabel = new QLabel("½ÓÊÕÏûÏ¢");
     QHBoxLayout *qhboxlayout4 = new QHBoxLayout;
     qhboxlayout4->addWidget(receivemessagelabel);
 
@@ -70,8 +70,8 @@ ClientDialog::ClientDialog(const QUrl &url,bool debug,QWidget *parent)
     m_receivemessageTextEdit->setReadOnly(true);
 
     //layout6
-    statusLabel = new QLabel("è¿æ¥çŠ¶æ€");
-    m_clean = new QPushButton("æ¸…é™¤");
+    statusLabel = new QLabel("Á¬½Ó×´Ì¬");
+    m_clean = new QPushButton("Çå³ı");
     QHBoxLayout *qhboxlayout6 = new QHBoxLayout;
     qhboxlayout6->addWidget(statusLabel);
     qhboxlayout6->addStretch();
@@ -101,7 +101,7 @@ ClientDialog::~ClientDialog()
     m_websocket.errorString();
     m_websocket.close();
 }
-//æ–­å¼€è¿æ¥æ“ä½œ
+//¶Ï¿ªÁ¬½Ó²Ù×÷
 void ClientDialog::closeConnection(){
     m_linkbutton->setEnabled(true);
     m_disconnectbutton->setEnabled(false);
@@ -111,14 +111,14 @@ void ClientDialog::closeConnection(){
     m_clean->setEnabled(false);
     statusLabel->setText(tr("disconnected"));
 }
-//è¿æ¥æœåŠ¡å™¨
+//Á¬½Ó·şÎñÆ÷
 void ClientDialog::connectToServer()
 {
     QString path = QString("ws://%1:%2").arg(m_iplineedit->text()).arg(m_portspinbox->text());
     QUrl url = QUrl(path);
     m_websocket.open(url);
 }
-//è¿æ¥ä¸Šä¹‹å
+//Á¬½ÓÉÏÖ®ºó
 void ClientDialog::onconnected(){
     qDebug() << "hello word!";
     statusLabel->setText(tr("connected"));
@@ -129,44 +129,51 @@ void ClientDialog::onconnected(){
     m_receivemessageTextEdit->setEnabled(true);
     m_clean->setEnabled(true);
 }
-//æ”¶åˆ°æ¶ˆæ¯
+//ÊÕµ½ÏûÏ¢
 void ClientDialog::onTextMessageReceived(const QString &message)
 {
     QString time = current_date_time->currentDateTime().toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
     m_receivemessageTextEdit->setText(time + "\n" + message);
 }
-//æ–­å¼€
+//¶Ï¿ª
 void ClientDialog::stopClicked()
 {
     m_websocket.close();
 }
-//å‘é€æ¶ˆæ¯
+//·¢ËÍÏûÏ¢
 void ClientDialog::onSendButtonClicked()
 {
-    //  QString msg= m_sendmessagetextedit->document()->toPlainText();
+    QString msg= m_sendmessagetextedit->document()->toPlainText();
 
-    QJsonArray arr ;
+
     QJsonObject groupObj;
     groupObj.insert("MsgType",2);
 
     QJsonArray array ;
+    QJsonObject item1;
+    item1.insert("TagId",0);
+    item1.insert("X",20000);
+    item1.insert("Y",30000);
+    item1.insert("Z",3);
+    item1.insert("StaticTime",111);
+    item1.insert("MapId",11);
+    item1.insert("Battery",80);
+    array.append(item1);
 
-    QJsonObject item;
-    item.insert("TagId",0);
-    item.insert("X",2000);
-    item.insert("Y",3000);
-    item.insert("Z",3);
-    item.insert("StaticTime",111);
-    item.insert("MapId",11);
-    item.insert("Battery",80);
-    array.append(item);
+    QJsonObject item2;
+    item2.insert("TagId",1);
+    item2.insert("X",70000);
+    item2.insert("Y",80000);
+    item2.insert("Z",3);
+    item2.insert("StaticTime",111);
+    item2.insert("MapId",11);
+    item2.insert("Battery",80);
+    array.append(item2);
+
     groupObj.insert("AncList",array);
 
-    arr.append(groupObj);
-
-
     QJsonDocument document;
-    document.setArray(arr);
+    document.setObject(groupObj);
     QByteArray array_byte = document.toJson(QJsonDocument::Compact);
     //    QString hdwHeartRate(array_byte);
 
@@ -174,7 +181,7 @@ void ClientDialog::onSendButtonClicked()
 
     m_websocket.sendBinaryMessage(array_byte);
 }
-//æ¸…é™¤å†…å®¹
+//Çå³ıÄÚÈİ
 void ClientDialog::onCleanButtonClicked()
 {
     m_receivemessageTextEdit->clear();
