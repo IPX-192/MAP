@@ -22,7 +22,7 @@ Window {
         source: "qrc:/font/MFYueYuan.ttf"
     }
 
-
+    ///
     //顶部栏
     Rectangle{
 
