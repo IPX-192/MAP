@@ -109,6 +109,10 @@ Window {
                 {
                     bSetOrigin = true
                 }
+                else
+                {
+                    openTagEditPopup()
+                }
             }
         }
     }
@@ -287,5 +291,21 @@ Window {
 
     //底部栏
 
+
+    //标签编辑弹窗
+    TagEditPopup {
+        id: tagEidtTag
+        anchors.centerIn: parent
+    }
+
+    function openTagEditPopup()
+    {
+        tagEidtTag.open()
+    }
+
+    function closeTagEditPoupu()
+    {
+        tagEidtTag.close()
+    }
 
 }

@@ -20,6 +20,6 @@
         <file>font/PingFang Regular.ttf</file>
         <file>iamge/coord.png</file>
         <file>UserInfoListView.qml</file>
-
+        <file>TagEditPopup.qml</file>
     </qresource>
 </RCC>
