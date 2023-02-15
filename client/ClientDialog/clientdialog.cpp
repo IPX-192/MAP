@@ -20,15 +20,15 @@ ClientDialog::ClientDialog(const QUrl &url,bool debug,QWidget *parent)
     : QWidget(parent),m_url(url),m_debug(debug)
 {
     //layout1
-    QLabel *iplabel = new QLabel("IPµØÖ·");
+    QLabel *iplabel = new QLabel("IPåœ°å€");
     m_iplineedit =new QLineEdit;
     m_iplineedit->setText("192.168.56.1");
-    QLabel *portlabel =new QLabel("¶Ë¿Ú");
+    QLabel *portlabel =new QLabel("ç«¯å£");
     m_portspinbox = new QSpinBox;
     m_portspinbox->setRange(0,65535);
     m_portspinbox->setValue(8195);
-    m_linkbutton = new QPushButton("Á¬½Ó");
-    m_disconnectbutton = new QPushButton("¶Ï¿ª");
+    m_linkbutton = new QPushButton("è¿æ¥");
+    m_disconnectbutton = new QPushButton("æ–­å¼€");
     pButtonGroup = new QButtonGroup();
     pButtonGroup->setExclusive(true);
     m_linkbutton->setCheckable(true);
@@ -45,21 +45,21 @@ ClientDialog::ClientDialog(const QUrl &url,bool debug,QWidget *parent)
     qhboxlayout1->addWidget(m_disconnectbutton);
 
     //layout2
-    QLabel *sendmessagelabel = new QLabel("·¢ËÍÏûÏ¢");
+    QLabel *sendmessagelabel = new QLabel("å‘é€æ¶ˆæ¯");
     QHBoxLayout *qhboxlayout2 = new QHBoxLayout;
     qhboxlayout2->addWidget(sendmessagelabel);
 
     //layout3
     m_sendmessagetextedit = new QTextEdit;
     m_sendmessagetextedit->setFixedHeight(50);
-    m_sendbutton = new QPushButton("·¢ËÍ");
+    m_sendbutton = new QPushButton("å‘é€");
     m_sendbutton->setFixedHeight(50);
     QHBoxLayout *qhboxlayout3 = new QHBoxLayout;
     qhboxlayout3->addWidget(m_sendmessagetextedit);
     qhboxlayout3->addWidget(m_sendbutton);
 
     //layout4
-    QLabel *receivemessagelabel = new QLabel("½ÓÊÕÏûÏ¢");
+    QLabel *receivemessagelabel = new QLabel("æ¥æ”¶æ¶ˆæ¯");
     QHBoxLayout *qhboxlayout4 = new QHBoxLayout;
     qhboxlayout4->addWidget(receivemessagelabel);
 
@@ -70,8 +70,8 @@ ClientDialog::ClientDialog(const QUrl &url,bool debug,QWidget *parent)
     m_receivemessageTextEdit->setReadOnly(true);
 
     //layout6
-    statusLabel = new QLabel("Á¬½Ó×´Ì¬");
-    m_clean = new QPushButton("Çå³ı");
+    statusLabel = new QLabel("è¿æ¥çŠ¶æ€");
+    m_clean = new QPushButton("æ¸…é™¤");
     QHBoxLayout *qhboxlayout6 = new QHBoxLayout;
     qhboxlayout6->addWidget(statusLabel);
     qhboxlayout6->addStretch();
@@ -101,7 +101,7 @@ ClientDialog::~ClientDialog()
     m_websocket.errorString();
     m_websocket.close();
 }
-//¶Ï¿ªÁ¬½Ó²Ù×÷
+//æ–­å¼€è¿æ¥æ“ä½œ
 void ClientDialog::closeConnection(){
     m_linkbutton->setEnabled(true);
     m_disconnectbutton->setEnabled(false);
@@ -111,14 +111,14 @@ void ClientDialog::closeConnection(){
     m_clean->setEnabled(false);
     statusLabel->setText(tr("disconnected"));
 }
-//Á¬½Ó·şÎñÆ÷
+//è¿æ¥æœåŠ¡å™¨
 void ClientDialog::connectToServer()
 {
     QString path = QString("ws://%1:%2").arg(m_iplineedit->text()).arg(m_portspinbox->text());
     QUrl url = QUrl(path);
     m_websocket.open(url);
 }
-//Á¬½ÓÉÏÖ®ºó
+//è¿æ¥ä¸Šä¹‹å
 void ClientDialog::onconnected(){
     qDebug() << "hello word!";
     statusLabel->setText(tr("connected"));
@@ -129,18 +129,18 @@ void ClientDialog::onconnected(){
     m_receivemessageTextEdit->setEnabled(true);
     m_clean->setEnabled(true);
 }
-//ÊÕµ½ÏûÏ¢
+//æ”¶åˆ°æ¶ˆæ¯
 void ClientDialog::onTextMessageReceived(const QString &message)
 {
     QString time = current_date_time->currentDateTime().toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
     m_receivemessageTextEdit->setText(time + "\n" + message);
 }
-//¶Ï¿ª
+//æ–­å¼€
 void ClientDialog::stopClicked()
 {
     m_websocket.close();
 }
-//·¢ËÍÏûÏ¢
+//å‘é€æ¶ˆæ¯
 void ClientDialog::onSendButtonClicked()
 {
     //  QString msg= m_sendmessagetextedit->document()->toPlainText();
@@ -174,7 +174,7 @@ void ClientDialog::onSendButtonClicked()
 
     m_websocket.sendBinaryMessage(array_byte);
 }
-//Çå³ıÄÚÈİ
+//æ¸…é™¤å†…å®¹
 void ClientDialog::onCleanButtonClicked()
 {
     m_receivemessageTextEdit->clear();
