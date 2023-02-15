@@ -170,7 +170,7 @@ void ClientDialog::onSendButtonClicked()
     item2.insert("Battery",80);
     array.append(item2);
 
-    groupObj.insert("AncList",array);
+    groupObj.insert("TagList",array);
 
     QJsonDocument document;
     document.setObject(groupObj);
