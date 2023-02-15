@@ -147,6 +147,9 @@ void CWebSocketServer::parseLabelMeg(QJsonObject &object)
     //查询人的信息
     qDebug()<<"*********tagId****"<<tagId;
 
+    //显示坐标位置
+    emit setCurCoord(coordX,coordY);
+
 }
 
 //连接成功
