@@ -149,31 +149,81 @@ Window {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 100
 
-        Image {
-            anchors.fill: parent
-            source: "qrc:/iamge/testMap.png"
-            fillMode:Image.PreserveAspectCrop
-        }
+        Rectangle{
+            id:imageDisplay
 
-        //原点图片
-        Image{
-            id:originImg
-            width: 25
-            height: 25
-            x:originX
-            y:originY
-            source: "qrc:/iamge/origin.png"
-        }
+            width:parent.width
+            height:parent.height
+            border.color: "black"
+            z:-10
 
-        //坐标图片
-        Image {
-            id:coordImg
-            width: 34
-            height: 34
-            x:parent.width / 2
-            y:parent.height /2
-            //anchors.centerIn: parent
-            source: "qrc:/iamge/coord.png"
+            Image {
+                id:usrImg
+                anchors.fill: parent
+                source: "qrc:/iamge/testMap.png"
+                fillMode: Image.PreserveAspectCrop;
+
+
+                //原点图片
+                Image{
+                    id:originImg
+                    width: 25
+                    height: 25
+                    x:originX
+                    y:originY
+                    source: "qrc:/iamge/origin.png"
+                }
+
+
+                //坐标图片
+                Image {
+                    id:coordImg
+                    width: 34
+                    height: 34
+                    x:parent.width / 2
+                    y:parent.height /2
+                    //anchors.centerIn: parent
+                    source: "qrc:/iamge/coord.png"
+                }
+
+                ///使用wheelEvent控制滚轮，其中angleDelta属性用来获取滚轮滚动的距离
+                MouseArea{
+                    anchors.fill: parent
+                    onWheel: {
+                        if (wheel.modifiers & Qt.ControlModifier) {
+                            usrImg.rotation += wheel.angleDelta.y / 120 * 5;
+                            if (Math.abs(usrImg.rotation) < 4)
+                                usrImg.rotation = 0;
+                        }
+                        else {
+                            usrImg.rotation += wheel.angleDelta.x / 120;
+                            if (Math.abs(usrImg.rotation) < 0.6)
+                                usrImg.rotation = 0;
+                            var scaleBefore = usrImg.scale;
+                            usrImg.scale += usrImg.scale * wheel.angleDelta.y / 120 / 10;
+                        }
+                    }
+                }
+            }
+
+            ///使用wheelEvent控制滚轮，其中angleDelta属性用来获取滚轮滚动的距离
+            //            MouseArea{
+            //                anchors.fill: parent
+            //                onWheel: {
+            //                    if (wheel.modifiers & Qt.ControlModifier) {
+            //                        imageDisplay.rotation += wheel.angleDelta.y / 120 * 5;
+            //                        if (Math.abs(imageDisplay.rotation) < 4)
+            //                            imageDisplay.rotation = 0;
+            //                    }
+            //                    else {
+            //                        imageDisplay.rotation += wheel.angleDelta.x / 120;
+            //                        if (Math.abs(imageDisplay.rotation) < 0.6)
+            //                            imageDisplay.rotation = 0;
+            //                        var scaleBefore = imageDisplay.scale;
+            //                        imageDisplay.scale += imageDisplay.scale * wheel.angleDelta.y / 120 / 10;
+            //                    }
+            //                }
+            //            }
         }
 
         MouseArea{
@@ -211,7 +261,7 @@ Window {
             target: InterAction
             //设置人的坐标
             onSetCurCoord:{
-                console.log("ggggggggggggggggggg" + coordX,coordY)
+
                 if( originX + originImg.width / 2  + coordX - coordImg.width / 2 < 0)
                 {
                     coordImg.x = originX + originImg.width / 2  + coordX - coordImg.width / 2
@@ -233,5 +283,9 @@ Window {
             }
         }
     }
+
+
+    //底部栏
+
 
 }
