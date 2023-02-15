@@ -125,6 +125,30 @@ void CWebSocketServer::parseLabelMeg(QJsonArray &array)
     emit setCurCoord(coordX,coordY);
 }
 
+void CWebSocketServer::parseLabelMeg(QJsonObject &object)
+{
+    //标签卡的数据为7个JSON对象组合而成,依次解析即可
+    int tagId = 0;
+    int coordX = 0;
+    int coordY = 0;
+    int coordZ = 0;
+    int staticTime = 0;
+    int mapId = 0;
+    int battery = 0;
+
+    tagId = object.value("TagId").toInt();
+    coordX = object.value("X").toInt() / 1000;
+    coordY = object.value("Y").toInt() / 1000;
+    coordZ = object.value("Z").toInt() / 1000;
+    staticTime = object.value("StaticTime").toInt();
+    mapId = object.value("MapId").toInt();
+    battery = object.value("Battery").toInt();
+
+    //查询人的信息
+    qDebug()<<"*********tagId****"<<tagId;
+
+}
+
 //连接成功
 void CWebSocketServer::onNewConnection()
 {
@@ -151,53 +175,95 @@ void CWebSocketServer::processTextMessage(QString message)
 
 }
 
-//数据是JSON格式，解析后判断是基站相关还是标签卡相关
+//数据是JSON格式，解析后判断是基站相关还是标签卡相关(对象包括数组）
 void CWebSocketServer::processByteArrayMessage(QByteArray array)
 {
-    qDebug()<<array;
-
     QJsonObject groupObj;
     QJsonDocument m_document;
 
     QJsonParseError error;
     m_document = QJsonDocument::fromJson(array, &error);
 
+    if (m_document.isObject()) {
+        groupObj = m_document.object();
+    }
 
-    //解析JSON数组，数组里面还包括JSON对象和JSON数组
+    if (groupObj.contains("MsgType")) {
+        //开始判断报文类型
+        int megType =  groupObj.value("MsgType").toInt();
+        qDebug() <<megType;
+        //报文为基站则暂时不管，为标签卡则处理
+        if(megType == 1)
+        {
+            return;
+        }
+    }
 
-    QJsonArray mesArray;
+    //开始解析标签卡数组，数组里面是每个成员的数据包
+    if (groupObj.contains("TagList")) {
+        QJsonArray mesArray = groupObj.value("TagList").toArray();
 
-    //步骤1：获取对应的QJsonArray数组
-    if (m_document.isArray()) {
-        mesArray = m_document.array();
 
-        //步骤2：用下标访问的方式来获取值（QJsonValue）,如果其中一个值是对象（QJsonObject），就获取这个对象，然后按照对象的解析方法来解析。
-        for (int i = 0; i < array.size(); i++) {
+        //这里的解析为JSON数组组合JSON对象
+
+        for (int i = 0; i < mesArray.size(); i++) {
             if (mesArray.at(i).isObject())
             {
                 QJsonObject object = mesArray.at(i).toObject();
+                parseLabelMeg(object);
 
-                if (object.contains("MsgType")) {
-
-                    //开始判断报文类型
-                    int megType =  object.value("MsgType").toInt();
-                    qDebug() <<megType;
-
-                    //报文为基站则暂时不管，为标签卡则处理
-                    if(megType == 1)
-                    {
-                        return;
-                    }
-                }
-
-                //解析标签卡的数据
-                if(object.contains("AncList"))
-                {
-
-                    QJsonArray lableArray = object.value("AncList").toArray();
-                    parseLabelMeg(lableArray);
-                }
             }
         }
     }
 }
+
+//数据是JSON格式，解析后判断是基站相关还是标签卡相关
+//void CWebSocketServer::processByteArrayMessage(QByteArray array)
+//{
+//    qDebug()<<array;
+
+//    QJsonObject groupObj;
+//    QJsonDocument m_document;
+
+//    QJsonParseError error;
+//    m_document = QJsonDocument::fromJson(array, &error);
+
+
+//    //解析JSON数组，数组里面还包括JSON对象和JSON数组
+
+//    QJsonArray mesArray;
+
+//    //步骤1：获取对应的QJsonArray数组
+//    if (m_document.isArray()) {
+//        mesArray = m_document.array();
+
+//        //步骤2：用下标访问的方式来获取值（QJsonValue）,如果其中一个值是对象（QJsonObject）,就获取这个对象，然后按照对象的解析方法来解析。
+//        for (int i = 0; i < array.size(); i++) {
+//            if (mesArray.at(i).isObject())
+//            {
+//                QJsonObject object = mesArray.at(i).toObject();
+
+//                if (object.contains("MsgType")) {
+
+//                    //开始判断报文类型
+//                    int megType =  object.value("MsgType").toInt();
+//                    qDebug() <<megType;
+
+//                    //报文为基站则暂时不管，为标签卡则处理
+//                    if(megType == 1)
+//                    {
+//                        return;
+//                    }
+//                }
+
+//                //解析标签卡的数据
+//                if(object.contains("AncList"))
+//                {
+
+//                    QJsonArray lableArray = object.value("AncList").toArray();
+//                    parseLabelMeg(lableArray);
+//                }
+//            }
+//        }
+//    }
+//}

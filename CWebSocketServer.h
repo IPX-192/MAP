@@ -48,6 +48,9 @@ private:
     //解析标签卡数组
     void parseLabelMeg(QJsonArray &array);
 
+    //解析标签卡数据(对象)
+    void parseLabelMeg(QJsonObject &object);
+
 private slots:
     void onNewConnection();
     void socketDisconnected();
