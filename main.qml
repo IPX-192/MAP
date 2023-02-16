@@ -1,6 +1,7 @@
 ﻿import QtQuick 2.12
 import QtQuick.Window 2.12
 import Charts 1.0
+import QtQuick.Controls 2.5
 
 Window {
 
@@ -58,7 +59,61 @@ Window {
         }
 
         //配置按钮
+        Button {
+            id: dataBtn
+            width: 100
+            height: 35
+            text: "历史数据"
+            anchors.right: parent.right
+            anchors.rightMargin: 40
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: {
 
+            }
+        }
+
+        Button {
+            id: tagBtn
+            width: 100
+            height: 35
+            text: "配置标签"
+            anchors.right: dataBtn.left
+            anchors.rightMargin: 20
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: {
+                openTagEditPopup()
+            }
+        }
+
+        Button {
+            id: oringinBtn
+            width: 100
+            height: 35
+            text: "配置原点"
+            anchors.right: tagBtn.left
+            anchors.rightMargin: 20
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: {
+                bSetOrigin = true
+            }
+        }
+
+        Button {
+            id: importBtn
+            width: 100
+            height: 35
+            text: "导入地图"
+            anchors.right: oringinBtn.left
+            anchors.rightMargin: 20
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: {
+                imageLoader.setSource("qrc:/FileDialog.qml",{"fileDialog_Title":qsTr("选择图片"),
+                                          "fileDialog_Visible":true,"fileDialog_NameFilter":["Image Files (*.png *.jpg)"],
+                                      } )
+            }
+        }
+
+        /*
         Rectangle {
             id:configBtn
             width: 50
@@ -73,6 +128,7 @@ Window {
                 anchors.centerIn: parent
                 text: qsTr("配置")
             }
+            visible: false
 
             MouseArea{
                 anchors.fill: parent
@@ -113,24 +169,24 @@ Window {
                 //上传图片
                 if(index === 0)
                 {
-                    imageLoader.setSource("qrc:/FileDialog.qml",{"fileDialog_Title":qsTr("选择图片"),
-                                              "fileDialog_Visible":true,"fileDialog_NameFilter":["Image Files (*.png *.jpg)"],
-                                          } )
+
                 }
 
                 //设置原点
                 if(index === 4)
                 {
 
-                    bSetOrigin = true
+
                 }
                 else
                 {
-                     openTagEditPopup()
+
                 }
             }
         }
+        */
     }
+
 
 
     //上传图片
