@@ -22,5 +22,6 @@
         <file>UserInfoListView.qml</file>
         <file>TagEditPopup.qml</file>
         <file>FileDialog.qml</file>
+        <file>HistoryDataPopup.qml</file>
     </qresource>
 </RCC>

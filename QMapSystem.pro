@@ -59,6 +59,7 @@ HEADERS += \
     CWebSocketServer.h \
     MainFrame.h \
     database/CAbstractConfigInfo.h \
+    database/CDatabaseManage.h \
     database/CMapOriginConfig.h \
     database/CTagInfoTable.h \
     database/CUserInfoTable.h \
@@ -74,6 +75,7 @@ SOURCES += \
         CWebSocketServer.cpp \
         MainFrame.cpp \
         database/CAbstractConfigInfo.cpp \
+        database/CDatabaseManage.cpp \
         database/CMapOriginConfig.cpp \
         database/CTagInfoTable.cpp \
         database/CUserInfoTable.cpp \
