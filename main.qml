@@ -1,11 +1,12 @@
 ﻿import QtQuick 2.12
 import QtQuick.Window 2.12
+import Charts 1.0
 
 Window {
 
     visible: true
-    width: 1270
-    height: 768
+    width: 1920
+    height: 1080
     title: qsTr("定位软件")
     property bool bSetOrigin:false
 
@@ -108,7 +109,7 @@ Window {
                 systemSettingLoader.visible = false
                 hideSetTimer.stop()
 
-                 console.log("seeeeeeeeeeeeeee" + index)
+                console.log("seeeeeeeeeeeeeee" + index)
                 //上传图片
                 if(index === 0)
                 {
@@ -142,7 +143,8 @@ Window {
     {
         target: imageLoader.item
         onGetFileString:{
-
+            usrImg.source = path
+            InterAction.copyImageFile( path )
         }
     }
 
@@ -197,6 +199,47 @@ Window {
                 source: "qrc:/iamge/testMap.png"
                 fillMode: Image.PreserveAspectCrop;
 
+                CUserCoordView{
+                    id:chart
+                    width: 500
+                    height: 200
+                    anchors.centerIn: parent
+                }
+
+
+                Connections{
+                    target: InterAction
+                    //设置人的坐标
+                    //            onSetCurCoord:{
+
+                    //                if( originX + originImg.width / 2  + coordX - coordImg.width / 2 < 0)
+                    //                {
+                    //                    coordImg.x = originX + originImg.width / 2  + coordX - coordImg.width / 2
+                    //                }
+                    //                else
+                    //                {
+                    //                    coordImg.x = originX + coordX - coordImg.width / 2
+                    //                }
+
+                    //                if(originY +  originImg.height / 2 +  coordY - coordImg.height / 2 < 0)
+                    //                {
+                    //                    coordImg.y = originY + originImg.height / 2
+                    //                }
+
+                    //                else
+                    //                {
+                    //                    coordImg.y = originY +  originImg.height / 2 +  coordY - coordImg.height / 2
+                    //                }
+                    //            }
+
+                    onSetCurCoord:{
+                        chart.setCurCoord(coordX,coordY);
+
+                    }
+                }
+
+
+
 
                 //原点图片
                 Image{
@@ -218,6 +261,8 @@ Window {
                     y:parent.height /2
                     //anchors.centerIn: parent
                     source: "qrc:/iamge/coord.png"
+
+                    visible: false
                 }
 
                 ///使用wheelEvent控制滚轮，其中angleDelta属性用来获取滚轮滚动的距离
@@ -295,31 +340,9 @@ Window {
         }
 
 
-        Connections{
-            target: InterAction
-            //设置人的坐标
-            onSetCurCoord:{
 
-                if( originX + originImg.width / 2  + coordX - coordImg.width / 2 < 0)
-                {
-                    coordImg.x = originX + originImg.width / 2  + coordX - coordImg.width / 2
-                }
-                else
-                {
-                    coordImg.x = originX + coordX - coordImg.width / 2
-                }
 
-                if(originY +  originImg.height / 2 +  coordY - coordImg.height / 2 < 0)
-                {
-                    coordImg.y = originY + originImg.height / 2
-                }
 
-                else
-                {
-                    coordImg.y = originY +  originImg.height / 2 +  coordY - coordImg.height / 2
-                }
-            }
-        }
     }
 
 

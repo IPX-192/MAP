@@ -51,7 +51,7 @@ void CWebSocketServer::test1()
 
 }
 
-void CWebSocketServer::copyImageFile(QString image)
+bool CWebSocketServer::copyImageFile(QString image)
 {
     //去掉file:///
     image = image.mid(8);
@@ -90,8 +90,10 @@ void CWebSocketServer::copyImageFile(QString image)
 
     if(!QFile::copy(image,LogoDir))
     {
-        return ;
+        return false;
     }
+
+    return  true;
 
 }
 

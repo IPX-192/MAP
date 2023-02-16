@@ -3,6 +3,7 @@
 #include "MainFrame.h"
 #include "datamodel/CUserInfoModel.h"
 #include "datamodel/CTagInfoModel.h"
+#include "CUserCoordView.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +16,9 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     mainFrame.contextToQml(engine);
+
+    qmlRegisterType<CUserCoordView>("Charts", 1, 0, "CUserCoordView");
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
