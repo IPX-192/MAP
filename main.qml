@@ -240,8 +240,8 @@ Window {
     //定位显示区域
     Item {
         id:mapItem
-        width: 500
-        height: 200
+        width: 1000
+        height: 100
         anchors.left: title.left
         anchors.leftMargin: 50
         anchors.bottom: parent.bottom
@@ -263,8 +263,8 @@ Window {
 
                 CUserCoordView{
                     id:chart
-                    width: 500
-                    height: 200
+                    width: 1000
+                    height: 100
                     anchors.centerIn: parent
                 }
 
