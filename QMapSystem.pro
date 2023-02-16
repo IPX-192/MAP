@@ -55,6 +55,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    CUserCoordView.h \
     CWebSocketServer.h \
     MainFrame.h \
     database/CAbstractConfigInfo.h \
@@ -69,6 +70,7 @@ HEADERS += \
     datamodel/CUserInfoModel.h
 
 SOURCES += \
+        CUserCoordView.cpp \
         CWebSocketServer.cpp \
         MainFrame.cpp \
         database/CAbstractConfigInfo.cpp \

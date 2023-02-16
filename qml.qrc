@@ -21,5 +21,6 @@
         <file>iamge/coord.png</file>
         <file>UserInfoListView.qml</file>
         <file>TagEditPopup.qml</file>
+        <file>FileDialog.qml</file>
     </qresource>
 </RCC>

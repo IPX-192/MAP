@@ -11,6 +11,8 @@ Window {
 
     readonly property string  fontName:  qsTr("Microsoft YaHei")  // 字体名字
 
+    property string ipAddress: ""
+
     property int originX: 40   //原点X
 
     property int originY: 40  //原点Y
@@ -105,17 +107,42 @@ Window {
             onSetBtnClicked:{
                 systemSettingLoader.visible = false
                 hideSetTimer.stop()
-                if(index === 1)
+                //上传图片
+                if(index === 0)
+                {
+                    imageLoader.setSource("qrc:/FileDialog.qml",{"fileDialog_Title":qsTr("选择图片"),
+                                              "fileDialog_Visible":true,"fileDialog_NameFilter":["Image Files (*.png *.jpg)"],
+                                          } )
+                }
+
+                //设置原点
+                if(index === 3)
                 {
                     bSetOrigin = true
                 }
                 else
                 {
-                    openTagEditPopup()
+                    // openTagEditPopup()
                 }
             }
         }
     }
+
+
+    //上传图片
+    Loader{
+        id:imageLoader
+    }
+
+    //响应获取文件路径消息
+    Connections
+    {
+        target: imageLoader.item
+        onGetFileString:{
+
+        }
+    }
+
 
     Timer{
         id:hideSetTimer
@@ -136,9 +163,9 @@ Window {
         anchors.topMargin: 20
         color: "lightblue"
 
-        UserInfoListView {
-            anchors.fill: parent
-        }
+        //        UserInfoListView {
+        //            anchors.fill: parent
+        //        }
     }
 
 
@@ -290,6 +317,30 @@ Window {
 
 
     //底部栏
+    Rectangle{
+        width: title.width
+        height: 50
+        color: title.color
+        anchors.bottom: parent.bottom
+
+        Text {
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 20
+            text: qsTr("服务器地址") + ipAddress
+            font.pixelSize: 22
+            font.family: fontName
+            color: "#FEFEFE"
+        }
+    }
+
+    Connections{
+        target: InterAction
+        onSendCurServerAddress:{
+            ipAddress = address
+            console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbb" + ipAddress)
+        }
+    }
 
 
     //标签编辑弹窗

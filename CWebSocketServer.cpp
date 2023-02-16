@@ -18,9 +18,10 @@ CWebSocketServer::CWebSocketServer()
 
     startServer();
 
-    QString aaa= getLocalIP();
+    QString serverIP = getLocalIP();
+    emit sendCurServerAddress(serverIP);
 
-    qDebug()<<"sdasdsadasdasdasd"<<aaa;
+    qDebug()<<"sdasdsadasdasdasd"<<serverIP;
 }
 
 CWebSocketServer::~CWebSocketServer()
@@ -43,6 +44,11 @@ void CWebSocketServer::stopServer()
 }
 
 void CWebSocketServer::test1()
+{
+
+}
+
+void CWebSocketServer::copyImageFile(image)
 {
 
 }
@@ -92,6 +98,8 @@ QString CWebSocketServer::getLocalIP()
             }
         }
     }
+
+
 }
 
 void CWebSocketServer::parseLabelMeg(QJsonArray &array)

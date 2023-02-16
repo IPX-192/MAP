@@ -10,7 +10,7 @@ Item {
     id : root
     visible: true
     width: 120
-    height: 103
+    height: 260
 
     signal setBtnClicked( var index )
 
@@ -19,7 +19,7 @@ Item {
     {
         id: menuRect
         width: 120
-        height: 103
+        height: 260
         radius: 10
         color: "white"
         border.width: 1
@@ -34,7 +34,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             Repeater
             {
-                model: [ qsTr( "标签卡配置" ), qsTr( "地图原点配置" )]
+                model: [ qsTr( "导入地图" ), qsTr( "人员信息配置" ),,qsTr( "历史数据" ), qsTr( "地图原点配置" )]
                 Rectangle
                 {
                     width: 100

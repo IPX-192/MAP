@@ -32,6 +32,8 @@ public:
 
     Q_INVOKABLE void test1();
 
+    Q_INVOKABLE void copyImageFile(QString image);
+
 protected:
     //获取IP地址
     QString getLocalIP();
@@ -41,6 +43,8 @@ signals:
     void sendMeg(QString meg);
 
     Q_INVOKABLE void setCurCoord(int coordX,int coordY);
+
+    Q_INVOKABLE void sendCurServerAddress(QString address);
 
 
 private:
