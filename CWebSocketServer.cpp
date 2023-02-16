@@ -174,7 +174,7 @@ void CWebSocketServer::parseLabelMeg(QJsonArray &array)
     qDebug()<<"*********tagId****"<<tagId;
 
     //显示坐标位置
-    emit setCurCoord(coordX,coordY);
+    emit setCurCoord(coordX,coordY,tagId);
 }
 
 void CWebSocketServer::parseLabelMeg(QJsonObject &object)
@@ -200,7 +200,7 @@ void CWebSocketServer::parseLabelMeg(QJsonObject &object)
     qDebug()<<"*********tagId****"<<tagId;
 
     //显示坐标位置
-    emit setCurCoord(coordX,coordY);
+    emit setCurCoord(coordX,coordY,tagId);
 
 }
 

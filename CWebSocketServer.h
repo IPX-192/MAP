@@ -42,7 +42,7 @@ protected:
 signals:
     void sendMeg(QString meg);
 
-    Q_INVOKABLE void setCurCoord(int coordX,int coordY);
+    Q_INVOKABLE void setCurCoord(int coordX,int coordY,int tagID);
 
     Q_INVOKABLE void sendCurServerAddress(QString address);
 

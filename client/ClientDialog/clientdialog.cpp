@@ -151,9 +151,9 @@ void ClientDialog::onSendButtonClicked()
 
     QJsonArray array ;
     QJsonObject item1;
-    item1.insert("TagId",0);
-    item1.insert("X",20000);
-    item1.insert("Y",30000);
+    item1.insert("TagId",55555);
+    item1.insert("X",40000);
+    item1.insert("Y",40000);
     item1.insert("Z",3);
     item1.insert("StaticTime",111);
     item1.insert("MapId",11);
@@ -161,7 +161,7 @@ void ClientDialog::onSendButtonClicked()
     array.append(item1);
 
     QJsonObject item2;
-    item2.insert("TagId",1);
+    item2.insert("TagId",1111);
     item2.insert("X",70000);
     item2.insert("Y",80000);
     item2.insert("Z",3);

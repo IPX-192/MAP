@@ -20,13 +20,21 @@ public:
     Q_INVOKABLE void drawCoordImage();
 
 
-    Q_INVOKABLE void setCurCoord(int coordX,int coordY);
+    Q_INVOKABLE void setCurCoord(int coordX, int coordY,int tagId);
+
+    Q_INVOKABLE void setOriginCoord(int originX,int originY);
 
 private:
     QPainter *m_painter{nullptr};           //绘制指针
 
     QVector<int>   m_vecCoordX;             //缓存坐标X位置，单位是mm
     QVector<int>   m_vecCoordY;
+
+    QVector<int>   m_vecTagId;
+    QPen           m_tagIDPen;
+
+    int            m_OriginX;
+    int            m_OriginY;
 
 };
 

@@ -25,6 +25,12 @@ Window {
         source: "qrc:/font/MFYueYuan.ttf"
     }
 
+    Component.onCompleted: {
+        //chart.setOriginCoord(originX - originImg.width / 2,originY - originImg.height / 2 )
+
+        chart.setOriginCoord(originX ,originY  )
+    }
+
     ///
     //顶部栏
     Rectangle{
@@ -233,7 +239,7 @@ Window {
                     //            }
 
                     onSetCurCoord:{
-                        chart.setCurCoord(coordX,coordY);
+                        chart.setCurCoord(coordX,coordY,tagID);
 
                     }
                 }
@@ -244,10 +250,10 @@ Window {
                 //原点图片
                 Image{
                     id:originImg
-                    width: 25
-                    height: 25
-                    x:originX
-                    y:originY
+                    width: 26
+                    height: 26
+                    x:originX - width / 2
+                    y:originY - height / 2
                     source: "qrc:/iamge/origin.png"
                 }
 
@@ -331,6 +337,8 @@ Window {
                     console.log("mouseY " + mouse.y)
                     originX = mouseX - originImg.width / 2
                     originY = mouseY - originImg.height / 2
+
+                    chart.setOriginCoord(originX - originImg.width / 2,originY - originImg.height / 2 )
                 }
                 else
                 {
@@ -338,11 +346,6 @@ Window {
                 }
             }
         }
-
-
-
-
-
     }
 
 
