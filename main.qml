@@ -107,6 +107,8 @@ Window {
             onSetBtnClicked:{
                 systemSettingLoader.visible = false
                 hideSetTimer.stop()
+
+                 console.log("seeeeeeeeeeeeeee" + index)
                 //上传图片
                 if(index === 0)
                 {
@@ -116,8 +118,9 @@ Window {
                 }
 
                 //设置原点
-                if(index === 3)
+                if(index === 4)
                 {
+
                     bSetOrigin = true
                 }
                 else
@@ -233,6 +236,10 @@ Window {
                             var scaleBefore = usrImg.scale;
                             usrImg.scale += usrImg.scale * wheel.angleDelta.y / 120 / 10;
                         }
+                    }
+
+                    onClicked: {
+                        console.log("现在鼠标点击的位置" + mouseX,mouseY)
                     }
                 }
             }

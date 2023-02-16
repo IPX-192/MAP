@@ -45,7 +45,7 @@ Item {
                     z:10
                     Text {
                         id: displayText
-                        text: qsTr( modelData )
+                        //text: qsTr( modelData )
                         font{ pixelSize: 20 ; family: "Microsoft YaHei"; bold: true}
                         color: "blue"
                         anchors.centerIn: parent

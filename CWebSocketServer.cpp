@@ -78,7 +78,7 @@ void CWebSocketServer::copyImageFile(QString image)
     LogoDir += m_suffix;
 
     //拼接报告名
-    QString reportLogo = "/companyName" + current_date + m_suffix;
+    QString reportLogo = current_date + m_suffix;
 
     //清空目录(保留默认logo)
     dir.setFilter(QDir::Files);
