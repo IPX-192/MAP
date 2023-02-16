@@ -68,7 +68,7 @@ Window {
             anchors.rightMargin: 40
             anchors.verticalCenter: parent.verticalCenter
             onClicked: {
-
+                dataPopup.open()
             }
         }
 
@@ -443,6 +443,12 @@ Window {
     function closeTagEditPoupu()
     {
         tagEidtTag.close()
+    }
+
+    //历史数据弹窗
+    HistoryDataPopup {
+        id: dataPopup
+        anchors.centerIn: parent
     }
 
 }
