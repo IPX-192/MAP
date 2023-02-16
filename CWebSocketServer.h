@@ -32,7 +32,7 @@ public:
 
     Q_INVOKABLE void test1();
 
-    Q_INVOKABLE void copyImageFile(QString image);
+    Q_INVOKABLE bool copyImageFile(QString image);
 
 protected:
     //获取IP地址
