@@ -68,6 +68,7 @@ bool MainFrame::getMapOriginConfig(CMapOriginInfo &info)
 
 bool MainFrame::saveMapOriginConfig(const CMapOriginInfo &info)
 {
-
+    bool bFlag = false;
+    return bFlag;
 }
 
