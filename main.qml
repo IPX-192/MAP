@@ -125,7 +125,7 @@ Window {
                 }
                 else
                 {
-                    // openTagEditPopup()
+                     openTagEditPopup()
                 }
             }
         }
