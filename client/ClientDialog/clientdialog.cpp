@@ -153,7 +153,7 @@ void ClientDialog::onSendButtonClicked()
     QJsonArray array ;
     QJsonObject item1;
     item1.insert("TagId",55555);
-    item1.insert("X",20000 + flag);
+    item1.insert("X",30000 + flag);
     item1.insert("Y",20000);
     item1.insert("Z",3);
     item1.insert("StaticTime",111);
@@ -171,7 +171,7 @@ void ClientDialog::onSendButtonClicked()
     item2.insert("Battery",80);
     array.append(item2);
 
-    if(flag<= 40000)
+    if(flag<= 400000)
     {
         flag+=10000;
     }

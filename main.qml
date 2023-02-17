@@ -23,7 +23,7 @@ Window {
 
     FontLoader{
         id: localFont1
-        source: "qrc:/font/MFYueYuan.ttf"
+        source: "qrc:/font/时尚中黑简体.ttf"
     }
 
     Rectangle{
@@ -61,7 +61,6 @@ Window {
         chart.setOriginCoord(originX ,originY  )
     }
 
-    ///
     //顶部栏
     Rectangle{
 
@@ -261,13 +260,32 @@ Window {
         }
     }
 
+    Image {
+        id: captionImage3
+        anchors.left: usrInfo.left
+        anchors.bottom: usrInfo.top
+        anchors.bottomMargin: 20
+        source: "qrc:/iamge/title.png"
+    }
+
+    Text {
+        id: pointAnalysis1
+        anchors.top: captionImage3.top
+        anchors.left: captionImage3.left
+        anchors.leftMargin: 13
+        color: "#F0F0F0"
+        text: qsTr("Tag标签信息")
+        font{family:localFont1.name;pixelSize: 18;}
+    }
+
     //表格
     Rectangle {
+        id:usrInfo
         width: 1000
         height: 300
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: mapItem.bottom
-        anchors.topMargin: 100
+        anchors.topMargin: 120
         color: "lightblue"
 
         UserInfoListView {
@@ -276,6 +294,23 @@ Window {
     }
 
 
+    Image {
+        id: captionImage4
+        anchors.left: mapItem.left
+        anchors.bottom: mapItem.top
+        anchors.bottomMargin: 20
+        source: "qrc:/iamge/title.png"
+    }
+
+    Text {
+        id: pointAnalysis
+        anchors.top: captionImage4.top
+        anchors.left: captionImage4.left
+        anchors.leftMargin: 13
+        color: "#F0F0F0"
+        text: qsTr("坐标显示图")
+        font{family:localFont1.name;pixelSize: 18;}
+    }
 
     //定位显示区域,居中显示
     Item {
@@ -285,7 +320,7 @@ Window {
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: title.bottom
-        anchors.topMargin: 50
+        anchors.topMargin: 80
 
         Rectangle{
             id:imageDisplay
@@ -330,21 +365,7 @@ Window {
                     height: 26
                     x:originX - width / 2
                     y:originY - height / 2
-
                     source: "qrc:/iamge/origin.png"
-                }
-
-                //坐标图片
-                Image {
-                    id:coordImg
-                    width: 34
-                    height: 34
-                    x:parent.width / 2
-                    y:parent.height /2
-                    //anchors.centerIn: parent
-                    source: "qrc:/iamge/coord.png"
-
-                    visible: false
                 }
 
                 ///使用wheelEvent控制滚轮，其中angleDelta属性用来获取滚轮滚动的距离
@@ -411,13 +432,11 @@ Window {
                 {
                     console.log("mouseX " + mouse.x)
                     console.log("mouseY " + mouse.y)
-                    //                    originX = mouseX - originImg.width / 2
-                    //                    originY = mouseY - originImg.height / 2
 
                     originX = mouseX
                     originY = mouseY
 
-                    chart.setOriginCoord(originX - originImg.width / 2,originY - originImg.height / 2 )
+                    chart.setOriginCoord(originX ,originY)
                 }
                 else
                 {

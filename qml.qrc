@@ -28,5 +28,7 @@
         <file>iamge/leftaDorn.gif</file>
         <file>iamge/rightDorn.gif</file>
         <file>iamge/top.png</file>
+        <file>font/时尚中黑简体.ttf</file>
+        <file>iamge/title.png</file>
     </qresource>
 </RCC>
