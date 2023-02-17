@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QQmlContext>
 #include <QString>
+#include <QTimer>
 #include <QQmlApplicationEngine>
 #include <QQmlEngine>
 #include <QtWebSockets/QWebSocketServer>
@@ -30,8 +31,6 @@ public:
     //停止服务
     void stopServer();
 
-    Q_INVOKABLE void test1();
-
     Q_INVOKABLE bool copyImageFile(QString image);
 
 protected:
@@ -45,6 +44,8 @@ signals:
     Q_INVOKABLE void setCurCoord(int coordX,int coordY,int tagID);
 
     Q_INVOKABLE void sendCurServerAddress(QString address);
+
+    Q_INVOKABLE void clearDrawCoord();
 
 
 private:
@@ -60,12 +61,15 @@ private slots:
     void socketDisconnected();
     void processTextMessage(QString message);
     void processByteArrayMessage(QByteArray array);
+    void onRecvDataFinish();
 
 
 private:
     QWebSocketServer * m_WebSocketServer;
     QList<QWebSocket *> m_clients;
     QWebSocket *pSocket;
+    QTimer     m_RecvTimer;
+    bool       m_bRecvData{false};
 };
 
 #endif // CWEBSOCKETSERVER_H

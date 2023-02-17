@@ -22,7 +22,7 @@ ClientDialog::ClientDialog(const QUrl &url,bool debug,QWidget *parent)
     //layout1
     QLabel *iplabel = new QLabel("IP地址");
     m_iplineedit =new QLineEdit;
-    m_iplineedit->setText("192.168.0.105");
+    m_iplineedit->setText("172.16.16.67");
     QLabel *portlabel =new QLabel("端口");
     m_portspinbox = new QSpinBox;
     m_portspinbox->setRange(0,65535);
@@ -94,6 +94,7 @@ ClientDialog::ClientDialog(const QUrl &url,bool debug,QWidget *parent)
     connect(&m_websocket,SIGNAL(connected()),this,SLOT(onconnected()));
     connect(&m_websocket,SIGNAL(disconnected()),this,SLOT(closeConnection()));
     connect(&m_websocket,SIGNAL(textMessageReceived(QString)),this,SLOT(onTextMessageReceived(QString)));
+    connect(&m_sendTimer,&QTimer::timeout,this,&ClientDialog::onSendButtonClicked);
 }
 
 ClientDialog::~ClientDialog()
@@ -128,6 +129,7 @@ void ClientDialog::onconnected(){
     m_sendbutton->setEnabled(true);
     m_receivemessageTextEdit->setEnabled(true);
     m_clean->setEnabled(true);
+    //m_sendTimer.start(1000);
 }
 //收到消息
 void ClientDialog::onTextMessageReceived(const QString &message)
@@ -145,14 +147,13 @@ void ClientDialog::onSendButtonClicked()
 {
     QString msg= m_sendmessagetextedit->document()->toPlainText();
 
-
     QJsonObject groupObj;
     groupObj.insert("MsgType",2);
 
     QJsonArray array ;
     QJsonObject item1;
     item1.insert("TagId",55555);
-    item1.insert("X",40000);
+    item1.insert("X",40000 + flag);
     item1.insert("Y",40000);
     item1.insert("Z",3);
     item1.insert("StaticTime",111);
@@ -169,6 +170,11 @@ void ClientDialog::onSendButtonClicked()
     item2.insert("MapId",11);
     item2.insert("Battery",80);
     array.append(item2);
+
+    if(flag<= 40000)
+    {
+        flag+=10000;
+    }
 
     groupObj.insert("TagList",array);
 

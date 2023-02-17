@@ -24,6 +24,8 @@ public:
 
     Q_INVOKABLE void setOriginCoord(int originX,int originY);
 
+    Q_INVOKABLE void clearVecCoord();
+
 private:
     QPainter *m_painter{nullptr};           //绘制指针
 

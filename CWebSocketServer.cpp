@@ -18,6 +18,7 @@ CWebSocketServer::CWebSocketServer()
     m_WebSocketServer->setMaxPendingConnections(20);
 
     connect(m_WebSocketServer,SIGNAL(newConnection()),this,SLOT(onNewConnection()));
+    connect(&m_RecvTimer,&QTimer::timeout,this,&CWebSocketServer::onRecvDataFinish);
 
     startServer();
 
@@ -34,21 +35,14 @@ CWebSocketServer::~CWebSocketServer()
 
 void CWebSocketServer::startServer()
 {
-
     //开始服务
     int i_port = 8195;
     m_WebSocketServer->listen(QHostAddress::Any,i_port);
-    qDebug()<<"ttttttttttttttttttttttt";
 }
 
 void CWebSocketServer::stopServer()
 {
     m_WebSocketServer->close();
-}
-
-void CWebSocketServer::test1()
-{
-
 }
 
 bool CWebSocketServer::copyImageFile(QString image)
@@ -233,7 +227,9 @@ void CWebSocketServer::processTextMessage(QString message)
 //数据是JSON格式，解析后判断是基站相关还是标签卡相关(对象包括数组）
 void CWebSocketServer::processByteArrayMessage(QByteArray array)
 {
-
+    //m_bRecvData = true;
+    m_RecvTimer.stop();
+    emit clearDrawCoord();
     qDebug()<<array;
     QJsonObject groupObj;
     QJsonDocument m_document;
@@ -268,10 +264,16 @@ void CWebSocketServer::processByteArrayMessage(QByteArray array)
             {
                 QJsonObject object = mesArray.at(i).toObject();
                 parseLabelMeg(object);
-
             }
         }
     }
+
+    m_RecvTimer.start(2000);   //超过两秒没有新数据上发，则认为传输已经结束，清理界面上的坐标
+}
+
+void CWebSocketServer::onRecvDataFinish()
+{
+    emit clearDrawCoord();
 }
 
 //数据是JSON格式，解析后判断是基站相关还是标签卡相关

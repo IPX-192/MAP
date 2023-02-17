@@ -23,5 +23,10 @@
         <file>TagEditPopup.qml</file>
         <file>FileDialog.qml</file>
         <file>HistoryDataPopup.qml</file>
+        <file>iamge/background.png</file>
+        <file>iamge/bottom.png</file>
+        <file>iamge/leftaDorn.gif</file>
+        <file>iamge/rightDorn.gif</file>
+        <file>iamge/top.png</file>
     </qresource>
 </RCC>

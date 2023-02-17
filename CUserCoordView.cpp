@@ -33,9 +33,6 @@ void CUserCoordView::drawCoordImage()
 
         m_painter->drawText(backImgRect,Qt::AlignHCenter | Qt::AlignVCenter, QString::number(m_vecTagId.at(i)));
     }
-
-
-
 }
 
 void CUserCoordView::setCurCoord(int coordX, int coordY,int tagId)
@@ -50,4 +47,12 @@ void CUserCoordView::setOriginCoord(int originX,int originY)
 {
     m_OriginX = originX;
     m_OriginY = originY;
+}
+
+void CUserCoordView::clearVecCoord()
+{
+    m_vecCoordX.clear();
+    m_vecCoordY.clear();
+    m_vecTagId.clear();
+    update();
 }

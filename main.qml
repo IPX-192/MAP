@@ -6,8 +6,8 @@ import QtQuick.Controls 2.5
 Window {
 
     visible: true
-    width: 1920
-    height: 1080
+    width: 1270
+    height: 768
     title: qsTr("定位软件")
     property bool bSetOrigin:false
 
@@ -26,6 +26,35 @@ Window {
         source: "qrc:/font/MFYueYuan.ttf"
     }
 
+    Rectangle{
+        anchors.fill:parent
+        color: "#050B14"
+        Image {
+            id: background
+            source: "qrc:/iamge/background.png"
+
+        }
+    }
+
+
+    AnimatedImage {
+        anchors.left: parent.left
+        anchors.top:title.bottom
+        anchors.bottom: bottomItem.top
+        source: "qrc:/iamge/leftaDorn.gif"
+        z:10
+
+    }
+
+    AnimatedImage {
+        anchors.right: parent.right
+        anchors.top:title.bottom
+        anchors.bottom: bottomItem.top
+        source: "qrc:/iamge/rightDorn.gif"
+        z:10
+    }
+
+
     Component.onCompleted: {
         //chart.setOriginCoord(originX - originImg.width / 2,originY - originImg.height / 2 )
 
@@ -39,9 +68,15 @@ Window {
         id:title
         width: parent.width
         height: 80
-        color: "#2E529B"
+        color: "#062B3C"
         anchors.top: parent.top
-        anchors.topMargin: 10
+
+
+        Image {
+            anchors.fill: parent
+            source: "qrc:/iamge/top.png"
+
+        }
 
         Image{
             id:logoImg
@@ -70,8 +105,11 @@ Window {
             width: 100
             height: 35
             text: "历史数据"
+            font.family: fontName
             anchors.right: parent.right
             anchors.rightMargin: 40
+            // highlighted:true
+
             anchors.verticalCenter: parent.verticalCenter
             onClicked: {
                 dataPopup.open()
@@ -83,6 +121,7 @@ Window {
             width: 100
             height: 35
             text: "配置标签"
+            font.family: fontName
             anchors.right: dataBtn.left
             anchors.rightMargin: 20
             anchors.verticalCenter: parent.verticalCenter
@@ -96,6 +135,7 @@ Window {
             width: 100
             height: 35
             text: "配置原点"
+            font.family: fontName
             anchors.right: tagBtn.left
             anchors.rightMargin: 20
             anchors.verticalCenter: parent.verticalCenter
@@ -108,6 +148,7 @@ Window {
             id: importBtn
             width: 100
             height: 35
+            font.family: fontName
             text: "导入地图"
             anchors.right: oringinBtn.left
             anchors.rightMargin: 20
@@ -222,38 +263,35 @@ Window {
 
     //表格
     Rectangle {
-        width: 500
+        width: 1000
         height: 300
-        anchors.right: parent.right
-        anchors.rightMargin: 50
-        anchors.top: title.bottom
-        anchors.topMargin: 20
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: mapItem.bottom
+        anchors.topMargin: 100
         color: "lightblue"
 
-        //        UserInfoListView {
-        //            anchors.fill: parent
-        //        }
+        UserInfoListView {
+            anchors.fill: parent
+        }
     }
 
 
 
-    //定位显示区域
+    //定位显示区域,居中显示
     Item {
         id:mapItem
         width: 1000
         height: 100
-        anchors.left: title.left
-        anchors.leftMargin: 50
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 100
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: title.bottom
+        anchors.topMargin: 50
 
         Rectangle{
             id:imageDisplay
-
             width:parent.width
             height:parent.height
             border.color: "black"
-            z:-10
 
             Image {
                 id:usrImg
@@ -263,8 +301,8 @@ Window {
 
                 CUserCoordView{
                     id:chart
-                    width: 1000
-                    height: 100
+                    width: 500
+                    height: 200
                     anchors.centerIn: parent
                 }
 
@@ -272,35 +310,17 @@ Window {
                 Connections{
                     target: InterAction
                     //设置人的坐标
-                    //            onSetCurCoord:{
-
-                    //                if( originX + originImg.width / 2  + coordX - coordImg.width / 2 < 0)
-                    //                {
-                    //                    coordImg.x = originX + originImg.width / 2  + coordX - coordImg.width / 2
-                    //                }
-                    //                else
-                    //                {
-                    //                    coordImg.x = originX + coordX - coordImg.width / 2
-                    //                }
-
-                    //                if(originY +  originImg.height / 2 +  coordY - coordImg.height / 2 < 0)
-                    //                {
-                    //                    coordImg.y = originY + originImg.height / 2
-                    //                }
-
-                    //                else
-                    //                {
-                    //                    coordImg.y = originY +  originImg.height / 2 +  coordY - coordImg.height / 2
-                    //                }
-                    //            }
-
                     onSetCurCoord:{
                         chart.setCurCoord(coordX,coordY,tagID);
 
                     }
+
+                    //新收到消息时清理以往的显示
+                    onClearDrawCoord:{
+                        console.log("开始清理")
+                        chart.clearVecCoord();
+                    }
                 }
-
-
 
 
                 //原点图片
@@ -310,9 +330,9 @@ Window {
                     height: 26
                     x:originX - width / 2
                     y:originY - height / 2
+
                     source: "qrc:/iamge/origin.png"
                 }
-
 
                 //坐标图片
                 Image {
@@ -391,8 +411,11 @@ Window {
                 {
                     console.log("mouseX " + mouse.x)
                     console.log("mouseY " + mouse.y)
-                    originX = mouseX - originImg.width / 2
-                    originY = mouseY - originImg.height / 2
+                    //                    originX = mouseX - originImg.width / 2
+                    //                    originY = mouseY - originImg.height / 2
+
+                    originX = mouseX
+                    originY = mouseY
 
                     chart.setOriginCoord(originX - originImg.width / 2,originY - originImg.height / 2 )
                 }
@@ -407,6 +430,7 @@ Window {
 
     //底部栏
     Rectangle{
+        id:bottomItem
         width: title.width
         height: 50
         color: title.color
