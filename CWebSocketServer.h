@@ -33,9 +33,10 @@ public:
 
     Q_INVOKABLE bool copyImageFile(QString image);
 
-protected:
     //获取IP地址
-    QString getLocalIP();
+    Q_INVOKABLE QString getLocalIP();
+
+    Q_INVOKABLE bool getServerConnectStatus();
 
 
 signals:
@@ -69,7 +70,7 @@ private:
     QList<QWebSocket *> m_clients;
     QWebSocket *pSocket;
     QTimer     m_RecvTimer;
-    bool       m_bRecvData{false};
+    bool       m_bConnectStatus{false};
 };
 
 #endif // CWEBSOCKETSERVER_H

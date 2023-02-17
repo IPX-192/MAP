@@ -15,6 +15,8 @@ Window {
 
     property string ipAddress: ""
 
+    property string connectStatus: "disconnected"
+
     property int originX: 40   //原点X
 
     property int originY: 40  //原点Y
@@ -58,7 +60,9 @@ Window {
     Component.onCompleted: {
         //chart.setOriginCoord(originX - originImg.width / 2,originY - originImg.height / 2 )
 
-        chart.setOriginCoord(originX ,originY  )
+        chart.setOriginCoord(originX ,originY)
+
+        ipAddress = InterAction.getLocalIP()
     }
 
     //顶部栏
@@ -139,7 +143,17 @@ Window {
             anchors.rightMargin: 20
             anchors.verticalCenter: parent.verticalCenter
             onClicked: {
-                bSetOrigin = true
+                bSetOrigin = !bSetOrigin
+                if(bSetOrigin)
+                {
+                    oringinBtn.highlighted = true
+                    oringinBtn.text  = qsTr("取消配置")
+                }
+                else
+                {
+                    oringinBtn.highlighted = false
+                    oringinBtn.text  = qsTr("配置原点")
+                }
             }
         }
 
@@ -372,6 +386,7 @@ Window {
                 MouseArea{
                     anchors.fill: parent
                     onWheel: {
+                        return;
                         if (wheel.modifiers & Qt.ControlModifier) {
                             usrImg.rotation += wheel.angleDelta.y / 120 * 5;
                             if (Math.abs(usrImg.rotation) < 4)
@@ -456,24 +471,37 @@ Window {
         anchors.bottom: parent.bottom
 
         Text {
+            id:ipAddressText
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 20
-            text: qsTr("服务器地址") + ipAddress
-            font.pixelSize: 22
+            text: qsTr("服务器地址: ") + ipAddress
+            font.pixelSize: 18
+            font.family: fontName
+            color: "#FEFEFE"
+        }
+
+        Text {
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: ipAddressText.right
+            anchors.leftMargin: 50
+            text: qsTr("连接状态: ") + connectStatus
+            font.pixelSize: 18
             font.family: fontName
             color: "#FEFEFE"
         }
     }
 
-    Connections{
-        target: InterAction
-        onSendCurServerAddress:{
-            ipAddress = address
-            console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbb" + ipAddress)
+    Timer{
+        interval: 1500
+        repeat:true
+        running:true
+        onTriggered:
+        {
+            var bStatus = InterAction.getServerConnectStatus()
+            connectStatus = bStatus ? qsTr("connected") : qsTr("disconnected")
         }
     }
-
 
     //标签编辑弹窗
     TagEditPopup {

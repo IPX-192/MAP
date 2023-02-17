@@ -23,7 +23,6 @@ CWebSocketServer::CWebSocketServer()
     startServer();
 
     QString serverIP = getLocalIP();
-    emit sendCurServerAddress(serverIP);
 
     qDebug()<<"sdasdsadasdasdasd"<<serverIP;
 }
@@ -136,8 +135,11 @@ QString CWebSocketServer::getLocalIP()
             }
         }
     }
+}
 
-
+bool CWebSocketServer::getServerConnectStatus()
+{
+    return m_bConnectStatus;
 }
 
 void CWebSocketServer::parseLabelMeg(QJsonArray &array)
@@ -207,6 +209,7 @@ void CWebSocketServer::onNewConnection()
 {
 
     qDebug() << "hello";
+    m_bConnectStatus = true;
     pSocket = m_WebSocketServer->nextPendingConnection();
 
     connect(pSocket,SIGNAL(textMessageReceived(QString)),this,SLOT(processTextMessage(QString)));
@@ -218,7 +221,7 @@ void CWebSocketServer::onNewConnection()
 //连接断开
 void CWebSocketServer::socketDisconnected()
 {
-
+    m_bConnectStatus = false;
 }
 
 void CWebSocketServer::processTextMessage(QString message)

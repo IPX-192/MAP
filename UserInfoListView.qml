@@ -1,11 +1,11 @@
 ﻿import QtQuick 2.0
 
 Item {
-    width: 500
+    width: 1000
     height: 300
 
     //表格宽度
-    property var tableWidth: 505
+    property var tableWidth: 1000
 
     //列高
     property real itemHeigt: 35
@@ -16,8 +16,9 @@ Item {
         id: headItem
         width: tableWidth
         height: itemHeigt
-        anchors.left: parent.left
-        anchors.right: parent.right
+        //                anchors.left: parent.left
+        //                anchors.right: parent.right
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
 
         Row {
@@ -26,7 +27,7 @@ Item {
 
             Rectangle {
                 id: headNumRect
-                width: tableWidth * 0.1
+                width: tableWidth * 0.05
                 height: itemHeigt
                 color: "#2E529B"
                 border.color: "#49649B"
@@ -35,6 +36,26 @@ Item {
                 Text {
                     id: headText
                     text: "序号"
+                    font.pixelSize: 16
+                    font.family: "Microsoft YaHei"
+                    font.bold: true
+                    color: "#D6D6D6"
+                    anchors.centerIn: parent
+                }
+            }
+
+
+            Rectangle {
+                id: headTagIdRect
+                width: tableWidth * 0.1
+                height: itemHeigt
+                color: "#2E529B"
+                border.color: "#49649B"
+
+                //普通表头框
+                Text {
+                    id: headIDText
+                    text: "TagID"
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
                     font.bold: true
@@ -63,7 +84,7 @@ Item {
 
             Rectangle {
                 id: headIDRect
-                width: tableWidth * 0.2
+                width: tableWidth * 0.15
                 height: itemHeigt
                 color: "#2E529B"
                 border.color: "#49649B"
@@ -81,7 +102,7 @@ Item {
 
             Rectangle {
                 id: headDeptRect
-                width: tableWidth * 0.2
+                width: tableWidth * 0.15
                 height: itemHeigt
                 color: "#2E529B"
                 border.color: "#49649B"
@@ -116,15 +137,15 @@ Item {
             }
 
             Rectangle {
-                id: headOptRect
-                width: tableWidth * 0.2
+                id: headCoordXRect
+                width: tableWidth * 0.1
                 height: itemHeigt
                 color: "#2E529B"
                 border.color: "#49649B"
 
                 //普通表头框
                 Text {
-                    text: "操作"
+                    text: "坐标x(m)"
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
                     font.bold: true
@@ -132,6 +153,44 @@ Item {
                     anchors.centerIn: parent
                 }
             }
+
+            Rectangle {
+                id: headCoordYRect
+                width: tableWidth * 0.1
+                height: itemHeigt
+                color: "#2E529B"
+                border.color: "#49649B"
+
+                //普通表头框
+                Text {
+                    text: "坐标y(m)"
+                    font.pixelSize: 16
+                    font.family: "Microsoft YaHei"
+                    font.bold: true
+                    color: "#D6D6D6"
+                    anchors.centerIn: parent
+                }
+            }
+
+            Rectangle {
+                id: headKwhRect
+                width: tableWidth * 0.05 + 8
+                height: itemHeigt
+                color: "#2E529B"
+                border.color: "#49649B"
+
+                //普通表头框
+                Text {
+                    text: "电量"
+                    font.pixelSize: 16
+                    font.family: "Microsoft YaHei"
+                    font.bold: true
+                    color: "#D6D6D6"
+                    anchors.centerIn: parent
+                }
+            }
+
+
         }
     }
 
