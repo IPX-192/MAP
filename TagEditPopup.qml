@@ -3,7 +3,7 @@ import QtQuick.Controls 2.5
 
 Popup {
     id: editTagPopup
-    width: 455
+    width: 1000
     height: 600
     modal: true
     focus: true
@@ -26,7 +26,8 @@ Popup {
     }
 
     Column {
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 50
         anchors.top: titeText.bottom
         anchors.topMargin: 40
         spacing: 20
@@ -206,7 +207,9 @@ Popup {
         width: 200
         height: 35
         text: "完成添加"
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 50
+
         anchors.bottom: nextBtn.top
         anchors.bottomMargin: 20
         onClicked: {
@@ -230,7 +233,8 @@ Popup {
         width: 200
         height: 35
         text: "保存并添加下一个"
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 50
         anchors.bottom: closeBtn.top
         anchors.bottomMargin: 20
         onClicked: {
@@ -258,12 +262,19 @@ Popup {
         width: 200
         height: 35
         text: "取消添加"
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 50
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 15
         onClicked: {
             close()
         }
+    }
+
+    UserMagListView{
+        anchors.right: parent.right
+        anchors.top: titeText.bottom
+        anchors.topMargin: 40
     }
 
 }

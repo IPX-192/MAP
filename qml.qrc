@@ -30,5 +30,6 @@
         <file>iamge/top.png</file>
         <file>font/时尚中黑简体.ttf</file>
         <file>iamge/title.png</file>
+        <file>UserMagListView.qml</file>
     </qresource>
 </RCC>
