@@ -301,8 +301,8 @@ Window {
 
                 CUserCoordView{
                     id:chart
-                    width: 500
-                    height: 200
+                    width: 1000
+                    height: 100
                     anchors.centerIn: parent
                 }
 

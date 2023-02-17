@@ -175,26 +175,30 @@ void CWebSocketServer::parseLabelMeg(QJsonObject &object)
 {
     //标签卡的数据为7个JSON对象组合而成,依次解析即可
     int tagId = 0;
-    int coordX = 0;
-    int coordY = 0;
-    int coordZ = 0;
+    int coordX = 0;      //单位毫米
+    int coordY = 0;      //单位毫米
+    int coordZ = 0;      //单位毫米
     int staticTime = 0;
     int mapId = 0;
     int battery = 0;
 
     tagId = object.value("TagId").toInt();
-    coordX = object.value("X").toInt() / 1000;
-    coordY = object.value("Y").toInt() / 1000;
-    coordZ = object.value("Z").toInt() / 1000;
+    coordX = object.value("X").toInt();
+    coordY = object.value("Y").toInt();
+    coordZ = object.value("Z").toInt();
     staticTime = object.value("StaticTime").toInt();
     mapId = object.value("MapId").toInt();
     battery = object.value("Battery").toInt();
+
+    //把毫米换算成像素点,1000个像素点为500m
+    int PixelX = coordX / 500;
+    int PixelY = coordY / 500;
 
     //查询人的信息
     qDebug()<<"*********tagId****"<<tagId;
 
     //显示坐标位置
-    emit setCurCoord(coordX,coordY,tagId);
+    emit setCurCoord(PixelX,PixelY,tagId);
 
 }
 
