@@ -33,9 +33,6 @@ public:
     //查询所有添加人员
     bool queryAll(vector<CUserInfo>& vUser);
 
-    //删除指定人员
-    bool delUserByUserID(const string& strID);
-
     //获取地图原点配置
     bool getMapOriginConfig(CMapOriginInfo &info);
 
@@ -50,6 +47,9 @@ public:
 
     //加载所有人员信息
     Q_INVOKABLE bool loadAllUser();
+
+    //删除指定人员
+    Q_INVOKABLE bool delUserByUserID(QString strID);
 
 public:
     //服务器对象

@@ -223,10 +223,10 @@ bool CUserInfoTable::getUserInfoByID(const string &strUserID, CUserInfo &info)
 
         if(cursor.rowsLeft())
         {
-            UserInfoTable account(*m_pDatabase);
+            UserInfoTable account(*m_pDatabase) ;
+            account = (*cursor);
 
             bSuccess = true;
-            info.setStrUserID(account.strUserID);
             info.setStrUsername(account.strUserName);
             info.setStrDepartment(account.strDepartment);
             info.setStrRole(account.strRole);

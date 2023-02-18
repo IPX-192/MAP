@@ -29,13 +29,13 @@ public:
     void setIStaticTime(int iStaticTime);
 
 private:
-    int m_iTagID;
-    int m_iMapID;
-    int m_iBattery;
-    int m_iPosX;
-    int m_iPosY;
-    int m_iPosZ;
-    int m_iStaticTime;
+    int m_iTagID{-1};
+    int m_iMapID{-1};
+    int m_iBattery{-1};
+    int m_iPosX{0};
+    int m_iPosY{0};
+    int m_iPosZ{0};
+    int m_iStaticTime{0};
 };
 
 #endif // CTAGINFO_H

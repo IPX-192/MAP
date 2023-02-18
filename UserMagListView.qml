@@ -188,7 +188,7 @@ Item {
                 id: numberRect
                 width: headNumRect.width
                 height: itemHeigt
-                color: "#213B42"
+                color: "transparent"
                 border.color: "#1A292D"
                 anchors.left: parent.left
 
@@ -198,7 +198,7 @@ Item {
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
-                    color: "#D6D6D6"
+                    color: "#000000"
                     anchors.centerIn: parent
                     fontSizeMode: Text.Fit
                     elide: Text.ElideRight
@@ -211,7 +211,7 @@ Item {
                 id: tagIDRect
                 width: headTagIdRect.width
                 height: itemHeigt
-                color: "#213B42"
+                color: "transparent"
                 border.color: "#1A292D"
                 anchors.left: numberRect.right
                 anchors.leftMargin: -1
@@ -221,7 +221,7 @@ Item {
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
-                    color: "#D6D6D6"
+                    color: "#000000"
                     anchors.centerIn: parent
                     fontSizeMode: Text.Fit
                     elide: Text.ElideRight
@@ -234,7 +234,7 @@ Item {
                 id: nameRect
                 width: headNameRect.width
                 height: itemHeigt
-                color: "#213B42"
+                color: "transparent"
                 border.color: "#1A292D"
                 anchors.left: tagIDRect.right
                 anchors.leftMargin: -1
@@ -244,7 +244,7 @@ Item {
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
-                    color: "#D6D6D6"
+                    color: "#000000"
                     anchors.centerIn: parent
                     fontSizeMode: Text.Fit
                     elide: Text.ElideRight
@@ -257,7 +257,7 @@ Item {
                 id: idRect
                 width: headIDRect.width
                 height: itemHeigt
-                color: "#213B42"
+                color: "transparent"
                 border.color: "#1A292D"
                 anchors.left: nameRect.right
                 anchors.leftMargin: -1
@@ -267,7 +267,7 @@ Item {
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
-                    color: "#D6D6D6"
+                    color: "#000000"
                     anchors.centerIn: parent
                     fontSizeMode: Text.Fit
                     elide: Text.ElideRight
@@ -280,7 +280,7 @@ Item {
                 id: depatmentRect
                 width: headDeptRect.width
                 height: itemHeigt
-                color: "#213B42"
+                color: "transparent"
                 border.color: "#1A292D"
                 anchors.left: idRect.right
                 anchors.leftMargin: -1
@@ -290,7 +290,7 @@ Item {
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
-                    color: "#D6D6D6"
+                    color: "#000000"
                     anchors.centerIn: parent
                     fontSizeMode: Text.Fit
                     elide: Text.ElideRight
@@ -303,7 +303,7 @@ Item {
                 id: roleRect
                 width: headRoleRect.width
                 height: itemHeigt
-                color: "#213B42"
+                color: "transparent"
                 border.color: "#1A292D"
                 anchors.left: depatmentRect.right
                 anchors.leftMargin: -1
@@ -313,7 +313,7 @@ Item {
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
-                    color: "#D6D6D6"
+                    color: "#000000"
                     anchors.centerIn: parent
                     fontSizeMode: Text.Fit
                     elide: Text.ElideRight
@@ -326,10 +326,29 @@ Item {
                 id: optRect
                 width: headOptRect.width
                 height: itemHeigt
-                color: "#213B42"
+                color: "transparent"
                 border.color: "#1A292D"
                 anchors.left: roleRect.right
                 anchors.leftMargin: -1
+
+                Text {
+                    text: "删除"
+                    width: parent.width
+                    font.pixelSize: 16
+                    font.family: "Microsoft YaHei"
+                    color: "#FFC061"
+                    anchors.centerIn: parent
+                    fontSizeMode: Text.Fit
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        InterAction.delUserByUserID(userID)
+                    }
+                }
             }
         }
     }

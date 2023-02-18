@@ -135,6 +135,7 @@ bool CTagInfoTable::updateTagInfo(const int &tagID, const CTagInfo &info)
         if(cursor.rowsLeft())
         {
             TagInfoTable tag(*m_pDatabase);
+            tag = *cursor;
 
             bSuccess = true;
             tag.iTagID = info.iTagID();
@@ -227,6 +228,7 @@ bool CTagInfoTable::getTagInfoByID(const int &tagID, CTagInfo &info)
         if(cursor.rowsLeft())
         {
             TagInfoTable tag(*m_pDatabase);
+            tag = *cursor;
 
             bSuccess = true;
             info.setITagID(tag.iTagID);

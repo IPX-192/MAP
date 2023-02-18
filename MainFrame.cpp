@@ -122,7 +122,7 @@ bool MainFrame::loadAllUser()
     return bSuccess;
 }
 
-bool MainFrame::delUserByUserID(const string &strID)
+bool MainFrame::delUserByUserID(QString strID)
 {
     bool bFlag = false;
 
@@ -141,9 +141,9 @@ bool MainFrame::delUserByUserID(const string &strID)
     }
 
     CUserInfo info;
-    info.setStrUserID(strID);
+    info.setStrUserID(strID.toStdString());
 
-    pPersonnelTable->getUserInfoByID(strID, info);
+    pPersonnelTable->getUserInfoByID(strID.toStdString(), info);
 
     CTagInfo tagInfo;
     tagInfo.setITagID(info.itagID());
@@ -151,6 +151,12 @@ bool MainFrame::delUserByUserID(const string &strID)
     bFlag = pPersonnelTable->delUserInfo(info);
 
     bFlag = pTagInfoTable->delTagInfo(tagInfo);
+
+    //刷新界面显示
+    if(bFlag)
+    {
+        loadAllUser();
+    }
 
     return bFlag;
 }
