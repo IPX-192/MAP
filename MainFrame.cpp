@@ -72,7 +72,7 @@ bool MainFrame::insert(QString name, QString userID, QString depart, QString rol
         return bFlag;
     }
 
-    if(!pPersonnelTable->checkUserIDAvailability(user.strUserID(), user.itagID()))
+    if(!pPersonnelTable->checkUserIDExist(user.strUserID(), user.itagID()))
     {
         bFlag = pPersonnelTable->addUserInfo(user);
         bFlag = pTagInfoTable->addTagInfo(tag);
@@ -81,7 +81,7 @@ bool MainFrame::insert(QString name, QString userID, QString depart, QString rol
     return bFlag;
 }
 
-bool MainFrame::isExist( QString &strID, QString &tagID )
+bool MainFrame::isExist( QString strID, QString tagID )
 {
     bool bFlag = false;
 
@@ -103,7 +103,7 @@ bool MainFrame::isExist( QString &strID, QString &tagID )
         return bFlag;
     }
 
-    bFlag = pPersonnelTable->checkUserIDAvailability(strID.toStdString(), tagID.toInt());
+    bFlag = pPersonnelTable->checkUserIDExist(strID.toStdString(), tagID.toInt());
 
     return bFlag;
 }

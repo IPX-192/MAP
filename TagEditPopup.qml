@@ -21,6 +21,12 @@ Popup {
     onOpened: {
         //加载所有人员信息
         InterAction.loadAllUser()
+        clearInput()
+    }
+
+    onClosed: {
+        bEditPopup = false
+        clearInput()
     }
 
     Text {
@@ -104,7 +110,7 @@ Popup {
         visible: bEditPopup
 
         Item {
-            id: name
+            id: nameItem
             width: 300
             height: 35
             Text {
@@ -135,7 +141,7 @@ Popup {
         }
 
         Item {
-            id: userID
+            id: userIDItem
             width: 300
             height: 35
             Text {
@@ -166,7 +172,7 @@ Popup {
         }
 
         Item {
-            id: department
+            id: departmentItem
             width: 300
             height: 35
             Text {
@@ -198,7 +204,7 @@ Popup {
 
 
         Item {
-            id: role
+            id: roleItem
             width: 300
             height: 35
             Text {
@@ -230,7 +236,7 @@ Popup {
 
 
         Item {
-            id: tagID
+            id: tagIDItem
             width: 300
             height: 35
             Text {

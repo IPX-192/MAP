@@ -169,7 +169,7 @@ Item {
         anchors.top: headItem.bottom
         anchors.topMargin: -1
         anchors.left: headItem.left
-        //model: UserInfoModel
+        model: UserInfoModel
         clip: true
         maximumFlickVelocity: itemHeigt * 10
         flickableDirection: Flickable.VerticalFlick
@@ -188,7 +188,7 @@ Item {
                 id: numberRect
                 width: headNumRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: "#213B42"
                 border.color: "#1A292D"
                 anchors.left: parent.left
 
@@ -211,13 +211,13 @@ Item {
                 id: tagIDRect
                 width: headTagIdRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: "#213B42"
                 border.color: "#1A292D"
                 anchors.left: numberRect.right
                 anchors.leftMargin: -1
 
                 Text {
-                    text: tagID
+                    text: userTagID
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
@@ -234,7 +234,7 @@ Item {
                 id: nameRect
                 width: headNameRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: "#213B42"
                 border.color: "#1A292D"
                 anchors.left: tagIDRect.right
                 anchors.leftMargin: -1
@@ -257,7 +257,7 @@ Item {
                 id: idRect
                 width: headIDRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: "#213B42"
                 border.color: "#1A292D"
                 anchors.left: nameRect.right
                 anchors.leftMargin: -1
@@ -280,7 +280,7 @@ Item {
                 id: depatmentRect
                 width: headDeptRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: "#213B42"
                 border.color: "#1A292D"
                 anchors.left: idRect.right
                 anchors.leftMargin: -1
@@ -303,7 +303,7 @@ Item {
                 id: roleRect
                 width: headRoleRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: "#213B42"
                 border.color: "#1A292D"
                 anchors.left: depatmentRect.right
                 anchors.leftMargin: -1
@@ -326,7 +326,7 @@ Item {
                 id: optRect
                 width: headOptRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: "#213B42"
                 border.color: "#1A292D"
                 anchors.left: roleRect.right
                 anchors.leftMargin: -1

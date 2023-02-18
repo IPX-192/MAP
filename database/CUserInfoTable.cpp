@@ -35,7 +35,7 @@ bool CUserInfoTable::addUserInfo(const CUserInfo &info)
     try
     {
         //判断新的名字是否可用
-        if(checkUserIDAvailability(info.strUserID(), info.itagID()))
+        if(!checkUserIDExist(info.strUserID(), info.itagID()))
         {
             bSuccess = true;
 
@@ -44,6 +44,7 @@ bool CUserInfoTable::addUserInfo(const CUserInfo &info)
             account.strUserName = info.strUsername();
             account.strDepartment = info.strDepartment();
             account.strRole       = info.strRole();
+            account.itagID = info.itagID();
             account.update();
         }
     }
@@ -241,7 +242,7 @@ bool CUserInfoTable::getUserInfoByID(const string &strUserID, CUserInfo &info)
     return bSuccess;
 }
 
-bool CUserInfoTable::checkUserIDAvailability(const string &strUserID, const int &tagID)
+bool CUserInfoTable::checkUserIDExist(const string &strUserID, const int &tagID)
 {
     if(m_pDatabase == nullptr)
     {
@@ -249,13 +250,13 @@ bool CUserInfoTable::checkUserIDAvailability(const string &strUserID, const int 
         return false;
     }
 
-    bool bFlag = true;
+    bool bFlag = false;
 
     unsigned long long iCount = select<UserInfoTable>(*m_pDatabase, UserInfoTable::StrUserID == strUserID && UserInfoTable::ItagID == tagID).count();
 
     if(iCount != 0)
     {
-        bFlag = false;
+        bFlag = true;
     }
 
     return bFlag;

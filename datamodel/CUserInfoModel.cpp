@@ -81,7 +81,7 @@ QVariant CUserInfoModel::data(const QModelIndex &index, int role) const
     }
     case UserTagID:
     {
-        return eleData.itagID();
+        return QString::number(eleData.itagID());
     }
     default:
         return QVariant();

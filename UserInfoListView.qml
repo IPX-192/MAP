@@ -243,7 +243,7 @@ Item {
                 id: nameRect
                 width: headNameRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: "#213B42"
                 border.color: "#1A292D"
                 anchors.left: numberRect.right
                 anchors.leftMargin: -1

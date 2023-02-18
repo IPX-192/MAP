@@ -20,7 +20,7 @@ public:
     bool getUserInfoByID(const string &strUserID, CUserInfo &info);
 
     //判断账号是否可用
-    bool checkUserIDAvailability(const string &strUserID, const int &tagID);
+    bool checkUserIDExist(const string &strUserID, const int &tagID);
 
 private:
     MapSysDatabase *m_pDatabase{nullptr};
