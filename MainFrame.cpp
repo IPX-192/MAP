@@ -47,7 +47,12 @@ bool MainFrame::insert(QString name, QString userID, QString depart, QString rol
     user.setStrRole(role.toStdString());
     user.setItagID(tagID.toInt());
 
+    CTagInfo tag;
+    tag.setITagID(tagID.toInt());
+
     CUserInfoTable* pPersonnelTable = CDatabaseManage::GetInstance()->pUserInfo();
+
+    CTagInfoTable* pTagInfoTable = CDatabaseManage::GetInstance()->pTagInfo();
 
     if(nullptr == pPersonnelTable)
     {
@@ -68,6 +73,7 @@ bool MainFrame::insert(QString name, QString userID, QString depart, QString rol
     if(!pPersonnelTable->checkUserIDAvailability(user.strUserID(), user.itagID()))
     {
         bFlag = pPersonnelTable->addUserInfo(user);
+        bFlag = pTagInfoTable->addTagInfo(tag);
     }
 
     return bFlag;
