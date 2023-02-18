@@ -18,6 +18,7 @@ public:
     bool updateUserInfo(const string userID, const CUserInfo &info);
     bool getAllUserInfo(vector<CUserInfo> &vecUsers);
     bool getUserInfoByID(const string &strUserID, CUserInfo &info);
+    bool getUserInfoByTagID(const int &tagID, CUserInfo &info);
 
     //判断账号是否可用
     bool checkUserIDExist(const string &strUserID, const int &tagID);

@@ -242,6 +242,43 @@ bool CUserInfoTable::getUserInfoByID(const string &strUserID, CUserInfo &info)
     return bSuccess;
 }
 
+bool CUserInfoTable::getUserInfoByTagID(const int &tagID, CUserInfo &info)
+{
+    lock();
+
+    bool bSuccess = false;
+
+    if(m_pDatabase == nullptr)
+    {
+        qDebug()<<"m_pDatabase == nullptr";
+        return false;
+    }
+
+    try
+    {
+        auto cursor = select<UserInfoTable>(*m_pDatabase, UserInfoTable::ItagID == tagID).cursor();
+
+        if(cursor.rowsLeft())
+        {
+            UserInfoTable account(*m_pDatabase) ;
+            account = (*cursor);
+
+            bSuccess = true;
+            info.setStrUsername(account.strUserName);
+            info.setStrDepartment(account.strDepartment);
+            info.setStrRole(account.strRole);
+            info.setStrUserID(account.strUserID);
+        }
+    }
+    catch(Except e)
+    {
+    }
+
+    unlock();
+
+    return bSuccess;
+}
+
 bool CUserInfoTable::checkUserIDExist(const string &strUserID, const int &tagID)
 {
     if(m_pDatabase == nullptr)
