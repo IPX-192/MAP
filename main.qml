@@ -21,7 +21,7 @@ Window {
 
     property int originY: 40  //原点Y
 
-    flags: Qt.FramelessWindowHint | Qt.Window
+    //flags: Qt.FramelessWindowHint | Qt.Window
 
     FontLoader{
         id: localFont1
@@ -366,7 +366,6 @@ Window {
 
                     //新收到消息时清理以往的显示
                     onClearDrawCoord:{
-                        console.log("开始清理")
                         chart.clearVecCoord();
                     }
                 }

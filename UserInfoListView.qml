@@ -220,7 +220,7 @@ Item {
                 id: numberRect
                 width: headNumRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: index % 2 === 0 ? "#213B42" : "#000000"
                 border.color: "#1A292D"
                 anchors.left: parent.left
 
@@ -243,7 +243,7 @@ Item {
                 id: tagIDRect
                 width: headTagIdRect.width
                 height: itemHeigt
-                color: "#213B42"
+                color: index % 2 === 0 ? "#213B42" : "#000000"
                 border.color: "#1A292D"
                 anchors.left: numberRect.right
                 anchors.leftMargin: -1
@@ -266,7 +266,7 @@ Item {
                 id: nameRect
                 width: headNameRect.width
                 height: itemHeigt
-                color: "#213B42"
+                color: index % 2 === 0 ? "#213B42" : "#000000"
                 border.color: "#1A292D"
                 anchors.left: tagIDRect.right
                 anchors.leftMargin: -1
@@ -289,7 +289,7 @@ Item {
                 id: idRect
                 width: headIDRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: index % 2 === 0 ? "#213B42" : "#000000"
                 border.color: "#1A292D"
                 anchors.left: nameRect.right
                 anchors.leftMargin: -1
@@ -312,7 +312,7 @@ Item {
                 id: depatmentRect
                 width: headDeptRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: index % 2 === 0 ? "#213B42" : "#000000"
                 border.color: "#1A292D"
                 anchors.left: idRect.right
                 anchors.leftMargin: -1
@@ -335,7 +335,7 @@ Item {
                 id: roleRect
                 width: headRoleRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: index % 2 === 0 ? "#213B42" : "#000000"
                 border.color: "#1A292D"
                 anchors.left: depatmentRect.right
                 anchors.leftMargin: -1
@@ -358,7 +358,7 @@ Item {
                 id: posXRect
                 width: headCoordXRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: index % 2 === 0 ? "#213B42" : "#000000"
                 border.color: "#1A292D"
                 anchors.left: roleRect.right
                 anchors.leftMargin: -1
@@ -381,9 +381,9 @@ Item {
                 id: posYRect
                 width: headCoordYRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: index % 2 === 0 ? "#213B42" : "#000000"
                 border.color: "#1A292D"
-                anchors.left: headCoordXRect.right
+                anchors.left: posXRect.right
                 anchors.leftMargin: -1
 
                 Text {
@@ -402,9 +402,9 @@ Item {
             //电量
             Rectangle {
                 id: batteryRect
-                width: headCoordZRect.width
+                width: headKwhRect.width
                 height: itemHeigt
-                color: curIndex == index? "#213B42" : "#000000"
+                color: index % 2 === 0 ? "#213B42" : "#000000"
                 border.color: "#1A292D"
                 anchors.left: posYRect.right
                 anchors.leftMargin: -1
