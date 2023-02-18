@@ -231,7 +231,7 @@ bool CUserInfoTable::getUserInfoByID(const string &strUserID, CUserInfo &info)
             info.setStrDepartment(account.strDepartment);
             info.setStrRole(account.strRole);
             info.setItagID(account.itagID);
-            info.setStrUserID(account.strUserID)
+            info.setStrUserID(account.strUserID);
         }
     }
     catch(Except e)
