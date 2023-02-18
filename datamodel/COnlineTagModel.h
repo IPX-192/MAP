@@ -32,6 +32,7 @@ public:
     void addData(COnlineTagInfo &info);
     void addData(vector<COnlineTagInfo> &vecTag);
     void deleteRow(int &rowIndex);
+    void deleteRow(int tagID);
 
 public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;

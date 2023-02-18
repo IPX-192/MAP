@@ -189,8 +189,6 @@ Item {
                     anchors.centerIn: parent
                 }
             }
-
-
         }
     }
 
