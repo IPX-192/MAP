@@ -27,8 +27,6 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-    CUserInfoModel m_userDataModel;
-    engine.rootContext()->setContextProperty( "UserInfoModel", &m_userDataModel );
 
     CTagInfoModel m_tagDataModel;
     engine.rootContext()->setContextProperty( "TagInfoModel", &m_tagDataModel );

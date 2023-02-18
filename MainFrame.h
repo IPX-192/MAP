@@ -14,6 +14,7 @@
 #include "./datamanager/CMapOriginInfo.h"
 #include "./datamanager/CTagInfo.h"
 #include "./database/CDatabaseManage.h"
+#include "./datamodel/CUserInfoModel.h"
 
 class MainFrame : public QObject
 {
@@ -32,12 +33,6 @@ public:
     //查询所有添加人员
     bool queryAll(vector<CUserInfo>& vUser);
 
-    //添加人员
-    Q_INVOKABLE bool insert(QString name, QString userID, QString depart, QString role, QString tagID);
-
-    //检查是否重复添加
-    Q_INVOKABLE bool isExist(const string& strID, const int& tagID);
-
     //删除指定人员
     bool delUserByUserID(const string& strID);
 
@@ -47,10 +42,22 @@ public:
     //保存地图原点配置
     bool saveMapOriginConfig(const CMapOriginInfo &info);
 
+    //添加人员
+    Q_INVOKABLE bool insert(QString name, QString userID, QString depart, QString role, QString tagID);
+
+    //检查是否重复添加
+    Q_INVOKABLE bool isExist(const string& strID, const int& tagID);
+
+    //加载所有人员信息
+    Q_INVOKABLE bool loadAllUser();
 
 public:
     //服务器对象
     CWebSocketServer         m_SocketServer;
+
+    //人员model
+    CUserInfoModel m_userDataModel;
+
 
 };
 

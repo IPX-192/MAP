@@ -18,6 +18,11 @@ Popup {
         color: "lightblue"
     }
 
+    onOpened: {
+        //加载所有人员信息
+        InterAction.loadAllUser()
+    }
+
     Text {
         id: titeText
         anchors.horizontalCenter: parent.horizontalCenter
@@ -275,7 +280,7 @@ Popup {
         else
         {
             //检查是否重复
-            let bExist = InterAction.isExist(userIDInput.text, tagIDInput.text)
+            let bExist = InterAction.isExist(userIDInput.text, Number(tagIDInput.text))
 
             if(bExist)
             {

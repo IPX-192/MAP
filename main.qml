@@ -62,7 +62,7 @@ Window {
 
         chart.setOriginCoord(originX ,originY)
 
-        ipAddress = InterAction.getLocalIP()
+        ipAddress = SocketServer.getLocalIP()
     }
 
     //顶部栏
@@ -260,7 +260,7 @@ Window {
         target: imageLoader.item
         onGetFileString:{
             usrImg.source = path
-            InterAction.copyImageFile( path )
+            SocketServer.copyImageFile( path )
         }
     }
 
@@ -357,7 +357,7 @@ Window {
 
 
                 Connections{
-                    target: InterAction
+                    target: SocketServer
                     //设置人的坐标
                     onSetCurCoord:{
                         chart.setCurCoord(coordX,coordY,tagID);
@@ -498,7 +498,7 @@ Window {
         running:true
         onTriggered:
         {
-            var bStatus = InterAction.getServerConnectStatus()
+            var bStatus = SocketServer.getServerConnectStatus()
             connectStatus = bStatus ? qsTr("connected") : qsTr("disconnected")
         }
     }

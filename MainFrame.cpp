@@ -12,7 +12,9 @@ MainFrame::~MainFrame()
 
 void MainFrame::contextToQml(QQmlApplicationEngine &engine)
 {
-    engine.rootContext()->setContextProperty( "InterAction", &m_SocketServer );
+    engine.rootContext()->setContextProperty( "InterAction", this );
+    engine.rootContext()->setContextProperty( "SocketServer", &m_SocketServer );
+    engine.rootContext()->setContextProperty( "UserInfoModel", &m_userDataModel );
 }
 
 void MainFrame::initialize()
@@ -104,6 +106,20 @@ bool MainFrame::isExist(const string &strID, const int &tagID)
     bFlag = pPersonnelTable->checkUserIDAvailability(strID, tagID);
 
     return bFlag;
+}
+
+bool MainFrame::loadAllUser()
+{
+    vector<CUserInfo> vUser;
+
+    bool bSuccess = queryAll(vUser);
+
+    if(bSuccess)
+    {
+        m_userDataModel.loadData(vUser);
+    }
+
+    return bSuccess;
 }
 
 bool MainFrame::delUserByUserID(const string &strID)
