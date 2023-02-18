@@ -9,6 +9,7 @@
 #include <QQmlEngine>
 #include <QtWebSockets/QWebSocketServer>
 #include <QtWebSockets/QWebSocket>
+#include "./datamanager/CTagInfo.h"
 
 #include <QTime>
 
@@ -41,6 +42,8 @@ public:
 
 signals:
     void sendMeg(QString meg);
+
+    void parseTagIdInfo(CTagInfo &tag);
 
     Q_INVOKABLE void setCurCoord(int coordX,int coordY,int tagID);
 

@@ -21,7 +21,7 @@ Window {
 
     property int originY: 40  //原点Y
 
-    //flags: Qt.FramelessWindowHint | Qt.Window
+    flags: Qt.FramelessWindowHint | Qt.Window
 
     FontLoader{
         id: localFont1

@@ -2,7 +2,7 @@
 
 MainFrame::MainFrame(QObject *parent)
 {
-
+    initialize();
 }
 
 MainFrame::~MainFrame()
@@ -20,7 +20,7 @@ void MainFrame::contextToQml(QQmlApplicationEngine &engine)
 
 void MainFrame::initialize()
 {
-
+    connect(&m_SocketServer,&CWebSocketServer::parseTagIdInfo,this,&MainFrame::porcOnlineTag);
 }
 
 bool MainFrame::queryAll(vector<CUserInfo> &vUser)

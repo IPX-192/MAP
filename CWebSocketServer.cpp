@@ -143,7 +143,7 @@ bool CWebSocketServer::getServerConnectStatus()
 }
 
 void CWebSocketServer::parseLabelMeg(QJsonArray &array)
-{
+{/*
     //标签卡的数据为7个JSON对象组合而成,依次解析即可
     int tagId = 0;
     int coordX = 0;
@@ -170,7 +170,7 @@ void CWebSocketServer::parseLabelMeg(QJsonArray &array)
     qDebug()<<"*********tagId****"<<tagId;
 
     //显示坐标位置
-    emit setCurCoord(coordX,coordY,tagId);
+    emit setCurCoord(coordX,coordY,tagId);*/
 }
 
 void CWebSocketServer::parseLabelMeg(QJsonObject &object)
@@ -202,6 +202,17 @@ void CWebSocketServer::parseLabelMeg(QJsonObject &object)
     //显示坐标位置
     emit setCurCoord(PixelX,PixelY,tagId);
 
+    //显示对应的表格数据
+    CTagInfo tagInfo;
+    tagInfo.setIPosX(coordX);
+    tagInfo.setIPosY(coordY);
+    tagInfo.setIPosZ(coordZ);
+    tagInfo.setIMapID(mapId);
+    tagInfo.setITagID(tagId);
+    tagInfo.setIBattery(battery);
+    tagInfo.setIStaticTime(staticTime);
+
+    emit parseTagIdInfo(tagInfo);
 }
 
 //连接成功
