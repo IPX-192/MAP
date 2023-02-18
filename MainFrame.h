@@ -1,4 +1,4 @@
-#ifndef MAINFRAME_H
+﻿#ifndef MAINFRAME_H
 #define MAINFRAME_H
 
 #include <QObject>
@@ -13,6 +13,7 @@
 #include "./datamanager/CUserInfo.h"
 #include "./datamanager/CMapOriginInfo.h"
 #include "./datamanager/CTagInfo.h"
+#include "./database/CDatabaseManage.h"
 
 class MainFrame : public QObject
 {
@@ -32,11 +33,10 @@ public:
     bool queryAll(vector<CUserInfo>& vUser);
 
     //添加人员
-    bool insert(const CUserInfo& user);
-    bool insert(const vector<CUserInfo>& vUser);
+    Q_INVOKABLE bool insert(QString name, QString userID, QString depart, QString role, QString tagID);
 
     //检查是否重复添加
-    bool isExist(const string& strID, const string& tagID);
+    Q_INVOKABLE bool isExist(const string& strID, const int& tagID);
 
     //删除指定人员
     bool delUserByUserID(const string& strID);

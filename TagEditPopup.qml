@@ -1,4 +1,4 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
 import QtQuick.Controls 2.5
 
 Popup {
@@ -192,11 +192,10 @@ Popup {
 
     Text {
         id: tipText
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.horizontalCenter: saveBtn.horizontalCenter
         anchors.bottom: saveBtn.top
         anchors.bottomMargin: 15
-        font.bold: true
-        font.pixelSize: 20
+        font.pixelSize: 12
         font.family: fontName
         color: "yellow"
         visible: false
@@ -220,10 +219,22 @@ Popup {
             }
             else
             {
-                //调用数据库添加
+                //检查是否重复
+                let bExist = InterAction.isExist(userIDInput.text, tagIDInput.text)
 
-                //添加成功
-                close()
+                if(bExist)
+                {
+                    tipText.text = "工号或标签ID已存在，无法重复添加"
+                    tipText.visible = true
+                    return
+                }
+
+                //调用数据库添加
+                let bSucess = InterAction.insert(nameInput.text, userIDInput.text, departmentInput.text,
+                                                roleInput.text, tagIDInput.text)
+
+                tipText.text = bSucess ? "添加成功" : "添加失败"
+                tipText.visible = true
             }
         }
     }
@@ -245,14 +256,32 @@ Popup {
             }
             else
             {
+                //检查是否重复
+                let bExist = InterAction.isExist(userIDInput.text, tagIDInput.text)
+
+                if(bExist)
+                {
+                    tipText.text = "工号或标签ID已存在，无法重复添加"
+                    tipText.visible = true
+                    return
+                }
+
                 //调用数据库添加
+                let bSucess = InterAction.insert(nameInput.text, userIDInput.text, departmentInput.text,
+                                                roleInput.text, tagIDInput.text)
+
+                tipText.text = bSucess ? "添加成功" : "添加失败"
+                tipText.visible = true
 
                 //清空当前输入
-                nameInput.text = ""
-                userIDInput.text = ""
-                departmentInput.text = ""
-                roleInput.text = ""
-                tagIDInput.text = ""
+                if(bSucess)
+                {
+                    nameInput.text = ""
+                    userIDInput.text = ""
+                    departmentInput.text = ""
+                    roleInput.text = ""
+                    tagIDInput.text = ""
+                }
             }
         }
     }

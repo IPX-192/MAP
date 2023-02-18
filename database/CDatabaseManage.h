@@ -18,6 +18,8 @@ public:
     CTagInfoTable *pTagInfo() const;
     CVersionInfoTable *pVersionInfo() const;
 
+    static CDatabaseManage *GetInstance();
+
 private:
     CDatabaseManage();
 

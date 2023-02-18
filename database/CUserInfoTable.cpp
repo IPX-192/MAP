@@ -35,7 +35,7 @@ bool CUserInfoTable::addUserInfo(const CUserInfo &info)
     try
     {
         //判断新的名字是否可用
-        if(checkUserIDAvailability(info.strUserID()))
+        if(checkUserIDAvailability(info.strUserID(), info.itagID()))
         {
             bSuccess = true;
 
@@ -241,7 +241,7 @@ bool CUserInfoTable::getUserInfoByID(const string &strUserID, CUserInfo &info)
     return bSuccess;
 }
 
-bool CUserInfoTable::checkUserIDAvailability(const string &strUserID)
+bool CUserInfoTable::checkUserIDAvailability(const string &strUserID, const int &tagID)
 {
     if(m_pDatabase == nullptr)
     {
@@ -251,7 +251,7 @@ bool CUserInfoTable::checkUserIDAvailability(const string &strUserID)
 
     bool bFlag = true;
 
-    unsigned long long iCount = select<UserInfoTable>(*m_pDatabase, UserInfoTable::StrUserID == strUserID).count();
+    unsigned long long iCount = select<UserInfoTable>(*m_pDatabase, UserInfoTable::StrUserID == strUserID && UserInfoTable::ItagID == tagID).count();
 
     if(iCount != 0)
     {
@@ -260,3 +260,4 @@ bool CUserInfoTable::checkUserIDAvailability(const string &strUserID)
 
     return bFlag;
 }
+

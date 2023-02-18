@@ -252,3 +252,24 @@ CVersionInfoTable *CDatabaseManage::pVersionInfo() const
 {
     return m_pVersionInfo;
 }
+
+CDatabaseManage *CDatabaseManage::GetInstance()
+{
+    if( s_pManagerInstance == nullptr)
+    {
+        s_csManager_Instance_Safe.lock();
+
+        if(s_pManagerInstance == nullptr)
+        {
+            s_pManagerInstance = new CDatabaseManage();
+        }
+
+        s_csManager_Instance_Safe.unlock();
+    }
+
+    return s_pManagerInstance;
+}
+
+QMutex CDatabaseManage::s_csManager_Instance_Safe;
+
+CDatabaseManage * CDatabaseManage::s_pManagerInstance = nullptr;
