@@ -63,6 +63,7 @@ HEADERS += \
     database/CMapOriginConfig.h \
     database/CTagInfoTable.h \
     database/CUserInfoTable.h \
+    database/CVersionInfoTable.h \
     database/mapsysdatabase.hpp \
     datamanager/CMapOriginInfo.h \
     datamanager/CTagInfo.h \
@@ -79,6 +80,7 @@ SOURCES += \
         database/CMapOriginConfig.cpp \
         database/CTagInfoTable.cpp \
         database/CUserInfoTable.cpp \
+        database/CVersionInfoTable.cpp \
         database/mapsysdatabase.cpp \
         datamanager/CMapOriginInfo.cpp \
         datamanager/CTagInfo.cpp \
