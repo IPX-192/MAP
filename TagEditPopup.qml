@@ -280,7 +280,7 @@ Popup {
         else
         {
             //检查是否重复
-            let bExist = InterAction.isExist(userIDInput.text, Number(tagIDInput.text))
+            let bExist = InterAction.isExist(userIDInput.text, tagIDInput.text)
 
             if(bExist)
             {

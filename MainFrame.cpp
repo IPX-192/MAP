@@ -81,7 +81,7 @@ bool MainFrame::insert(QString name, QString userID, QString depart, QString rol
     return bFlag;
 }
 
-bool MainFrame::isExist(const string &strID, const int &tagID)
+bool MainFrame::isExist( QString &strID, QString &tagID )
 {
     bool bFlag = false;
 
@@ -103,7 +103,7 @@ bool MainFrame::isExist(const string &strID, const int &tagID)
         return bFlag;
     }
 
-    bFlag = pPersonnelTable->checkUserIDAvailability(strID, tagID);
+    bFlag = pPersonnelTable->checkUserIDAvailability(strID.toStdString(), tagID.toInt());
 
     return bFlag;
 }

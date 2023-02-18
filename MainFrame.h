@@ -46,7 +46,7 @@ public:
     Q_INVOKABLE bool insert(QString name, QString userID, QString depart, QString role, QString tagID);
 
     //检查是否重复添加
-    Q_INVOKABLE bool isExist(const string& strID, const int& tagID);
+    Q_INVOKABLE bool isExist(QString &strID, QString &tagID);
 
     //加载所有人员信息
     Q_INVOKABLE bool loadAllUser();
