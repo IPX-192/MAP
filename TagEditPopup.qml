@@ -3,6 +3,11 @@ import QtQuick.Controls 2.5
 
 Popup {
     id: editTagPopup
+
+    property bool bEditPopup: false
+
+    onBEditPopupChanged: clearInput()
+
     width: 1000
     height: 600
     modal: true
@@ -25,12 +30,73 @@ Popup {
         color: "#FEFEFE"
     }
 
-    Column {
-        anchors.left: parent.left
-        anchors.leftMargin: 50
+    UserMagListView{
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: titeText.bottom
         anchors.topMargin: 40
+        visible: !bEditPopup
+    }
+
+    Row {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 15
         spacing: 20
+
+        Button {
+            id: popupBtn
+            width: 150
+            height: 35
+            text: "添加人员"
+            visible: !bEditPopup
+            onClicked: {
+                bEditPopup = true
+            }
+        }
+
+        Button {
+            id: addBtn
+            width: 150
+            height: 35
+            text: "添加人员"
+            visible: bEditPopup
+            onClicked: {
+                addUser()
+            }
+        }
+
+        Button {
+            id: nextBtn
+            width: 150
+            height: 35
+            text: "保存并添加下一个"
+            visible: bEditPopup
+            onClicked: {
+                if(addUser())
+                {
+                    clearInput()
+                }
+            }
+        }
+
+        Button {
+            id: closeBtn
+            width: 150
+            height: 35
+            text: "关闭弹窗"
+            onClicked: {
+                close()
+            }
+        }
+    }
+
+
+    Column {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: titeText.bottom
+        anchors.topMargin: 40
+        spacing: 40
+        visible: bEditPopup
 
         Item {
             id: name
@@ -188,19 +254,56 @@ Popup {
                 }
             }
         }
+
+        Text {
+            id: tipText
+            font.pixelSize: 12
+            font.family: fontName
+            color: "yellow"
+            visible: false
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
     }
 
-    Text {
-        id: tipText
-        anchors.horizontalCenter: saveBtn.horizontalCenter
-        anchors.bottom: saveBtn.top
-        anchors.bottomMargin: 15
-        font.pixelSize: 12
-        font.family: fontName
-        color: "yellow"
-        visible: false
+    function addUser()
+    {
+        if(userIDInput.text === "" || tagIDInput.text === "")
+        {
+            tipText.text = "工号与标签ID为必填项"
+            tipText.visible = true
+        }
+        else
+        {
+            //检查是否重复
+            let bExist = InterAction.isExist(userIDInput.text, tagIDInput.text)
+
+            if(bExist)
+            {
+                tipText.text = "工号或标签ID已存在，无法重复添加"
+                tipText.visible = true
+                return false
+            }
+
+            //调用数据库添加
+            let bSucess = InterAction.insert(nameInput.text, userIDInput.text, departmentInput.text,
+                                            roleInput.text, tagIDInput.text)
+
+            tipText.text = bSucess ? "添加成功" : "添加失败"
+            tipText.visible = true
+            return bSucess
+        }
     }
 
+    function clearInput()
+    {
+        nameInput.text = ""
+        userIDInput.text = ""
+        departmentInput.text = ""
+        roleInput.text = ""
+        tagIDInput.text = ""
+    }
+
+    /*
     Button {
         id: saveBtn
         width: 200
@@ -299,11 +402,5 @@ Popup {
             close()
         }
     }
-
-    UserMagListView{
-        anchors.right: parent.right
-        anchors.top: titeText.bottom
-        anchors.topMargin: 40
-    }
-
+    */
 }
