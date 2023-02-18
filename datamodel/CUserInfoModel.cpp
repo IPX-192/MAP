@@ -38,12 +38,20 @@ void CUserInfoModel::addData(vector<CUserInfo> &vecUser)
     emit layoutChanged();
 }
 
-void CUserInfoModel::deleteRow(int &rowIndex)
+void CUserInfoModel::deleteRow(QString userID)
 {
-    if( rowIndex>=0 && rowIndex<m_userInfoData.size() )
+    if(m_userInfoData.count() > 0)
     {
-        m_userInfoData.removeAt(rowIndex);
+        for(int i = 0 ; i< m_userInfoData.count() ; i++)
+        {
+            if(m_userInfoData[i].strUserID() == userID.toStdString())
+            {
+                m_userInfoData.remove(i);
+            }
+
+        }
     }
+
     emit layoutChanged();
 }
 

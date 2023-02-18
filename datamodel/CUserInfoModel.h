@@ -25,7 +25,7 @@ public:
     void loadData(const vector<CUserInfo> &vecUser);
     void addData(CUserInfo &info);
     void addData(vector<CUserInfo> &vecUser);
-    void deleteRow(int &rowIndex);
+    void deleteRow(QString userID);
 
 public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;

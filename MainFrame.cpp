@@ -15,6 +15,7 @@ void MainFrame::contextToQml(QQmlApplicationEngine &engine)
     engine.rootContext()->setContextProperty( "InterAction", this );
     engine.rootContext()->setContextProperty( "SocketServer", &m_SocketServer );
     engine.rootContext()->setContextProperty( "UserInfoModel", &m_userDataModel );
+    engine.rootContext()->setContextProperty( "OnlineTagModel", &m_onlineTagModel );
 }
 
 void MainFrame::initialize()
@@ -155,7 +156,7 @@ bool MainFrame::delUserByUserID(QString strID)
     //刷新界面显示
     if(bFlag)
     {
-        loadAllUser();
+        m_userDataModel.deleteRow(strID);
     }
 
     return bFlag;

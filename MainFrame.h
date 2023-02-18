@@ -15,6 +15,7 @@
 #include "./datamanager/CTagInfo.h"
 #include "./database/CDatabaseManage.h"
 #include "./datamodel/CUserInfoModel.h"
+#include "./datamodel/COnlineTagModel.h"
 
 class MainFrame : public QObject
 {
@@ -58,7 +59,8 @@ public:
     //人员model
     CUserInfoModel m_userDataModel;
 
-
+    //在线标签信息model
+    COnlineTagInfoModel m_onlineTagModel;
 };
 
 #endif // MAINFRAME_H

@@ -201,7 +201,7 @@ Item {
         anchors.top: headItem.bottom
         anchors.topMargin: -1
         anchors.left: headItem.left
-        //model: UserInfoModel
+        model: OnlineTagModel
         clip: true
         maximumFlickVelocity: itemHeigt * 10
         flickableDirection: Flickable.VerticalFlick
@@ -238,6 +238,29 @@ Item {
                 }
             }
 
+            //TagID
+            Rectangle {
+                id: tagIDRect
+                width: headTagIdRect.width
+                height: itemHeigt
+                color: "#213B42"
+                border.color: "#1A292D"
+                anchors.left: numberRect.right
+                anchors.leftMargin: -1
+
+                Text {
+                    text: tagID
+                    width: parent.width
+                    font.pixelSize: 16
+                    font.family: "Microsoft YaHei"
+                    color: "#D6D6D6"
+                    anchors.centerIn: parent
+                    fontSizeMode: Text.Fit
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
+                }
+            }
+
             //姓名
             Rectangle {
                 id: nameRect
@@ -245,7 +268,7 @@ Item {
                 height: itemHeigt
                 color: "#213B42"
                 border.color: "#1A292D"
-                anchors.left: numberRect.right
+                anchors.left: tagIDRect.right
                 anchors.leftMargin: -1
 
                 Text {
@@ -318,7 +341,7 @@ Item {
                 anchors.leftMargin: -1
 
                 Text {
-                    text: department
+                    text: userRole
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
@@ -330,18 +353,74 @@ Item {
                 }
             }
 
-            //操作
+            //坐标x
             Rectangle {
-                id: optRect
-                width: headOptRect.width
+                id: posXRect
+                width: headCoordXRect.width
                 height: itemHeigt
                 color: curIndex == index? "#213B42" : "#000000"
                 border.color: "#1A292D"
                 anchors.left: roleRect.right
                 anchors.leftMargin: -1
 
+                Text {
+                    text: posX
+                    width: parent.width
+                    font.pixelSize: 16
+                    font.family: "Microsoft YaHei"
+                    color: "#D6D6D6"
+                    anchors.centerIn: parent
+                    fontSizeMode: Text.Fit
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
+                }
+            }
+
+            //坐标y
+            Rectangle {
+                id: posYRect
+                width: headCoordYRect.width
+                height: itemHeigt
+                color: curIndex == index? "#213B42" : "#000000"
+                border.color: "#1A292D"
+                anchors.left: headCoordXRect.right
+                anchors.leftMargin: -1
+
+                Text {
+                    text: posY
+                    width: parent.width
+                    font.pixelSize: 16
+                    font.family: "Microsoft YaHei"
+                    color: "#D6D6D6"
+                    anchors.centerIn: parent
+                    fontSizeMode: Text.Fit
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
+                }
+            }
+
+            //电量
+            Rectangle {
+                id: batteryRect
+                width: headCoordZRect.width
+                height: itemHeigt
+                color: curIndex == index? "#213B42" : "#000000"
+                border.color: "#1A292D"
+                anchors.left: posYRect.right
+                anchors.leftMargin: -1
+
+                Text {
+                    text: battery
+                    width: parent.width
+                    font.pixelSize: 16
+                    font.family: "Microsoft YaHei"
+                    color: "#D6D6D6"
+                    anchors.centerIn: parent
+                    fontSizeMode: Text.Fit
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
+                }
             }
         }
     }
-
 }
