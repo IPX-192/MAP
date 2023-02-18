@@ -252,7 +252,7 @@ bool CUserInfoTable::checkUserIDExist(const string &strUserID, const int &tagID)
 
     bool bFlag = false;
 
-    unsigned long long iCount = select<UserInfoTable>(*m_pDatabase, UserInfoTable::StrUserID == strUserID && UserInfoTable::ItagID == tagID).count();
+    unsigned long long iCount = select<UserInfoTable>(*m_pDatabase, UserInfoTable::StrUserID == strUserID || UserInfoTable::ItagID == tagID).count();
 
     if(iCount != 0)
     {
