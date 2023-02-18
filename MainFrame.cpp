@@ -194,3 +194,29 @@ bool MainFrame::saveMapOriginConfig(const CMapOriginInfo &info)
     return bFlag;
 }
 
+void MainFrame::porcOnlineTag(const CTagInfo &tag)
+{
+    COnlineTagInfo info;
+    info.setIPosX(tag.iPosX());
+    info.setIPosY(tag.iPosY());
+    info.setIPosZ(tag.iPosZ());
+    info.setIMapID(tag.iMapID());
+    info.setITagID(tag.iTagID());
+    info.setIBattery(tag.iBattery());
+    info.setIStaticTime(tag.iStaticTime());
+
+    //根据tagid查找人员信息
+    CUserInfoTable* pPersonnelTable = CDatabaseManage::GetInstance()->pUserInfo();
+
+    CUserInfo user;
+    if(pPersonnelTable->getUserInfoByTagID(tag.iTagID(), user))
+    {
+        info.setStrUserID(user.strUserID());
+        info.setStrDepartment(user.strDepartment());
+        info.setStrRole(user.strRole());
+        info.setStrUsername(user.strUsername());
+
+        m_onlineTagModel.addData(info);
+    }
+}
+

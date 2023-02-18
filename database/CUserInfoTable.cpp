@@ -231,6 +231,7 @@ bool CUserInfoTable::getUserInfoByID(const string &strUserID, CUserInfo &info)
             info.setStrDepartment(account.strDepartment);
             info.setStrRole(account.strRole);
             info.setItagID(account.itagID);
+            info.setStrUserID(account.strUserID)
         }
     }
     catch(Except e)
@@ -268,6 +269,7 @@ bool CUserInfoTable::getUserInfoByTagID(const int &tagID, CUserInfo &info)
             info.setStrDepartment(account.strDepartment);
             info.setStrRole(account.strRole);
             info.setStrUserID(account.strUserID);
+            info.setItagID(account.itagID);
         }
     }
     catch(Except e)
