@@ -292,6 +292,7 @@ void CWebSocketServer::processByteArrayMessage(QByteArray array)
 void CWebSocketServer::onRecvDataFinish()
 {
     emit clearDrawCoord();
+    emit clearFromTagData();
 }
 
 //数据是JSON格式，解析后判断是基站相关还是标签卡相关

@@ -31,5 +31,7 @@
         <file>font/时尚中黑简体.ttf</file>
         <file>iamge/title.png</file>
         <file>UserMagListView.qml</file>
+        <file>iamge/set.png</file>
+        <file>iamge/setClick.png</file>
     </qresource>
 </RCC>

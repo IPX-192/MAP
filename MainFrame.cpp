@@ -21,6 +21,7 @@ void MainFrame::contextToQml(QQmlApplicationEngine &engine)
 void MainFrame::initialize()
 {
     connect(&m_SocketServer,&CWebSocketServer::parseTagIdInfo,this,&MainFrame::porcOnlineTag);
+    connect(&m_SocketServer,&CWebSocketServer::clearFromTagData,this,&MainFrame::onClearTagInfoFrom);
 }
 
 bool MainFrame::queryAll(vector<CUserInfo> &vUser)
@@ -218,5 +219,10 @@ void MainFrame::porcOnlineTag(const CTagInfo &tag)
 
         m_onlineTagModel.addData(info);
     }
+}
+
+void MainFrame::onClearTagInfoFrom()
+{
+    m_onlineTagModel.deleteAll();
 }
 

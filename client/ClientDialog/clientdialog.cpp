@@ -164,7 +164,7 @@ void ClientDialog::onSendButtonClicked()
     QJsonObject item2;
     item2.insert("TagId",1111);
     item2.insert("X",70000);
-    item2.insert("Y",30000);
+    item2.insert("Y",30000 - flag1);
     item2.insert("Z",3);
     item2.insert("StaticTime",111);
     item2.insert("MapId",11);
@@ -175,6 +175,8 @@ void ClientDialog::onSendButtonClicked()
     {
         flag+=10000;
     }
+
+    flag1 += 1000;
 
     groupObj.insert("TagList",array);
 

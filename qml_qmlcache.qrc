@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<RCC>
+    <qresource prefix="/">
+        <file alias="iamge/testMap.png">iamge/testMap.png</file>
+        <file alias="iamge/log.png">iamge/log.png</file>
+        <file alias="iamge/origin.png">iamge/origin.png</file>
+        <file alias="iamge/usr.png">iamge/usr.png</file>
+        <file alias="font/Digital-7Mono.TTF">font/Digital-7Mono.TTF</file>
+        <file alias="font/FZDALTJ.OTF">font/FZDALTJ.OTF</file>
+        <file alias="font/HarmonyOS_Sans_Black.ttf">font/HarmonyOS_Sans_Black.ttf</file>
+        <file alias="font/HarmonyOS_Sans_Bold.ttf">font/HarmonyOS_Sans_Bold.ttf</file>
+        <file alias="font/HarmonyOS_Sans_Light.ttf">font/HarmonyOS_Sans_Light.ttf</file>
+        <file alias="font/HarmonyOS_Sans_Medium.ttf">font/HarmonyOS_Sans_Medium.ttf</file>
+        <file alias="font/HarmonyOS_Sans_Regular.ttf">font/HarmonyOS_Sans_Regular.ttf</file>
+        <file alias="font/HarmonyOS_Sans_Thin.ttf">font/HarmonyOS_Sans_Thin.ttf</file>
+        <file alias="font/MFYueYuan.ttf">font/MFYueYuan.ttf</file>
+        <file alias="font/PingFang Heavy.ttf">font/PingFang Heavy.ttf</file>
+        <file alias="font/PingFang Regular.ttf">font/PingFang Regular.ttf</file>
+        <file alias="iamge/coord.png">iamge/coord.png</file>
+        <file alias="iamge/background.png">iamge/background.png</file>
+        <file alias="iamge/bottom.png">iamge/bottom.png</file>
+        <file alias="iamge/leftaDorn.gif">iamge/leftaDorn.gif</file>
+        <file alias="iamge/rightDorn.gif">iamge/rightDorn.gif</file>
+        <file alias="iamge/top.png">iamge/top.png</file>
+        <file alias="font/时尚中黑简体.ttf">font/时尚中黑简体.ttf</file>
+        <file alias="iamge/title.png">iamge/title.png</file>
+        <file alias="iamge/set.png">iamge/set.png</file>
+        <file alias="iamge/setClick.png">iamge/setClick.png</file>
+    </qresource>
+</RCC>

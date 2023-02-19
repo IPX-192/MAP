@@ -11,6 +11,8 @@ Window {
     title: qsTr("定位软件")
     property bool bSetOrigin:false
 
+    property bool bSetLocalIp:false
+
     readonly property string  fontName:  qsTr("Microsoft YaHei")  // 字体名字
 
     property string ipAddress: ""
@@ -38,7 +40,6 @@ Window {
         }
     }
 
-
     AnimatedImage {
         anchors.left: parent.left
         anchors.top:title.bottom
@@ -56,7 +57,6 @@ Window {
         z:10
     }
 
-
     Component.onCompleted: {
         //chart.setOriginCoord(originX - originImg.width / 2,originY - originImg.height / 2 )
 
@@ -67,13 +67,11 @@ Window {
 
     //顶部栏
     Rectangle{
-
         id:title
         width: parent.width
         height: 80
         color: "#062B3C"
         anchors.top: parent.top
-
 
         Image {
             anchors.fill: parent
@@ -172,82 +170,7 @@ Window {
                                       } )
             }
         }
-
-        /*
-        Rectangle {
-            id:configBtn
-            width: 50
-            height: width
-            radius: width / 2
-            color: "white"
-            anchors.verticalCenter:logoImg.verticalCenter
-            anchors.left: logoImg.right
-            anchors.leftMargin: 500
-            border.color: "black"
-            Text {
-                anchors.centerIn: parent
-                text: qsTr("配置")
-            }
-            visible: false
-
-            MouseArea{
-                anchors.fill: parent
-                onClicked: {
-                    systemSettingLoader.visible = !systemSettingLoader.visible
-                    if(systemSettingLoader.visible)
-                    {
-                        hideSetTimer.start()
-                    }
-                    else
-                    {
-                        hideSetTimer.stop()
-                    }
-                }
-            }
-
-        }
-
-        //系统设置菜单
-        Loader
-        {
-            id : systemSettingLoader
-            visible: false
-            anchors.horizontalCenter: configBtn.horizontalCenter
-            anchors.top: configBtn.bottom
-            anchors.topMargin: 20
-            z:20
-            source: "qrc:/SystemConfig.qml"
-        }
-
-        Connections{
-            target: systemSettingLoader.item
-            onSetBtnClicked:{
-                systemSettingLoader.visible = false
-                hideSetTimer.stop()
-
-                console.log("seeeeeeeeeeeeeee" + index)
-                //上传图片
-                if(index === 0)
-                {
-
-                }
-
-                //设置原点
-                if(index === 4)
-                {
-
-
-                }
-                else
-                {
-
-                }
-            }
-        }
-        */
     }
-
-
 
     //上传图片
     Loader{
@@ -405,25 +328,6 @@ Window {
                     }
                 }
             }
-
-            ///使用wheelEvent控制滚轮，其中angleDelta属性用来获取滚轮滚动的距离
-            //            MouseArea{
-            //                anchors.fill: parent
-            //                onWheel: {
-            //                    if (wheel.modifiers & Qt.ControlModifier) {
-            //                        imageDisplay.rotation += wheel.angleDelta.y / 120 * 5;
-            //                        if (Math.abs(imageDisplay.rotation) < 4)
-            //                            imageDisplay.rotation = 0;
-            //                    }
-            //                    else {
-            //                        imageDisplay.rotation += wheel.angleDelta.x / 120;
-            //                        if (Math.abs(imageDisplay.rotation) < 0.6)
-            //                            imageDisplay.rotation = 0;
-            //                        var scaleBefore = imageDisplay.scale;
-            //                        imageDisplay.scale += imageDisplay.scale * wheel.angleDelta.y / 120 / 10;
-            //                    }
-            //                }
-            //            }
         }
 
         MouseArea{
@@ -469,10 +373,47 @@ Window {
         color: title.color
         anchors.bottom: parent.bottom
 
+        Rectangle{
+            id:ipSetBtn
+            width: 120
+            height: 36
+            color: parent.color
+            anchors.verticalCenter: bottomItem.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 20
+            border.color: "black"
+            radius: 6
+            Image {
+                id:ipSetImage
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 5
+                source: "qrc:/iamge/set.png"
+            }
+
+            Text {
+                id:ipSetText
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: ipSetImage.right
+                anchors.leftMargin: 10
+                text: bSetLocalIp ? qsTr("回环地址") : ("本机IP")
+                font.pixelSize: 16
+                font.family: fontName
+                color: "#FEFEFE"
+            }
+
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    bSetLocalIp = !bSetLocalIp
+                }
+            }
+        }
+
         Text {
             id:ipAddressText
             anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
+            anchors.left: ipSetBtn.right
             anchors.leftMargin: 20
             text: qsTr("服务器地址: ") + ipAddress
             font.pixelSize: 18

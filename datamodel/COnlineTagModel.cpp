@@ -65,6 +65,12 @@ void COnlineTagInfoModel::deleteRow(int tagID)
 
 }
 
+void COnlineTagInfoModel::deleteAll()
+{
+    m_userTagInfoData.clear();
+    emit layoutChanged();
+}
+
 int COnlineTagInfoModel::rowCount(const QModelIndex &parent) const
 {
     return m_userTagInfoData.size();

@@ -57,6 +57,9 @@ public slots:
     //处理收到的标签信息
     void porcOnlineTag(const CTagInfo &tag);
 
+    //清理实时的表格tag数据
+    void onClearTagInfoFrom();
+
 public:
     //服务器对象
     CWebSocketServer         m_SocketServer;

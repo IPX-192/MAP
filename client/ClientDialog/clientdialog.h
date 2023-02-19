@@ -55,5 +55,6 @@ private:
     QDateTime *current_date_time;
     QTimer    m_sendTimer;
     int       flag {10000};
+    int       flag1 {1000};
 };
 #endif // CLIENTDIALOG_HPP
