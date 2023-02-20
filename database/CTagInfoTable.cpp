@@ -20,6 +20,7 @@ bool CTagInfoTable::Check_Config_Table()
     return true;
 }
 
+//添加标签信息
 bool CTagInfoTable::addTagInfo(const CTagInfo &info)
 {
     lock();
@@ -34,7 +35,7 @@ bool CTagInfoTable::addTagInfo(const CTagInfo &info)
 
     try
     {
-        //判断新的名字是否可用
+        //判断新的ID是否可用
         if(checkTagIDAvailability(info.iTagID()))
         {
             bSuccess = true;
@@ -60,6 +61,7 @@ bool CTagInfoTable::addTagInfo(const CTagInfo &info)
     return bSuccess;
 }
 
+//删除标签信息
 bool CTagInfoTable::delTagInfo(const CTagInfo &info, bool bDeleteAll)
 {
     lock();
@@ -74,6 +76,7 @@ bool CTagInfoTable::delTagInfo(const CTagInfo &info, bool bDeleteAll)
 
     try
     {
+        //删除所有标签信息
         if(bDeleteAll)
         {
             vector<TagInfoTable> vecSearch;
@@ -92,6 +95,7 @@ bool CTagInfoTable::delTagInfo(const CTagInfo &info, bool bDeleteAll)
         {
             int tagInfoID = info.iTagID();
 
+            //根据标签ID删除对象
             auto cursor = select<TagInfoTable>(*m_pDatabase, TagInfoTable::ITagID == tagInfoID).cursor();
 
             if(cursor.rowsLeft())
@@ -114,6 +118,7 @@ bool CTagInfoTable::delTagInfo(const CTagInfo &info, bool bDeleteAll)
     return bSuccess;
 }
 
+//更新标签信息
 bool CTagInfoTable::updateTagInfo(const int &tagID, const CTagInfo &info)
 {
     if(m_pDatabase == nullptr)
@@ -159,6 +164,7 @@ bool CTagInfoTable::updateTagInfo(const int &tagID, const CTagInfo &info)
     return bSuccess;
 }
 
+//查找所有标签信息
 bool CTagInfoTable::getAllTagInfo(vector<CTagInfo> &vecTags)
 {
     lock();
@@ -209,6 +215,7 @@ bool CTagInfoTable::getAllTagInfo(vector<CTagInfo> &vecTags)
     return bSuccess;
 }
 
+//根据id获取标签对象
 bool CTagInfoTable::getTagInfoByID(const int &tagID, CTagInfo &info)
 {
     lock();
@@ -249,6 +256,7 @@ bool CTagInfoTable::getTagInfoByID(const int &tagID, CTagInfo &info)
     return bSuccess;
 }
 
+//检查标签id是否存在
 bool CTagInfoTable::checkTagIDAvailability(const int &tagID)
 {
     bool bFlag = true;

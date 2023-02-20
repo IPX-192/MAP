@@ -1,7 +1,6 @@
 ﻿#ifndef CUSERINFOTABLE_H
 #define CUSERINFOTABLE_H
 
-
 #include "CAbstractConfigInfo.h"
 #include "../datamanager/CUserInfo.h"
 
@@ -10,6 +9,7 @@ class CUserInfoTable : public CAbstractConfigInfo
 public:
     CUserInfoTable(MapSysDatabase *dataBase);
     ~CUserInfoTable();
+
 
     virtual bool Check_Config_Table();
 
