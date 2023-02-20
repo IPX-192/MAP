@@ -297,8 +297,8 @@ Window {
                 //原点图片
                 Image{
                     id:originImg
-                    width: 26
-                    height: 26
+                    width: 24
+                    height: 24
                     x:originX - width / 2
                     y:originY - height / 2
                     source: "qrc:/iamge/origin.png"
