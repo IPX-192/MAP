@@ -286,7 +286,6 @@ Window {
                     //设置人的坐标
                     onSetCurCoord:{
                         chart.setCurCoord(coordX,maxY - coordY,tagID);
-
                     }
 
                     //新收到消息时清理以往的显示

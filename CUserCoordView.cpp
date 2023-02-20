@@ -20,9 +20,10 @@ void CUserCoordView::paint(QPainter *painter)
 void CUserCoordView::drawCoordImage()
 {
 
+    qDebug()<<"看看原点位置" << m_OriginY;
     for(int i = 0;i<m_vecCoordX.size();i++)
     {
-        QRect backImgRect( m_OriginX + m_vecCoordX.at(i) - 14,m_OriginY + m_vecCoordY.at(i) - 14,m_CoordImgWidth,m_CoordImgWidth);
+        QRect backImgRect( m_OriginX + m_vecCoordX.at(i) - 12,m_OriginY + m_vecCoordY.at(i) - 12,m_CoordImgWidth,m_CoordImgWidth);
         QRect tagIDImgRect(m_OriginX + m_vecCoordX.at(i) - 18,m_OriginY + m_vecCoordY.at(i) + 2,m_CoordIdWidth,m_CoordImgWidth);
         QImage backImg(":/iamge/coord.png");
 
@@ -37,6 +38,7 @@ void CUserCoordView::drawCoordImage()
 
 void CUserCoordView::setCurCoord(int coordX, int coordY,int tagId)
 {
+    qDebug()<<"看看设置的Y" << coordY;
     m_vecCoordX.append(coordX);
     m_vecCoordY.append(coordY);
     m_vecTagId.append(tagId);
