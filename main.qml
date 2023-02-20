@@ -23,6 +23,8 @@ Window {
 
     property int originY: 40  //原点Y
 
+    property var maxY:100
+
     //flags: Qt.FramelessWindowHint | Qt.Window
 
     FontLoader{
@@ -60,7 +62,7 @@ Window {
     Component.onCompleted: {
         //chart.setOriginCoord(originX - originImg.width / 2,originY - originImg.height / 2 )
 
-        chart.setOriginCoord(originX ,originY)
+        chart.setOriginCoord(originX ,maxY - originY)
 
         ipAddress = SocketServer.getLocalIP()
     }
@@ -283,7 +285,7 @@ Window {
                     target: SocketServer
                     //设置人的坐标
                     onSetCurCoord:{
-                        chart.setCurCoord(coordX,coordY,tagID);
+                        chart.setCurCoord(coordX,maxY - coordY,tagID);
 
                     }
 
@@ -349,12 +351,12 @@ Window {
                 if(bSetOrigin)
                 {
                     console.log("mouseX " + mouse.x)
-                    console.log("mouseY " + mouse.y)
+                    console.log("mouseY " + (maxY - mouse.y))
 
                     originX = mouseX
                     originY = mouseY
 
-                    chart.setOriginCoord(originX ,originY)
+                    chart.setOriginCoord(originX , maxY - mouseY)
                 }
                 else
                 {
