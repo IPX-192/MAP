@@ -9,13 +9,19 @@ CDatabaseManage::CDatabaseManage()
     ,m_pTagInfo(nullptr)
     ,m_pVersionInfo(nullptr)
 {
+    //检查数据库表格是否存在
     checkConfigDatabase();
+
+    //初始化表格对象
     initailizeConfigObject();
+
+    //检查是否需要更新表格内容
     checkConfigDatatable();
 }
 
 CDatabaseManage::~CDatabaseManage()
 {
+    //释放所有指针对象
     if( m_pUserInfo != nullptr)
     {
         delete m_pUserInfo;
@@ -41,6 +47,7 @@ CDatabaseManage::~CDatabaseManage()
     }
 }
 
+//检查配置数据库，包括：文件存在、数据库升级、配置默认值
 bool CDatabaseManage::checkConfigDatabase()
 {
     bool bAvailable = false;
@@ -50,11 +57,12 @@ bool CDatabaseManage::checkConfigDatabase()
     m_strConfigDBPath = strCurrent_Path + "/";
     m_strConfigDBPath += "MapDatabase.db";
 
+    //如果数据库不存在，创建数据库
     if (!isFileExist(m_strConfigDBPath))
     {
         string dbFilePathConfig = "database=" + m_strConfigDBPath;
 
-        //创建数据库,configDB("sqlite3", "EPS100Database.db");
+        //创建数据库,configDB("sqlite3", "MapSysDatabase.db");
         m_pConfigDatabase = new MapSysDatabase("sqlite3", dbFilePathConfig.c_str());
 
         //提交数据库事务，在这里会创建全部的配置项的数据库表
@@ -68,6 +76,7 @@ bool CDatabaseManage::checkConfigDatabase()
     }
     else
     {
+        //文件存在
         string strTempDataBasePath = "database=" + m_strConfigDBPath;
         m_pConfigDatabase = new MapSysDatabase("sqlite3", strTempDataBasePath.c_str());
         if (nullptr == m_pConfigDatabase)
@@ -87,6 +96,7 @@ bool CDatabaseManage::checkConfigDatabase()
     return bAvailable;
 }
 
+//创建数据库表格对象
 void CDatabaseManage::initailizeConfigObject()
 {
     m_pUserInfo = new CUserInfoTable(m_pConfigDatabase);
@@ -95,6 +105,7 @@ void CDatabaseManage::initailizeConfigObject()
     m_pVersionInfo = new CVersionInfoTable(m_pConfigDatabase);
 }
 
+//检查配置是否存在更新
 bool CDatabaseManage::checkConfigDatatable()
 {
     bool bRet = true;
@@ -107,6 +118,7 @@ bool CDatabaseManage::checkConfigDatatable()
     return false;
 }
 
+//检查当前数据库版本是否匹配（预留接口）
 bool CDatabaseManage::checkDatabaseVersion()
 {
     //默认为不成功
@@ -159,6 +171,7 @@ bool CDatabaseManage::checkDatabaseVersion()
     return bSuccess;
 }
 
+//传入数据库表格对象，检查表格是否需要更新
 bool CDatabaseManage::checkAndUpdateTable(CAbstractConfigInfo *info, bool bUpdate)
 {
     bool bRet = false;
@@ -174,6 +187,7 @@ bool CDatabaseManage::checkAndUpdateTable(CAbstractConfigInfo *info, bool bUpdat
     return bRet;
 }
 
+//工具函数，检查文件是否存在
 bool CDatabaseManage::isFileExist(const string &fullPath, bool bCreat)
 {
     QString qsPath = QString::fromStdString(fullPath);
@@ -193,6 +207,7 @@ bool CDatabaseManage::isFileExist(const string &fullPath, bool bCreat)
     return ok;
 }
 
+//工具函数，检查路径是否存在
 bool CDatabaseManage::isDirExist(const string &fullPath, bool bCreat)
 {
     QString qsTemp = QString::fromStdString(fullPath);
@@ -215,6 +230,7 @@ bool CDatabaseManage::isDirExist(const string &fullPath, bool bCreat)
     return  bRes;
 }
 
+//删除文件夹，文件
 bool CDatabaseManage::deleteFileOrFolder(const string &fullPath)
 {
     QString strPath = QString::fromStdString(fullPath);

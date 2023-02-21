@@ -197,7 +197,7 @@ void CWebSocketServer::parseLabelMeg(QJsonObject &object)
     int PixelY = coordY / 500;
 
     //查询人的信息
-    qDebug()<<"*********tagId****"<<tagId;
+    //qDebug()<<"*********tagId****"<<tagId;
 
     //显示坐标位置
     emit setCurCoord(PixelX,PixelY,tagId);
@@ -218,15 +218,11 @@ void CWebSocketServer::parseLabelMeg(QJsonObject &object)
 //连接成功
 void CWebSocketServer::onNewConnection()
 {
-
-    qDebug() << "hello";
     m_bConnectStatus = true;
     pSocket = m_WebSocketServer->nextPendingConnection();
-
     connect(pSocket,SIGNAL(textMessageReceived(QString)),this,SLOT(processTextMessage(QString)));
     connect(pSocket,SIGNAL(binaryMessageReceived(QByteArray)),this,SLOT(processByteArrayMessage(QByteArray)));
     connect(pSocket,SIGNAL(disconnected()),this,SLOT(socketDisconnected()));
-
 }
 
 //连接断开
@@ -245,10 +241,10 @@ void CWebSocketServer::processTextMessage(QString message)
 //数据是JSON格式，解析后判断是基站相关还是标签卡相关(对象包括数组）
 void CWebSocketServer::processByteArrayMessage(QByteArray array)
 {
-    //m_bRecvData = true;
+    //关闭超时定时器
     m_RecvTimer.stop();
     emit clearDrawCoord();
-    qDebug()<<array;
+    //qDebug()<<array;
     QJsonObject groupObj;
     QJsonDocument m_document;
 
@@ -273,8 +269,6 @@ void CWebSocketServer::processByteArrayMessage(QByteArray array)
     //开始解析标签卡数组，数组里面是每个成员的数据包
     if (groupObj.contains("TagList")) {
         QJsonArray mesArray = groupObj.value("TagList").toArray();
-
-
         //这里的解析为JSON数组组合JSON对象
 
         for (int i = 0; i < mesArray.size(); i++) {
@@ -291,8 +285,8 @@ void CWebSocketServer::processByteArrayMessage(QByteArray array)
 
 void CWebSocketServer::onRecvDataFinish()
 {
-    emit clearDrawCoord();
-    emit clearFromTagData();
+    //emit clearDrawCoord();
+    //emit clearFromTagData();
 }
 
 //数据是JSON格式，解析后判断是基站相关还是标签卡相关

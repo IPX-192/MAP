@@ -1,5 +1,6 @@
 ﻿#ifndef CDATABASEMANAGE_H
 #define CDATABASEMANAGE_H
+
 #include "CUserInfoTable.h"
 #include "CMapOriginConfig.h"
 #include "CTagInfoTable.h"
@@ -7,17 +8,20 @@
 
 #include "mapsysdatabase.hpp"
 
+//数据库管理类
 class CDatabaseManage
 {
 public:
     ~CDatabaseManage();
 
 public:
+    //获取所有数据表格对象
     CUserInfoTable *pUserInfo() const;
     CMapOriginConfig *pConfigMapOrigin() const;
     CTagInfoTable *pTagInfo() const;
     CVersionInfoTable *pVersionInfo() const;
 
+    //获取单例
     static CDatabaseManage *GetInstance();
 
 private:
