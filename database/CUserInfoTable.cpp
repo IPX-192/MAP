@@ -20,6 +20,7 @@ bool CUserInfoTable::Check_Config_Table()
     return true;
 }
 
+//添加人员信息
 bool CUserInfoTable::addUserInfo(const CUserInfo &info)
 {
     lock();
@@ -58,6 +59,7 @@ bool CUserInfoTable::addUserInfo(const CUserInfo &info)
     return bSuccess;
 }
 
+//删除人员信息
 bool CUserInfoTable::delUserInfo(const CUserInfo &info, bool bDeleteAll)
 {
     lock();
@@ -72,6 +74,7 @@ bool CUserInfoTable::delUserInfo(const CUserInfo &info, bool bDeleteAll)
 
     try
     {
+        //删除所有信息
         if(bDeleteAll)
         {
             vector<UserInfoTable> vecSearch;
@@ -88,6 +91,7 @@ bool CUserInfoTable::delUserInfo(const CUserInfo &info, bool bDeleteAll)
         }
         else
         {
+            //根据用户ID删除信息
             string strUserID = info.strUserID();
 
             auto cursor = select<UserInfoTable>(*m_pDatabase, UserInfoTable::StrUserID == strUserID).cursor();
@@ -112,6 +116,7 @@ bool CUserInfoTable::delUserInfo(const CUserInfo &info, bool bDeleteAll)
     return bSuccess;
 }
 
+//更新人员信息
 bool CUserInfoTable::updateUserInfo(const string userID, const CUserInfo &info)
 {
     if(m_pDatabase == nullptr)
@@ -159,6 +164,7 @@ bool CUserInfoTable::updateUserInfo(const string userID, const CUserInfo &info)
 
 }
 
+//获取全部人员信息
 bool CUserInfoTable::getAllUserInfo(vector<CUserInfo> &vecUsers)
 {
     lock();
@@ -205,6 +211,7 @@ bool CUserInfoTable::getAllUserInfo(vector<CUserInfo> &vecUsers)
     return bSuccess;
 }
 
+//根据ID查找用户信息
 bool CUserInfoTable::getUserInfoByID(const string &strUserID, CUserInfo &info)
 {
     lock();
@@ -243,6 +250,7 @@ bool CUserInfoTable::getUserInfoByID(const string &strUserID, CUserInfo &info)
     return bSuccess;
 }
 
+//根据标签ID获取用户信息
 bool CUserInfoTable::getUserInfoByTagID(const int &tagID, CUserInfo &info)
 {
     lock();
@@ -281,6 +289,7 @@ bool CUserInfoTable::getUserInfoByTagID(const int &tagID, CUserInfo &info)
     return bSuccess;
 }
 
+//检查用户信息是否重叠，用户ID和标签ID不能重复
 bool CUserInfoTable::checkUserIDExist(const string &strUserID, const int &tagID)
 {
     if(m_pDatabase == nullptr)

@@ -4,6 +4,7 @@
 #include <string>
 using namespace std;
 
+//人员信息
 class CUserInfo
 {
 public:

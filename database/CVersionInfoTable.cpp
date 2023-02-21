@@ -15,6 +15,7 @@ CVersionInfoTable::~CVersionInfoTable()
     }
 }
 
+//默认配置
 bool CVersionInfoTable::Check_Config_Table()
 {
     bool bSuccess = false;
@@ -44,6 +45,7 @@ bool CVersionInfoTable::Check_Config_Table()
     return bSuccess;
 }
 
+//获取软件版本
 string CVersionInfoTable::getVersionInfo()
 {
     lock();
@@ -71,6 +73,7 @@ string CVersionInfoTable::getVersionInfo()
     return "";
 }
 
+//更新数据库版本
 bool CVersionInfoTable::updateVersionInfo(const QString &info)
 {
     lock();

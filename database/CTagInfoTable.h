@@ -5,6 +5,7 @@
 #include "CAbstractConfigInfo.h"
 #include "../datamanager/CTagInfo.h"
 
+//标签数据表
 class CTagInfoTable : public CAbstractConfigInfo
 {
 public:

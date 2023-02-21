@@ -1,7 +1,7 @@
 ﻿#ifndef CTAGINFO_H
 #define CTAGINFO_H
 
-
+//标签信息
 class CTagInfo {
 public:
     CTagInfo();

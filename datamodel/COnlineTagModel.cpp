@@ -1,5 +1,6 @@
 ﻿#include "COnlineTagModel.h"
 
+//注册qml能识别的数据名
 COnlineTagInfoModel::COnlineTagInfoModel(QObject *parent)
 {
     m_roleName.insert(UserNameRole, "userName");
@@ -13,9 +14,9 @@ COnlineTagInfoModel::COnlineTagInfoModel(QObject *parent)
     m_roleName.insert(PosYRole, "posY");
     m_roleName.insert(PosZRole, "posZ");
     m_roleName.insert(StaticTimeRole, "staticTime");
-
 }
 
+//加载在线标签数据进行显示
 void COnlineTagInfoModel::loadData(const vector<COnlineTagInfo> &vecTag)
 {
     m_userTagInfoData.clear();
@@ -28,6 +29,7 @@ void COnlineTagInfoModel::loadData(const vector<COnlineTagInfo> &vecTag)
     emit layoutChanged();
 }
 
+//在线标签表添加数据
 void COnlineTagInfoModel::addData(COnlineTagInfo &info)
 {
     //去掉之前缓存的数据,再添加新数据，则一直显示taglist里面的最新信息
@@ -42,6 +44,7 @@ void COnlineTagInfoModel::addData(COnlineTagInfo &info)
     emit layoutChanged();
 }
 
+//在线标签表添加批量数据
 void COnlineTagInfoModel::addData(vector<COnlineTagInfo> &vecTag)
 {
     for(auto it : vecTag)
@@ -51,6 +54,7 @@ void COnlineTagInfoModel::addData(vector<COnlineTagInfo> &vecTag)
     emit layoutChanged();
 }
 
+//删除一行
 void COnlineTagInfoModel::deleteRow(int &rowIndex)
 {
     if( rowIndex>=0 && rowIndex<m_userTagInfoData.size() )
@@ -60,11 +64,21 @@ void COnlineTagInfoModel::deleteRow(int &rowIndex)
     emit layoutChanged();
 }
 
+//根据tagID删除一行数据
 void COnlineTagInfoModel::deleteRow(int tagID)
 {
+    for (auto element : m_userTagInfoData)
+    {
+        for ( int i = 0; i < m_userTagInfoData.size() ; i++)
+        {
+            m_userTagInfoData.remove(i);
+        }
+    }
 
+    emit layoutChanged();
 }
 
+//删除所有数据
 void COnlineTagInfoModel::deleteAll()
 {
     m_userTagInfoData.clear();

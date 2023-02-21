@@ -3,6 +3,7 @@
 
 #include "CAbstractConfigInfo.h"
 
+//软件版本号（预留接口,暂时不用）
 class CVersionInfoTable : public CAbstractConfigInfo
 {
 public:
@@ -11,7 +12,10 @@ public:
 
     virtual bool Check_Config_Table();
 
+    //获取软件版本号
     string getVersionInfo();
+
+    //更新软件版本号
     bool updateVersionInfo(const QString &info);
 
 private:

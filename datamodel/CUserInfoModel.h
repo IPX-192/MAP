@@ -22,9 +22,16 @@ public:
 public:
     explicit CUserInfoModel(QObject *parent = nullptr);
 
+    //人员信息进行显示
     void loadData(const vector<CUserInfo> &vecUser);
+
+    //人员添加数据
     void addData(CUserInfo &info);
+
+    //人员批量添加数据
     void addData(vector<CUserInfo> &vecUser);
+
+    //删除一行
     void deleteRow(QString userID);
 
 public:

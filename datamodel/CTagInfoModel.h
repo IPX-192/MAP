@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//标签信息显示model
 class CTagInfoModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -25,9 +26,16 @@ public:
 public:
     explicit CTagInfoModel(QObject *parent = nullptr);
 
+    //标签数据进行显示
     void loadData(const vector<CTagInfo> &vecTag);
+
+    //标签表添加数据
     void addData(CTagInfo &info);
+
+    //标签信息
     void addData(vector<CTagInfo> &vecTag);
+
+    //删除一行
     void deleteRow(int &rowIndex);
 
 public:

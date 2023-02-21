@@ -4,6 +4,7 @@
 #include <string>
 using namespace std;
 
+//在线标签信息
 class COnlineTagInfo {
 public:
     COnlineTagInfo();

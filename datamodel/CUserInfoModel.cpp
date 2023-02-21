@@ -10,6 +10,7 @@ CUserInfoModel::CUserInfoModel(QObject *parent)
     m_roleName.insert(UserTagID, "userTagID");
 }
 
+//人员信息进行显示
 void CUserInfoModel::loadData(const vector<CUserInfo> &vecUser)
 {
     m_userInfoData.clear();
@@ -22,6 +23,7 @@ void CUserInfoModel::loadData(const vector<CUserInfo> &vecUser)
     emit layoutChanged();
 }
 
+//人员添加数据
 void CUserInfoModel::addData(CUserInfo &info)
 {
     m_userInfoData.push_front(info);
@@ -29,6 +31,7 @@ void CUserInfoModel::addData(CUserInfo &info)
     emit layoutChanged();
 }
 
+//人员批量添加数据
 void CUserInfoModel::addData(vector<CUserInfo> &vecUser)
 {
     for(auto it : vecUser)
@@ -38,6 +41,7 @@ void CUserInfoModel::addData(vector<CUserInfo> &vecUser)
     emit layoutChanged();
 }
 
+//删除一行
 void CUserInfoModel::deleteRow(QString userID)
 {
     if(m_userInfoData.count() > 0)

@@ -11,6 +11,7 @@ CTagInfoModel::CTagInfoModel(QObject *parent)
     m_roleName.insert(StaticTimeRole, "staticTime");
 }
 
+//标签数据进行显示
 void CTagInfoModel::loadData(const vector<CTagInfo> &vecTag)
 {
     m_TagInfoData.clear();
@@ -23,6 +24,7 @@ void CTagInfoModel::loadData(const vector<CTagInfo> &vecTag)
     emit layoutChanged();
 }
 
+//标签表添加数据
 void CTagInfoModel::addData(CTagInfo &info)
 {
     m_TagInfoData.push_front(info);
@@ -30,6 +32,7 @@ void CTagInfoModel::addData(CTagInfo &info)
     emit layoutChanged();
 }
 
+//标签信息
 void CTagInfoModel::addData(vector<CTagInfo> &vecTag)
 {
     for(auto it : vecTag)
@@ -39,6 +42,7 @@ void CTagInfoModel::addData(vector<CTagInfo> &vecTag)
     emit layoutChanged();
 }
 
+//删除一行
 void CTagInfoModel::deleteRow(int &rowIndex)
 {
     if( rowIndex>=0 && rowIndex<m_TagInfoData.size() )

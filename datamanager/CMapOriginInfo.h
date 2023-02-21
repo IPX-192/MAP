@@ -1,6 +1,7 @@
 #ifndef CMAPORIGININFO_H
 #define CMAPORIGININFO_H
 
+//原点配置信息类
 class CMapOriginInfo {
 public:
     CMapOriginInfo();
