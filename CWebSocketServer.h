@@ -27,10 +27,10 @@ public:
 
 public:
     //开始服务
-    void startServer();
+    Q_INVOKABLE void startServer(bool local);
 
     //停止服务
-    void stopServer();
+    Q_INVOKABLE void stopServer();
 
     Q_INVOKABLE bool copyImageFile(QString image);
 

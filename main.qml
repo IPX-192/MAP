@@ -379,14 +379,14 @@ Window {
             anchors.verticalCenter: bottomItem.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 20
-            border.color: "black"
+            border.color: "#2E529B"
             radius: 6
             Image {
                 id:ipSetImage
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
                 anchors.leftMargin: 5
-                source: "qrc:/iamge/set.png"
+                source: "qrc:/iamge/setClick.png"
             }
 
             Text {
@@ -394,7 +394,7 @@ Window {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: ipSetImage.right
                 anchors.leftMargin: 10
-                text: bSetLocalIp ? qsTr("回环地址") : ("本机IP")
+                text: bSetLocalIp ? qsTr("LocalHost") : ("本机IP")
                 font.pixelSize: 16
                 font.family: fontName
                 color: "#FEFEFE"
@@ -404,6 +404,13 @@ Window {
                 anchors.fill: parent
                 onClicked: {
                     bSetLocalIp = !bSetLocalIp
+                    SocketServer.stopServer()
+                    bSetLocalIp ? SocketServer.startServer(true) : SocketServer.startServer(false)
+                    ipAddress =   bSetLocalIp ? "127.0.0.1" : SocketServer.getLocalIP()
+
+                    //改变布局
+                    ipSetImage.source = bSetLocalIp ? "qrc:/iamge/set.png" : "qrc:/iamge/setClick.png"
+                    ipSetBtn.border.color =  bSetLocalIp ? "#404142" : "#2E529B"
                 }
             }
         }

@@ -20,7 +20,7 @@ CWebSocketServer::CWebSocketServer()
     connect(m_WebSocketServer,SIGNAL(newConnection()),this,SLOT(onNewConnection()));
     connect(&m_RecvTimer,&QTimer::timeout,this,&CWebSocketServer::onRecvDataFinish);
 
-    startServer();
+    startServer(false);
 
     QString serverIP = getLocalIP();
 
@@ -32,11 +32,21 @@ CWebSocketServer::~CWebSocketServer()
 
 }
 
-void CWebSocketServer::startServer()
+void CWebSocketServer::startServer(bool local)
 {
     //开始服务
     int i_port = 8195;
-    m_WebSocketServer->listen(QHostAddress::Any,i_port);
+
+    //判断是LocalHost还是本机IP
+    if(local)
+    {
+        m_WebSocketServer->listen(QHostAddress::LocalHost,i_port);
+    }
+
+    else
+    {
+        m_WebSocketServer->listen(QHostAddress::Any,i_port);
+    }
 }
 
 void CWebSocketServer::stopServer()
