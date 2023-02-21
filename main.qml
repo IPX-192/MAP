@@ -21,7 +21,7 @@ Window {
 
     property int originX: 40   //原点X
 
-    property int originY: 40  //原点Y
+    property int originY: 80  //原点Y
 
     property var maxY:100
 
@@ -60,10 +60,7 @@ Window {
     }
 
     Component.onCompleted: {
-        //chart.setOriginCoord(originX - originImg.width / 2,originY - originImg.height / 2 )
-
         chart.setOriginCoord(originX ,maxY - originY)
-
         ipAddress = SocketServer.getLocalIP()
     }
 
@@ -285,7 +282,7 @@ Window {
                     target: SocketServer
                     //设置人的坐标
                     onSetCurCoord:{
-                        chart.setCurCoord(coordX,maxY - coordY,tagID);
+                        chart.setCurCoord(coordX,coordY,tagID);
                     }
 
                     //新收到消息时清理以往的显示
@@ -349,13 +346,13 @@ Window {
                 //如果设置原点,设置原点
                 if(bSetOrigin)
                 {
-                    console.log("mouseX " + mouse.x)
+                    //console.log("mouseX " + mouse.x)
                     console.log("mouseY " + (maxY - mouse.y))
 
-                    originX = mouseX
-                    originY = mouseY
+                    originX = mouse.x
+                    originY = mouse.y
 
-                    chart.setOriginCoord(originX , maxY - mouseY)
+                    chart.setOriginCoord(originX ,maxY - mouse.y)
                 }
                 else
                 {

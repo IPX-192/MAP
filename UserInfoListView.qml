@@ -145,7 +145,7 @@ Item {
 
                 //普通表头框
                 Text {
-                    text: "坐标x(m)"
+                    text: "坐标x(mm)"
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
                     font.bold: true
@@ -163,7 +163,7 @@ Item {
 
                 //普通表头框
                 Text {
-                    text: "坐标y(m)"
+                    text: "坐标y(mm)"
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
                     font.bold: true

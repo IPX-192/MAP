@@ -19,12 +19,11 @@ void CUserCoordView::paint(QPainter *painter)
 
 void CUserCoordView::drawCoordImage()
 {
-
-    qDebug()<<"看看原点位置" << m_OriginY;
     for(int i = 0;i<m_vecCoordX.size();i++)
     {
-        QRect backImgRect( m_OriginX + m_vecCoordX.at(i) - 12,m_OriginY + m_vecCoordY.at(i) - 12,m_CoordImgWidth,m_CoordImgWidth);
-        QRect tagIDImgRect(m_OriginX + m_vecCoordX.at(i) - 18,m_OriginY + m_vecCoordY.at(i) + 2,m_CoordIdWidth,m_CoordImgWidth);
+        //通常程序中Y轴坐标值是越往下越大,目前要更改为越往上越大，因此要取反值
+        QRect backImgRect( m_OriginX + m_vecCoordX.at(i) - 12,100 - (m_OriginY + m_vecCoordY.at(i) + 12),m_CoordImgWidth,m_CoordImgWidth);
+        QRect tagIDImgRect(m_OriginX + m_vecCoordX.at(i) - 18,100 - (m_OriginY + m_vecCoordY.at(i) - 5),m_CoordIdWidth,m_CoordImgWidth);
         QImage backImg(":/iamge/coord.png");
 
         m_painter->drawImage(backImgRect, backImg);

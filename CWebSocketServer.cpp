@@ -192,7 +192,7 @@ void CWebSocketServer::parseLabelMeg(QJsonObject &object)
     mapId = object.value("MapId").toInt();
     battery = object.value("Battery").toInt();
 
-    //把毫米换算成像素点,1000个像素点为500m
+    //把毫米换算成像素点,1000个像素点为500m,即一个像素点为500mm
     int PixelX = coordX / 500;
     int PixelY = coordY / 500;
 
