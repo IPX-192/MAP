@@ -33,5 +33,6 @@
         <file>UserMagListView.qml</file>
         <file>iamge/set.png</file>
         <file>iamge/setClick.png</file>
+        <file>DeviceMagPopup.qml</file>
     </qresource>
 </RCC>

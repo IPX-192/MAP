@@ -106,8 +106,8 @@ Window {
             height: 35
             text: "历史数据"
             font.family: fontName
-            anchors.right: parent.right
-            anchors.rightMargin: 40
+            anchors.right: deviceSetBtn.left
+            anchors.rightMargin: 20
             // highlighted:true
 
             anchors.verticalCenter: parent.verticalCenter
@@ -167,6 +167,20 @@ Window {
                 imageLoader.setSource("qrc:/FileDialog.qml",{"fileDialog_Title":qsTr("选择图片"),
                                           "fileDialog_Visible":true,"fileDialog_NameFilter":["Image Files (*.png *.jpg)"],
                                       } )
+            }
+        }
+
+        Button {
+            id: deviceSetBtn
+            width: 100
+            height: 35
+            font.family: fontName
+            text: "设备配置"
+            anchors.right: parent.right
+            anchors.rightMargin: 40
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: {
+                devicePopup.open()
             }
         }
     }
@@ -469,5 +483,13 @@ Window {
         id: dataPopup
         anchors.centerIn: parent
     }
+
+    //设备设置
+    DeviceMagPopup{
+        id:devicePopup
+        anchors.centerIn: parent
+    }
+
+
 
 }
