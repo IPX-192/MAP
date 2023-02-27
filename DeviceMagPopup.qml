@@ -168,18 +168,9 @@ Popup {
 
     }
 
-    Button {
-        id: closeBtn
-        width: 200
-        height: 35
-        text: "关闭弹窗"
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 15
-        font.family: fontName
-        onClicked: {
-            close()
-        }
+    Connections{
+        target: popupTitle
+        onPopupClose:  close()
     }
 
 
