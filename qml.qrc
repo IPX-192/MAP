@@ -35,5 +35,8 @@
         <file>iamge/setClick.png</file>
         <file>DeviceMagPopup.qml</file>
         <file>CusInputBox.qml</file>
+        <file>DevMagListview.qml</file>
+        <file>PopupTitle.qml</file>
+        <file>iamge/close2.png</file>
     </qresource>
 </RCC>

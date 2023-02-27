@@ -26,5 +26,6 @@
         <file alias="iamge/title.png">iamge/title.png</file>
         <file alias="iamge/set.png">iamge/set.png</file>
         <file alias="iamge/setClick.png">iamge/setClick.png</file>
+        <file alias="iamge/close2.png">iamge/close2.png</file>
     </qresource>
 </RCC>

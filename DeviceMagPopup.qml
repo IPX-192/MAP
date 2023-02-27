@@ -16,10 +16,21 @@ Popup {
     modal: true
     focus: true
     closePolicy: Popup.CloseOnEscape
+    padding: 0
+
+    //弹出窗口的Title栏
+    PopupTitle{
+        id : popupTitle
+        width: parent.width
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.leftMargin: 1
+        titleText: qsTr( "添加设备" )
+    }
 
     Text {
         id:addDevText
-        anchors.top: parent.top
+        anchors.top: popupTitle.bottom
         anchors.topMargin: 30
         anchors.left: parent.left
         anchors.leftMargin: 20
@@ -31,7 +42,7 @@ Popup {
 
     Text {
         id:maxDevText
-        anchors.top: parent.top
+        anchors.top: popupTitle.bottom
         anchors.topMargin: 30
         anchors.right: maxDevInput.left
         anchors.rightMargin: 20
@@ -169,6 +180,70 @@ Popup {
         onClicked: {
             close()
         }
+    }
+
+
+    //添加个数和单位
+
+    Row{
+        id:addRow
+        width: parent.width
+        height: 50
+        anchors.top: maxDevInput.bottom
+        anchors.topMargin: 50
+        anchors.left: addDevText.left
+        spacing: 80
+
+        Item {
+            width: devNumText.width +20 + devNumInput.width
+            height: parent.height
+
+            Text {
+                id:devNumText
+                text: qsTr("请输入添加设备数：")
+                font.pixelSize: 20
+                font.family: fontName
+                color: "#FEFEFE"
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            CusInputBox{
+                id:devNumInput
+                width: 100
+                height: 50
+                anchors.right: parent.right
+            }
+        }
+
+        Item {
+            width: devWidthText.width +20 + devWidthInput.width
+            height: parent.height
+            Text {
+                id:devWidthText
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                text: qsTr("请输入设备宽度(mm)：")
+                font.pixelSize: 20
+                font.family: fontName
+                color: "#FEFEFE"
+            }
+
+            CusInputBox{
+                id:devWidthInput
+                width: 100
+                height: 50
+                anchors.right: parent.right
+            }
+
+        }
+    }
+
+    DevMagListview{
+        id:devList
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top:addRow.bottom
+        anchors.topMargin: 30
     }
 
     background: Rectangle{
