@@ -29,6 +29,43 @@ Popup {
         color: "#FEFEFE"
     }
 
+    Text {
+        id:maxDevText
+        anchors.top: parent.top
+        anchors.topMargin: 30
+        anchors.right: maxDevInput.left
+        anchors.rightMargin: 20
+        text: qsTr("最大设备号：")
+        font.pixelSize: 20
+        font.family: fontName
+        color: "#FEFEFE"
+    }
+
+    CusInputBox{
+        id:maxDevInput
+        width: 100
+        height: 50
+        anchors.right: sureBtn.left
+        anchors.rightMargin: 20
+        anchors.verticalCenter: addDevText.verticalCenter
+    }
+
+
+    Button {
+        id: sureBtn
+        width: 60
+        height: 30
+        text: "确定"
+        anchors.right: parent.right
+        anchors.rightMargin: 20
+        anchors.verticalCenter: addDevText.verticalCenter
+        font.family: fontName
+        onClicked: {
+            close()
+        }
+    }
+
+
     RadioButton {
         id: nextBtn
         text: qsTr("正序添加")
@@ -128,6 +165,7 @@ Popup {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 15
+        font.family: fontName
         onClicked: {
             close()
         }
