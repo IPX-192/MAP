@@ -38,5 +38,6 @@
         <file>DevMagListview.qml</file>
         <file>PopupTitle.qml</file>
         <file>iamge/close2.png</file>
+        <file>CircleBtn.qml</file>
     </qresource>
 </RCC>

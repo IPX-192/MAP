@@ -243,5 +243,66 @@ Popup {
 
     }
 
+    //底部矩形
+    Rectangle
+    {
+        id : confirmRect
+        color: "#212222"
+        width: 1000
+        height: 50
+        anchors.bottom: parent.bottom
+
+        //确定按钮
+        CircleBtn{
+            id: btnOk
+            width: 120
+            height: 40
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 300
+            btnName: qsTr("确定")
+            bPriority: true
+            MouseArea{
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+
+
+                }
+                onEntered: {
+                    btnOk.press();
+                }
+                onExited: {
+                    btnOk.release();
+                }
+            }
+        }
+
+        //取消按钮
+        CircleBtn{
+            id: btnCancel
+            width: 120
+            height: 40
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: parent.right
+            anchors.rightMargin: 300
+            btnName: qsTr("取消")
+            MouseArea{
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+
+
+                }
+                onEntered: {
+                    btnCancel.press();
+                }
+                onExited: {
+                    btnCancel.release();
+                }
+            }
+        }
+
+    }
 
 }
