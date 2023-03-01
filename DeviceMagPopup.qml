@@ -8,7 +8,7 @@ Popup {
     property var factorX :1.0
     property var factorY :1.0
     property var factor  :1.0
-    property bool bGender:true
+    property bool bNext:true
 
     id:devicePopup
     width: 1000
@@ -59,6 +59,8 @@ Popup {
         anchors.right: sureBtn.left
         anchors.rightMargin: 20
         anchors.verticalCenter: addDevText.verticalCenter
+        enabled: !bNext
+        opacity: bNext ? 0.5 : 1
     }
 
 
@@ -71,6 +73,8 @@ Popup {
         anchors.rightMargin: 20
         anchors.verticalCenter: addDevText.verticalCenter
         font.family: fontName
+        enabled: maxDevInput.enabled
+        opacity: maxDevInput.opacity
         onClicked: {
             close()
         }
@@ -108,7 +112,7 @@ Popup {
                 anchors.fill: parent
                 onClicked: {
                     nextBtn.checked  = true
-                    bGender = true
+                    bNext = true
                 }
             }
         }
@@ -153,7 +157,7 @@ Popup {
                 anchors.fill: parent
                 onClicked: {
                     preBtn.checked  = true
-                    bGender = false
+                    bNext = false
                 }
             }
         }

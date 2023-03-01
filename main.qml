@@ -449,6 +449,45 @@ Window {
             font.family: fontName
             color: "#FEFEFE"
         }
+
+        //服务器地址
+        CusInputBox{
+            id:serverInput
+            width: 180
+            height: 40
+            anchors.right: parent.right
+            anchors.rightMargin: 180
+            anchors.verticalCenter: parent.verticalCenter
+            tipsString:"请输入转发地址"
+            maximumLength:15
+        }
+
+        //端口号
+        CusInputBox{
+            id:comInput
+            width: 60
+            height: 40
+            anchors.left: serverInput.right
+            anchors.leftMargin: 20
+            anchors.verticalCenter: parent.verticalCenter
+            tipsString:"端口号"
+            maximumLength:5
+        }
+
+        Button {
+            id: serverBtn
+            width: 60
+            height: 30
+            text: "转发"
+            anchors.left: comInput.right
+            anchors.leftMargin: 20
+            anchors.verticalCenter: parent.verticalCenter
+            font.family: fontName
+            onClicked: {
+
+            }
+        }
+
     }
 
     Timer{

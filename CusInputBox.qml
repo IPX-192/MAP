@@ -9,6 +9,7 @@ TextField {
     property int inputBoxWidth
     property int inputBoxheight
     property int textPointSize:16
+    property int maxInputLength:9999
     property bool inputBoxFocus:false
     property string  tipsString:qsTr("")        //提示性文字
     property string  tipsStringColor:qsTr("")   //提示性文字颜色
@@ -22,7 +23,7 @@ TextField {
     horizontalAlignment:TextInput.AlignHCenter
     placeholderText:tipsString
     focus: true
-
+    maximumLength:maxInputLength
 
     font {
         family:fontName
