@@ -52,6 +52,14 @@ public:
     //删除指定人员
     Q_INVOKABLE bool delUserByUserID(QString strID);
 
+    //////设备管理相关///////
+    Q_INVOKABLE void setDevAddType(bool type);
+
+    Q_INVOKABLE bool getDevAddType();
+
+signals:
+    Q_INVOKABLE void sigSetDevAddEnable(bool next);
+
 public slots:
 
     //处理收到的标签信息
@@ -62,13 +70,16 @@ public slots:
 
 public:
     //服务器对象
-    CWebSocketServer         m_SocketServer;
+    CWebSocketServer    m_SocketServer;
 
     //人员model
-    CUserInfoModel m_userDataModel;
+    CUserInfoModel      m_userDataModel;
 
     //在线标签信息model
     COnlineTagInfoModel m_onlineTagModel;
+
+    //是否是正向添加设备
+    bool                m_devAddNext{true};
 };
 
 #endif // MAINFRAME_H

@@ -4,13 +4,11 @@ import QtGraphicalEffects 1.12
 
 
 Popup {
-
+    id:deviceMag
     property var factorX :1.0
     property var factorY :1.0
     property var factor  :1.0
     property bool bNext:true
-
-    id:devicePopup
     width: 1000
     height: 600
     modal: true
@@ -89,6 +87,13 @@ Popup {
         anchors.leftMargin: 20 * factorX
         anchors.verticalCenter: addDevText.verticalCenter
 
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                return
+            }
+        }
+
         indicator: Rectangle {
             implicitWidth: 30 * factor
             implicitHeight: 30 * factor
@@ -110,6 +115,7 @@ Popup {
 
             MouseArea{
                 anchors.fill: parent
+                propagateComposedEvents: true
                 onClicked: {
                     nextBtn.checked  = true
                     bNext = true
@@ -132,6 +138,12 @@ Popup {
         anchors.left: nextBtn.right
         anchors.leftMargin: 85 * factorX
         anchors.verticalCenter: nextBtn.verticalCenter
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                return
+            }
+        }
 
         indicator: Rectangle {
             implicitWidth: 30 * factor
@@ -155,6 +167,7 @@ Popup {
 
             MouseArea{
                 anchors.fill: parent
+                propagateComposedEvents: true
                 onClicked: {
                     preBtn.checked  = true
                     bNext = false
@@ -175,6 +188,16 @@ Popup {
     Connections{
         target: popupTitle
         onPopupClose:  close()
+    }
+
+    Connections{
+        target: InterAction
+        onSigSetDevAddEnable:{
+            if(next)
+            {
+
+            }
+        }
     }
 
 
@@ -247,6 +270,16 @@ Popup {
 
     }
 
+    Timer{
+        id:closeTimer
+        interval: 1000
+        running: false
+        repeat: false
+        onTriggered: {
+            deviceMag.close()
+        }
+    }
+
     //底部矩形
     Rectangle
     {
@@ -271,7 +304,8 @@ Popup {
                 hoverEnabled: true
                 onClicked: {
 
-
+                    InterAction.setDevAddType(bNext)
+                    closeTimer.start()
                 }
                 onEntered: {
                     btnOk.press();
@@ -295,7 +329,7 @@ Popup {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-
+                    deviceMag.close()
 
                 }
                 onEntered: {

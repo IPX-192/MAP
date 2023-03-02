@@ -163,6 +163,16 @@ bool MainFrame::delUserByUserID(QString strID)
     return bFlag;
 }
 
+void MainFrame::setDevAddType(bool type)
+{
+    m_devAddNext = type;
+}
+
+bool MainFrame::getDevAddType()
+{
+    return m_devAddNext;
+}
+
 bool MainFrame::getMapOriginConfig(CMapOriginInfo &info)
 {
     bool bFlag = false;
