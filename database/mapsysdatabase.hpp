@@ -6,6 +6,8 @@ class ProductInfoTable;
 class UserInfoTable;
 class TagInfoTable;
 class MapOriginConfig;
+class TagDataTable;
+class DevInfoTable;
 class ProductInfoTable : public litesql::Persistent {
 public:
     class Own {
@@ -190,6 +192,114 @@ public:
     std::auto_ptr<MapOriginConfig> upcastCopy() const;
 };
 std::ostream & operator<<(std::ostream& os, MapOriginConfig o);
+class TagDataTable : public litesql::Persistent {
+public:
+    class Own {
+    public:
+        static const litesql::FieldType Id;
+    };
+    static const std::string type__;
+    static const std::string table__;
+    static const std::string sequence__;
+    static const litesql::FieldType Id;
+    litesql::Field<int> id;
+    static const litesql::FieldType Type;
+    litesql::Field<std::string> type;
+    static const litesql::FieldType IDataID;
+    litesql::Field<int> iDataID;
+    static const litesql::FieldType ITagID;
+    litesql::Field<int> iTagID;
+    static const litesql::FieldType SaveTime;
+    litesql::Field<std::string> saveTime;
+    static const litesql::FieldType IMapID;
+    litesql::Field<int> iMapID;
+    static const litesql::FieldType IBattery;
+    litesql::Field<int> iBattery;
+    static const litesql::FieldType IPosX;
+    litesql::Field<int> iPosX;
+    static const litesql::FieldType IPosY;
+    litesql::Field<int> iPosY;
+    static const litesql::FieldType IPosZ;
+    litesql::Field<int> iPosZ;
+    static const litesql::FieldType IStaticTime;
+    litesql::Field<int> iStaticTime;
+    static const litesql::FieldType StrUserID;
+    litesql::Field<std::string> strUserID;
+    static const litesql::FieldType StrUserName;
+    litesql::Field<std::string> strUserName;
+    static const litesql::FieldType StrDepartment;
+    litesql::Field<std::string> strDepartment;
+    static const litesql::FieldType StrRole;
+    litesql::Field<std::string> strRole;
+protected:
+    void defaults();
+public:
+    TagDataTable(const litesql::Database& db);
+    TagDataTable(const litesql::Database& db, const litesql::Record& rec);
+    TagDataTable(const TagDataTable& obj);
+    const TagDataTable& operator=(const TagDataTable& obj);
+protected:
+    std::string insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs);
+    void create();
+    virtual void addUpdates(Updates& updates);
+    virtual void addIDUpdates(Updates& updates);
+public:
+    static void getFieldTypes(std::vector<litesql::FieldType>& ftypes);
+protected:
+    virtual void delRecord();
+    virtual void delRelations();
+public:
+    virtual void update();
+    virtual void del();
+    virtual bool typeIsCorrect() const;
+    std::auto_ptr<TagDataTable> upcast() const;
+    std::auto_ptr<TagDataTable> upcastCopy() const;
+};
+std::ostream & operator<<(std::ostream& os, TagDataTable o);
+class DevInfoTable : public litesql::Persistent {
+public:
+    class Own {
+    public:
+        static const litesql::FieldType Id;
+    };
+    static const std::string type__;
+    static const std::string table__;
+    static const std::string sequence__;
+    static const litesql::FieldType Id;
+    litesql::Field<int> id;
+    static const litesql::FieldType Type;
+    litesql::Field<std::string> type;
+    static const litesql::FieldType IDevID;
+    litesql::Field<int> iDevID;
+    static const litesql::FieldType DevName;
+    litesql::Field<std::string> devName;
+    static const litesql::FieldType DevPos;
+    litesql::Field<int> devPos;
+protected:
+    void defaults();
+public:
+    DevInfoTable(const litesql::Database& db);
+    DevInfoTable(const litesql::Database& db, const litesql::Record& rec);
+    DevInfoTable(const DevInfoTable& obj);
+    const DevInfoTable& operator=(const DevInfoTable& obj);
+protected:
+    std::string insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs);
+    void create();
+    virtual void addUpdates(Updates& updates);
+    virtual void addIDUpdates(Updates& updates);
+public:
+    static void getFieldTypes(std::vector<litesql::FieldType>& ftypes);
+protected:
+    virtual void delRecord();
+    virtual void delRelations();
+public:
+    virtual void update();
+    virtual void del();
+    virtual bool typeIsCorrect() const;
+    std::auto_ptr<DevInfoTable> upcast() const;
+    std::auto_ptr<DevInfoTable> upcastCopy() const;
+};
+std::ostream & operator<<(std::ostream& os, DevInfoTable o);
 class MapSysDatabase : public litesql::Database {
 public:
     MapSysDatabase(std::string backendType, std::string connInfo);
