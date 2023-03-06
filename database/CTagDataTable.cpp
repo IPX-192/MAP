@@ -1,12 +1,12 @@
-#include "CHistoryDataTable.h"
+﻿#include "CTagDataTable.h"
 #include <QDebug>
 
-CHistoryDataTable::CHistoryDataTable(MapSysDatabase *dataBase)
+CTagDataTable::CTagDataTable(MapSysDatabase *dataBase)
 {
     m_pDatabase = dataBase;
 }
 
-CHistoryDataTable::~CHistoryDataTable()
+CTagDataTable::~CTagDataTable()
 {
     if(m_pDatabase != nullptr)
     {
@@ -15,12 +15,12 @@ CHistoryDataTable::~CHistoryDataTable()
     }
 }
 
-bool CHistoryDataTable::Check_Config_Table()
+bool CTagDataTable::Check_Config_Table()
 {
     return true;
 }
 
-bool CHistoryDataTable::addHistoryData(const CHistoryData &info)
+bool CTagDataTable::addHistoryData(const CTagData &info)
 {
     lock();
 
@@ -61,7 +61,7 @@ bool CHistoryDataTable::addHistoryData(const CHistoryData &info)
     return bSuccess;
 }
 
-bool CHistoryDataTable::delHistoryData(const CHistoryData &info, bool bDeleteAll)
+bool CTagDataTable::delHistoryData(const CTagData &info, bool bDeleteAll)
 {
     lock();
 
@@ -117,7 +117,7 @@ bool CHistoryDataTable::delHistoryData(const CHistoryData &info, bool bDeleteAll
     return bSuccess;
 }
 
-bool CHistoryDataTable::getAllHistoryData(vector<CHistoryData> &vecDatas)
+bool CTagDataTable::getAllHistoryData(vector<CTagData> &vecDatas)
 {
     lock();
 
@@ -141,7 +141,7 @@ bool CHistoryDataTable::getAllHistoryData(vector<CHistoryData> &vecDatas)
         {
             tag = (*cursor);
 
-            CHistoryData test;
+            CTagData test;
             test.setIDataID(tag.iDataID);
             test.setITagID(tag.iTagID);
             test.setIMapID(tag.iMapID);
@@ -172,7 +172,7 @@ bool CHistoryDataTable::getAllHistoryData(vector<CHistoryData> &vecDatas)
     return bSuccess;
 }
 
-bool CHistoryDataTable::getHistoryDataByCondition(const string &strCondition, vector<CHistoryData> &vecDatas)
+bool CTagDataTable::getHistoryDataByCondition(const string &strCondition, vector<CTagData> &vecDatas)
 {
     lock();
 
@@ -196,7 +196,7 @@ bool CHistoryDataTable::getHistoryDataByCondition(const string &strCondition, ve
 
         for(;cursor.rowsLeft();cursor++)
         {
-            CHistoryData record;
+            CTagData record;
             TagDataTable table(*m_pDatabase);
             table = *cursor;
 

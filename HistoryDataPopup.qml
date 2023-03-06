@@ -103,7 +103,7 @@ Popup {
 
             Rectangle {
                 id: headNameRect
-                width: 908 * 0.09
+                width: 908 * 0.07
                 height: 35
                 color: "#2E529B"
                 border.color: "#49649B"
@@ -139,7 +139,7 @@ Popup {
 
             Rectangle {
                 id: headDeptRect
-                width: 908 * 0.12
+                width: 908 * 0.10
                 height: 35
                 color: "#2E529B"
                 border.color: "#49649B"
@@ -211,7 +211,7 @@ Popup {
 
             Rectangle {
                 id: headBatteryYRect
-                width: 908 * 0.10
+                width: 908 * 0.06
                 height: 35
                 color: "#2E529B"
                 border.color: "#49649B"
@@ -227,10 +227,28 @@ Popup {
                 }
             }
 
+            Rectangle {
+                id: headTimeRect
+                width: 908 * 0.09
+                height: 35
+                color: "#2E529B"
+                border.color: "#49649B"
+
+                //普通表头框
+                Text {
+                    text: "静止时间"
+                    font.pixelSize: 16
+                    font.family: "Microsoft YaHei"
+                    font.bold: true
+                    color: "#D6D6D6"
+                    anchors.centerIn: parent
+                }
+            }
+
 
             Rectangle {
                 id: headOptRect
-                width: 908 * 0.07
+                width: 908 * 0.06
                 height: 35
                 color: "#2E529B"
                 border.color: "#49649B"
@@ -252,7 +270,7 @@ Popup {
     ListView{
         id: userInfoListiew
         width: 908
-        height: parent.height - headItem.height
+        height: backgRect.height - headItem.height
         anchors.top: headItem.bottom
         anchors.topMargin: -1
         anchors.left: headItem.left
@@ -466,6 +484,29 @@ Popup {
 
                 Text {
                     text: battery
+                    width: parent.width
+                    font.pixelSize: 16
+                    font.family: "Microsoft YaHei"
+                    color: "#D6D6D6"
+                    anchors.centerIn: parent
+                    fontSizeMode: Text.Fit
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
+                }
+            }
+
+            //静止时间
+            Rectangle {
+                id: timeRect
+                width: headTimeRect.width
+                height: 35
+                color: "transparent"
+                border.color: "#1A292D"
+                anchors.left: batteryRect.right
+                anchors.leftMargin: -1
+
+                Text {
+                    text: staticTime
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"

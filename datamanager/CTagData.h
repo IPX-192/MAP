@@ -1,14 +1,14 @@
-#ifndef CHISTORDATA_H
+﻿#ifndef CHISTORDATA_H
 #define CHISTORDATA_H
 
 #include <string>
 using namespace std;
 
 //历史数据
-class CHistoryData {
+class CTagData {
 public:
-    CHistoryData();
-    ~CHistoryData();
+    CTagData();
+    ~CTagData();
 
     int iTagID() const;
     void setITagID(int iTagID);
