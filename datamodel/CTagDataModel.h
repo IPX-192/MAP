@@ -10,12 +10,12 @@ using namespace std;
 //标签信息显示model
 class CTagDataModel : public QAbstractListModel
 {
-    /*
     Q_OBJECT
 public:
     enum MODEL_ROLE
     {
         TagIDRole = 0,
+        DataIDRole,
         MapIDRole,
         BatteryRole,
         PosXRole,
@@ -41,7 +41,7 @@ public:
     void addData(vector<CTagData> &vecTag);
 
     //删除一行
-    void deleteRow(int &rowIndex);
+    void deleteRow(QString userID);
 
 public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -51,7 +51,6 @@ public:
 private:
     QVector< CTagData > m_TagData;
     QHash<int, QByteArray> m_roleName;
-    */
 };
 
 #endif // CTAGDATAMODEL_H

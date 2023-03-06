@@ -274,7 +274,7 @@ Popup {
         anchors.top: headItem.bottom
         anchors.topMargin: -1
         anchors.left: headItem.left
-        model: UserInfoModel
+        model: TagDataModel
         clip: true
         maximumFlickVelocity: 350
         flickableDirection: Flickable.VerticalFlick
@@ -322,7 +322,7 @@ Popup {
                 anchors.leftMargin: -1
 
                 Text {
-                    text: userTagID
+                    text: tagID
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
@@ -414,7 +414,7 @@ Popup {
                 anchors.leftMargin: -1
 
                 Text {
-                    text: department
+                    text: userRole
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
@@ -543,7 +543,7 @@ Popup {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        //InterAction.delUserByUserID(userID)
+                        InterAction.delTagData(dataID)
                     }
                 }
             }

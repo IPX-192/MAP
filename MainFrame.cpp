@@ -16,6 +16,7 @@ void MainFrame::contextToQml(QQmlApplicationEngine &engine)
     engine.rootContext()->setContextProperty( "SocketServer", &m_SocketServer );
     engine.rootContext()->setContextProperty( "UserInfoModel", &m_userDataModel );
     engine.rootContext()->setContextProperty( "OnlineTagModel", &m_onlineTagModel );
+    engine.rootContext()->setContextProperty( "TagDataModel", &m_tagDataModel);
 }
 
 void MainFrame::initialize()
@@ -158,6 +159,32 @@ bool MainFrame::delUserByUserID(QString strID)
     if(bFlag)
     {
         m_userDataModel.deleteRow(strID);
+    }
+
+    return bFlag;
+}
+
+bool MainFrame::delTagData(QString dataID)
+{
+    bool bFlag = false;
+
+    CTagDataTable* pTagDataTable = CDatabaseManage::GetInstance()->pTagData();
+
+
+    if(nullptr == pTagDataTable)
+    {
+        return bFlag;
+    }
+
+    CTagData tagData;
+    tagData.setIDataID(dataID.toInt());
+
+    bFlag = pTagDataTable->delHistoryData(tagData);
+
+    //刷新界面显示
+    if(bFlag)
+    {
+        m_tagDataModel.deleteRow(dataID);
     }
 
     return bFlag;

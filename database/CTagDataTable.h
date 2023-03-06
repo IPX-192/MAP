@@ -18,7 +18,7 @@ public:
     bool addHistoryData(const CTagData &info);
 
     //删除历史数据
-    bool delHistoryData(const CTagData &info, bool bDeleteAll);
+    bool delHistoryData(const CTagData &info, bool bDeleteAll = false);
 
     //获取所有标签信息
     bool getAllHistoryData(vector<CTagData> &vecDatas);
