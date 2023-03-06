@@ -1,0 +1,4 @@
+#ifndef CTAGDATAMODEL_H
+#define CTAGDATAMODEL_H
+
+#endif // CTAGDATAMODEL_H
