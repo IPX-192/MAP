@@ -210,7 +210,7 @@ Popup {
         anchors.top: maxDevInput.bottom
         anchors.topMargin: 50
         anchors.left: addDevText.left
-        spacing: 80
+        spacing: 250
 
         Item {
             width: devNumText.width +20 + devNumInput.width
@@ -231,6 +231,19 @@ Popup {
                 width: 100
                 height: 50
                 anchors.right: parent.right
+                validator: RegExpValidator{regExp: /^([1-9]|[1-9]\d|1\d{2}|200)$/}
+            }
+
+            //提示
+            Text {
+                id:devNumTip
+                text: qsTr("(最大设备数200,多个设备请分批次添加)")
+                font.pixelSize: 12
+                font.family: fontName
+                color: "red"
+                anchors.left: devNumInput.right
+                anchors.leftMargin: 15
+                anchors.bottom: devNumText.bottom
             }
         }
 
@@ -252,6 +265,7 @@ Popup {
                 width: 100
                 height: 50
                 anchors.right: parent.right
+                validator: RegExpValidator{regExp: /^(?:[1-9]|\d{2,3}|[1-4]\d{3}|5000)$./}
             }
 
         }
