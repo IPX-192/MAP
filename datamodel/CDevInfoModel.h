@@ -28,6 +28,8 @@ public:
     //更新状态
     void updateRowData(bool bHighlight, QString devName);
 
+    Q_INVOKABLE QVariant get(int index, const QString &roleName) const;
+
 public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;

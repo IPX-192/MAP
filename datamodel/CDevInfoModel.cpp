@@ -5,6 +5,12 @@ CDevInfoModel::CDevInfoModel(QObject *parent)
     m_roleName.insert(DevNameRole, "devName");
     m_roleName.insert(DevPosRole, "devPos");
     m_roleName.insert(BHighlightRole, "bLight");
+
+    CDevInfo test;
+    test.setIDevID(1);
+    test.setIDevPos(200);
+    test.setBHighlight(true);
+    m_devInfoData.push_back(test);
 }
 
 void CDevInfoModel::loadData(const vector<CDevInfo> &vecTag)
@@ -35,6 +41,13 @@ void CDevInfoModel::updateRowData(bool bHighlight, QString devName)
         }
     }
     emit layoutChanged();
+}
+
+QVariant CDevInfoModel::get(int index, const QString &roleName) const
+{
+    QModelIndex modelIndex = this->index(index);
+    QVariant value = data(modelIndex, roleNames().key(roleName.toUtf8(), Qt::DisplayRole));
+    return value;
 }
 
 int CDevInfoModel::rowCount(const QModelIndex &parent) const

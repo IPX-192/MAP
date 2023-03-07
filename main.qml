@@ -386,16 +386,12 @@ Window {
         anchors.topMargin: 5
 
         Component.onCompleted: {
-            for(var x =0;x<testModel.rowCount();x++)
-            {
-                let curData = testModel.get(x).devPos
-                devCom.createObject(devItem, {'pos': curData , 'color' : "green"})
-            }
-        }
+            var count = DevInfoModel.rowCount();
 
-        ListModel {
-            id: testModel
-            ListElement { devPos: 200}
+            for (var i = 0; i < count; i++) {
+                var item = DevInfoModel.get(i,"devPos");
+                devCom.createObject(devItem, {'pos': item , 'color' : "green"})
+            }
         }
 
 //        ListView {
