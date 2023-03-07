@@ -50,4 +50,24 @@
 	<field name = "iPosZ"     		type = "integer"    default = "" />
   </object>
   
+    <!--4.标签历史信息表-->
+  <object name = "TagDataTable">
+    <!--标签ID-->
+	<field name = "iTagID"     		type = "integer"   default = "" />
+	<!--保存时间-->
+	
+	<!--所属地图-->
+	<field name = "iMapID"        	type = "integer"   default = "" />
+	<!--剩余电量-->
+	<field name = "iBattery"        type = "integer"   default = "" />
+	<!--标签位置x-->
+	<field name = "iPosX"       	type = "integer"   default = "" />
+	<!--标签位置y-->
+	<field name = "iPosY"       	type = "integer"   default = "" />
+	<!--标签位置z-->
+	<field name = "iPosZ"       	type = "integer"   default = "" />
+	<!--静止时间-->
+	<field name = "iStaticTime"     type = "integer"   default = "" />
+  </object>
+  
  </database>
