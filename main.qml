@@ -385,18 +385,42 @@ Window {
         anchors.top: mapItem.bottom
         anchors.topMargin: 5
 
-        ListView {
-            anchors.fill: parent
-            orientation: Qt.Horizontal
-            clip: true
-            model: DevInfoModel
-            delegate: Rectangle {
+        Component.onCompleted: {
+            for(var x =0;x<testModel.rowCount();x++)
+            {
+                let curData = testModel.get(x).devPos
+                devCom.createObject(devItem, {'pos': curData , 'color' : "green"})
+            }
+        }
+
+        ListModel {
+            id: testModel
+            ListElement { devPos: 200}
+        }
+
+//        ListView {
+//            anchors.fill: parent
+//            orientation: Qt.Horizontal
+//            clip: true
+//            model: DevInfoModel
+//            delegate: Rectangle {
+//                width: 5
+//                height: parent.height
+//                x: devPos
+//                id: listItem
+//                color: bLight ? "green" : "transparent"
+//            }
+//        }
+
+        Component {
+            id: devCom
+            Rectangle {
+                id: devRect
+                property alias pos: devRect.x
+                property alias color: devRect.color
                 width: 5
                 height: parent.height
-                id: listItem
-                implicitWidth: tableWidth
-                implicitHeight: itemHeigt
-                color: bHighlight ? "transparent" : "green"
+                color: bLight ? "green" : "transparent"
             }
         }
     }
