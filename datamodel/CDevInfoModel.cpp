@@ -1,6 +1,6 @@
-#include "CDevInfoModel.h"
+﻿#include "CDevInfoModel.h"
 
 CDevInfoModel::CDevInfoModel(QObject *parent)
 {
-m_devInfoData.insert(m_roleName,)
+    //m_roleName.insert(m_roleName, "name");
 }

@@ -1,4 +1,4 @@
-#ifndef CDEVINFOTABLE_H
+﻿#ifndef CDEVINFOTABLE_H
 #define CDEVINFOTABLE_H
 
 #include "CAbstractConfigInfo.h"
@@ -17,14 +17,20 @@ public:
     //添加标签信息
     bool addDevInfo(const CDevInfo &info);
 
-    //批量添加标签信息
-    bool addDevInfo(const vector<CDevInfo> &vecInfo);
-
     //删除标签信息
-    bool delDevInfo();
+    bool delDevInfo(const CDevInfo &info, bool bDeleteAll = false);
+
+    //更新标签信息
+    bool updateDevInfo(const int &DevID, const CDevInfo &info);
 
     //获取所有标签信息
-    bool getAllDevInfo(vector<CDevInfo> &vecInfo);
+    bool getAllDevInfo(vector<CDevInfo> &vecDevs);
+
+    //根据ID查找标签信息
+    bool getDevInfoByID(const int &DevID, CDevInfo &info);
+
+    //判断标签是否可用
+    bool checkDevIDAvailability(const int &DevID);
 
 private:
     MapSysDatabase *m_pDatabase{nullptr};

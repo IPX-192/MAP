@@ -9,6 +9,7 @@ CDatabaseManage::CDatabaseManage()
     ,m_pTagInfo(nullptr)
     ,m_pVersionInfo(nullptr)
     ,m_pTagData(nullptr)
+    ,m_pDevInfo(nullptr)
 {
     //检查数据库表格是否存在
     checkConfigDatabase();
@@ -51,6 +52,12 @@ CDatabaseManage::~CDatabaseManage()
     {
         delete m_pTagData;
         m_pTagData = nullptr;
+    }
+
+    if( m_pDevInfo != nullptr)
+    {
+        delete m_pDevInfo;
+        m_pDevInfo = nullptr;
     }
 }
 
@@ -111,6 +118,7 @@ void CDatabaseManage::initailizeConfigObject()
     m_pTagInfo = new CTagInfoTable(m_pConfigDatabase);
     m_pVersionInfo = new CVersionInfoTable(m_pConfigDatabase);
     m_pTagData = new CTagDataTable(m_pConfigDatabase);
+    m_pDevInfo = new CDevInfoTable(m_pConfigDatabase);
 }
 
 //检查配置是否存在更新
@@ -123,7 +131,7 @@ bool CDatabaseManage::checkConfigDatatable()
     bRet &= checkAndUpdateTable(m_pConfigMapOrigin, m_bUpgrade);
     bRet &= checkAndUpdateTable(m_pTagInfo, m_bUpgrade);
     bRet &= checkAndUpdateTable(m_pTagData, m_bUpgrade);
-
+    bRet &= checkAndUpdateTable(m_pDevInfo, m_bUpgrade);
     return false;
 }
 
@@ -256,6 +264,11 @@ bool CDatabaseManage::deleteFileOrFolder(const string &fullPath)
         qDir.removeRecursively();
     }
     return true;
+}
+
+CDevInfoTable *CDatabaseManage::pDevInfo() const
+{
+    return m_pDevInfo;
 }
 
 CTagDataTable *CDatabaseManage::pTagData() const

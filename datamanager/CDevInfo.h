@@ -1,10 +1,9 @@
-#ifndef CDEVINFO_H
+﻿#ifndef CDEVINFO_H
 #define CDEVINFO_H
 
 #include <string>
 using namespace std;
 
-//设备信息
 class CDevInfo {
 public:
     CDevInfo();

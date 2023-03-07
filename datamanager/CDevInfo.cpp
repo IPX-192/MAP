@@ -1,4 +1,4 @@
-#include "CDevInfo.h"
+﻿#include "CDevInfo.h"
 
 CDevInfo::CDevInfo()
 {

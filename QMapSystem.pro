@@ -61,12 +61,14 @@ HEADERS += \
     MainFrame.h \
     database/CAbstractConfigInfo.h \
     database/CDatabaseManage.h \
+    database/CDevInfoTable.h \
     database/CMapOriginConfig.h \
     database/CTagDataTable.h \
     database/CTagInfoTable.h \
     database/CUserInfoTable.h \
     database/CVersionInfoTable.h \
     database/mapsysdatabase.hpp \
+    datamanager/CDevInfo.h \
     datamanager/CMapOriginInfo.h \
     datamanager/COnlineTagInfo.h \
     datamanager/CTagData.h \
@@ -85,12 +87,14 @@ SOURCES += \
         MainFrame.cpp \
         database/CAbstractConfigInfo.cpp \
         database/CDatabaseManage.cpp \
+        database/CDevInfoTable.cpp \
         database/CMapOriginConfig.cpp \
         database/CTagDataTable.cpp \
         database/CTagInfoTable.cpp \
         database/CUserInfoTable.cpp \
         database/CVersionInfoTable.cpp \
         database/mapsysdatabase.cpp \
+        datamanager/CDevInfo.cpp \
         datamanager/CMapOriginInfo.cpp \
         datamanager/COnlineTagInfo.cpp \
         datamanager/CTagData.cpp \

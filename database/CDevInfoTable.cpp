@@ -1,4 +1,4 @@
-#include "CDevInfoTable.h"
+﻿#include "CDevInfoTable.h"
 #include <QDebug>
 
 CDevInfoTable::CDevInfoTable(MapSysDatabase *dataBase)
@@ -20,6 +20,7 @@ bool CDevInfoTable::Check_Config_Table()
     return true;
 }
 
+//添加标签信息
 bool CDevInfoTable::addDevInfo(const CDevInfo &info)
 {
     lock();
@@ -34,47 +35,16 @@ bool CDevInfoTable::addDevInfo(const CDevInfo &info)
 
     try
     {
-        bSuccess = true;
-
-        DevInfoTable tag(*m_pDatabase);
-        tag.iDevID = info.iDevID();
-        tag.devName = info.strDevName();
-        tag.devPos = info.iDevPos();
-        tag.update();
-    }
-    catch(Except e)
-    {
-
-    }
-
-    unlock();
-
-    return bSuccess;
-}
-
-bool CDevInfoTable::addDevInfo(const vector<CDevInfo> &vecInfo)
-{
-    lock();
-
-    bool bSuccess = false;
-
-    if(m_pDatabase == nullptr)
-    {
-        qDebug()<<"m_pDatabase == nullptr";
-        return bSuccess;
-    }
-
-    try
-    {
-        bSuccess = true;
-
-        for(auto info : vecInfo)
+        //判断新的ID是否可用
+        if(checkDevIDAvailability(info.iDevID()))
         {
-            DevInfoTable tag(*m_pDatabase);
-            tag.iDevID = info.iDevID();
-            tag.devName = info.strDevName();
-            tag.devPos = info.iDevPos();
-            tag.update();
+            bSuccess = true;
+
+            DevInfoTable Dev(*m_pDatabase);
+            Dev.iDevID = info.iDevID();
+            Dev.devName = info.strDevName();
+            Dev.devPos = info.iDevPos();
+            Dev.update();
         }
     }
     catch(Except e)
@@ -87,7 +57,8 @@ bool CDevInfoTable::addDevInfo(const vector<CDevInfo> &vecInfo)
     return bSuccess;
 }
 
-bool CDevInfoTable::delDevInfo()
+//删除标签信息
+bool CDevInfoTable::delDevInfo(const CDevInfo &info, bool bDeleteAll)
 {
     lock();
 
@@ -102,17 +73,37 @@ bool CDevInfoTable::delDevInfo()
     try
     {
         //删除所有标签信息
-        vector<DevInfoTable> vecSearch;
-
-        m_pDatabase->begin();
-
-        vecSearch = select<DevInfoTable>(*m_pDatabase).all();
-        for(auto &element : vecSearch)
+        if(bDeleteAll)
         {
-            element.del();
-        }
+            vector<DevInfoTable> vecSearch;
 
-        m_pDatabase->commit();
+            m_pDatabase->begin();
+
+            vecSearch = select<DevInfoTable>(*m_pDatabase).all();
+            for(auto &element : vecSearch)
+            {
+                element.del();
+            }
+
+            m_pDatabase->commit();
+        }
+        else
+        {
+            int DevInfoID = info.iDevID();
+
+            //根据标签ID删除对象
+            auto cursor = select<DevInfoTable>(*m_pDatabase, DevInfoTable::IDevID == DevInfoID).cursor();
+
+            if(cursor.rowsLeft())
+            {
+                bSuccess = true;
+
+                DevInfoTable Dev(*m_pDatabase);
+                Dev = (*cursor);
+
+                Dev.del();
+            }
+        }
     }
     catch(Except e)
     {
@@ -123,7 +114,50 @@ bool CDevInfoTable::delDevInfo()
     return bSuccess;
 }
 
-bool CDevInfoTable::getAllDevInfo(vector<CDevInfo> &vecInfo)
+//更新标签信息
+bool CDevInfoTable::updateDevInfo(const int &DevID, const CDevInfo &info)
+{
+    if(m_pDatabase == nullptr)
+    {
+        qDebug()<<"m_pDatabase == nullptr";
+        return false;
+    }
+
+    lock();
+
+    bool bSuccess = false;
+
+    try
+    {
+        bSuccess = true;
+
+        auto cursor = select<DevInfoTable>(*m_pDatabase, DevInfoTable::IDevID == DevID).cursor();
+
+        if(cursor.rowsLeft())
+        {
+            DevInfoTable Dev(*m_pDatabase);
+            Dev = *cursor;
+
+            bSuccess = true;
+            Dev.iDevID = info.iDevID();
+            Dev.devName = info.strDevName();
+            Dev.devPos = info.iDevPos();
+            Dev.update();
+        }
+
+    }
+    catch (Except e)
+    {
+
+    }
+
+    unlock();
+
+    return bSuccess;
+}
+
+//查找所有标签信息
+bool CDevInfoTable::getAllDevInfo(vector<CDevInfo> &vecDevs)
 {
     lock();
 
@@ -142,17 +176,17 @@ bool CDevInfoTable::getAllDevInfo(vector<CDevInfo> &vecInfo)
         auto cursor = select<DevInfoTable>(*m_pDatabase).cursor();
 
         //存在则获取
-        DevInfoTable tag(*m_pDatabase);
+        DevInfoTable Dev(*m_pDatabase);
         for (;cursor.rowsLeft(); cursor++)
         {
-            tag = (*cursor);
+            Dev = (*cursor);
 
-            CDevInfo info;
-            info.setIDevID(info.iDevID());
-            info.setIDevPos(info.iDevPos());
-            info.setStrDevName(info.strDevName());
+            CDevInfo test;
+            test.setIDevID(Dev.iDevID);
+            test.setStrDevName(Dev.devName);
+            test.setIDevPos(Dev.devPos);
 
-            vecInfo.push_back(info);
+            vecDevs.push_back(test);
         }
 
         bSuccess = true;
@@ -167,4 +201,62 @@ bool CDevInfoTable::getAllDevInfo(vector<CDevInfo> &vecInfo)
     unlock();
 
     return bSuccess;
+}
+
+//根据id获取标签对象
+bool CDevInfoTable::getDevInfoByID(const int &DevID, CDevInfo &info)
+{
+    lock();
+
+    bool bSuccess = false;
+
+    if(m_pDatabase == nullptr)
+    {
+        qDebug()<<"m_pDatabase == nullptr";
+        return bSuccess;
+    }
+
+    try
+    {
+        auto cursor = select<DevInfoTable>(*m_pDatabase, DevInfoTable::IDevID == DevID).cursor();
+
+        if(cursor.rowsLeft())
+        {
+            DevInfoTable Dev(*m_pDatabase);
+            Dev = *cursor;
+
+            bSuccess = true;
+            info.setIDevID(Dev.iDevID);
+            info.setStrDevName(Dev.devName);
+            info.setIDevPos(Dev.devPos);
+        }
+    }
+    catch(Except e)
+    {
+    }
+
+    unlock();
+
+    return bSuccess;
+}
+
+//检查标签id是否存在
+bool CDevInfoTable::checkDevIDAvailability(const int &DevID)
+{
+    bool bFlag = true;
+
+    if(m_pDatabase == nullptr)
+    {
+        qDebug()<<"m_pDatabase == nullptr";
+        return false;
+    }
+
+    unsigned long long iCount = select<DevInfoTable>(*m_pDatabase, DevInfoTable::IDevID == DevID).count();
+
+    if(iCount != 0)
+    {
+        bFlag = false;
+    }
+
+    return bFlag;
 }
