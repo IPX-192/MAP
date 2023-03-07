@@ -377,7 +377,7 @@ Window {
     }
 
     //设备显示
-    Rectangle {
+    Item {
         id: devItem
         width: mapItem.width
         height: 30
@@ -389,35 +389,50 @@ Window {
             var count = DevInfoModel.rowCount();
 
             for (var i = 0; i < count; i++) {
-                var item = DevInfoModel.get(i,"devPos");
-                devCom.createObject(devItem, {'pos': item , 'color' : "green"})
+                var item = DevInfoModel.get(i,"devPos") / 500;
+                let devName = DevInfoModel.get(i, "devName")
+                devCom.createObject(devItem, {'pos': item , 'color' : "green", 'devName': devName})
             }
         }
 
-//        ListView {
-//            anchors.fill: parent
-//            orientation: Qt.Horizontal
-//            clip: true
-//            model: DevInfoModel
-//            delegate: Rectangle {
-//                width: 5
-//                height: parent.height
-//                x: devPos
-//                id: listItem
-//                color: bLight ? "green" : "transparent"
-//            }
-//        }
-
         Component {
             id: devCom
-            Rectangle {
-                id: devRect
+            Item {
+                id: devItem
+                width: 1
+                height: parent.height
                 property alias pos: devRect.x
                 property alias color: devRect.color
-                width: 5
-                height: parent.height
-                color: bLight ? "green" : "transparent"
+                property alias devName: tooltip.text
+
+                Rectangle {
+                    id: devRect
+                    width: 1
+                    height: parent.height
+                    color: bLight ? "green" : "transparent"
+                }
+
+                MouseArea {
+                    id: devMouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onEntered: {
+                        tooltip.visible = true
+                    }
+                    onExited: {
+                        tooltip.visible = false
+                    }
+                }
+
+                ToolTip {
+                    id: tooltip
+                    delay: 200
+                    width: 50
+                    text: devName
+                }
+
             }
+
         }
     }
 
