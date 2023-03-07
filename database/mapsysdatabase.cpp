@@ -147,7 +147,6 @@ const litesql::FieldType UserInfoTable::StrRole("strRole_",A_field_type_string,t
 const litesql::FieldType UserInfoTable::ItagID("itagID_",A_field_type_integer,table__);
 void UserInfoTable::defaults() {
     id = 0;
-    strRole = "0";
     itagID = 0;
 }
 UserInfoTable::UserInfoTable(const litesql::Database& db)
@@ -674,6 +673,434 @@ std::ostream & operator<<(std::ostream& os, MapOriginConfig o) {
     os << "-------------------------------------" << std::endl;
     return os;
 }
+const litesql::FieldType TagDataTable::Own::Id("id_",A_field_type_integer,"TagDataTable_");
+const std::string TagDataTable::type__("TagDataTable");
+const std::string TagDataTable::table__("TagDataTable_");
+const std::string TagDataTable::sequence__("TagDataTable_seq");
+const litesql::FieldType TagDataTable::Id("id_",A_field_type_integer,table__);
+const litesql::FieldType TagDataTable::Type("type_",A_field_type_string,table__);
+const litesql::FieldType TagDataTable::IDataID("iDataID_",A_field_type_integer,table__);
+const litesql::FieldType TagDataTable::ITagID("iTagID_",A_field_type_integer,table__);
+const litesql::FieldType TagDataTable::SaveTime("saveTime_",A_field_type_string,table__);
+const litesql::FieldType TagDataTable::IMapID("iMapID_",A_field_type_integer,table__);
+const litesql::FieldType TagDataTable::IBattery("iBattery_",A_field_type_integer,table__);
+const litesql::FieldType TagDataTable::IPosX("iPosX_",A_field_type_integer,table__);
+const litesql::FieldType TagDataTable::IPosY("iPosY_",A_field_type_integer,table__);
+const litesql::FieldType TagDataTable::IPosZ("iPosZ_",A_field_type_integer,table__);
+const litesql::FieldType TagDataTable::IStaticTime("iStaticTime_",A_field_type_integer,table__);
+const litesql::FieldType TagDataTable::StrUserID("strUserID_",A_field_type_string,table__);
+const litesql::FieldType TagDataTable::StrUserName("strUserName_",A_field_type_string,table__);
+const litesql::FieldType TagDataTable::StrDepartment("strDepartment_",A_field_type_string,table__);
+const litesql::FieldType TagDataTable::StrRole("strRole_",A_field_type_string,table__);
+void TagDataTable::defaults() {
+    id = 0;
+    iDataID = 0;
+    iTagID = 0;
+    iMapID = 0;
+    iBattery = 0;
+    iPosX = 0;
+    iPosY = 0;
+    iPosZ = 0;
+    iStaticTime = 0;
+}
+TagDataTable::TagDataTable(const litesql::Database& db)
+     : litesql::Persistent(db), id(Id), type(Type), iDataID(IDataID), iTagID(ITagID), saveTime(SaveTime), iMapID(IMapID), iBattery(IBattery), iPosX(IPosX), iPosY(IPosY), iPosZ(IPosZ), iStaticTime(IStaticTime), strUserID(StrUserID), strUserName(StrUserName), strDepartment(StrDepartment), strRole(StrRole) {
+    defaults();
+}
+TagDataTable::TagDataTable(const litesql::Database& db, const litesql::Record& rec)
+     : litesql::Persistent(db, rec), id(Id), type(Type), iDataID(IDataID), iTagID(ITagID), saveTime(SaveTime), iMapID(IMapID), iBattery(IBattery), iPosX(IPosX), iPosY(IPosY), iPosZ(IPosZ), iStaticTime(IStaticTime), strUserID(StrUserID), strUserName(StrUserName), strDepartment(StrDepartment), strRole(StrRole) {
+    defaults();
+    size_t size = (rec.size() > 15) ? 15 : rec.size();
+    switch(size) {
+    case 15: strRole = convert<const std::string&, std::string>(rec[14]);
+        strRole.setModified(false);
+    case 14: strDepartment = convert<const std::string&, std::string>(rec[13]);
+        strDepartment.setModified(false);
+    case 13: strUserName = convert<const std::string&, std::string>(rec[12]);
+        strUserName.setModified(false);
+    case 12: strUserID = convert<const std::string&, std::string>(rec[11]);
+        strUserID.setModified(false);
+    case 11: iStaticTime = convert<const std::string&, int>(rec[10]);
+        iStaticTime.setModified(false);
+    case 10: iPosZ = convert<const std::string&, int>(rec[9]);
+        iPosZ.setModified(false);
+    case 9: iPosY = convert<const std::string&, int>(rec[8]);
+        iPosY.setModified(false);
+    case 8: iPosX = convert<const std::string&, int>(rec[7]);
+        iPosX.setModified(false);
+    case 7: iBattery = convert<const std::string&, int>(rec[6]);
+        iBattery.setModified(false);
+    case 6: iMapID = convert<const std::string&, int>(rec[5]);
+        iMapID.setModified(false);
+    case 5: saveTime = convert<const std::string&, std::string>(rec[4]);
+        saveTime.setModified(false);
+    case 4: iTagID = convert<const std::string&, int>(rec[3]);
+        iTagID.setModified(false);
+    case 3: iDataID = convert<const std::string&, int>(rec[2]);
+        iDataID.setModified(false);
+    case 2: type = convert<const std::string&, std::string>(rec[1]);
+        type.setModified(false);
+    case 1: id = convert<const std::string&, int>(rec[0]);
+        id.setModified(false);
+    }
+}
+TagDataTable::TagDataTable(const TagDataTable& obj)
+     : litesql::Persistent(obj), id(obj.id), type(obj.type), iDataID(obj.iDataID), iTagID(obj.iTagID), saveTime(obj.saveTime), iMapID(obj.iMapID), iBattery(obj.iBattery), iPosX(obj.iPosX), iPosY(obj.iPosY), iPosZ(obj.iPosZ), iStaticTime(obj.iStaticTime), strUserID(obj.strUserID), strUserName(obj.strUserName), strDepartment(obj.strDepartment), strRole(obj.strRole) {
+}
+const TagDataTable& TagDataTable::operator=(const TagDataTable& obj) {
+    if (this != &obj) {
+        id = obj.id;
+        type = obj.type;
+        iDataID = obj.iDataID;
+        iTagID = obj.iTagID;
+        saveTime = obj.saveTime;
+        iMapID = obj.iMapID;
+        iBattery = obj.iBattery;
+        iPosX = obj.iPosX;
+        iPosY = obj.iPosY;
+        iPosZ = obj.iPosZ;
+        iStaticTime = obj.iStaticTime;
+        strUserID = obj.strUserID;
+        strUserName = obj.strUserName;
+        strDepartment = obj.strDepartment;
+        strRole = obj.strRole;
+    }
+    litesql::Persistent::operator=(obj);
+    return *this;
+}
+std::string TagDataTable::insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs) {
+    tables.push_back(table__);
+    litesql::Record fields;
+    litesql::Record values;
+    fields.push_back(id.name());
+    values.push_back(id);
+    id.setModified(false);
+    fields.push_back(type.name());
+    values.push_back(type);
+    type.setModified(false);
+    fields.push_back(iDataID.name());
+    values.push_back(iDataID);
+    iDataID.setModified(false);
+    fields.push_back(iTagID.name());
+    values.push_back(iTagID);
+    iTagID.setModified(false);
+    fields.push_back(saveTime.name());
+    values.push_back(saveTime);
+    saveTime.setModified(false);
+    fields.push_back(iMapID.name());
+    values.push_back(iMapID);
+    iMapID.setModified(false);
+    fields.push_back(iBattery.name());
+    values.push_back(iBattery);
+    iBattery.setModified(false);
+    fields.push_back(iPosX.name());
+    values.push_back(iPosX);
+    iPosX.setModified(false);
+    fields.push_back(iPosY.name());
+    values.push_back(iPosY);
+    iPosY.setModified(false);
+    fields.push_back(iPosZ.name());
+    values.push_back(iPosZ);
+    iPosZ.setModified(false);
+    fields.push_back(iStaticTime.name());
+    values.push_back(iStaticTime);
+    iStaticTime.setModified(false);
+    fields.push_back(strUserID.name());
+    values.push_back(strUserID);
+    strUserID.setModified(false);
+    fields.push_back(strUserName.name());
+    values.push_back(strUserName);
+    strUserName.setModified(false);
+    fields.push_back(strDepartment.name());
+    values.push_back(strDepartment);
+    strDepartment.setModified(false);
+    fields.push_back(strRole.name());
+    values.push_back(strRole);
+    strRole.setModified(false);
+    fieldRecs.push_back(fields);
+    valueRecs.push_back(values);
+    return litesql::Persistent::insert(tables, fieldRecs, valueRecs, sequence__);
+}
+void TagDataTable::create() {
+    litesql::Record tables;
+    litesql::Records fieldRecs;
+    litesql::Records valueRecs;
+    type = type__;
+    std::string newID = insert(tables, fieldRecs, valueRecs);
+    if (id == 0)
+        id = newID;
+}
+void TagDataTable::addUpdates(Updates& updates) {
+    prepareUpdate(updates, table__);
+    updateField(updates, table__, id);
+    updateField(updates, table__, type);
+    updateField(updates, table__, iDataID);
+    updateField(updates, table__, iTagID);
+    updateField(updates, table__, saveTime);
+    updateField(updates, table__, iMapID);
+    updateField(updates, table__, iBattery);
+    updateField(updates, table__, iPosX);
+    updateField(updates, table__, iPosY);
+    updateField(updates, table__, iPosZ);
+    updateField(updates, table__, iStaticTime);
+    updateField(updates, table__, strUserID);
+    updateField(updates, table__, strUserName);
+    updateField(updates, table__, strDepartment);
+    updateField(updates, table__, strRole);
+}
+void TagDataTable::addIDUpdates(Updates& updates) {
+}
+void TagDataTable::getFieldTypes(std::vector<litesql::FieldType>& ftypes) {
+    ftypes.push_back(Id);
+    ftypes.push_back(Type);
+    ftypes.push_back(IDataID);
+    ftypes.push_back(ITagID);
+    ftypes.push_back(SaveTime);
+    ftypes.push_back(IMapID);
+    ftypes.push_back(IBattery);
+    ftypes.push_back(IPosX);
+    ftypes.push_back(IPosY);
+    ftypes.push_back(IPosZ);
+    ftypes.push_back(IStaticTime);
+    ftypes.push_back(StrUserID);
+    ftypes.push_back(StrUserName);
+    ftypes.push_back(StrDepartment);
+    ftypes.push_back(StrRole);
+}
+void TagDataTable::delRecord() {
+    deleteFromTable(table__, id);
+}
+void TagDataTable::delRelations() {
+}
+void TagDataTable::update() {
+    if (!inDatabase) {
+        create();
+        return;
+    }
+    Updates updates;
+    addUpdates(updates);
+    if (id != oldKey) {
+        if (!typeIsCorrect()) 
+            upcastCopy()->addIDUpdates(updates);
+    }
+    litesql::Persistent::update(updates);
+    oldKey = id;
+}
+void TagDataTable::del() {
+    if (!typeIsCorrect()) {
+        std::auto_ptr<TagDataTable> p(upcastCopy());
+        p->delRelations();
+        p->onDelete();
+        p->delRecord();
+    } else {
+        delRelations();
+        onDelete();
+        delRecord();
+    }
+    inDatabase = false;
+}
+bool TagDataTable::typeIsCorrect() const {
+    return type == type__;
+}
+std::auto_ptr<TagDataTable> TagDataTable::upcast() const {
+    return auto_ptr<TagDataTable>(new TagDataTable(*this));
+}
+std::auto_ptr<TagDataTable> TagDataTable::upcastCopy() const {
+    TagDataTable* np = new TagDataTable(*this);
+    np->id = id;
+    np->type = type;
+    np->iDataID = iDataID;
+    np->iTagID = iTagID;
+    np->saveTime = saveTime;
+    np->iMapID = iMapID;
+    np->iBattery = iBattery;
+    np->iPosX = iPosX;
+    np->iPosY = iPosY;
+    np->iPosZ = iPosZ;
+    np->iStaticTime = iStaticTime;
+    np->strUserID = strUserID;
+    np->strUserName = strUserName;
+    np->strDepartment = strDepartment;
+    np->strRole = strRole;
+    np->inDatabase = inDatabase;
+    return auto_ptr<TagDataTable>(np);
+}
+std::ostream & operator<<(std::ostream& os, TagDataTable o) {
+    os << "-------------------------------------" << std::endl;
+    os << o.id.name() << " = " << o.id << std::endl;
+    os << o.type.name() << " = " << o.type << std::endl;
+    os << o.iDataID.name() << " = " << o.iDataID << std::endl;
+    os << o.iTagID.name() << " = " << o.iTagID << std::endl;
+    os << o.saveTime.name() << " = " << o.saveTime << std::endl;
+    os << o.iMapID.name() << " = " << o.iMapID << std::endl;
+    os << o.iBattery.name() << " = " << o.iBattery << std::endl;
+    os << o.iPosX.name() << " = " << o.iPosX << std::endl;
+    os << o.iPosY.name() << " = " << o.iPosY << std::endl;
+    os << o.iPosZ.name() << " = " << o.iPosZ << std::endl;
+    os << o.iStaticTime.name() << " = " << o.iStaticTime << std::endl;
+    os << o.strUserID.name() << " = " << o.strUserID << std::endl;
+    os << o.strUserName.name() << " = " << o.strUserName << std::endl;
+    os << o.strDepartment.name() << " = " << o.strDepartment << std::endl;
+    os << o.strRole.name() << " = " << o.strRole << std::endl;
+    os << "-------------------------------------" << std::endl;
+    return os;
+}
+const litesql::FieldType DevInfoTable::Own::Id("id_",A_field_type_integer,"DevInfoTable_");
+const std::string DevInfoTable::type__("DevInfoTable");
+const std::string DevInfoTable::table__("DevInfoTable_");
+const std::string DevInfoTable::sequence__("DevInfoTable_seq");
+const litesql::FieldType DevInfoTable::Id("id_",A_field_type_integer,table__);
+const litesql::FieldType DevInfoTable::Type("type_",A_field_type_string,table__);
+const litesql::FieldType DevInfoTable::IDevID("iDevID_",A_field_type_integer,table__);
+const litesql::FieldType DevInfoTable::DevName("devName_",A_field_type_string,table__);
+const litesql::FieldType DevInfoTable::DevPos("devPos_",A_field_type_integer,table__);
+void DevInfoTable::defaults() {
+    id = 0;
+    iDevID = 0;
+    devPos = 0;
+}
+DevInfoTable::DevInfoTable(const litesql::Database& db)
+     : litesql::Persistent(db), id(Id), type(Type), iDevID(IDevID), devName(DevName), devPos(DevPos) {
+    defaults();
+}
+DevInfoTable::DevInfoTable(const litesql::Database& db, const litesql::Record& rec)
+     : litesql::Persistent(db, rec), id(Id), type(Type), iDevID(IDevID), devName(DevName), devPos(DevPos) {
+    defaults();
+    size_t size = (rec.size() > 5) ? 5 : rec.size();
+    switch(size) {
+    case 5: devPos = convert<const std::string&, int>(rec[4]);
+        devPos.setModified(false);
+    case 4: devName = convert<const std::string&, std::string>(rec[3]);
+        devName.setModified(false);
+    case 3: iDevID = convert<const std::string&, int>(rec[2]);
+        iDevID.setModified(false);
+    case 2: type = convert<const std::string&, std::string>(rec[1]);
+        type.setModified(false);
+    case 1: id = convert<const std::string&, int>(rec[0]);
+        id.setModified(false);
+    }
+}
+DevInfoTable::DevInfoTable(const DevInfoTable& obj)
+     : litesql::Persistent(obj), id(obj.id), type(obj.type), iDevID(obj.iDevID), devName(obj.devName), devPos(obj.devPos) {
+}
+const DevInfoTable& DevInfoTable::operator=(const DevInfoTable& obj) {
+    if (this != &obj) {
+        id = obj.id;
+        type = obj.type;
+        iDevID = obj.iDevID;
+        devName = obj.devName;
+        devPos = obj.devPos;
+    }
+    litesql::Persistent::operator=(obj);
+    return *this;
+}
+std::string DevInfoTable::insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs) {
+    tables.push_back(table__);
+    litesql::Record fields;
+    litesql::Record values;
+    fields.push_back(id.name());
+    values.push_back(id);
+    id.setModified(false);
+    fields.push_back(type.name());
+    values.push_back(type);
+    type.setModified(false);
+    fields.push_back(iDevID.name());
+    values.push_back(iDevID);
+    iDevID.setModified(false);
+    fields.push_back(devName.name());
+    values.push_back(devName);
+    devName.setModified(false);
+    fields.push_back(devPos.name());
+    values.push_back(devPos);
+    devPos.setModified(false);
+    fieldRecs.push_back(fields);
+    valueRecs.push_back(values);
+    return litesql::Persistent::insert(tables, fieldRecs, valueRecs, sequence__);
+}
+void DevInfoTable::create() {
+    litesql::Record tables;
+    litesql::Records fieldRecs;
+    litesql::Records valueRecs;
+    type = type__;
+    std::string newID = insert(tables, fieldRecs, valueRecs);
+    if (id == 0)
+        id = newID;
+}
+void DevInfoTable::addUpdates(Updates& updates) {
+    prepareUpdate(updates, table__);
+    updateField(updates, table__, id);
+    updateField(updates, table__, type);
+    updateField(updates, table__, iDevID);
+    updateField(updates, table__, devName);
+    updateField(updates, table__, devPos);
+}
+void DevInfoTable::addIDUpdates(Updates& updates) {
+}
+void DevInfoTable::getFieldTypes(std::vector<litesql::FieldType>& ftypes) {
+    ftypes.push_back(Id);
+    ftypes.push_back(Type);
+    ftypes.push_back(IDevID);
+    ftypes.push_back(DevName);
+    ftypes.push_back(DevPos);
+}
+void DevInfoTable::delRecord() {
+    deleteFromTable(table__, id);
+}
+void DevInfoTable::delRelations() {
+}
+void DevInfoTable::update() {
+    if (!inDatabase) {
+        create();
+        return;
+    }
+    Updates updates;
+    addUpdates(updates);
+    if (id != oldKey) {
+        if (!typeIsCorrect()) 
+            upcastCopy()->addIDUpdates(updates);
+    }
+    litesql::Persistent::update(updates);
+    oldKey = id;
+}
+void DevInfoTable::del() {
+    if (!typeIsCorrect()) {
+        std::auto_ptr<DevInfoTable> p(upcastCopy());
+        p->delRelations();
+        p->onDelete();
+        p->delRecord();
+    } else {
+        delRelations();
+        onDelete();
+        delRecord();
+    }
+    inDatabase = false;
+}
+bool DevInfoTable::typeIsCorrect() const {
+    return type == type__;
+}
+std::auto_ptr<DevInfoTable> DevInfoTable::upcast() const {
+    return auto_ptr<DevInfoTable>(new DevInfoTable(*this));
+}
+std::auto_ptr<DevInfoTable> DevInfoTable::upcastCopy() const {
+    DevInfoTable* np = new DevInfoTable(*this);
+    np->id = id;
+    np->type = type;
+    np->iDevID = iDevID;
+    np->devName = devName;
+    np->devPos = devPos;
+    np->inDatabase = inDatabase;
+    return auto_ptr<DevInfoTable>(np);
+}
+std::ostream & operator<<(std::ostream& os, DevInfoTable o) {
+    os << "-------------------------------------" << std::endl;
+    os << o.id.name() << " = " << o.id << std::endl;
+    os << o.type.name() << " = " << o.type << std::endl;
+    os << o.iDevID.name() << " = " << o.iDevID << std::endl;
+    os << o.devName.name() << " = " << o.devName << std::endl;
+    os << o.devPos.name() << " = " << o.devPos << std::endl;
+    os << "-------------------------------------" << std::endl;
+    return os;
+}
 MapSysDatabase::MapSysDatabase(std::string backendType, std::string connInfo)
      : litesql::Database(backendType, connInfo) {
     initialize();
@@ -688,15 +1115,21 @@ std::vector<litesql::Database::SchemaItem> MapSysDatabase::getSchema() const {
         res.push_back(Database::SchemaItem("UserInfoTable_seq","sequence",backend->getCreateSequenceSQL("UserInfoTable_seq")));
         res.push_back(Database::SchemaItem("TagInfoTable_seq","sequence",backend->getCreateSequenceSQL("TagInfoTable_seq")));
         res.push_back(Database::SchemaItem("MapOriginConfig_seq","sequence",backend->getCreateSequenceSQL("MapOriginConfig_seq")));
+        res.push_back(Database::SchemaItem("TagDataTable_seq","sequence",backend->getCreateSequenceSQL("TagDataTable_seq")));
+        res.push_back(Database::SchemaItem("DevInfoTable_seq","sequence",backend->getCreateSequenceSQL("DevInfoTable_seq")));
     }
     res.push_back(Database::SchemaItem("ProductInfoTable_","table","CREATE TABLE ProductInfoTable_ (id_ " + rowIdType + ",type_ " + backend->getSQLType(A_field_type_string,"") + "" +",strSoftVersion_ " + backend->getSQLType(A_field_type_string,"") + "" +")"));
     res.push_back(Database::SchemaItem("UserInfoTable_","table","CREATE TABLE UserInfoTable_ (id_ " + rowIdType + ",type_ " + backend->getSQLType(A_field_type_string,"") + "" +",strUserID_ " + backend->getSQLType(A_field_type_string,"") + "" +",strUserName_ " + backend->getSQLType(A_field_type_string,"") + "" +",strDepartment_ " + backend->getSQLType(A_field_type_string,"") + "" +",strRole_ " + backend->getSQLType(A_field_type_string,"") + "" +",itagID_ " + backend->getSQLType(A_field_type_integer,"") + "" +")"));
     res.push_back(Database::SchemaItem("TagInfoTable_","table","CREATE TABLE TagInfoTable_ (id_ " + rowIdType + ",type_ " + backend->getSQLType(A_field_type_string,"") + "" +",iTagID_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iMapID_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iBattery_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosX_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosY_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosZ_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iStaticTime_ " + backend->getSQLType(A_field_type_integer,"") + "" +")"));
     res.push_back(Database::SchemaItem("MapOriginConfig_","table","CREATE TABLE MapOriginConfig_ (id_ " + rowIdType + ",type_ " + backend->getSQLType(A_field_type_string,"") + "" +",iPosX_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosY_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosZ_ " + backend->getSQLType(A_field_type_integer,"") + "" +")"));
+    res.push_back(Database::SchemaItem("TagDataTable_","table","CREATE TABLE TagDataTable_ (id_ " + rowIdType + ",type_ " + backend->getSQLType(A_field_type_string,"") + "" +",iDataID_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iTagID_ " + backend->getSQLType(A_field_type_integer,"") + "" +",saveTime_ " + backend->getSQLType(A_field_type_string,"") + "" +",iMapID_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iBattery_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosX_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosY_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosZ_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iStaticTime_ " + backend->getSQLType(A_field_type_integer,"") + "" +",strUserID_ " + backend->getSQLType(A_field_type_string,"") + "" +",strUserName_ " + backend->getSQLType(A_field_type_string,"") + "" +",strDepartment_ " + backend->getSQLType(A_field_type_string,"") + "" +",strRole_ " + backend->getSQLType(A_field_type_string,"") + "" +")"));
+    res.push_back(Database::SchemaItem("DevInfoTable_","table","CREATE TABLE DevInfoTable_ (id_ " + rowIdType + ",type_ " + backend->getSQLType(A_field_type_string,"") + "" +",iDevID_ " + backend->getSQLType(A_field_type_integer,"") + "" +",devName_ " + backend->getSQLType(A_field_type_string,"") + "" +",devPos_ " + backend->getSQLType(A_field_type_integer,"") + "" +")"));
     res.push_back(Database::SchemaItem("ProductInfoTable_id_idx","index","CREATE INDEX ProductInfoTable_id_idx ON ProductInfoTable_ (id_)"));
     res.push_back(Database::SchemaItem("UserInfoTable_id_idx","index","CREATE INDEX UserInfoTable_id_idx ON UserInfoTable_ (id_)"));
     res.push_back(Database::SchemaItem("TagInfoTable_id_idx","index","CREATE INDEX TagInfoTable_id_idx ON TagInfoTable_ (id_)"));
     res.push_back(Database::SchemaItem("MapOriginConfig_id_idx","index","CREATE INDEX MapOriginConfig_id_idx ON MapOriginConfig_ (id_)"));
+    res.push_back(Database::SchemaItem("TagDataTable_id_idx","index","CREATE INDEX TagDataTable_id_idx ON TagDataTable_ (id_)"));
+    res.push_back(Database::SchemaItem("DevInfoTable_id_idx","index","CREATE INDEX DevInfoTable_id_idx ON DevInfoTable_ (id_)"));
     return res;
 }
 void MapSysDatabase::initialize() {

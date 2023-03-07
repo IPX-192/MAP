@@ -1,7 +1,6 @@
 ﻿#ifndef CTAGINFOTABLE_H
 #define CTAGINFOTABLE_H
 
-
 #include "CAbstractConfigInfo.h"
 #include "../datamanager/CTagInfo.h"
 

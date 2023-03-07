@@ -309,7 +309,7 @@ Item {
                 anchors.leftMargin: -1
 
                 Text {
-                    text: department
+                    text: userRole
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"

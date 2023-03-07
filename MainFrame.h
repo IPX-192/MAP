@@ -16,6 +16,7 @@
 #include "./database/CDatabaseManage.h"
 #include "./datamodel/CUserInfoModel.h"
 #include "./datamodel/COnlineTagModel.h"
+#include "./datamodel/CTagDataModel.h"
 
 class MainFrame : public QObject
 {
@@ -52,6 +53,9 @@ public:
     //删除指定人员
     Q_INVOKABLE bool delUserByUserID(QString strID);
 
+    //删除指定历史数据
+    Q_INVOKABLE bool delTagData(QString dataID);
+
     //////设备管理相关///////
     Q_INVOKABLE void setDevAddType(bool type);
 
@@ -77,6 +81,9 @@ public:
 
     //在线标签信息model
     COnlineTagInfoModel m_onlineTagModel;
+
+    //历史数据model
+    CTagDataModel       m_tagDataModel;
 
     //是否是正向添加设备
     bool                m_devAddNext{true};

@@ -5,6 +5,7 @@
 #include "CMapOriginConfig.h"
 #include "CTagInfoTable.h"
 #include "CVersionInfoTable.h"
+#include "CTagDataTable.h"
 
 #include "mapsysdatabase.hpp"
 
@@ -20,6 +21,7 @@ public:
     CMapOriginConfig *pConfigMapOrigin() const;
     CTagInfoTable *pTagInfo() const;
     CVersionInfoTable *pVersionInfo() const;
+    CTagDataTable *pTagData() const;
 
     //获取单例
     static CDatabaseManage *GetInstance();
@@ -64,6 +66,7 @@ private:
     CMapOriginConfig *m_pConfigMapOrigin;
     CTagInfoTable *m_pTagInfo;
     CVersionInfoTable *m_pVersionInfo;
+    CTagDataTable *m_pTagData;
 
     //配置文件路径
     string				  m_strConfigDBPath{""};

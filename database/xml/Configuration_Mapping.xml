@@ -17,7 +17,7 @@
 	<!--工作队-->
 	<field name = "strDepartment"   type = "string"    default = "" />
 	<!--角色-->
-	<field name = "strRole"         type = "string"    default = "0" />
+	<field name = "strRole"         type = "string"    default = "" />
 	<!--标签ID-->
 	<field name = "itagID"        	type = "integer"   default = "0" />
   </object>
@@ -56,6 +56,12 @@
 	<field name = "iTagID"     		type = "integer"   default = "" />
 	<!--保存时间-->
 	
+    <!--数据ID-->
+	<field name = "iDataID"     	type = "integer"   default = "" />
+    <!--标签ID-->
+	<field name = "iTagID"     		type = "integer"   default = "" />
+	<!--保存时间-->
+	<field name = "saveTime"     	type = "string"    default = "" />
 	<!--所属地图-->
 	<field name = "iMapID"        	type = "integer"   default = "" />
 	<!--剩余电量-->
@@ -68,6 +74,25 @@
 	<field name = "iPosZ"       	type = "integer"   default = "" />
 	<!--静止时间-->
 	<field name = "iStaticTime"     type = "integer"   default = "" />
+	<!--工号-->
+	<field name = "strUserID"   	type = "string"    default = "" />
+	<!--名字-->
+	<field name = "strUserName"     type = "string"    default = "" />
+	<!--工作队-->
+	<field name = "strDepartment"   type = "string"    default = "" />
+	<!--角色-->
+	<field name = "strRole"         type = "string"    default = "" />
+  </object>
+  
+    <!--5.设备信息表-->
+  <object name = "DevInfoTable">
+    <!--设备ID-->
+	<field name = "iDevID"     		type = "integer"   default = "" />
+	<!--设备号-->
+	<field name = "devName"     	type = "string"     default = "" />
+    <!--设备位置-->
+	<field name = "devPos"         	type = "integer"    default = "" />
+
   </object>
   
  </database>

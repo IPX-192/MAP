@@ -62,15 +62,18 @@ HEADERS += \
     database/CAbstractConfigInfo.h \
     database/CDatabaseManage.h \
     database/CMapOriginConfig.h \
+    database/CTagDataTable.h \
     database/CTagInfoTable.h \
     database/CUserInfoTable.h \
     database/CVersionInfoTable.h \
     database/mapsysdatabase.hpp \
     datamanager/CMapOriginInfo.h \
     datamanager/COnlineTagInfo.h \
+    datamanager/CTagData.h \
     datamanager/CTagInfo.h \
     datamanager/CUserInfo.h \
     datamodel/COnlineTagModel.h \
+    datamodel/CTagDataModel.h \
     datamodel/CTagInfoModel.h \
     datamodel/CUserInfoModel.h
 
@@ -82,15 +85,18 @@ SOURCES += \
         database/CAbstractConfigInfo.cpp \
         database/CDatabaseManage.cpp \
         database/CMapOriginConfig.cpp \
+        database/CTagDataTable.cpp \
         database/CTagInfoTable.cpp \
         database/CUserInfoTable.cpp \
         database/CVersionInfoTable.cpp \
         database/mapsysdatabase.cpp \
         datamanager/CMapOriginInfo.cpp \
         datamanager/COnlineTagInfo.cpp \
+        datamanager/CTagData.cpp \
         datamanager/CTagInfo.cpp \
         datamanager/CUserInfo.cpp \
         datamodel/COnlineTagModel.cpp \
+        datamodel/CTagDataModel.cpp \
         datamodel/CTagInfoModel.cpp \
         datamodel/CUserInfoModel.cpp \
         main.cpp
