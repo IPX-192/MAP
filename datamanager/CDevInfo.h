@@ -18,10 +18,14 @@ public:
     int iDevPos() const;
     void setIDevPos(int iDevPos);
 
+    bool bHighlight() const;
+    void setBHighlight(bool bHighlight);
+
 private:
     int m_iDevID{-1};
     string m_strDevName{""};
     int m_iDevPos{-1};
+    bool m_bHighlight{false};
 };
 
 #endif // CDEVINFO_H

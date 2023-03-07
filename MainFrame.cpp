@@ -17,6 +17,7 @@ void MainFrame::contextToQml(QQmlApplicationEngine &engine)
     engine.rootContext()->setContextProperty( "UserInfoModel", &m_userDataModel );
     engine.rootContext()->setContextProperty( "OnlineTagModel", &m_onlineTagModel );
     engine.rootContext()->setContextProperty( "TagDataModel", &m_tagDataModel);
+    engine.rootContext()->setContextProperty( "DevInfoModel", &m_devInfoModel);
 }
 
 void MainFrame::initialize()

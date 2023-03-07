@@ -5,6 +5,7 @@ CDevInfo::CDevInfo()
     m_iDevID = -1;
     m_strDevName = "";
     m_iDevPos = -1;
+    m_bHighlight = false;
 }
 
 CDevInfo::~CDevInfo()
@@ -40,4 +41,14 @@ int CDevInfo::iDevPos() const
 void CDevInfo::setIDevPos(int iDevPos)
 {
     m_iDevPos = iDevPos;
+}
+
+bool CDevInfo::bHighlight() const
+{
+    return m_bHighlight;
+}
+
+void CDevInfo::setBHighlight(bool bHighlight)
+{
+    m_bHighlight = bHighlight;
 }

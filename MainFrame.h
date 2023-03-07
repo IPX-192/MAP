@@ -17,6 +17,7 @@
 #include "./datamodel/CUserInfoModel.h"
 #include "./datamodel/COnlineTagModel.h"
 #include "./datamodel/CTagDataModel.h"
+#include "./datamodel/CDevInfoModel.h"
 
 class MainFrame : public QObject
 {
@@ -86,6 +87,9 @@ public:
 
     //历史数据model
     CTagDataModel       m_tagDataModel;
+
+    //设备model
+    CDevInfoModel       m_devInfoModel;
 
     //是否是正向添加设备
     bool                m_devAddNext{true};

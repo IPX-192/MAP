@@ -376,6 +376,31 @@ Window {
         }
     }
 
+    //设备显示
+    Rectangle {
+        id: devItem
+        width: mapItem.width
+        height: 30
+        anchors.left: mapItem.left
+        anchors.top: mapItem.bottom
+        anchors.topMargin: 5
+
+        ListView {
+            anchors.fill: parent
+            orientation: Qt.Horizontal
+            clip: true
+            model: DevInfoModel
+            delegate: Rectangle {
+                width: 5
+                height: parent.height
+                id: listItem
+                implicitWidth: tableWidth
+                implicitHeight: itemHeigt
+                color: bHighlight ? "transparent" : "green"
+            }
+        }
+    }
+
 
     //底部栏
     Rectangle{
