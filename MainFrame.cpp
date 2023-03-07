@@ -200,6 +200,11 @@ bool MainFrame::getDevAddType()
     return m_devAddNext;
 }
 
+void MainFrame::addDev(int devNum, int devWidth)
+{
+    qDebug()<<"qqqqqqqqqqqqqqwww"<<devNum<<devWidth;
+}
+
 bool MainFrame::getMapOriginConfig(CMapOriginInfo &info)
 {
     bool bFlag = false;

@@ -319,6 +319,7 @@ Popup {
                 onClicked: {
 
                     InterAction.setDevAddType(bNext)
+                    InterAction.addDev(Number(devNumInput.text),Number(devWidthInput.text))
                     closeTimer.start()
                 }
                 onEntered: {

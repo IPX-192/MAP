@@ -72,6 +72,7 @@ HEADERS += \
     datamanager/CTagData.h \
     datamanager/CTagInfo.h \
     datamanager/CUserInfo.h \
+    datamodel/CDevInfoModel.h \
     datamodel/COnlineTagModel.h \
     datamodel/CTagDataModel.h \
     datamodel/CTagInfoModel.h \
@@ -95,6 +96,7 @@ SOURCES += \
         datamanager/CTagData.cpp \
         datamanager/CTagInfo.cpp \
         datamanager/CUserInfo.cpp \
+        datamodel/CDevInfoModel.cpp \
         datamodel/COnlineTagModel.cpp \
         datamodel/CTagDataModel.cpp \
         datamodel/CTagInfoModel.cpp \
