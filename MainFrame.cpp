@@ -57,12 +57,9 @@ bool MainFrame::copyImageFile(QString image)
 
     LogoDir += "/";
     //将logo重新命名
-    LogoDir += "map" + current_date;
+    LogoDir += "map";
     QString m_suffix =  image.right(4);
     LogoDir += m_suffix;
-
-    //拼接报告名
-    QString reportLogo = current_date + m_suffix;
 
     //清空目录(保留默认logo)
     dir.setFilter(QDir::Files);
@@ -92,7 +89,32 @@ bool MainFrame::isSaveImage()
         dir.mkdir(LogoDir);
     }
     QFileInfoList list = dir.entryInfoList();
-    return list.count() > 0 ? true : false;
+    return list.count() > 2 ? true : false;
+}
+
+QString MainFrame::getImagePath()
+{
+    QString path =  "file:///" + qApp->applicationDirPath() + "/MapImg/";
+
+    QDir dir(path);
+    if(!dir.exists())
+    {
+        dir.mkdir(path);
+    }
+
+    QString imgSuffix;
+    //清空目录(保留默认logo)
+    dir.setFilter(QDir::Files);
+    int fileCount = static_cast<int>(dir.count());
+    for (int i = 0; i < fileCount; i++)
+    {
+        if(dir[i].contains("map"))
+        {
+            imgSuffix = dir[i].right(4);
+        }
+    }
+    path += "map" + imgSuffix;
+    return path;
 }
 
 bool MainFrame::queryAll(vector<CUserInfo> &vUser)

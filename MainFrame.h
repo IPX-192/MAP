@@ -37,6 +37,8 @@ public:
     Q_INVOKABLE bool copyImageFile(QString image);
     //判断是否更改过背景图片
     Q_INVOKABLE bool isSaveImage();
+
+    Q_INVOKABLE QString getImagePath();
     //查询所有添加人员
     bool queryAll(vector<CUserInfo>& vUser);
 
