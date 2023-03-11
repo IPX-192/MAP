@@ -1,4 +1,13 @@
 ﻿#include "MainFrame.h"
+#include <QMap>
+#include <QFileInfo>
+#include <QGuiApplication>
+#include <QHostAddress>
+#include <QDir>
+#include <QHostInfo>
+#include <QNetworkInterface>
+#include <QBitmap>
+#include <QFileInfoList>
 
 MainFrame::MainFrame(QObject *parent)
 {
@@ -24,6 +33,66 @@ void MainFrame::initialize()
 {
     connect(&m_SocketServer,&CWebSocketServer::parseTagIdInfo,this,&MainFrame::porcOnlineTag);
     connect(&m_SocketServer,&CWebSocketServer::clearFromTagData,this,&MainFrame::onClearTagInfoFrom);
+}
+
+bool MainFrame::copyImageFile(QString image)
+{
+    //去掉file:///
+    image = image.mid(8);
+    //获取需要拷贝的文件名称
+    QFileInfo info(image);
+
+    //获取可执行文件目录
+    QString appPath = qApp->applicationDirPath();
+    //查询该目录下是否存在文件夹LogoFile，没有则创建
+    QString LogoDir = appPath + "/MapImg";
+    QDir dir(LogoDir);
+    if(!dir.exists())
+    {
+        dir.mkdir(LogoDir);
+    }
+
+    QDateTime current_date_time =QDateTime::currentDateTime();
+    QString   current_date = current_date_time.toString("hhmmsszzz");
+
+    LogoDir += "/";
+    //将logo重新命名
+    LogoDir += "map" + current_date;
+    QString m_suffix =  image.right(4);
+    LogoDir += m_suffix;
+
+    //拼接报告名
+    QString reportLogo = current_date + m_suffix;
+
+    //清空目录(保留默认logo)
+    dir.setFilter(QDir::Files);
+    int fileCount = static_cast<int>(dir.count());
+    for (int i = 0; i < fileCount; i++)
+    {
+        dir.remove(dir[i]);
+    }
+
+    if(!QFile::copy(image,LogoDir))
+    {
+        return false;
+    }
+
+    return  true;
+}
+
+bool MainFrame::isSaveImage()
+{
+    //获取可执行文件目录
+    QString appPath = qApp->applicationDirPath();
+    //查询该目录下是否存在文件夹LogoFile，没有则创建
+    QString LogoDir = appPath + "/MapImg";
+    QDir dir(LogoDir);
+    if(!dir.exists())
+    {
+        dir.mkdir(LogoDir);
+    }
+    QFileInfoList list = dir.entryInfoList();
+    return list.count() > 0 ? true : false;
 }
 
 bool MainFrame::queryAll(vector<CUserInfo> &vUser)
@@ -204,6 +273,10 @@ bool MainFrame::getDevAddType()
 void MainFrame::addDev(int devNum, int devWidth)
 {
     qDebug()<<"qqqqqqqqqqqqqqwww"<<devNum<<devWidth;
+
+    //先判断是否是顺序添加设备
+    CDevInfo dev;
+
 }
 
 bool MainFrame::getMapOriginConfig(CMapOriginInfo &info)

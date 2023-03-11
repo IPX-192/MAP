@@ -62,6 +62,8 @@ Window {
     Component.onCompleted: {
         chart.setOriginCoord(originX ,maxY - originY)
         ipAddress = SocketServer.getLocalIP()
+        var flag = InterAction.isSaveImage()
+        console.log("bfasdasdasdas xxx" +flag)
     }
 
     //顶部栏
@@ -196,10 +198,9 @@ Window {
         target: imageLoader.item
         onGetFileString:{
             usrImg.source = path
-            SocketServer.copyImageFile( path )
+            InterAction.copyImageFile( path )
         }
     }
-
 
     Timer{
         id:hideSetTimer
