@@ -191,6 +191,91 @@ bool MainFrame::delTagData(QString dataID)
     return bFlag;
 }
 
+bool MainFrame::delAllDevInfo()
+{
+    bool bFlag = false;
+
+    CDevInfoTable* pDevInfoTable = CDatabaseManage::GetInstance()->pDevInfo();
+    if(nullptr == pDevInfoTable)
+    {
+        return bFlag;
+    }
+    CDevInfo devinfo;
+    bFlag = pDevInfoTable->delDevInfo(devinfo, true);
+
+    //刷新界面显示
+    if(bFlag)
+    {
+        m_devInfoModel.deleteAll();
+    }
+
+    return bFlag;
+}
+
+bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth)
+{
+    bool bFlag = false;
+    if(devNum <= 0 || devWidth <= 0)
+    {
+        return bFlag;
+    }
+
+    CDevInfoTable* pDevInfoTable = CDatabaseManage::GetInstance()->pDevInfo();
+    if(nullptr == pDevInfoTable)
+    {
+        return bFlag;
+    }
+
+    //正序
+    if(bRightOrder)
+    {
+        for(int i = 0; i< devNum; i++)
+        {
+            CDevInfo info;
+            info.setIDevID(i);
+            info.setStrDevName(QString::number(i).toStdString());
+            info.setIDevPos(i*devWidth);
+            info.setBHighlight(false);
+            bFlag = pDevInfoTable->addDevInfo(info);
+        }
+    }
+    else
+    {
+        for(int i = devNum; i > 0; i--)
+        {
+            CDevInfo info;
+            info.setIDevID(i);
+            info.setStrDevName(QString::number(i).toStdString());
+            info.setIDevPos(i*devWidth);
+            info.setBHighlight(false);
+            bFlag = pDevInfoTable->addDevInfo(info);
+        }
+    }
+
+    loadDevINfo();
+
+    return true;
+}
+
+bool MainFrame::loadDevINfo()
+{
+    bool bFlag = false;
+
+    vector<CDevInfo> vDevInfo;
+    CDevInfoTable* pDevInfoTable = CDatabaseManage::GetInstance()->pDevInfo();
+
+    if(nullptr == pDevInfoTable)
+    {
+        return bFlag;
+    }
+
+    bFlag = pDevInfoTable->getAllDevInfo(vDevInfo);
+
+    m_devInfoModel.loadData(vDevInfo);
+
+    return bFlag;
+}
+
 void MainFrame::setDevAddType(bool type)
 {
     m_devAddNext = type;

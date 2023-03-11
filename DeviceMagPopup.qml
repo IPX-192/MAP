@@ -16,6 +16,8 @@ Popup {
     closePolicy: Popup.CloseOnEscape
     padding: 0
 
+    property alias bRightOrder: nextBtn.checked
+
     //弹出窗口的Title栏
     PopupTitle{
         id : popupTitle

@@ -36,16 +36,13 @@ bool CDevInfoTable::addDevInfo(const CDevInfo &info)
     try
     {
         //判断新的ID是否可用
-        if(checkDevIDAvailability(info.iDevID()))
-        {
-            bSuccess = true;
+        bSuccess = true;
 
-            DevInfoTable Dev(*m_pDatabase);
-            Dev.iDevID = info.iDevID();
-            Dev.devName = info.strDevName();
-            Dev.devPos = info.iDevPos();
-            Dev.update();
-        }
+        DevInfoTable Dev(*m_pDatabase);
+        Dev.iDevID = info.iDevID();
+        Dev.devName = info.strDevName();
+        Dev.devPos = info.iDevPos();
+        Dev.update();
     }
     catch(Except e)
     {

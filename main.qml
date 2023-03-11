@@ -385,35 +385,18 @@ Window {
         anchors.top: mapItem.bottom
         anchors.topMargin: 5
 
-        Component.onCompleted: {
-            var count = DevInfoModel.rowCount();
-
-            for (var i = 0; i < count; i++) {
-                var item = DevInfoModel.get(i,"devPos") / 500;
-                let devName = DevInfoModel.get(i, "devName")
-                devCom.createObject(devItem, {'pos': item , 'color' : "green", 'devName': devName})
-            }
-        }
-
-        Component {
-            id: devCom
-            Item {
-                id: devItem
+        Repeater {
+            width: parent.width
+            height: parent.height
+            model: DevInfoModel
+            delegate: Rectangle {
+                id: test
+                x: devPos / 500
+                y: 0
                 width: 1
-                height: parent.height
-                property alias pos: devRect.x
-                property alias color: devRect.color
-                property alias devName: tooltip.text
-
-                Rectangle {
-                    id: devRect
-                    width: 1
-                    height: parent.height
-                    color: bLight ? "green" : "transparent"
-                }
-
+                height: 30
+                color: model.bLight  ? "green" : "gray"
                 MouseArea {
-                    id: devMouseArea
                     anchors.fill: parent
                     hoverEnabled: true
                     onEntered: {
@@ -428,12 +411,12 @@ Window {
                     id: tooltip
                     delay: 200
                     width: 50
-                    text: devName
+                    y: parent.height
+                    text: model.devName
                 }
-
             }
-
         }
+
     }
 
 
