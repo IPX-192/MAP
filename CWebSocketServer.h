@@ -32,7 +32,6 @@ public:
     //停止服务
     Q_INVOKABLE void stopServer();
 
-    Q_INVOKABLE bool copyImageFile(QString image);
 
     //获取IP地址
     Q_INVOKABLE QString getLocalIP();

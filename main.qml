@@ -25,6 +25,8 @@ Window {
 
     property var maxY:100
 
+    property bool bSaveImg:false
+
     //flags: Qt.FramelessWindowHint | Qt.Window
 
     FontLoader{
@@ -62,6 +64,15 @@ Window {
     Component.onCompleted: {
         chart.setOriginCoord(originX ,maxY - originY)
         ipAddress = SocketServer.getLocalIP()
+        bSaveImg = InterAction.isSaveImage()
+        if(bSaveImg)
+        {
+            usrImg.source = InterAction.getImagePath()
+        }
+        else
+        {
+            usrImg.source = "qrc:/iamge/testMap.png"
+        }
     }
 
     //顶部栏
@@ -196,10 +207,9 @@ Window {
         target: imageLoader.item
         onGetFileString:{
             usrImg.source = path
-            SocketServer.copyImageFile( path )
+            InterAction.copyImageFile( path )
         }
     }
-
 
     Timer{
         id:hideSetTimer
