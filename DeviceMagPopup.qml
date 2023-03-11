@@ -280,6 +280,21 @@ Popup {
         anchors.topMargin: 30
     }
 
+    //清除按钮
+    Button {
+        id: clearBtn
+        width: 60
+        height: 30
+        text: "清除"
+        anchors.verticalCenter: devList.verticalCenter
+        anchors.right: parent.right
+        anchors.rightMargin: 120
+        font.family: fontName
+        onClicked: {
+            InterAction.delAllDevInfo()
+        }
+    }
+
     background: Rectangle{
         anchors.fill: parent
         color: "#061215"
@@ -321,8 +336,10 @@ Popup {
                 onClicked: {
 
                     InterAction.setDevAddType(bNext)
-                    InterAction.addDev(Number(devNumInput.text),Number(devWidthInput.text))
-                    closeTimer.start()
+
+                    InterAction.addDevINfo(bNext,Number(devNumInput.text),Number(devWidthInput.text))
+
+                    // closeTimer.start()
                 }
                 onEntered: {
                     btnOk.press();

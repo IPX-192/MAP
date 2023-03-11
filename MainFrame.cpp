@@ -377,15 +377,6 @@ bool MainFrame::getDevAddType()
     return m_devAddNext;
 }
 
-void MainFrame::addDev(int devNum, int devWidth)
-{
-    qDebug()<<"qqqqqqqqqqqqqqwww"<<devNum<<devWidth;
-
-    //先判断是否是顺序添加设备
-    CDevInfo dev;
-
-}
-
 bool MainFrame::getMapOriginConfig(CMapOriginInfo &info)
 {
     bool bFlag = false;

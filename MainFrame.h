@@ -78,8 +78,6 @@ public:
 
     Q_INVOKABLE bool getDevAddType();
 
-    Q_INVOKABLE void addDev(int devNum,int devWidth);
-
 signals:
     Q_INVOKABLE void sigSetDevAddEnable(bool next);
 
