@@ -8,7 +8,7 @@ CDevInfoModel::CDevInfoModel(QObject *parent)
 
     CDevInfo test;
     test.setIDevID(1);
-    test.setIDevPos(200);
+    test.setIDevPos(20000);
     test.setBHighlight(true);
     test.setStrDevName("dev1");
     m_devInfoData.push_back(test);

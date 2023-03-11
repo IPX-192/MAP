@@ -22,7 +22,7 @@ ClientDialog::ClientDialog(const QUrl &url,bool debug,QWidget *parent)
     //layout1
     QLabel *iplabel = new QLabel("IPµØÖ·");
     m_iplineedit =new QLineEdit;
-    m_iplineedit->setText("172.16.16.67");
+    m_iplineedit->setText("192.168.0.105");
     QLabel *portlabel =new QLabel("¶Ë¿Ú");
     m_portspinbox = new QSpinBox;
     m_portspinbox->setRange(0,65535);
