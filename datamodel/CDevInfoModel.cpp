@@ -9,8 +9,21 @@ CDevInfoModel::CDevInfoModel(QObject *parent)
     CDevInfo test;
     test.setIDevID(1);
     test.setIDevPos(20000);
+
     test.setBHighlight(true);
     test.setStrDevName("dev1");
+    m_devInfoData.push_back(test);
+
+    test.setIDevID(2);
+    test.setIDevPos(20000);
+    test.setBHighlight(false);
+    test.setStrDevName("dev2");
+    m_devInfoData.push_back(test);
+
+    test.setIDevID(3);
+    test.setIDevPos(50000);
+    test.setBHighlight(true);
+    test.setStrDevName("dev3");
     m_devInfoData.push_back(test);
 }
 
@@ -42,6 +55,12 @@ void CDevInfoModel::updateRowData(bool bHighlight, QString devName)
         }
     }
     emit layoutChanged();
+}
+
+QString CDevInfoModel::getDevNameByPos(int pos)
+{
+    //if(pos > 0 && pos < m_)
+    return "";
 }
 
 QVariant CDevInfoModel::get(int index, const QString &roleName) const

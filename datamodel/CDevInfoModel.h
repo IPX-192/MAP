@@ -28,6 +28,9 @@ public:
     //更新状态
     void updateRowData(bool bHighlight, QString devName);
 
+    //获取标签位置
+    QString getDevNameByPos(int pos);
+
     Q_INVOKABLE QVariant get(int index, const QString &roleName) const;
 
 public:

@@ -48,6 +48,7 @@ public:
     //保存地图原点配置
     bool saveMapOriginConfig(const CMapOriginInfo &info);
 
+
     //添加人员
     Q_INVOKABLE bool insert(QString name, QString userID, QString depart, QString role, QString tagID);
 
@@ -62,6 +63,15 @@ public:
 
     //删除指定历史数据
     Q_INVOKABLE bool delTagData(QString dataID);
+
+    //删除所有设备
+    Q_INVOKABLE bool delAllDevInfo();
+
+    //添加设备
+    Q_INVOKABLE bool addDevINfo(bool bRightOrder, int devNum, int devWidth);
+
+    //加载所有设备
+    Q_INVOKABLE bool loadDevINfo();
 
     //////设备管理相关///////
     Q_INVOKABLE void setDevAddType(bool type);
