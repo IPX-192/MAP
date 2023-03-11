@@ -16,8 +16,6 @@ Item {
         id: headItem
         width: tableWidth
         height: itemHeigt
-        //                anchors.left: parent.left
-        //                anchors.right: parent.right
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
 

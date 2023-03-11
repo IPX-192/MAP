@@ -68,8 +68,77 @@ Item {
                     anchors.centerIn: parent
                 }
             }
-
         }
     }
 
+    ListView{
+        id: userInfoListiew
+        width: tableWidth
+        height: parent.height - headItem.height
+        anchors.top: headItem.bottom
+        anchors.topMargin: -1
+        anchors.left: headItem.left
+        model: DevInfoModel
+        clip: true
+        maximumFlickVelocity: itemHeigt * 10
+        flickableDirection: Flickable.VerticalFlick
+        boundsBehavior: Flickable.StopAtBounds
+        spacing: -1
+
+        delegate: Item {
+            id: listItem
+            width: tableWidth
+            height: itemHeigt
+            implicitWidth: tableWidth
+            implicitHeight: itemHeigt
+
+
+
+            //设备标号
+            Rectangle {
+                id: devnumRect
+                width: headDevNumRect.width
+                height: itemHeigt
+                color: index % 2 === 0 ? "#213B42" : "#000000"
+                border.color: "#1A292D"
+                anchors.left: parent.left
+
+                Text {
+                    id: devnumText
+                    text: devName
+                    width: parent.width
+                    font.pixelSize: 16
+                    font.family: "Microsoft YaHei"
+                    color: "#D6D6D6"
+                    anchors.centerIn: parent
+                    fontSizeMode: Text.Fit
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
+                }
+            }
+
+            //设备位置
+            Rectangle {
+                id: devPosRect
+                width: headDevWidthRect.width
+                height: itemHeigt
+                color: index % 2 === 0 ? "#213B42" : "#000000"
+                border.color: "#1A292D"
+                anchors.left: devnumRect.right
+
+                Text {
+                    id: devPosText
+                    text: devPos
+                    width: parent.width
+                    font.pixelSize: 16
+                    font.family: "Microsoft YaHei"
+                    color: "#D6D6D6"
+                    anchors.centerIn: parent
+                    fontSizeMode: Text.Fit
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
+                }
+            }
+        }
+    }
 }
