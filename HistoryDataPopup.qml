@@ -13,6 +13,10 @@ Popup {
         color: "lightblue"
     }
 
+    onOpened: {
+        InterAction.loadAllTagData()
+    }
+
     Text {
         id: titeText
         anchors.horizontalCenter: parent.horizontalCenter

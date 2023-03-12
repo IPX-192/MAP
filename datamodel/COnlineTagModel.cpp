@@ -33,13 +33,13 @@ void COnlineTagInfoModel::loadData(const vector<COnlineTagInfo> &vecTag)
 void COnlineTagInfoModel::addData(COnlineTagInfo &info)
 {
     //去掉之前缓存的数据,再添加新数据，则一直显示taglist里面的最新信息
-    for(int i = 0;i<m_userTagInfoData.size();i++)
-    {
-        if(m_userTagInfoData.at(i).iTagID() == info.iTagID())
-        {
-            m_userTagInfoData.removeAt(i);
-        }
-    }
+//    for(int i = 0;i<m_userTagInfoData.size();i++)
+//    {
+//        if(m_userTagInfoData.at(i).iTagID() == info.iTagID())
+//        {
+//            m_userTagInfoData.removeAt(i);
+//        }
+//    }
     m_userTagInfoData.push_front(info);
     emit layoutChanged();
 }
@@ -83,6 +83,18 @@ void COnlineTagInfoModel::deleteAll()
 {
     m_userTagInfoData.clear();
     emit layoutChanged();
+}
+
+bool COnlineTagInfoModel::checkTagInfoUpdate(COnlineTagInfo &info)
+{
+    for(auto it : m_userTagInfoData)
+    {
+        if(it == info)
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 int COnlineTagInfoModel::rowCount(const QModelIndex &parent) const

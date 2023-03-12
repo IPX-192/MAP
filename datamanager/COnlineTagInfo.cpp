@@ -129,3 +129,10 @@ void COnlineTagInfo::setStrRole(const string &strRole)
 {
     m_strRole = strRole;
 }
+
+bool COnlineTagInfo::operator==(const COnlineTagInfo &info) const
+{
+    bool bEqual = (m_iTagID == info.m_iTagID) && (m_iPosX == info.m_iPosX) &&
+                  (m_iPosY == info.m_iPosY) && (m_iPosZ == info.m_iPosZ) && (m_iStaticTime == info.m_iStaticTime);
+    return bEqual;
+}

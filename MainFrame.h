@@ -48,6 +48,9 @@ public:
     //保存地图原点配置
     bool saveMapOriginConfig(const CMapOriginInfo &info);
 
+    //添加历史数据
+    bool addHistoryTagData(COnlineTagInfo &info);
+
     //添加人员
     Q_INVOKABLE bool insert(QString name, QString userID, QString depart, QString role, QString tagID);
 
@@ -59,6 +62,9 @@ public:
 
     //删除指定人员
     Q_INVOKABLE bool delUserByUserID(QString strID);
+
+    //加载所有历史数据
+    Q_INVOKABLE bool loadAllTagData();
 
     //删除指定历史数据
     Q_INVOKABLE bool delTagData(QString dataID);

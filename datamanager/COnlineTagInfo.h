@@ -43,6 +43,8 @@ public:
     string strRole() const;
     void setStrRole(const string &strRole);
 
+    bool operator==(const COnlineTagInfo& info) const ;
+
 private:
     string m_strUserID{""};
     string m_strUsername{""};

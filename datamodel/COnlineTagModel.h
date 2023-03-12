@@ -47,6 +47,9 @@ public:
     //删除表格所有数据
     void deleteAll();
 
+    //检查数据是否需要更新
+    bool checkTagInfoUpdate(COnlineTagInfo &info);
+
 public:
     //QAbstractListModel 必须要重载的类
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;

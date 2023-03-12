@@ -256,6 +256,23 @@ bool MainFrame::delUserByUserID(QString strID)
     return bFlag;
 }
 
+bool MainFrame::loadAllTagData()
+{
+    bool bFlag = false;
+
+    vector<CTagData> vecData;
+    CTagDataTable* pTagDataTable = CDatabaseManage::GetInstance()->pTagData();
+
+    if(nullptr == pTagDataTable)
+    {
+        return bFlag;
+    }
+
+    bFlag = pTagDataTable->getAllHistoryData(vecData);
+
+    m_tagDataModel.loadData(vecData);
+}
+
 bool MainFrame::delTagData(QString dataID)
 {
     bool bFlag = false;
@@ -414,6 +431,38 @@ bool MainFrame::saveMapOriginConfig(const CMapOriginInfo &info)
     return bFlag;
 }
 
+bool MainFrame::addHistoryTagData(COnlineTagInfo &info)
+{
+    bool bFlag = false;
+
+    if(info.iTagID() == -1)
+    {
+        return bFlag;
+    }
+
+    CTagData data;
+    data.setIPosX(info.iPosX());
+    data.setIPosY(info.iPosY());
+    data.setIPosZ(info.iPosZ());
+    data.setIMapID(info.iMapID());
+    data.setStrRole(info.strRole());
+    data.setStrUserID(info.strUserID());
+    data.setIBattery(info.iBattery());
+    data.setStrUsername(info.strUsername());
+    data.setStrDepartment(info.strDepartment());
+
+    CTagDataTable* pTagDataTable = CDatabaseManage::GetInstance()->pTagData();
+
+    if(nullptr == pTagDataTable)
+    {
+        return bFlag;
+    }
+
+    bFlag = pTagDataTable->addHistoryData(data);
+
+    return bFlag;
+}
+
 void MainFrame::porcOnlineTag(const CTagInfo &tag)
 {
     COnlineTagInfo info;
@@ -436,7 +485,12 @@ void MainFrame::porcOnlineTag(const CTagInfo &tag)
         info.setStrRole(user.strRole());
         info.setStrUsername(user.strUsername());
 
-        m_onlineTagModel.addData(info);
+        if(m_onlineTagModel.checkTagInfoUpdate(info))
+        {
+            m_onlineTagModel.addData(info);
+            addHistoryTagData(info);
+        }
+
     }
 }
 
@@ -444,4 +498,3 @@ void MainFrame::onClearTagInfoFrom()
 {
     m_onlineTagModel.deleteAll();
 }
-
