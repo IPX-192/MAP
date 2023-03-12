@@ -106,6 +106,16 @@ bool CWebSocketServer::getServerConnectStatus()
     return m_bConnectStatus;
 }
 
+void CWebSocketServer::startTranspond(QString ip, QString com)
+{
+    m_ClientSystem.connectToServer(ip,com);
+}
+
+void CWebSocketServer::setClientStatus(bool connect)
+{
+    m_bTranspond = connect;
+}
+
 void CWebSocketServer::parseLabelMeg(QJsonArray &array)
 {/*
     //标签卡的数据为7个JSON对象组合而成,依次解析即可
@@ -208,6 +218,12 @@ void CWebSocketServer::processByteArrayMessage(QByteArray array)
     //关闭超时定时器
     m_RecvTimer.stop();
     emit clearDrawCoord();
+
+    //判断是否转发
+    if(m_bTranspond)
+    {
+        m_ClientSystem.sendMeg(array);
+    }
     //qDebug()<<array;
     QJsonObject groupObj;
     QJsonDocument m_document;

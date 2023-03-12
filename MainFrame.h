@@ -48,7 +48,6 @@ public:
     //保存地图原点配置
     bool saveMapOriginConfig(const CMapOriginInfo &info);
 
-
     //添加人员
     Q_INVOKABLE bool insert(QString name, QString userID, QString depart, QString role, QString tagID);
 

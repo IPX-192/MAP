@@ -1,14 +1,14 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2020-01-10T18:59:42
+# Project created by QtCreator 2020-01-10T18:10:21
 #
 #-------------------------------------------------
 
-QT       += core gui websockets
+QT       += core gui network websockets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = ClientDialog
+TARGET = ServerDialog
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -34,10 +34,10 @@ CONFIG(release,debug|release){
 
 SOURCES += \
         main.cpp \
-        clientdialog.cpp
+        serverdialog.cpp
 
 HEADERS += \
-        clientdialog.h
+        serverdialog.h
 
 FORMS += \
-        clientdialog.ui
+        serverdialog.ui

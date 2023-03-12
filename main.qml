@@ -4,7 +4,6 @@ import Charts 1.0
 import QtQuick.Controls 2.5
 
 Window {
-
     visible: true
     width: 1270
     height: 768
@@ -26,6 +25,8 @@ Window {
     property var maxY:100
 
     property bool bSaveImg:false
+
+    property bool bTranspond:false
 
     //flags: Qt.FramelessWindowHint | Qt.Window
 
@@ -537,10 +538,19 @@ Window {
             anchors.verticalCenter: parent.verticalCenter
             font.family: fontName
             onClicked: {
-
+                bTranspond = !bTranspond
+                SocketServer.setClientStatus(bTranspond);
+                if(bTranspond)
+                {
+                    serverBtn.text = "停止"
+                    SocketServer.startTranspond(serverInput.text,comInput.text)
+                }
+                else
+                {
+                    serverBtn.text = "转发"
+                }
             }
         }
-
     }
 
     Timer{

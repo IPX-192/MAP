@@ -9,6 +9,7 @@
 #include <QQmlEngine>
 #include <QtWebSockets/QWebSocketServer>
 #include <QtWebSockets/QWebSocket>
+#include "CClientSystem.h"
 #include "./datamanager/CTagInfo.h"
 
 #include <QTime>
@@ -32,11 +33,15 @@ public:
     //停止服务
     Q_INVOKABLE void stopServer();
 
-
     //获取IP地址
     Q_INVOKABLE QString getLocalIP();
 
     Q_INVOKABLE bool getServerConnectStatus();
+
+
+    Q_INVOKABLE void startTranspond(QString ip,QString com);
+
+    Q_INVOKABLE void setClientStatus(bool connect);
 
 
 signals:
@@ -71,10 +76,13 @@ private slots:
 
 private:
     QWebSocketServer * m_WebSocketServer;
+    //转发客户端
+    CClientSystem       m_ClientSystem;
     QList<QWebSocket *> m_clients;
     QWebSocket *pSocket;
     QTimer     m_RecvTimer;
     bool       m_bConnectStatus{false};
+    bool       m_bTranspond{false};
 };
 
 #endif // CWEBSOCKETSERVER_H
