@@ -43,6 +43,8 @@ public:
 
     Q_INVOKABLE void setClientStatus(bool connect);
 
+    Q_INVOKABLE void stopTranspond();
+
 
 signals:
     void sendMeg(QString meg);

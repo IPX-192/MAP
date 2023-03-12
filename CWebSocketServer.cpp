@@ -116,6 +116,11 @@ void CWebSocketServer::setClientStatus(bool connect)
     m_bTranspond = connect;
 }
 
+void CWebSocketServer::stopTranspond()
+{
+    m_ClientSystem.stopConnect();
+}
+
 void CWebSocketServer::parseLabelMeg(QJsonArray &array)
 {/*
     //标签卡的数据为7个JSON对象组合而成,依次解析即可

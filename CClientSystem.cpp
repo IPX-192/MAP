@@ -14,7 +14,6 @@ CClientSystem::~CClientSystem()
 //连接服务器
 void CClientSystem::connectToServer(QString ip, QString com)
 {
-    qDebug()<<"2222222222222222222" <<ip;
     QString path = QString("ws://%1:%2").arg(ip).arg(com);
     QUrl url = QUrl(path);
     m_websocket.open(url);

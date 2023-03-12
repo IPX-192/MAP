@@ -543,11 +543,13 @@ Window {
                 if(bTranspond)
                 {
                     serverBtn.text = "停止"
+                    //SocketServer.startTranspond("192.168.0.105","8000")
                     SocketServer.startTranspond(serverInput.text,comInput.text)
                 }
                 else
                 {
                     serverBtn.text = "转发"
+                    SocketServer.stopTranspond();
                 }
             }
         }
@@ -591,7 +593,4 @@ Window {
         id:devicePopup
         anchors.centerIn: parent
     }
-
-
-
 }
