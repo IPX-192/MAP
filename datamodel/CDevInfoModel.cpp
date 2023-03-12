@@ -6,25 +6,25 @@ CDevInfoModel::CDevInfoModel(QObject *parent)
     m_roleName.insert(DevPosRole, "devPos");
     m_roleName.insert(BHighlightRole, "bLight");
 
-    CDevInfo test;
-    test.setIDevID(1);
-    test.setIDevPos(20000);
+    //    CDevInfo test;
+    //    test.setIDevID(1);
+    //    test.setIDevPos(20000);
 
-    test.setBHighlight(true);
-    test.setStrDevName("dev1");
-    m_devInfoData.push_back(test);
+    //    test.setBHighlight(true);
+    //    test.setStrDevName("dev1");
+    //    m_devInfoData.push_back(test);
 
-    test.setIDevID(2);
-    test.setIDevPos(20000);
-    test.setBHighlight(false);
-    test.setStrDevName("dev2");
-    m_devInfoData.push_back(test);
+    //    test.setIDevID(2);
+    //    test.setIDevPos(20000);
+    //    test.setBHighlight(false);
+    //    test.setStrDevName("dev2");
+    //    m_devInfoData.push_back(test);
 
-    test.setIDevID(3);
-    test.setIDevPos(50000);
-    test.setBHighlight(true);
-    test.setStrDevName("dev3");
-    m_devInfoData.push_back(test);
+    //    test.setIDevID(3);
+    //    test.setIDevPos(50000);
+    //    test.setBHighlight(true);
+    //    test.setStrDevName("dev3");
+    //    m_devInfoData.push_back(test);
 }
 
 void CDevInfoModel::loadData(const vector<CDevInfo> &vecTag)

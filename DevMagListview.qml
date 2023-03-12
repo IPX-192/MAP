@@ -92,8 +92,6 @@ Item {
             implicitWidth: tableWidth
             implicitHeight: itemHeigt
 
-
-
             //设备标号
             Rectangle {
                 id: devnumRect
