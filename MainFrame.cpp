@@ -488,9 +488,9 @@ void MainFrame::porcOnlineTag(const CTagInfo &tag)
         if(m_onlineTagModel.checkTagInfoUpdate(info))
         {
             m_onlineTagModel.addData(info);
+            m_devInfoModel.updateDevStatus(info.iPosX());
             addHistoryTagData(info);
         }
-
     }
 }
 

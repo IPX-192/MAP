@@ -52,3 +52,8 @@ void CDevInfo::setBHighlight(bool bHighlight)
 {
     m_bHighlight = bHighlight;
 }
+
+bool CDevInfo::operator==(const CDevInfo &other) const
+{
+    return (m_iDevID == other.m_iDevID && m_iDevPos == other.m_iDevPos && m_strDevName == other.m_strDevName);
+}

@@ -21,6 +21,8 @@ public:
     bool bHighlight() const;
     void setBHighlight(bool bHighlight);
 
+    bool operator==(const CDevInfo& other) const;
+
 private:
     int m_iDevID{-1};
     string m_strDevName{""};

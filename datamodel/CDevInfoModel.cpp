@@ -29,12 +29,29 @@ CDevInfoModel::CDevInfoModel(QObject *parent)
 
 void CDevInfoModel::loadData(const vector<CDevInfo> &vecTag)
 {
+    if(vecTag.size() <= 0)
+    {
+        return;
+    }
+
     m_devInfoData.clear();
 
-    for(auto it : vecTag)
+    for(auto it = vecTag.begin(); it != vecTag.end(); ++it)
     {
-        m_devInfoData.push_back(it);
+        CDevInfo info;
+        info.setIDevID(it->iDevID());
+        info.setIDevPos(it->iDevPos());
+        info.setStrDevName(it->strDevName());
+        info.setBHighlight(false);
+        m_devInfoData.push_back(info);
     }
+
+    //设置最大距离
+    auto last = std::find(vecTag.begin(), vecTag.end(), vecTag.back());
+    m_maxPos = last->iDevPos();
+
+    //设置位置间距
+    m_spacing = m_devInfoData[0].iDevPos();
 
     emit layoutChanged();
 }
@@ -45,16 +62,13 @@ void CDevInfoModel::deleteAll()
     emit layoutChanged();
 }
 
-void CDevInfoModel::updateRowData(bool bHighlight, QString devName)
+void CDevInfoModel::updateRowData(bool bHighlight, int index)
 {
-    for(auto it : m_devInfoData)
+    if(index >=0 && index < m_devInfoData.size())
     {
-        if(it.strDevName() == devName.toStdString())
-        {
-            it.setBHighlight(bHighlight);
-        }
+        m_devInfoData[index].setBHighlight(bHighlight);
+        emit layoutChanged();
     }
-    emit layoutChanged();
 }
 
 int CDevInfoModel::dataNum()
@@ -62,10 +76,21 @@ int CDevInfoModel::dataNum()
     return  m_devInfoData.size();
 }
 
-QString CDevInfoModel::getDevNameByPos(int pos)
+bool CDevInfoModel::updateDevStatus(int pos)
 {
-    //if(pos > 0 && pos < m_)
-    return "";
+    if(pos <= 0 || pos > m_maxPos)
+    {
+        return false;
+    }
+
+    int index = pos / m_spacing - 1;
+
+    if(index >= 0)
+    {
+        updateRowData(true, index);
+    }
+
+    return true;
 }
 
 QVariant CDevInfoModel::get(int index, const QString &roleName) const

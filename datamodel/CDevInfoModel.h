@@ -26,13 +26,13 @@ public:
     void deleteAll();
 
     //更新状态
-    void updateRowData(bool bHighlight, QString devName);
+    void updateRowData(bool bHighlight, int index);
 
     //获取设备数量
     int  dataNum();
 
-    //获取标签位置
-    QString getDevNameByPos(int pos);
+    //更新设备状态
+    bool updateDevStatus(int pos);
 
     Q_INVOKABLE QVariant get(int index, const QString &roleName) const;
 
@@ -45,6 +45,8 @@ private:
     //在线标签数据
     QVector< CDevInfo > m_devInfoData;
     QHash<int, QByteArray> m_roleName;
+    int m_maxPos{0};
+    int m_spacing{0};
 };
 
 #endif // CDEVINFOMODEL_H
