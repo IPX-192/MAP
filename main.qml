@@ -396,6 +396,10 @@ Window {
         anchors.top: mapItem.bottom
         anchors.topMargin: 5
 
+        Component.onCompleted: {
+            InterAction.loadDevINfo()
+        }
+
         Repeater {
             width: parent.width
             height: parent.height

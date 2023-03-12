@@ -20,6 +20,7 @@ Popup {
     property alias bRightOrder: nextBtn.checked
 
     onOpened: {
+        InterAction.loadDevINfo()
         devNum = InterAction.getDevNum()
         console.log("seeess " + devNum);
     }

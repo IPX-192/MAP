@@ -320,7 +320,7 @@ bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth)
     //正序
     if(bRightOrder)
     {
-        for(int i = 0; i< devNum; i++)
+        for(int i = 1; i<= devNum; i++)
         {
             CDevInfo info;
             info.setIDevID(i);
@@ -332,7 +332,7 @@ bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth)
     }
     else
     {
-        for(int i = devNum; i > 0; i--)
+        for(int i = devNum; i > 1; i--)
         {
             CDevInfo info;
             info.setIDevID(i);

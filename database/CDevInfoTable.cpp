@@ -38,11 +38,11 @@ bool CDevInfoTable::addDevInfo(const CDevInfo &info)
         //判断新的ID是否可用
         bSuccess = true;
 
-        DevInfoTable Dev(*m_pDatabase);
-        Dev.iDevID = info.iDevID();
-        Dev.devName = info.strDevName();
-        Dev.devPos = info.iDevPos();
-        Dev.update();
+        DevInfoTable dev(*m_pDatabase);
+        dev.iDevID = info.iDevID();
+        dev.devName = info.strDevName();
+        dev.devPos = info.iDevPos();
+        dev.update();
     }
     catch(Except e)
     {
@@ -72,6 +72,8 @@ bool CDevInfoTable::delDevInfo(const CDevInfo &info, bool bDeleteAll)
         //删除所有标签信息
         if(bDeleteAll)
         {
+            bSuccess = true;
+
             vector<DevInfoTable> vecSearch;
 
             m_pDatabase->begin();

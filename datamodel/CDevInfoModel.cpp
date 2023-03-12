@@ -33,7 +33,7 @@ void CDevInfoModel::loadData(const vector<CDevInfo> &vecTag)
 
     for(auto it : vecTag)
     {
-        m_devInfoData.push_front(it);
+        m_devInfoData.push_back(it);
     }
 
     emit layoutChanged();
