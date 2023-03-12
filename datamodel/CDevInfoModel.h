@@ -2,6 +2,7 @@
 #define CDEVINFOMODEL_H
 
 #include <QAbstractListModel>
+#include <QTimer>
 #include "../datamanager/CDevInfo.h"
 
 class CDevInfoModel : public QAbstractListModel
@@ -34,6 +35,9 @@ public:
     //更新设备状态
     bool updateDevStatus(int pos);
 
+    //初始化所有设备状态
+    void initDevStatus();
+
     Q_INVOKABLE QVariant get(int index, const QString &roleName) const;
 
 public:
@@ -47,6 +51,7 @@ private:
     QHash<int, QByteArray> m_roleName;
     int m_maxPos{0};
     int m_spacing{0};
+    QTimer m_timer;
 };
 
 #endif // CDEVINFOMODEL_H
