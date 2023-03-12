@@ -57,6 +57,11 @@ void CDevInfoModel::updateRowData(bool bHighlight, QString devName)
     emit layoutChanged();
 }
 
+int CDevInfoModel::dataNum()
+{
+    return  m_devInfoData.size();
+}
+
 QString CDevInfoModel::getDevNameByPos(int pos)
 {
     //if(pos > 0 && pos < m_)

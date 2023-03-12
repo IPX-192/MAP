@@ -9,6 +9,7 @@ Popup {
     property var factorY :1.0
     property var factor  :1.0
     property bool bNext:true
+    property var devNum:0
     width: 1000
     height: 600
     modal: true
@@ -17,6 +18,11 @@ Popup {
     padding: 0
 
     property alias bRightOrder: nextBtn.checked
+
+    onOpened: {
+        devNum = InterAction.getDevNum() + 1
+        console.log("seeess " + devNum);
+    }
 
     //弹出窗口的Title栏
     PopupTitle{
@@ -63,7 +69,6 @@ Popup {
         opacity: bNext ? 0.5 : 1
     }
 
-
     Button {
         id: sureBtn
         width: 60
@@ -80,7 +85,6 @@ Popup {
         }
     }
 
-
     RadioButton {
         id: nextBtn
         text: qsTr("正序添加")
@@ -88,6 +92,8 @@ Popup {
         anchors.left: addDevText.right
         anchors.leftMargin: 20 * factorX
         anchors.verticalCenter: addDevText.verticalCenter
+        enabled: devNum === 0
+        opacity: enabled ? 1 : 0.5
 
         MouseArea{
             anchors.fill: parent
@@ -140,6 +146,8 @@ Popup {
         anchors.left: nextBtn.right
         anchors.leftMargin: 85 * factorX
         anchors.verticalCenter: nextBtn.verticalCenter
+        enabled: nextBtn.enabled
+        opacity: nextBtn.opacity
         MouseArea{
             anchors.fill: parent
             onClicked: {
@@ -292,6 +300,8 @@ Popup {
         font.family: fontName
         onClicked: {
             InterAction.delAllDevInfo()
+            //设备数清零
+            devNum = 0
         }
     }
 

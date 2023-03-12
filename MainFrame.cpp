@@ -377,6 +377,11 @@ bool MainFrame::getDevAddType()
     return m_devAddNext;
 }
 
+int MainFrame::getDevNum()
+{
+    return m_devInfoModel.dataNum();
+}
+
 bool MainFrame::getMapOriginConfig(CMapOriginInfo &info)
 {
     bool bFlag = false;

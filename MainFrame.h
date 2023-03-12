@@ -77,6 +77,7 @@ public:
 
     Q_INVOKABLE bool getDevAddType();
 
+    Q_INVOKABLE int  getDevNum();
 signals:
     Q_INVOKABLE void sigSetDevAddEnable(bool next);
 
