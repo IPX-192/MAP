@@ -320,7 +320,7 @@ bool MainFrame::delAllDevInfo()
     return bFlag;
 }
 
-bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth)
+bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth,int maxDev)
 {
     bool bFlag = false;
     if(devNum <= 0 || devWidth <= 0)
@@ -347,9 +347,10 @@ bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth)
             bFlag = pDevInfoTable->addDevInfo(info);
         }
     }
+    //逆序添加的时候是最大设备号开始
     else
     {
-        for(int i = devNum; i > 1; i--)
+        for(int i = maxDev; i >= devNum; i--)
         {
             CDevInfo info;
             info.setIDevID(i);

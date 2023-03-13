@@ -73,7 +73,7 @@ public:
     Q_INVOKABLE bool delAllDevInfo();
 
     //添加设备
-    Q_INVOKABLE bool addDevINfo(bool bRightOrder, int devNum, int devWidth);
+    Q_INVOKABLE bool addDevINfo(bool bRightOrder, int devNum, int devWidth,int maxDev);
 
     //加载所有设备
     Q_INVOKABLE bool loadDevINfo();

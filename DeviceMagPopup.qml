@@ -22,7 +22,7 @@ Popup {
     onOpened: {
         InterAction.loadDevINfo()
         devNum = InterAction.getDevNum()
-        console.log("seeess " + devNum);
+        devNumTip.text = "最大设备数200,多个设备请分批次添加"
     }
 
     //弹出窗口的Title栏
@@ -211,7 +211,6 @@ Popup {
         }
     }
 
-
     //添加个数和单位
 
     Row{
@@ -312,9 +311,10 @@ Popup {
 
     }
 
+    //添加设备确认后关闭弹窗
     Timer{
         id:closeTimer
-        interval: 1000
+        interval: 2500
         running: false
         repeat: false
         onTriggered: {
@@ -345,12 +345,23 @@ Popup {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
+                    if(Number(devNumInput.text) > 0&& Number(devWidthInput.text) > 0  )
+                    {
+                        //如果是逆序添加
+                        if(!bNext)
+                        {
+                            //添加设备个数不能大于最大设备号
+                            if(devNumInput.text > maxDevInput.text)
+                            {
+                                devNumTip.text = "添加设备数不能大于最大设备数!"
+                                return
+                            }
+                        }
 
-                    InterAction.setDevAddType(bNext)
-
-                    InterAction.addDevINfo(bNext,Number(devNumInput.text),Number(devWidthInput.text))
-
-                    // closeTimer.start()
+                        InterAction.setDevAddType(bNext)
+                        InterAction.addDevINfo(bNext,Number(devNumInput.text),Number(devWidthInput.text),Number(maxDevInput.text))
+                        closeTimer.start()
+                    }
                 }
                 onEntered: {
                     btnOk.press();
