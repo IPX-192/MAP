@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick 2.12
 
 Item {
 
@@ -84,6 +85,7 @@ Item {
         //flickableDirection: Flickable.VerticalFlick
         //boundsBehavior: Flickable.StopAtBounds
         interactive:true
+        snapMode: ListView.NoSnap
         spacing: -1
 
         delegate: Item {
