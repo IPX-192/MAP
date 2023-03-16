@@ -81,9 +81,9 @@ Item {
         anchors.left: headItem.left
         model: DevInfoModel
         clip: true
-        maximumFlickVelocity: 1000
-        //flickableDirection: Flickable.VerticalFlick
-        //boundsBehavior: Flickable.StopAtBounds
+        maximumFlickVelocity: 200
+        flickableDirection: Flickable.VerticalFlick
+        boundsBehavior: Flickable.StopAtBounds
         interactive:true
         snapMode: ListView.NoSnap
         spacing: -1

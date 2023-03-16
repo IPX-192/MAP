@@ -20,9 +20,14 @@ Popup {
     property alias bRightOrder: nextBtn.checked
 
     onOpened: {
+        InterAction.bResetTimerACtive(false)
         InterAction.loadDevINfo()
         devNum = InterAction.getDevNum()
         devNumTip.text = "最大设备数200,多个设备请分批次添加"
+    }
+
+    onClosed: {
+        InterAction.bResetTimerACtive(true)
     }
 
     //弹出窗口的Title栏

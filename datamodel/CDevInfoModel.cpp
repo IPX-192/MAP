@@ -58,7 +58,7 @@ void CDevInfoModel::loadData(const vector<CDevInfo> &vecTag)
 
     //设置最大距离
     auto last = std::find(vecTag.begin(), vecTag.end(), vecTag.back());
-    m_maxPos = last->iDevPos();
+    m_maxPos = last->iDevPos() > m_devInfoData[0].iDevPos() ? last->iDevPos() : m_devInfoData[0].iDevPos();
 
     //设置位置间距
     m_spacing = m_devInfoData[0].iDevPos();
@@ -68,6 +68,8 @@ void CDevInfoModel::loadData(const vector<CDevInfo> &vecTag)
 
 void CDevInfoModel::deleteAll()
 {
+    m_maxPos = 0;
+    m_spacing = 0;
     m_devInfoData.clear();
     emit layoutChanged();
 }
@@ -110,6 +112,23 @@ void CDevInfoModel::initDevStatus()
         it.setBHighlight(false);
     }
     emit layoutChanged();
+}
+
+bool CDevInfoModel::checkDevEnable()
+{
+    return true;
+}
+
+void CDevInfoModel::setTimerState(bool bActive)
+{
+    if(bActive)
+    {
+        m_timer.start();
+    }
+    else
+    {
+        m_timer.stop();
+    }
 }
 
 QVariant CDevInfoModel::get(int index, const QString &roleName) const
@@ -155,4 +174,18 @@ QVariant CDevInfoModel::data(const QModelIndex &index, int role) const
 QHash<int, QByteArray> CDevInfoModel::roleNames() const
 {
     return m_roleName;
+}
+
+int CDevInfoModel::getMaxPos() const
+{
+    return m_maxPos;
+}
+
+int CDevInfoModel::getLastDevID() const
+{
+    if(m_devInfoData.size())
+    {
+        return m_devInfoData.last().iDevID();
+    }
+    return 0;
 }

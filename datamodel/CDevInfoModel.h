@@ -38,6 +38,18 @@ public:
     //初始化所有设备状态
     void initDevStatus();
 
+    //判断当前设备是否能添加
+    bool checkDevEnable();
+
+    //变更定时器状态
+    void setTimerState(bool bActive);
+
+    //获取当前最大位置
+    int getMaxPos() const;
+
+    //获取当前设备号
+    int getLastDevID() const;
+
     Q_INVOKABLE QVariant get(int index, const QString &roleName) const;
 
 public:

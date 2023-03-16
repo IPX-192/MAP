@@ -78,6 +78,9 @@ public:
     //加载所有设备
     Q_INVOKABLE bool loadDevINfo();
 
+    //暂停刷新设备
+    Q_INVOKABLE void bResetTimerACtive(bool bActive);
+
     //////设备管理相关///////
     Q_INVOKABLE void setDevAddType(bool type);
 

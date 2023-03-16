@@ -328,6 +328,11 @@ bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth,int maxDev
         return bFlag;
     }
 
+//    if(m_devInfoModel.getMaxPos() >= 1000000)
+//    {
+//        return bFlag;
+//    }
+
     CDevInfoTable* pDevInfoTable = CDatabaseManage::GetInstance()->pDevInfo();
     if(nullptr == pDevInfoTable)
     {
@@ -339,25 +344,48 @@ bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth,int maxDev
     {
         for(int i = 1; i<= devNum; i++)
         {
-            CDevInfo info;
-            info.setIDevID(i);
-            info.setStrDevName(QString::number(i).toStdString());
-            info.setIDevPos(i*devWidth);
-            info.setBHighlight(false);
-            bFlag = pDevInfoTable->addDevInfo(info);
+            int maxPos = m_devInfoModel.getMaxPos();
+            int curDevID = m_devInfoModel.rowCount() + i;
+            int curPos = maxPos + i*devWidth;
+
+            if(curPos < 1000000)
+            {
+                CDevInfo info;
+                info.setIDevID(curDevID);
+                info.setStrDevName(QString::number(curDevID).toStdString());
+                info.setIDevPos(curPos);
+                info.setBHighlight(false);
+                bFlag = pDevInfoTable->addDevInfo(info);
+            }
+            else
+            {
+                return false;
+            }
         }
     }
     //逆序添加的时候是最大设备号开始
     else
     {
-        for(int i = maxDev; i >= devNum; i--)
+        int startID = maxDev - m_devInfoModel.getLastDevID() + 1;
+        for(int i = startID; i >= devNum; i--)
         {
-            CDevInfo info;
-            info.setIDevID(i);
-            info.setStrDevName(QString::number(i).toStdString());
-            info.setIDevPos(i*devWidth);
-            info.setBHighlight(false);
-            bFlag = pDevInfoTable->addDevInfo(info);
+            int maxPos = m_devInfoModel.getMaxPos();
+            int curDevID = i; //- m_devInfoModel.rowCount();
+            int curPos = maxPos + (i - devNum )*devWidth;
+
+            if(curPos < 1000000)
+            {
+                CDevInfo info;
+                info.setIDevID(curDevID);
+                info.setStrDevName(QString::number(curDevID).toStdString());
+                info.setIDevPos(curPos);
+                info.setBHighlight(false);
+                bFlag = pDevInfoTable->addDevInfo(info);
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 
@@ -383,6 +411,11 @@ bool MainFrame::loadDevINfo()
     m_devInfoModel.loadData(vDevInfo);
 
     return bFlag;
+}
+
+void MainFrame::bResetTimerACtive(bool bActive)
+{
+    m_devInfoModel.setTimerState(bActive);
 }
 
 void MainFrame::setDevAddType(bool type)
