@@ -351,7 +351,7 @@ Popup {
                         if(!bNext)
                         {
                             //添加设备个数不能大于最大设备号
-                            if(devNumInput.text > maxDevInput.text)
+                            if(Number(devNumInput.text) > Number(maxDevInput.text))
                             {
                                 devNumTip.text = "添加设备数不能大于最大设备数!"
                                 return
@@ -360,7 +360,7 @@ Popup {
 
                         InterAction.setDevAddType(bNext)
                         InterAction.addDevINfo(bNext,Number(devNumInput.text),Number(devWidthInput.text),Number(maxDevInput.text))
-                        closeTimer.start()
+                        //closeTimer.start()
                     }
                 }
                 onEntered: {
