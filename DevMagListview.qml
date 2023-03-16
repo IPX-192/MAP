@@ -72,7 +72,7 @@ Item {
     }
 
     ListView{
-        id: userInfoListiew
+        id: devInfoListiew
         width: tableWidth
         height: parent.height - headItem.height
         anchors.top: headItem.bottom
@@ -80,9 +80,10 @@ Item {
         anchors.left: headItem.left
         model: DevInfoModel
         clip: true
-        maximumFlickVelocity: itemHeigt * 10
-        flickableDirection: Flickable.VerticalFlick
-        boundsBehavior: Flickable.StopAtBounds
+        maximumFlickVelocity: 1000
+        //flickableDirection: Flickable.VerticalFlick
+        //boundsBehavior: Flickable.StopAtBounds
+        interactive:true
         spacing: -1
 
         delegate: Item {
