@@ -61,6 +61,7 @@ HEADERS += \
     MainFrame.h \
     database/CAbstractConfigInfo.h \
     database/CDatabaseManage.h \
+    database/CDevInfoConfig.h \
     database/CDevInfoTable.h \
     database/CMapOriginConfig.h \
     database/CTagDataTable.h \
@@ -87,6 +88,7 @@ SOURCES += \
         MainFrame.cpp \
         database/CAbstractConfigInfo.cpp \
         database/CDatabaseManage.cpp \
+        database/CDevInfoConfig.cpp \
         database/CDevInfoTable.cpp \
         database/CMapOriginConfig.cpp \
         database/CTagDataTable.cpp \

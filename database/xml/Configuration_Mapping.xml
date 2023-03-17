@@ -54,12 +54,8 @@
   <object name = "TagDataTable">
     <!--标签ID-->
 	<field name = "iTagID"     		type = "integer"   default = "" />
-	<!--保存时间-->
-	
     <!--数据ID-->
 	<field name = "iDataID"     	type = "integer"   default = "" />
-    <!--标签ID-->
-	<field name = "iTagID"     		type = "integer"   default = "" />
 	<!--保存时间-->
 	<field name = "saveTime"     	type = "string"    default = "" />
 	<!--所属地图-->
@@ -89,10 +85,17 @@
     <!--设备ID-->
 	<field name = "iDevID"     		type = "integer"   default = "" />
 	<!--设备号-->
-	<field name = "devName"     	type = "string"     default = "" />
+	<field name = "devName"     	type = "string"    default = "" />
     <!--设备位置-->
-	<field name = "devPos"         	type = "integer"    default = "" />
-
+	<field name = "devPos"         	type = "integer"   default = "" />
+  </object>
+  
+    <!--6.设备配置表-->
+  <object name = "DevConfigTable">
+	<!--设备是否正序排序-->
+	<field name = "bRightOrder"     type = "boolean"   default = "" />
+	<!--最大设备号码-->
+	<field name = "maxDev" 	    	type = "integer"   default = "" />
   </object>
   
  </database>

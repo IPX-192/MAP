@@ -10,6 +10,7 @@ CDatabaseManage::CDatabaseManage()
     ,m_pVersionInfo(nullptr)
     ,m_pTagData(nullptr)
     ,m_pDevInfo(nullptr)
+    ,m_pDevConfig(nullptr)
 {
     //检查数据库表格是否存在
     checkConfigDatabase();
@@ -58,6 +59,12 @@ CDatabaseManage::~CDatabaseManage()
     {
         delete m_pDevInfo;
         m_pDevInfo = nullptr;
+    }
+
+    if( m_pDevConfig != nullptr)
+    {
+        delete m_pDevConfig;
+        m_pDevConfig = nullptr;
     }
 }
 
@@ -119,6 +126,7 @@ void CDatabaseManage::initailizeConfigObject()
     m_pVersionInfo = new CVersionInfoTable(m_pConfigDatabase);
     m_pTagData = new CTagDataTable(m_pConfigDatabase);
     m_pDevInfo = new CDevInfoTable(m_pConfigDatabase);
+    m_pDevConfig = new CDevInfoConfig(m_pConfigDatabase);
 }
 
 //检查配置是否存在更新
@@ -132,6 +140,7 @@ bool CDatabaseManage::checkConfigDatatable()
     bRet &= checkAndUpdateTable(m_pTagInfo, m_bUpgrade);
     bRet &= checkAndUpdateTable(m_pTagData, m_bUpgrade);
     bRet &= checkAndUpdateTable(m_pDevInfo, m_bUpgrade);
+    bRet &= checkAndUpdateTable(m_pDevConfig, m_bUpgrade);
     return false;
 }
 
@@ -269,6 +278,11 @@ bool CDatabaseManage::deleteFileOrFolder(const string &fullPath)
 CDevInfoTable *CDatabaseManage::pDevInfo() const
 {
     return m_pDevInfo;
+}
+
+CDevInfoConfig *CDatabaseManage::pDevConfig() const
+{
+    return m_pDevConfig;
 }
 
 CTagDataTable *CDatabaseManage::pTagData() const

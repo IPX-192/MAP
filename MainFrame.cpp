@@ -393,6 +393,9 @@ bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth,int maxDev
 
     loadDevINfo();
 
+    updateBRightOrderConfig(bRightOrder);
+    updateMaxNumConfig(maxDev);
+
     return true;
 }
 
@@ -418,6 +421,63 @@ bool MainFrame::loadDevINfo()
 void MainFrame::bResetTimerACtive(bool bActive)
 {
     m_devInfoModel.setTimerState(bActive);
+}
+
+bool MainFrame::bDevRightOrder()
+{
+    bool bFlag = true;
+
+    CDevInfoConfig* pDevInfoConfig = CDatabaseManage::GetInstance()->pDevConfig();
+
+    if(nullptr == pDevInfoConfig)
+    {
+        return bFlag;
+    }
+
+    bFlag = pDevInfoConfig->getDevInfoOrderConfig();
+
+    return bFlag;
+}
+
+int MainFrame::getDevMaxNum()
+{
+    bool bFlag = true;
+
+    CDevInfoConfig* pDevInfoConfig = CDatabaseManage::GetInstance()->pDevConfig();
+
+    if(nullptr == pDevInfoConfig)
+    {
+        return bFlag;
+    }
+
+    bFlag = pDevInfoConfig->getDevInfoOrderConfig();
+
+    return bFlag;
+}
+
+void MainFrame::updateBRightOrderConfig(bool bRightOrder)
+{
+
+    CDevInfoConfig* pDevInfoConfig = CDatabaseManage::GetInstance()->pDevConfig();
+
+    if(nullptr == pDevInfoConfig)
+    {
+        return ;
+    }
+
+    pDevInfoConfig->updateOrderConfig(bRightOrder);
+}
+
+void MainFrame::updateMaxNumConfig(int maxnum)
+{
+    CDevInfoConfig* pDevInfoConfig = CDatabaseManage::GetInstance()->pDevConfig();
+
+    if(nullptr == pDevInfoConfig)
+    {
+        return ;
+    }
+
+    pDevInfoConfig->updateMaxDevNumConfig(maxnum);
 }
 
 void MainFrame::setDevAddType(bool type)

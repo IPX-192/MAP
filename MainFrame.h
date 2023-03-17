@@ -81,6 +81,18 @@ public:
     //暂停刷新设备
     Q_INVOKABLE void bResetTimerACtive(bool bActive);
 
+    //获取设备是否正序配置
+    Q_INVOKABLE bool bDevRightOrder();
+
+    //获取最大设备
+    Q_INVOKABLE int getDevMaxNum();
+
+    //更新设备值
+    Q_INVOKABLE void updateBRightOrderConfig(bool bRightOrder);
+
+    //更新最大设备数量
+    Q_INVOKABLE void updateMaxNumConfig(int maxnum);
+
     //////设备管理相关///////
     Q_INVOKABLE void setDevAddType(bool type);
 

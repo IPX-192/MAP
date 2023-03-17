@@ -7,7 +7,7 @@
 #include "CVersionInfoTable.h"
 #include "CTagDataTable.h"
 #include "CDevInfoTable.h"
-
+#include "CDevInfoConfig.h"
 #include "mapsysdatabase.hpp"
 
 //数据库管理类
@@ -24,6 +24,7 @@ public:
     CVersionInfoTable *pVersionInfo() const;
     CTagDataTable *pTagData() const;
     CDevInfoTable *pDevInfo() const;
+    CDevInfoConfig *pDevConfig() const;
 
     //获取单例
     static CDatabaseManage *GetInstance();
@@ -70,6 +71,7 @@ private:
     CVersionInfoTable *m_pVersionInfo;
     CTagDataTable *m_pTagData;
     CDevInfoTable *m_pDevInfo;
+    CDevInfoConfig *m_pDevConfig;
 
     //配置文件路径
     string				  m_strConfigDBPath{""};

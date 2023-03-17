@@ -8,6 +8,7 @@ class TagInfoTable;
 class MapOriginConfig;
 class TagDataTable;
 class DevInfoTable;
+class DevConfigTable;
 class ProductInfoTable : public litesql::Persistent {
 public:
     class Own {
@@ -23,6 +24,7 @@ public:
     litesql::Field<std::string> type;
     static const litesql::FieldType StrSoftVersion;
     litesql::Field<std::string> strSoftVersion;
+    static void initValues();
 protected:
     void defaults();
 public:
@@ -71,6 +73,7 @@ public:
     litesql::Field<std::string> strRole;
     static const litesql::FieldType ItagID;
     litesql::Field<int> itagID;
+    static void initValues();
 protected:
     void defaults();
 public:
@@ -123,6 +126,7 @@ public:
     litesql::Field<int> iPosZ;
     static const litesql::FieldType IStaticTime;
     litesql::Field<int> iStaticTime;
+    static void initValues();
 protected:
     void defaults();
 public:
@@ -167,6 +171,7 @@ public:
     litesql::Field<int> iPosY;
     static const litesql::FieldType IPosZ;
     litesql::Field<int> iPosZ;
+    static void initValues();
 protected:
     void defaults();
 public:
@@ -205,10 +210,10 @@ public:
     litesql::Field<int> id;
     static const litesql::FieldType Type;
     litesql::Field<std::string> type;
-    static const litesql::FieldType IDataID;
-    litesql::Field<int> iDataID;
     static const litesql::FieldType ITagID;
     litesql::Field<int> iTagID;
+    static const litesql::FieldType IDataID;
+    litesql::Field<int> iDataID;
     static const litesql::FieldType SaveTime;
     litesql::Field<std::string> saveTime;
     static const litesql::FieldType IMapID;
@@ -231,6 +236,7 @@ public:
     litesql::Field<std::string> strDepartment;
     static const litesql::FieldType StrRole;
     litesql::Field<std::string> strRole;
+    static void initValues();
 protected:
     void defaults();
 public:
@@ -275,6 +281,7 @@ public:
     litesql::Field<std::string> devName;
     static const litesql::FieldType DevPos;
     litesql::Field<int> devPos;
+    static void initValues();
 protected:
     void defaults();
 public:
@@ -300,6 +307,49 @@ public:
     std::auto_ptr<DevInfoTable> upcastCopy() const;
 };
 std::ostream & operator<<(std::ostream& os, DevInfoTable o);
+class DevConfigTable : public litesql::Persistent {
+public:
+    class Own {
+    public:
+        static const litesql::FieldType Id;
+    };
+    static const std::string type__;
+    static const std::string table__;
+    static const std::string sequence__;
+    static const litesql::FieldType Id;
+    litesql::Field<int> id;
+    static const litesql::FieldType Type;
+    litesql::Field<std::string> type;
+    static const litesql::FieldType BRightOrder;
+    litesql::Field<bool> bRightOrder;
+    static const litesql::FieldType MaxDev;
+    litesql::Field<int> maxDev;
+    static void initValues();
+protected:
+    void defaults();
+public:
+    DevConfigTable(const litesql::Database& db);
+    DevConfigTable(const litesql::Database& db, const litesql::Record& rec);
+    DevConfigTable(const DevConfigTable& obj);
+    const DevConfigTable& operator=(const DevConfigTable& obj);
+protected:
+    std::string insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs);
+    void create();
+    virtual void addUpdates(Updates& updates);
+    virtual void addIDUpdates(Updates& updates);
+public:
+    static void getFieldTypes(std::vector<litesql::FieldType>& ftypes);
+protected:
+    virtual void delRecord();
+    virtual void delRelations();
+public:
+    virtual void update();
+    virtual void del();
+    virtual bool typeIsCorrect() const;
+    std::auto_ptr<DevConfigTable> upcast() const;
+    std::auto_ptr<DevConfigTable> upcastCopy() const;
+};
+std::ostream & operator<<(std::ostream& os, DevConfigTable o);
 class MapSysDatabase : public litesql::Database {
 public:
     MapSysDatabase(std::string backendType, std::string connInfo);

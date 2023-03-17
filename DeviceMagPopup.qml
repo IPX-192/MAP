@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtGraphicalEffects 1.12
 
@@ -9,6 +9,7 @@ Popup {
     property var factorY :1.0
     property var factor  :1.0
     property bool bNext:true
+    property int devMaxNum: 0
     property var devNum:0
     width: 1000
     height: 600
@@ -23,6 +24,13 @@ Popup {
         InterAction.bResetTimerACtive(false)
         InterAction.loadDevINfo()
         devNum = InterAction.getDevNum()
+        bNext = InterAction.bDevRightOrder()
+
+        if(!bNext)
+        {
+            devMaxNum = InterAction.getDevMaxNum()
+        }
+
         devNumTip.text = "最大设备数200,多个设备请分批次添加"
     }
 
@@ -71,7 +79,7 @@ Popup {
         anchors.right: sureBtn.left
         anchors.rightMargin: 20
         anchors.verticalCenter: addDevText.verticalCenter
-        enabled: !bNext
+        enabled: !bNext && devNum === 0
         opacity: bNext ? 0.5 : 1
     }
 
@@ -94,7 +102,7 @@ Popup {
     RadioButton {
         id: nextBtn
         text: qsTr("正序添加")
-        checked: true
+        checked: bNext
         anchors.left: addDevText.right
         anchors.leftMargin: 20 * factorX
         anchors.verticalCenter: addDevText.verticalCenter
@@ -154,6 +162,7 @@ Popup {
         anchors.verticalCenter: nextBtn.verticalCenter
         enabled: nextBtn.enabled
         opacity: nextBtn.opacity
+        checked: !bNext
         MouseArea{
             anchors.fill: parent
             onClicked: {
