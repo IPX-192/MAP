@@ -9,7 +9,7 @@ Popup {
     property var factorY :1.0
     property var factor  :1.0
     property bool bNext:true
-    property int devMaxNum: 0
+    property alias devMaxNum: maxDevInput.text
     property var devNum:0
     width: 1000
     height: 600
@@ -26,10 +26,11 @@ Popup {
         devNum = InterAction.getDevNum()
         bNext = InterAction.bDevRightOrder()
 
-        if(!bNext)
-        {
-            devMaxNum = InterAction.getDevMaxNum()
-        }
+//        if(!bNext)
+//        {
+//            devMaxNum = String(InterAction.getDevMaxNum())
+//        }
+
 
         devNumTip.text = "最大设备数200,多个设备请分批次添加"
     }
