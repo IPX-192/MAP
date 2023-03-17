@@ -45,6 +45,8 @@ public:
 
     bool operator==(const COnlineTagInfo& info) const ;
 
+    COnlineTagInfo& operator=(const COnlineTagInfo& info);
+
 private:
     string m_strUserID{""};
     string m_strUsername{""};

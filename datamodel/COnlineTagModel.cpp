@@ -40,7 +40,22 @@ void COnlineTagInfoModel::addData(COnlineTagInfo &info)
 //            m_userTagInfoData.removeAt(i);
 //        }
 //    }
-    m_userTagInfoData.push_front(info);
+    //判断数据是否存在，若存在则更新 不存在则添加
+    bool bUpdate = false;
+    for(int i = 0; i < m_userTagInfoData.size(); i++)
+    {
+        if(m_userTagInfoData[i].iTagID() == info.iTagID())
+        {
+            bUpdate = true;
+            m_userTagInfoData[i] = info;
+        }
+    }
+
+    if(!bUpdate)
+    {
+        m_userTagInfoData.push_front(info);
+    }
+
     emit layoutChanged();
 }
 

@@ -133,6 +133,18 @@ void COnlineTagInfo::setStrRole(const string &strRole)
 bool COnlineTagInfo::operator==(const COnlineTagInfo &info) const
 {
     bool bEqual = (m_iTagID == info.m_iTagID) && (m_iPosX == info.m_iPosX) &&
-                  (m_iPosY == info.m_iPosY) && (m_iPosZ == info.m_iPosZ) && (m_iStaticTime == info.m_iStaticTime);
+                  (m_iPosY == info.m_iPosY) && (m_iPosZ == info.m_iPosZ) &&
+                  (m_iStaticTime == info.m_iStaticTime) && (m_iBattery == info.iBattery());
     return bEqual;
+}
+
+COnlineTagInfo &COnlineTagInfo::operator=(const COnlineTagInfo &info)
+{
+    m_iTagID = info.iTagID();
+    m_iPosX = info.iPosX();
+    m_iPosY = info.iPosY();
+    m_iPosZ = info.iPosZ();
+    m_iStaticTime = info.iStaticTime();
+    m_iBattery = info.iBattery();
+    return *this;
 }
