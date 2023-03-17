@@ -366,13 +366,13 @@ bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth,int maxDev
     //逆序添加的时候是最大设备号开始
     else
     {
-        int startID = maxDev - m_devInfoModel.getLastDevID();
-        int count = 0;
-        for(int i = startID, j = 1; j <= devNum; i--, j++)
+        int startID = maxDev - m_devInfoModel.rowCount();
+
+        for(int i = 0; i< devNum; i++)
         {
             int maxPos = m_devInfoModel.getMaxPos();
-            int curDevID = i; //- m_devInfoModel.rowCount();
-            int curPos = maxPos + j*devWidth;
+            int curDevID = startID - i;
+            int curPos = maxPos + ( i + 1 )*devWidth;
 
             if(curPos < 1000000)
             {
@@ -387,6 +387,7 @@ bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth,int maxDev
             {
                 return false;
             }
+
         }
     }
 
