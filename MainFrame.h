@@ -101,6 +101,7 @@ public:
     Q_INVOKABLE int  getDevNum();
 signals:
     Q_INVOKABLE void sigSetDevAddEnable(bool next);
+    Q_INVOKABLE void sigSetDevWidth(int width);
 
 public slots:
 

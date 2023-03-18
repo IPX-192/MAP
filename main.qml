@@ -408,7 +408,7 @@ Window {
                 id: test
                 x: devPos / 500
                 y: 0
-                width: 1
+                width: 2
                 height: 30
                 color: model.bLight  ? "green" : "gray"
                 MouseArea {
@@ -430,6 +430,14 @@ Window {
                     text: model.devName
                 }
             }
+        }
+
+    }
+
+    Connections{
+        target: InterAction
+        onSigSetDevWidth:{
+
         }
 
     }

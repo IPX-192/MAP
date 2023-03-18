@@ -188,7 +188,41 @@ void CWebSocketServer::parseLabelMeg(QJsonObject &object)
     //查询人的信息
     qDebug()<<"*********tagId****"<<tagId;
 
+    CDevInfo dev;
+    CDevInfo dev1;
+
+    int devNum = 0;
+
     //显示坐标位置
+    for (std::vector<CDevInfo>::iterator it = m_vecDevInfo.begin(); it != m_vecDevInfo.end(); ++it)
+    {
+        // 使用迭代器访问每个元素
+        dev = *it;
+
+        if(it + 1 < m_vecDevInfo.end())
+        {
+            dev1 = *(it + 1);
+
+            //如果X坐标小于第一个设备
+
+            if(coordX <= dev.iDevPos())
+            {
+                devNum = dev.iDevID();
+                break;
+            }
+
+            //如果X坐标位于两者之间
+            if(coordX > dev.iDevPos() && coordX <= dev1.iDevPos())
+            {
+                devNum = dev1.iDevID();
+                break;
+            }
+            else
+            {
+                devNum = 0;
+            }
+        }
+    }
 
     emit setCurCoord(PixelX,PixelY,tagId);
 
@@ -196,7 +230,7 @@ void CWebSocketServer::parseLabelMeg(QJsonObject &object)
     CTagInfo tagInfo;
     tagInfo.setIPosX(coordX);
     tagInfo.setIPosY(coordY);
-    tagInfo.setIPosZ(coordZ);
+    tagInfo.setIPosZ(devNum);
     tagInfo.setIMapID(mapId);
     tagInfo.setITagID(tagId);
     tagInfo.setIBattery(battery);
@@ -338,7 +372,8 @@ void CWebSocketServer::processByteArrayMessage(QByteArray array)
 void CWebSocketServer::onRecvDataFinish()
 {
     m_bFirstRev = true;
-    emit clearDrawCoord();
-    emit clearFromTagData();
+    m_vecDevInfo.clear();
+    //    emit clearDrawCoord();
+    //    emit clearFromTagData();
 }
 

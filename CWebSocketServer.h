@@ -89,7 +89,6 @@ private:
     CClientSystem       m_ClientSystem;
     QList<QWebSocket *> m_clients;
     QWebSocket *pSocket;
-    QMap<int,int> m_mapDev;
     vector<CDevInfo> m_vecDevInfo;
     QTimer        m_RecvTimer;
     bool          m_bConnectStatus{false};
