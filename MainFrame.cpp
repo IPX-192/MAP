@@ -301,23 +301,26 @@ bool MainFrame::delTagData(QString dataID)
 
 bool MainFrame::delAllDevInfo()
 {
-    bool bFlag = false;
+    //    bool bFlag = false;
 
-    CDevInfoTable* pDevInfoTable = CDatabaseManage::GetInstance()->pDevInfo();
-    if(nullptr == pDevInfoTable)
-    {
-        return bFlag;
-    }
-    CDevInfo devinfo;
-    bFlag = pDevInfoTable->delDevInfo(devinfo, true);
+    //    CDevInfoTable* pDevInfoTable = CDatabaseManage::GetInstance()->pDevInfo();
+    //    if(nullptr == pDevInfoTable)
+    //    {
+    //        return bFlag;
+    //    }
+    //    CDevInfo devinfo;
+    //    bFlag = pDevInfoTable->delDevInfo(devinfo, true);
 
-    //刷新界面显示
-    if(bFlag)
-    {
-        m_devInfoModel.deleteAll();
-    }
+    //    //刷新界面显示
+    //    if(bFlag)
+    //    {
+    //        m_devInfoModel.deleteAll();
+    //    }
 
-    return bFlag;
+    //清除设备匹配
+    m_SocketServer.clearDevMap();
+    return true;
+    // return bFlag;
 }
 
 bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth,int maxDev)
@@ -328,10 +331,10 @@ bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth,int maxDev
         return bFlag;
     }
 
-//    if(m_devInfoModel.getMaxPos() >= 1000000)
-//    {
-//        return bFlag;
-//    }
+    //    if(m_devInfoModel.getMaxPos() >= 1000000)
+    //    {
+    //        return bFlag;
+    //    }
 
     CDevInfoTable* pDevInfoTable = CDatabaseManage::GetInstance()->pDevInfo();
     if(nullptr == pDevInfoTable)
@@ -356,6 +359,8 @@ bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth,int maxDev
                 info.setIDevPos(curPos);
                 info.setBHighlight(false);
                 bFlag = pDevInfoTable->addDevInfo(info);
+                //添加设备
+                //m_SocketServer.setDevMap(devNum,curPos);
             }
             else
             {
@@ -382,12 +387,13 @@ bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth,int maxDev
                 info.setIDevPos(curPos);
                 info.setBHighlight(false);
                 bFlag = pDevInfoTable->addDevInfo(info);
+                //添加设备
+                //m_SocketServer.setDevMap(devNum,curPos);
             }
             else
             {
                 return false;
             }
-
         }
     }
 

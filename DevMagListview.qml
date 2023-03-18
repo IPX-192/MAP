@@ -61,7 +61,7 @@ Item {
                 //普通表头框
                 Text {
                     id: headDevWidthText
-                    text: "设备位置"
+                    text: "设备号"
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
                     font.bold: true

@@ -189,3 +189,8 @@ int CDevInfoModel::getLastDevID() const
     }
     return 0;
 }
+
+void CDevInfoModel::getDevNum(int curX)
+{
+    m_devInfoData.size();
+}

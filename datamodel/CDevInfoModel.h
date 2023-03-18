@@ -50,6 +50,8 @@ public:
     //获取当前设备号
     int getLastDevID() const;
 
+    void getDevNum(int curX);
+
     Q_INVOKABLE QVariant get(int index, const QString &roleName) const;
 
 public:

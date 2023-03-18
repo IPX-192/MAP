@@ -9,10 +9,12 @@
 #include <QQmlEngine>
 #include <QtWebSockets/QWebSocketServer>
 #include <QtWebSockets/QWebSocket>
+#include <QMap>
 #include "CClientSystem.h"
 #include "./datamanager/CTagInfo.h"
+#include "./database/CDevInfoTable.h"
+#include "./database/CDatabaseManage.h"
 
-#include <QTime>
 
 #if _MSC_VER >= 1600  //MSVC2015>1899,  MSVC_VER=14.0
 #pragma execution_character_set("utf-8")
@@ -44,6 +46,11 @@ public:
     Q_INVOKABLE void setClientStatus(bool connect);
 
     Q_INVOKABLE void stopTranspond();
+
+    //设置设备位置
+    void setDevMap(int devNum,int pos);
+
+    void clearDevMap();
 
 
 signals:
@@ -82,9 +89,12 @@ private:
     CClientSystem       m_ClientSystem;
     QList<QWebSocket *> m_clients;
     QWebSocket *pSocket;
-    QTimer     m_RecvTimer;
-    bool       m_bConnectStatus{false};
-    bool       m_bTranspond{false};
+    QMap<int,int> m_mapDev;
+    vector<CDevInfo> m_vecDevInfo;
+    QTimer        m_RecvTimer;
+    bool          m_bConnectStatus{false};
+    bool          m_bTranspond{false};
+    bool          m_bFirstRev{true};
 };
 
 #endif // CWEBSOCKETSERVER_H

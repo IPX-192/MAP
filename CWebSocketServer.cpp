@@ -121,6 +121,16 @@ void CWebSocketServer::stopTranspond()
     m_ClientSystem.stopConnect();
 }
 
+void CWebSocketServer::setDevMap(int devNum, int pos)
+{
+
+}
+
+void CWebSocketServer::clearDevMap()
+{
+
+}
+
 void CWebSocketServer::parseLabelMeg(QJsonArray &array)
 {/*
     //标签卡的数据为7个JSON对象组合而成,依次解析即可
@@ -176,12 +186,11 @@ void CWebSocketServer::parseLabelMeg(QJsonObject &object)
     int PixelY = coordY / 500;
 
     //查询人的信息
-    //qDebug()<<"*********tagId****"<<tagId;
+    qDebug()<<"*********tagId****"<<tagId;
 
     //显示坐标位置
-    emit setCurCoord(PixelX,PixelY,tagId);
 
-    //增加设备位置的显示
+    emit setCurCoord(PixelX,PixelY,tagId);
 
     //显示对应的表格数据
     CTagInfo tagInfo;
@@ -215,6 +224,7 @@ void CWebSocketServer::socketDisconnected()
 //后台数据发送的是字符串
 void CWebSocketServer::processTextMessage(QString message)
 {
+
     //关闭超时定时器
     m_RecvTimer.stop();
     emit clearDrawCoord();
@@ -224,7 +234,17 @@ void CWebSocketServer::processTextMessage(QString message)
     {
         m_ClientSystem.sendMeg(message);
     }
-    //qDebug()<<array;
+    //第一次收到数据缓存设备信息
+    if(m_bFirstRev)
+    {
+        CDevInfoTable* pDevInfoTable = CDatabaseManage::GetInstance()->pDevInfo();
+        if(nullptr == pDevInfoTable)
+        {
+            return;
+        }
+        pDevInfoTable->getAllDevInfo(m_vecDevInfo);
+        m_bFirstRev = false;
+    }
     QJsonObject groupObj;
     QJsonDocument m_document;
 
@@ -317,57 +337,8 @@ void CWebSocketServer::processByteArrayMessage(QByteArray array)
 
 void CWebSocketServer::onRecvDataFinish()
 {
+    m_bFirstRev = true;
     emit clearDrawCoord();
     emit clearFromTagData();
 }
 
-//数据是JSON格式，解析后判断是基站相关还是标签卡相关
-//void CWebSocketServer::processByteArrayMessage(QByteArray array)
-//{
-//    qDebug()<<array;
-
-//    QJsonObject groupObj;
-//    QJsonDocument m_document;
-
-//    QJsonParseError error;
-//    m_document = QJsonDocument::fromJson(array, &error);
-
-
-//    //解析JSON数组，数组里面还包括JSON对象和JSON数组
-
-//    QJsonArray mesArray;
-
-//    //步骤1：获取对应的QJsonArray数组
-//    if (m_document.isArray()) {
-//        mesArray = m_document.array();
-
-//        //步骤2：用下标访问的方式来获取值（QJsonValue）,如果其中一个值是对象（QJsonObject）,就获取这个对象，然后按照对象的解析方法来解析。
-//        for (int i = 0; i < array.size(); i++) {
-//            if (mesArray.at(i).isObject())
-//            {
-//                QJsonObject object = mesArray.at(i).toObject();
-
-//                if (object.contains("MsgType")) {
-
-//                    //开始判断报文类型
-//                    int megType =  object.value("MsgType").toInt();
-//                    qDebug() <<megType;
-
-//                    //报文为基站则暂时不管，为标签卡则处理
-//                    if(megType == 1)
-//                    {
-//                        return;
-//                    }
-//                }
-
-//                //解析标签卡的数据
-//                if(object.contains("AncList"))
-//                {
-
-//                    QJsonArray lableArray = object.value("AncList").toArray();
-//                    parseLabelMeg(lableArray);
-//                }
-//            }
-//        }
-//    }
-//}
