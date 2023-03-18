@@ -26,10 +26,10 @@ Popup {
         devNum = InterAction.getDevNum()
         bNext = InterAction.bDevRightOrder()
 
-//        if(!bNext)
-//        {
-//            devMaxNum = String(InterAction.getDevMaxNum())
-//        }
+        //        if(!bNext)
+        //        {
+        //            devMaxNum = String(InterAction.getDevMaxNum())
+        //        }
 
 
         devNumTip.text = "最大设备数200,多个设备请分批次添加"
@@ -360,21 +360,32 @@ Popup {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
+                    //添加设备之前获取一次设备数量
+                    devNum = InterAction.getDevNum()
                     if(Number(devNumInput.text) > 0&& Number(devWidthInput.text) > 0  )
                     {
                         //如果是逆序添加
                         if(!bNext)
                         {
+                            console.log("see see devNum" + devNum)
                             //添加设备个数不能大于最大设备号
                             if(Number(devNumInput.text) > Number(maxDevInput.text))
                             {
                                 devNumTip.text = "添加设备数不能大于最大设备数!"
                                 return
                             }
+                            //添加总个数不能大于最大设备号
+                            if(devNum >= Number(maxDevInput.text))
+                            {
+                                devNumTip.text = "添加设备数已满！"
+                                return
+                            }
                         }
 
                         InterAction.setDevAddType(bNext)
                         InterAction.addDevINfo(bNext,Number(devNumInput.text),Number(devWidthInput.text),Number(maxDevInput.text))
+                        //添加完设备后获取设备数量
+                        devNum = InterAction.getDevNum()
                         //closeTimer.start()
                     }
                 }
