@@ -373,7 +373,7 @@ void CWebSocketServer::onRecvDataFinish()
 {
     m_bFirstRev = true;
     m_vecDevInfo.clear();
-    //    emit clearDrawCoord();
-    //    emit clearFromTagData();
+    emit clearDrawCoord();
+    emit clearFromTagData();
 }
 

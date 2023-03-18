@@ -413,11 +413,11 @@ Window {
             model: DevInfoModel
             delegate: Rectangle {
                 id: test
-                x: devPos / 500
+                x:index * 40
                 y: 0
-                width: 2
+                width: 10
                 height: 30
-                color: model.bLight  ? "green" : "gray"
+                color: model.bLight  ? "red" : "gray"
                 MouseArea {
                     anchors.fill: parent
                     hoverEnabled: true
