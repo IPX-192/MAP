@@ -374,7 +374,7 @@ Popup {
                                 return
                             }
                             //添加总个数不能大于最大设备号
-                            if(devNum >= Number(maxDevInput.text))
+                            if(devNum +  Number(devNumInput.text)  > Number(maxDevInput.text))
                             {
                                 devNumTip.text = "添加设备数已满！"
                                 return

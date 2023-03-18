@@ -42,7 +42,7 @@ Item {
                 //普通表头框
                 Text {
                     id: headDevNumText
-                    text: "设备号1"
+                    text: "设备号"
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
                     font.bold: true
@@ -61,7 +61,7 @@ Item {
                 //普通表头框
                 Text {
                     id: headDevWidthText
-                    text: "设备号"
+                    text: "设备位置"
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
                     font.bold: true
