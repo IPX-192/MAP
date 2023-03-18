@@ -181,6 +181,8 @@ void CWebSocketServer::parseLabelMeg(QJsonObject &object)
     //显示坐标位置
     emit setCurCoord(PixelX,PixelY,tagId);
 
+    //增加设备位置的显示
+
     //显示对应的表格数据
     CTagInfo tagInfo;
     tagInfo.setIPosX(coordX);

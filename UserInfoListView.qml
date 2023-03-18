@@ -191,7 +191,7 @@ Item {
 
             Rectangle {
                 id: headKwhRect
-                width: tableWidth * 0.05 + 8
+                width: tableWidth * 0.05 + 10
                 height: itemHeigt
                 color: "#2E529B"
                 border.color: "#49649B"
