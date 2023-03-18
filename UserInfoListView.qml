@@ -425,7 +425,7 @@ Item {
                 anchors.leftMargin: -1
 
                 Text {
-                    text: posZ  //暂时用Z代替
+                    text: posZ === "0" ? "--" : posZ  //暂时用Z代替
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"

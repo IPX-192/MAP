@@ -391,7 +391,7 @@ bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth,int maxDev
         }
     }
 
-    emit sigSetDevWidth(devNum);
+    emit sigSetDevWidth(devWidth);
     loadDevINfo();
     updateBRightOrderConfig(bRightOrder);
     updateMaxNumConfig(maxDev);

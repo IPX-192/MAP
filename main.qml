@@ -28,6 +28,8 @@ Window {
 
     property bool bTranspond:false
 
+    property var devPosWidth:1
+
     //flags: Qt.FramelessWindowHint | Qt.Window
 
     FontLoader{
@@ -387,6 +389,11 @@ Window {
         }
     }
 
+    function getDevPosWidth(width)
+    {
+
+    }
+
     //设备显示
     Item {
         id: devItem
@@ -432,16 +439,27 @@ Window {
             }
         }
 
-    }
+        Connections{
+            target: InterAction
+            onSigSetDevWidth:{
 
-    Connections{
-        target: InterAction
-        onSigSetDevWidth:{
+                if(width <= 1000)
+                {
+                    devPosWidth = 1
+                }
 
+                else if(width > 1000 && width <= 3000 )
+                {
+                    devPosWidth = 2
+                }
+
+                else
+                {
+                    devPosWidth = 3
+                }
+            }
         }
-
     }
-
 
     //底部栏
     Rectangle{
