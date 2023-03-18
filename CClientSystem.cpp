@@ -29,6 +29,11 @@ void CClientSystem::sendMeg(QByteArray array)
     m_websocket.sendBinaryMessage(array);
 }
 
+void CClientSystem::sendMeg(QString meg)
+{
+
+}
+
 //连接上之后
 void CClientSystem::onconnected()
 {

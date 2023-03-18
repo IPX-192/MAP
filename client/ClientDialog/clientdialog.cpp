@@ -183,11 +183,13 @@ void ClientDialog::onSendButtonClicked()
     QJsonDocument document;
     document.setObject(groupObj);
     QByteArray array_byte = document.toJson(QJsonDocument::Compact);
-    //    QString hdwHeartRate(array_byte);
+    QString hdwHeartRate(array_byte);
 
     //qDebug()<<"see see"<<jsString;
 
-    m_websocket.sendBinaryMessage(array_byte);
+    // m_websocket.sendBinaryMessage(array_byte);
+
+    m_websocket.sendTextMessage(hdwHeartRate);
 }
 //Çå³ýÄÚÈÝ
 void ClientDialog::onCleanButtonClicked()

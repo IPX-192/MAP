@@ -82,7 +82,7 @@ Item {
 
             Rectangle {
                 id: headIDRect
-                width: tableWidth * 0.15
+                width: tableWidth * 0.12
                 height: itemHeigt
                 color: "#2E529B"
                 border.color: "#49649B"
@@ -100,7 +100,7 @@ Item {
 
             Rectangle {
                 id: headDeptRect
-                width: tableWidth * 0.15
+                width: tableWidth * 0.12
                 height: itemHeigt
                 color: "#2E529B"
                 border.color: "#49649B"
@@ -118,7 +118,7 @@ Item {
 
             Rectangle {
                 id: headRoleRect
-                width: tableWidth * 0.15
+                width: tableWidth * 0.12
                 height: itemHeigt
                 color: "#2E529B"
                 border.color: "#49649B"
@@ -162,6 +162,25 @@ Item {
                 //普通表头框
                 Text {
                     text: "坐标y(mm)"
+                    font.pixelSize: 16
+                    font.family: "Microsoft YaHei"
+                    font.bold: true
+                    color: "#D6D6D6"
+                    anchors.centerIn: parent
+                }
+            }
+
+            //设备位置
+            Rectangle {
+                id: headDevRect
+                width: tableWidth * 0.09
+                height: itemHeigt
+                color: "#2E529B"
+                border.color: "#49649B"
+
+                //普通表头框
+                Text {
+                    text: "设备位置"
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
                     font.bold: true
@@ -395,6 +414,29 @@ Item {
                 }
             }
 
+            //设备位置
+            Rectangle {
+                id: devRect
+                width: headDevRect.width
+                height: itemHeigt
+                color: index % 2 === 0 ? "#213B42" : "#000000"
+                border.color: "#1A292D"
+                anchors.left: posYRect.right
+                anchors.leftMargin: -1
+
+                Text {
+                    text: posZ  //暂时用Z代替
+                    width: parent.width
+                    font.pixelSize: 16
+                    font.family: "Microsoft YaHei"
+                    color: "#D6D6D6"
+                    anchors.centerIn: parent
+                    fontSizeMode: Text.Fit
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
+                }
+            }
+
             //电量
             Rectangle {
                 id: batteryRect
@@ -402,7 +444,7 @@ Item {
                 height: itemHeigt
                 color: index % 2 === 0 ? "#213B42" : "#000000"
                 border.color: "#1A292D"
-                anchors.left: posYRect.right
+                anchors.left: devRect.right
                 anchors.leftMargin: -1
 
                 Text {

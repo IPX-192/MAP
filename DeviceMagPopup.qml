@@ -367,7 +367,6 @@ Popup {
                         //如果是逆序添加
                         if(!bNext)
                         {
-                            console.log("see see devNum" + devNum)
                             //添加设备个数不能大于最大设备号
                             if(Number(devNumInput.text) > Number(maxDevInput.text))
                             {

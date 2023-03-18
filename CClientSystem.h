@@ -19,6 +19,8 @@ public:
     //发送消息
     void sendMeg(QByteArray array);
 
+    void sendMeg(QString meg);
+
 public slots:
     void onconnected();
     void onTextMessageReceived(const QString &message);
