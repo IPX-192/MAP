@@ -63,6 +63,7 @@ private:
     //在线标签数据
     QVector< CDevInfo > m_devInfoData;
     QHash<int, QByteArray> m_roleName;
+    QMap<int, QPair<int, int>> m_devRanges;
     int m_maxPos{0};
     int m_spacing{0};
     QTimer m_timer;

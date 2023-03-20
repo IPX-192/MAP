@@ -15,26 +15,6 @@ CDevInfoModel::CDevInfoModel(QObject *parent)
 
     // 启动定时器
     m_timer.start();
-
-    //    CDevInfo test;
-    //    test.setIDevID(1);
-    //    test.setIDevPos(20000);
-
-    //    test.setBHighlight(true);
-    //    test.setStrDevName("dev1");
-    //    m_devInfoData.push_back(test);
-
-    //    test.setIDevID(2);
-    //    test.setIDevPos(20000);
-    //    test.setBHighlight(false);
-    //    test.setStrDevName("dev2");
-    //    m_devInfoData.push_back(test);
-
-    //    test.setIDevID(3);
-    //    test.setIDevPos(50000);
-    //    test.setBHighlight(true);
-    //    test.setStrDevName("dev3");
-    //    m_devInfoData.push_back(test);
 }
 
 void CDevInfoModel::loadData(const vector<CDevInfo> &vecTag)
@@ -45,6 +25,8 @@ void CDevInfoModel::loadData(const vector<CDevInfo> &vecTag)
     }
 
     m_devInfoData.clear();
+    m_devRanges.clear();
+    int lastRange = 0;
 
     for(auto it = vecTag.begin(); it != vecTag.end(); ++it)
     {
@@ -54,6 +36,9 @@ void CDevInfoModel::loadData(const vector<CDevInfo> &vecTag)
         info.setStrDevName(it->strDevName());
         info.setBHighlight(false);
         m_devInfoData.push_back(info);
+
+        m_devRanges.insert(info.iDevID(), {lastRange, it->iDevPos()});
+        lastRange = it->iDevPos() + 1;
     }
 
     //设置最大距离
@@ -95,14 +80,17 @@ bool CDevInfoModel::updateDevStatus(int pos)
         return false;
     }
 
-    int index = pos / m_spacing - 1;
-
-    if(index >= 0)
+    for (auto it = m_devRanges.constBegin(); it != m_devRanges.constEnd(); ++it)
     {
-        updateRowData(true, index);
+       if (pos >= it.value().first && pos < it.value().second)
+       {
+           //it.key()是设备编号，此处参数应为index,故减1
+           updateRowData(true, it.key() - 1);
+           return true;
+       }
     }
 
-    return true;
+    return false;
 }
 
 void CDevInfoModel::initDevStatus()
