@@ -25,7 +25,8 @@ public:
         UserNameRole,
         UserDepartmentRole,
         UserRole,
-        UserIDRole
+        UserIDRole,
+        SaveTime
     };
 
 public:
@@ -42,6 +43,9 @@ public:
 
     //删除一行
     void deleteRow(QString userID);
+
+    //删除所有
+    void delAllData();
 
 public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;

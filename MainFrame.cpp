@@ -8,6 +8,7 @@
 #include <QNetworkInterface>
 #include <QBitmap>
 #include <QFileInfoList>
+#include <QDateTime>
 
 MainFrame::MainFrame(QObject *parent)
 {
@@ -299,6 +300,30 @@ bool MainFrame::delTagData(QString dataID)
     return bFlag;
 }
 
+bool MainFrame::delAllTagData()
+{
+    bool bFlag = false;
+
+    CTagDataTable* pTagDataTable = CDatabaseManage::GetInstance()->pTagData();
+
+
+    if(nullptr == pTagDataTable)
+    {
+        return bFlag;
+    }
+
+    CTagData tagData;
+    bFlag = pTagDataTable->delHistoryData(tagData, true);
+
+    //刷新界面显示
+    if(bFlag)
+    {
+        m_tagDataModel.delAllData();
+    }
+
+    return bFlag;
+}
+
 bool MainFrame::delAllDevInfo()
 {
     bool bFlag = false;
@@ -547,6 +572,11 @@ bool MainFrame::addHistoryTagData(COnlineTagInfo &info)
     data.setIBattery(info.iBattery());
     data.setStrUsername(info.strUsername());
     data.setStrDepartment(info.strDepartment());
+
+    //数据保存时间
+    QDateTime date = QDateTime::currentDateTime();
+    QString currentDateTimeStr = date.toString("MM-dd hh:mm:ss");
+    data.setSaveTime(currentDateTimeStr.toStdString());
 
     CTagDataTable* pTagDataTable = CDatabaseManage::GetInstance()->pTagData();
 

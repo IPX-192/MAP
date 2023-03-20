@@ -140,3 +140,13 @@ void CTagData::setIDataID(int iDataID)
 {
     m_iDataID = iDataID;
 }
+
+string CTagData::saveTime() const
+{
+    return m_saveTime;
+}
+
+void CTagData::setSaveTime(const string &saveTime)
+{
+    m_saveTime = saveTime;
+}

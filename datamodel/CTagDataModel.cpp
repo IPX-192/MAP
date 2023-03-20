@@ -14,6 +14,7 @@ CTagDataModel::CTagDataModel(QObject *parent)
     m_roleName.insert(UserIDRole, "userID");
     m_roleName.insert(UserDepartmentRole, "department");
     m_roleName.insert(UserRole, "userRole");
+    m_roleName.insert(SaveTime, "saveTime");
 }
 
 void CTagDataModel::loadData(const vector<CTagData> &vecTag)
@@ -57,6 +58,12 @@ void CTagDataModel::deleteRow(QString dataID)
         }
     }
 
+    emit layoutChanged();
+}
+
+void CTagDataModel::delAllData()
+{
+    m_TagData.clear();
     emit layoutChanged();
 }
 
@@ -124,6 +131,9 @@ QVariant CTagDataModel::data(const QModelIndex &index, int role) const
     {
         return eleData.iStaticTime();
     }
+    case SaveTime:
+        return QString::fromStdString(eleData.saveTime());
+
     default:
         return QVariant();
     }

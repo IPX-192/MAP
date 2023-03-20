@@ -45,6 +45,7 @@ bool CTagDataTable::addHistoryData(const CTagData &info)
         tag.iPosY    = info.iPosY();
         tag.iPosZ    = info.iPosZ();
         tag.iStaticTime = info.iStaticTime();
+        tag.saveTime = info.saveTime();
         tag.strUserName = info.strUsername();
         tag.strUserID = info.strUserID();
         tag.strDepartment = info.strDepartment();
@@ -87,6 +88,8 @@ bool CTagDataTable::delHistoryData(const CTagData &info, bool bDeleteAll)
             {
                 element.del();
             }
+
+            bSuccess = true;
 
             m_pDatabase->commit();
         }
@@ -153,6 +156,7 @@ bool CTagDataTable::getAllHistoryData(vector<CTagData> &vecDatas)
             test.setStrUserID(tag.strUserID);
             test.setStrRole(tag.strRole);
             test.setStrUsername(tag.strUserName);
+            test.setSaveTime(tag.saveTime);
             test.setStrDepartment(tag.strDepartment);
 
             vecDatas.push_back(test);
@@ -191,6 +195,7 @@ bool CTagDataTable::getHistoryDataByCondition(const string &strCondition, vector
                                                                Like(TagDataTable::StrUserID,"%"+strCondition+"%") ||
                                                                Like(TagDataTable::StrRole,"%"+strCondition+"%") ||
                                                                Like(TagDataTable::StrUserName,"%"+strCondition+"%") ||
+                                                               Like(TagDataTable::SaveTime,"%"+strCondition+"%") ||
                                                                Like(TagDataTable::StrDepartment,"%"+strCondition+"%")),
                              select<TagDataTable>(*m_pDatabase,Like(TagDataTable::IMapID,"%"+strCondition+"%"))).cursor();
 

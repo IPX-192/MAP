@@ -46,6 +46,9 @@ public:
     int iDataID() const;
     void setIDataID(int iDataID);
 
+    string saveTime() const;
+    void setSaveTime(const string &saveTime);
+
 private:
     int m_iDataID{-1};
     int m_iTagID{-1};
@@ -55,6 +58,7 @@ private:
     int m_iPosY{0};
     int m_iPosZ{0};
     int m_iStaticTime{0};
+    string m_saveTime;
     string m_strUserID;
     string m_strUsername;
     string m_strDepartment;

@@ -69,6 +69,9 @@ public:
     //删除指定历史数据
     Q_INVOKABLE bool delTagData(QString dataID);
 
+    //删除指定历史数据
+    Q_INVOKABLE bool delAllTagData();
+
     //删除所有设备
     Q_INVOKABLE bool delAllDevInfo();
 

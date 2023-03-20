@@ -30,11 +30,26 @@ Popup {
     }
 
     Button {
+        id: delAllBtn
+        width: 200
+        height: 35
+        text: "删除所有数据"
+        anchors.right: parent.horizontalCenter
+        anchors.rightMargin: 30
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 15
+        onClicked: {
+            InterAction.delAllTagData()
+        }
+    }
+
+    Button {
         id: closeBtn
         width: 200
         height: 35
         text: "关闭弹窗"
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: parent.horizontalCenter
+        anchors.leftMargin: 30
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 15
         onClicked: {
@@ -161,7 +176,7 @@ Popup {
 
             Rectangle {
                 id: headRoleRect
-                width: 908 * 0.12
+                width: 908 * 0.11
                 height: 35
                 color: "#2E529B"
                 border.color: "#49649B"
@@ -215,7 +230,7 @@ Popup {
 
             Rectangle {
                 id: headBatteryYRect
-                width: 908 * 0.06
+                width: 908 * 0.05
                 height: 35
                 color: "#2E529B"
                 border.color: "#49649B"
@@ -233,14 +248,14 @@ Popup {
 
             Rectangle {
                 id: headTimeRect
-                width: 908 * 0.09
+                width: 908 * 0.11
                 height: 35
                 color: "#2E529B"
                 border.color: "#49649B"
 
                 //普通表头框
                 Text {
-                    text: "静止时间"
+                    text: "保存时间"
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
                     font.bold: true
@@ -510,9 +525,9 @@ Popup {
                 anchors.leftMargin: -1
 
                 Text {
-                    text: staticTime
+                    text: saveTime
                     width: parent.width
-                    font.pixelSize: 16
+                    font.pixelSize: 13
                     font.family: "Microsoft YaHei"
                     color: "#000000"
                     anchors.centerIn: parent
