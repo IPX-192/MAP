@@ -396,50 +396,50 @@ Window {
 
 
     //设备显示
-    Item {
-        id: devItem
-        width: mapItem.width
-        height: 30
-        anchors.left: mapItem.left
-        anchors.top: mapItem.bottom
-        anchors.topMargin: 5
+    //    Item {
+    //        id: devItem
+    //        width: mapItem.width
+    //        height: 30
+    //        anchors.left: mapItem.left
+    //        anchors.top: mapItem.bottom
+    //        anchors.topMargin: 5
 
-        Component.onCompleted: {
-            InterAction.loadDevINfo()
-        }
+    //        Component.onCompleted: {
+    //            InterAction.loadDevINfo()
+    //        }
 
-        Repeater {
-            width: parent.width
-            height: parent.height
-            model: DevInfoModel
-            delegate: Rectangle {
-                id: test
-                x:index * 40
-                y: 0
-                width: 10
-                height: 30
-                color: model.bLight  ? "red" : "gray"
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: {
-                        tooltip.visible = true
-                    }
-                    onExited: {
-                        tooltip.visible = false
-                    }
-                }
+    //        Repeater {
+    //            width: parent.width
+    //            height: parent.height
+    //            model: DevInfoModel
+    //            delegate: Rectangle {
+    //                id: test
+    //                x:index * 40
+    //                y: 0
+    //                width: 10
+    //                height: 30
+    //                color: model.bLight  ? "red" : "gray"
+    //                MouseArea {
+    //                    anchors.fill: parent
+    //                    hoverEnabled: true
+    //                    onEntered: {
+    //                        tooltip.visible = true
+    //                    }
+    //                    onExited: {
+    //                        tooltip.visible = false
+    //                    }
+    //                }
 
-                ToolTip {
-                    id: tooltip
-                    delay: 200
-                    width: 50
-                    y: parent.height
-                    text: model.devName
-                }
-            }
-        }
-    }
+    //                ToolTip {
+    //                    id: tooltip
+    //                    delay: 200
+    //                    width: 50
+    //                    y: parent.height
+    //                    text: model.devName
+    //                }
+    //            }
+    //        }
+    //    }
 
     //底部栏
     Rectangle{

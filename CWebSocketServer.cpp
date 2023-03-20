@@ -258,7 +258,6 @@ void CWebSocketServer::socketDisconnected()
 //后台数据发送的是字符串
 void CWebSocketServer::processTextMessage(QString message)
 {
-
     //关闭超时定时器
     m_RecvTimer.stop();
     emit clearDrawCoord();
