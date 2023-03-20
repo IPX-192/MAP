@@ -6,7 +6,7 @@ CDevInfoModel::CDevInfoModel(QObject *parent)
     m_roleName.insert(DevPosRole, "devPos");
     m_roleName.insert(BHighlightRole, "bLight");
 
-    m_timer.setInterval(1000);
+    m_timer.setInterval(800);
 
     // 设置定时器的触发事件
     QObject::connect(&m_timer, &QTimer::timeout, this, [&](){
@@ -107,9 +107,9 @@ bool CDevInfoModel::updateDevStatus(int pos)
 
 void CDevInfoModel::initDevStatus()
 {
-    for(auto it : m_devInfoData)
+    for(int index = 0; index < m_devInfoData.size(); index++)
     {
-        it.setBHighlight(false);
+        m_devInfoData[index].setBHighlight(false);
     }
     emit layoutChanged();
 }
