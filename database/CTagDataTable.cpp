@@ -95,7 +95,7 @@ bool CTagDataTable::delHistoryData(const CTagData &info, bool bDeleteAll)
             int tagdataID = info.iDataID();
 
             //根据数据ID删除对象
-            auto cursor = select<TagDataTable>(*m_pDatabase, TagDataTable::IDataID == tagdataID).cursor();
+            auto cursor = select<TagDataTable>(*m_pDatabase, TagDataTable::Id == tagdataID).cursor();
 
             if(cursor.rowsLeft())
             {
@@ -142,7 +142,7 @@ bool CTagDataTable::getAllHistoryData(vector<CTagData> &vecDatas)
             tag = (*cursor);
 
             CTagData test;
-            test.setIDataID(tag.iDataID);
+            test.setIDataID(tag.id);
             test.setITagID(tag.iTagID);
             test.setIMapID(tag.iMapID);
             test.setIBattery(tag.iBattery);

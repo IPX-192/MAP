@@ -50,7 +50,7 @@ void CTagDataModel::deleteRow(QString dataID)
     {
         for(int i = 0 ; i< m_TagData.count() ; i++)
         {
-            if(m_TagData[i].strUserID() == dataID.toStdString())
+            if(m_TagData[i].iDataID() == dataID.toInt())
             {
                 m_TagData.remove(i);
             }
@@ -98,7 +98,7 @@ QVariant CTagDataModel::data(const QModelIndex &index, int role) const
     }
     case DataIDRole:
     {
-        return QString::number(eleData.iTagID());
+        return QString::number(eleData.iDataID());
     }
     case MapIDRole:
     {

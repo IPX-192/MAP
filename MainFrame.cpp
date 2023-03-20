@@ -537,6 +537,7 @@ bool MainFrame::addHistoryTagData(COnlineTagInfo &info)
     }
 
     CTagData data;
+    data.setITagID(info.iTagID());
     data.setIPosX(info.iPosX());
     data.setIPosY(info.iPosY());
     data.setIPosZ(info.iPosZ());

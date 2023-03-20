@@ -445,7 +445,7 @@ Popup {
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
-                    color: "#D6D6D6"
+                    color: "#000000"
                     anchors.centerIn: parent
                     fontSizeMode: Text.Fit
                     elide: Text.ElideRight
@@ -468,7 +468,7 @@ Popup {
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
-                    color: "#D6D6D6"
+                    color: "#000000"
                     anchors.centerIn: parent
                     fontSizeMode: Text.Fit
                     elide: Text.ElideRight
@@ -491,7 +491,7 @@ Popup {
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
-                    color: "#D6D6D6"
+                    color: "#000000"
                     anchors.centerIn: parent
                     fontSizeMode: Text.Fit
                     elide: Text.ElideRight
@@ -514,7 +514,7 @@ Popup {
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
-                    color: "#D6D6D6"
+                    color: "#000000"
                     anchors.centerIn: parent
                     fontSizeMode: Text.Fit
                     elide: Text.ElideRight
@@ -529,7 +529,7 @@ Popup {
                 height: 35
                 color: "transparent"
                 border.color: "#1A292D"
-                anchors.left: batteryRect.right
+                anchors.left: timeRect.right
                 anchors.leftMargin: -1
 
                 Text {
