@@ -56,6 +56,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     CClientSystem.h \
+    CDataParseThread.h \
     CUserCoordView.h \
     CWebSocketServer.h \
     MainFrame.h \
@@ -83,6 +84,7 @@ HEADERS += \
 
 SOURCES += \
         CClientSystem.cpp \
+        CDataParseThread.cpp \
         CUserCoordView.cpp \
         CWebSocketServer.cpp \
         MainFrame.cpp \
