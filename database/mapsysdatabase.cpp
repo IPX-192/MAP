@@ -964,22 +964,26 @@ const litesql::FieldType DevInfoTable::Type("type_",A_field_type_string,table__)
 const litesql::FieldType DevInfoTable::IDevID("iDevID_",A_field_type_integer,table__);
 const litesql::FieldType DevInfoTable::DevName("devName_",A_field_type_string,table__);
 const litesql::FieldType DevInfoTable::DevPos("devPos_",A_field_type_integer,table__);
+const litesql::FieldType DevInfoTable::DevWidth("devWidth_",A_field_type_integer,table__);
 void DevInfoTable::initValues() {
 }
 void DevInfoTable::defaults() {
     id = 0;
     iDevID = 0;
     devPos = 0;
+    devWidth = 0;
 }
 DevInfoTable::DevInfoTable(const litesql::Database& db)
-     : litesql::Persistent(db), id(Id), type(Type), iDevID(IDevID), devName(DevName), devPos(DevPos) {
+     : litesql::Persistent(db), id(Id), type(Type), iDevID(IDevID), devName(DevName), devPos(DevPos), devWidth(DevWidth) {
     defaults();
 }
 DevInfoTable::DevInfoTable(const litesql::Database& db, const litesql::Record& rec)
-     : litesql::Persistent(db, rec), id(Id), type(Type), iDevID(IDevID), devName(DevName), devPos(DevPos) {
+     : litesql::Persistent(db, rec), id(Id), type(Type), iDevID(IDevID), devName(DevName), devPos(DevPos), devWidth(DevWidth) {
     defaults();
-    size_t size = (rec.size() > 5) ? 5 : rec.size();
+    size_t size = (rec.size() > 6) ? 6 : rec.size();
     switch(size) {
+    case 6: devWidth = convert<const std::string&, int>(rec[5]);
+        devWidth.setModified(false);
     case 5: devPos = convert<const std::string&, int>(rec[4]);
         devPos.setModified(false);
     case 4: devName = convert<const std::string&, std::string>(rec[3]);
@@ -993,7 +997,7 @@ DevInfoTable::DevInfoTable(const litesql::Database& db, const litesql::Record& r
     }
 }
 DevInfoTable::DevInfoTable(const DevInfoTable& obj)
-     : litesql::Persistent(obj), id(obj.id), type(obj.type), iDevID(obj.iDevID), devName(obj.devName), devPos(obj.devPos) {
+     : litesql::Persistent(obj), id(obj.id), type(obj.type), iDevID(obj.iDevID), devName(obj.devName), devPos(obj.devPos), devWidth(obj.devWidth) {
 }
 const DevInfoTable& DevInfoTable::operator=(const DevInfoTable& obj) {
     if (this != &obj) {
@@ -1002,6 +1006,7 @@ const DevInfoTable& DevInfoTable::operator=(const DevInfoTable& obj) {
         iDevID = obj.iDevID;
         devName = obj.devName;
         devPos = obj.devPos;
+        devWidth = obj.devWidth;
     }
     litesql::Persistent::operator=(obj);
     return *this;
@@ -1025,6 +1030,9 @@ std::string DevInfoTable::insert(litesql::Record& tables, litesql::Records& fiel
     fields.push_back(devPos.name());
     values.push_back(devPos);
     devPos.setModified(false);
+    fields.push_back(devWidth.name());
+    values.push_back(devWidth);
+    devWidth.setModified(false);
     fieldRecs.push_back(fields);
     valueRecs.push_back(values);
     return litesql::Persistent::insert(tables, fieldRecs, valueRecs, sequence__);
@@ -1045,6 +1053,7 @@ void DevInfoTable::addUpdates(Updates& updates) {
     updateField(updates, table__, iDevID);
     updateField(updates, table__, devName);
     updateField(updates, table__, devPos);
+    updateField(updates, table__, devWidth);
 }
 void DevInfoTable::addIDUpdates(Updates& updates) {
 }
@@ -1054,6 +1063,7 @@ void DevInfoTable::getFieldTypes(std::vector<litesql::FieldType>& ftypes) {
     ftypes.push_back(IDevID);
     ftypes.push_back(DevName);
     ftypes.push_back(DevPos);
+    ftypes.push_back(DevWidth);
 }
 void DevInfoTable::delRecord() {
     deleteFromTable(table__, id);
@@ -1100,6 +1110,7 @@ std::auto_ptr<DevInfoTable> DevInfoTable::upcastCopy() const {
     np->iDevID = iDevID;
     np->devName = devName;
     np->devPos = devPos;
+    np->devWidth = devWidth;
     np->inDatabase = inDatabase;
     return auto_ptr<DevInfoTable>(np);
 }
@@ -1110,6 +1121,7 @@ std::ostream & operator<<(std::ostream& os, DevInfoTable o) {
     os << o.iDevID.name() << " = " << o.iDevID << std::endl;
     os << o.devName.name() << " = " << o.devName << std::endl;
     os << o.devPos.name() << " = " << o.devPos << std::endl;
+    os << o.devWidth.name() << " = " << o.devWidth << std::endl;
     os << "-------------------------------------" << std::endl;
     return os;
 }
@@ -1283,7 +1295,7 @@ std::vector<litesql::Database::SchemaItem> MapSysDatabase::getSchema() const {
     res.push_back(Database::SchemaItem("TagInfoTable_","table","CREATE TABLE TagInfoTable_ (id_ " + rowIdType + ",type_ " + backend->getSQLType(A_field_type_string,"") + "" +",iTagID_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iMapID_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iBattery_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosX_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosY_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosZ_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iStaticTime_ " + backend->getSQLType(A_field_type_integer,"") + "" +")"));
     res.push_back(Database::SchemaItem("MapOriginConfig_","table","CREATE TABLE MapOriginConfig_ (id_ " + rowIdType + ",type_ " + backend->getSQLType(A_field_type_string,"") + "" +",iPosX_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosY_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosZ_ " + backend->getSQLType(A_field_type_integer,"") + "" +")"));
     res.push_back(Database::SchemaItem("TagDataTable_","table","CREATE TABLE TagDataTable_ (id_ " + rowIdType + ",type_ " + backend->getSQLType(A_field_type_string,"") + "" +",iTagID_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iDataID_ " + backend->getSQLType(A_field_type_integer,"") + "" +",saveTime_ " + backend->getSQLType(A_field_type_string,"") + "" +",iMapID_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iBattery_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosX_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosY_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iPosZ_ " + backend->getSQLType(A_field_type_integer,"") + "" +",iStaticTime_ " + backend->getSQLType(A_field_type_integer,"") + "" +",strUserID_ " + backend->getSQLType(A_field_type_string,"") + "" +",strUserName_ " + backend->getSQLType(A_field_type_string,"") + "" +",strDepartment_ " + backend->getSQLType(A_field_type_string,"") + "" +",strRole_ " + backend->getSQLType(A_field_type_string,"") + "" +")"));
-    res.push_back(Database::SchemaItem("DevInfoTable_","table","CREATE TABLE DevInfoTable_ (id_ " + rowIdType + ",type_ " + backend->getSQLType(A_field_type_string,"") + "" +",iDevID_ " + backend->getSQLType(A_field_type_integer,"") + "" +",devName_ " + backend->getSQLType(A_field_type_string,"") + "" +",devPos_ " + backend->getSQLType(A_field_type_integer,"") + "" +")"));
+    res.push_back(Database::SchemaItem("DevInfoTable_","table","CREATE TABLE DevInfoTable_ (id_ " + rowIdType + ",type_ " + backend->getSQLType(A_field_type_string,"") + "" +",iDevID_ " + backend->getSQLType(A_field_type_integer,"") + "" +",devName_ " + backend->getSQLType(A_field_type_string,"") + "" +",devPos_ " + backend->getSQLType(A_field_type_integer,"") + "" +",devWidth_ " + backend->getSQLType(A_field_type_integer,"") + "" +")"));
     res.push_back(Database::SchemaItem("DevConfigTable_","table","CREATE TABLE DevConfigTable_ (id_ " + rowIdType + ",type_ " + backend->getSQLType(A_field_type_string,"") + "" +",bRightOrder_ " + backend->getSQLType(A_field_type_boolean,"") + "" +",maxDev_ " + backend->getSQLType(A_field_type_integer,"") + "" +")"));
     res.push_back(Database::SchemaItem("ProductInfoTable_id_idx","index","CREATE INDEX ProductInfoTable_id_idx ON ProductInfoTable_ (id_)"));
     res.push_back(Database::SchemaItem("UserInfoTable_id_idx","index","CREATE INDEX UserInfoTable_id_idx ON UserInfoTable_ (id_)"));

@@ -88,6 +88,8 @@
 	<field name = "devName"     	type = "string"    default = "" />
     <!--设备位置-->
 	<field name = "devPos"         	type = "integer"   default = "" />
+	<!--设备宽度-->
+	<field name = "devWidth"        type = "integer"   default = "" />
   </object>
   
     <!--6.设备配置表-->

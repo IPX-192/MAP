@@ -14,6 +14,7 @@ public:
     {
         DevNameRole,
         DevPosRole,
+        DevWidthRole,
         BHighlightRole
     };
 

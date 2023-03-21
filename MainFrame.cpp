@@ -380,6 +380,7 @@ bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth,int maxDev
                 info.setIDevID(curDevID);
                 info.setStrDevName(QString::number(curDevID).toStdString());
                 info.setIDevPos(curPos);
+                info.setIDevWidth(devWidth);
                 info.setBHighlight(false);
                 bFlag = pDevInfoTable->addDevInfo(info);
             }
@@ -406,6 +407,7 @@ bool MainFrame::addDevINfo(bool bRightOrder, int devNum, int devWidth,int maxDev
                 info.setIDevID(curDevID);
                 info.setStrDevName(QString::number(curDevID).toStdString());
                 info.setIDevPos(curPos);
+                info.setIDevWidth(devWidth);
                 info.setBHighlight(false);
                 bFlag = pDevInfoTable->addDevInfo(info);
             }
@@ -617,6 +619,10 @@ void MainFrame::porcOnlineTag(const CTagInfo &tag)
             m_onlineTagModel.addData(info);
             m_devInfoModel.updateDevStatus(info.iPosX());
             addHistoryTagData(info);
+        }
+        else
+        {
+            m_onlineTagModel.deleteRow(info.iTagID());
         }
     }
 }

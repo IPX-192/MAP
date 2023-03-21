@@ -23,10 +23,14 @@ public:
 
     bool operator==(const CDevInfo& other) const;
 
+    int iDevWidth() const;
+    void setIDevWidth(int iDevWidth);
+
 private:
     int m_iDevID{-1};
     string m_strDevName{""};
     int m_iDevPos{-1};
+    int m_iDevWidth{0};
     bool m_bHighlight{false};
 };
 

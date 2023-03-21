@@ -281,6 +281,8 @@ public:
     litesql::Field<std::string> devName;
     static const litesql::FieldType DevPos;
     litesql::Field<int> devPos;
+    static const litesql::FieldType DevWidth;
+    litesql::Field<int> devWidth;
     static void initValues();
 protected:
     void defaults();

@@ -55,5 +55,15 @@ void CDevInfo::setBHighlight(bool bHighlight)
 
 bool CDevInfo::operator==(const CDevInfo &other) const
 {
-    return (m_iDevID == other.m_iDevID && m_iDevPos == other.m_iDevPos && m_strDevName == other.m_strDevName);
+    return (m_iDevID == other.m_iDevID && m_iDevPos == other.m_iDevPos && m_strDevName == other.m_strDevName && m_iDevWidth == other.m_iDevWidth);
+}
+
+int CDevInfo::iDevWidth() const
+{
+    return m_iDevWidth;
+}
+
+void CDevInfo::setIDevWidth(int iDevWidth)
+{
+    m_iDevWidth = iDevWidth;
 }

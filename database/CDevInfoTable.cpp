@@ -42,6 +42,7 @@ bool CDevInfoTable::addDevInfo(const CDevInfo &info)
         dev.iDevID = info.iDevID();
         dev.devName = info.strDevName();
         dev.devPos = info.iDevPos();
+        dev.devWidth = info.iDevWidth();
         dev.update();
     }
     catch(Except e)
@@ -141,6 +142,7 @@ bool CDevInfoTable::updateDevInfo(const int &DevID, const CDevInfo &info)
             Dev.iDevID = info.iDevID();
             Dev.devName = info.strDevName();
             Dev.devPos = info.iDevPos();
+            Dev.devWidth = info.iDevWidth();
             Dev.update();
         }
 
@@ -184,7 +186,7 @@ bool CDevInfoTable::getAllDevInfo(vector<CDevInfo> &vecDevs)
             test.setIDevID(Dev.iDevID);
             test.setStrDevName(Dev.devName);
             test.setIDevPos(Dev.devPos);
-
+            test.setIDevWidth(Dev.devWidth);
             vecDevs.push_back(test);
         }
 
@@ -228,6 +230,7 @@ bool CDevInfoTable::getDevInfoByID(const int &DevID, CDevInfo &info)
             info.setIDevID(Dev.iDevID);
             info.setStrDevName(Dev.devName);
             info.setIDevPos(Dev.devPos);
+            info.setIDevWidth(Dev.devWidth);
         }
     }
     catch(Except e)

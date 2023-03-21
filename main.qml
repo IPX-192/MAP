@@ -396,50 +396,56 @@ Window {
 
 
     //设备显示
-    //    Item {
-    //        id: devItem
-    //        width: mapItem.width
-    //        height: 30
-    //        anchors.left: mapItem.left
-    //        anchors.top: mapItem.bottom
-    //        anchors.topMargin: 5
+    Item {
+        id: devItem
+        width: mapItem.width
+        height: 30
+        anchors.left: mapItem.left
+        anchors.top: mapItem.bottom
+        anchors.topMargin: 5
 
-    //        Component.onCompleted: {
-    //            InterAction.loadDevINfo()
-    //        }
+        Component.onCompleted: {
+            InterAction.loadDevINfo()
+        }
 
-    //        Repeater {
-    //            width: parent.width
-    //            height: parent.height
-    //            model: DevInfoModel
-    //            delegate: Rectangle {
-    //                id: test
-    //                x:index * 40
-    //                y: 0
-    //                width: 10
-    //                height: 30
-    //                color: model.bLight  ? "red" : "gray"
-    //                MouseArea {
-    //                    anchors.fill: parent
-    //                    hoverEnabled: true
-    //                    onEntered: {
-    //                        tooltip.visible = true
-    //                    }
-    //                    onExited: {
-    //                        tooltip.visible = false
-    //                    }
-    //                }
+        ListView {
+            width: parent.width
+            height: parent.height
+            model: DevInfoModel
+            orientation: Qt.Horizontal
+            clip: true
+            spacing: -1
+            delegate: Rectangle {
+                id: test
+                width: devWidth / 500
+                height: 30
+                color: model.bLight  ? "#00A000" : "gray"
+                border.color: "#A0A0A0"
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onEntered: {
+                        tooltip.visible = true
+                    }
+                    onExited: {
+                        tooltip.visible = false
+                    }
+                }
 
-    //                ToolTip {
-    //                    id: tooltip
-    //                    delay: 200
-    //                    width: 50
-    //                    y: parent.height
-    //                    text: model.devName
-    //                }
-    //            }
-    //        }
-    //    }
+                ToolTip {
+                    id: tooltip
+                    delay: 200
+                    width: 50
+                    y: parent.height
+                    text: model.devName
+                }
+
+                Component.onCompleted: {
+                    console.log("devWidth", devWidth)
+                }
+            }
+        }
+    }
 
     //底部栏
     Rectangle{

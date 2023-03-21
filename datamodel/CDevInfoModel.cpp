@@ -4,6 +4,7 @@ CDevInfoModel::CDevInfoModel(QObject *parent)
 {
     m_roleName.insert(DevNameRole, "devName");
     m_roleName.insert(DevPosRole, "devPos");
+    m_roleName.insert(DevWidthRole, "devWidth");
     m_roleName.insert(BHighlightRole, "bLight");
 
     m_timer.setInterval(800);
@@ -34,6 +35,7 @@ void CDevInfoModel::loadData(const vector<CDevInfo> &vecTag)
         info.setIDevID(it->iDevID());
         info.setIDevPos(it->iDevPos());
         info.setStrDevName(it->strDevName());
+        info.setIDevWidth(it->iDevWidth());
         info.setBHighlight(false);
         m_devInfoData.push_back(info);
 
@@ -149,6 +151,10 @@ QVariant CDevInfoModel::data(const QModelIndex &index, int role) const
     case DevPosRole:
     {
         return eleData.iDevPos();
+    }
+    case DevWidthRole:
+    {
+        return eleData.iDevWidth();
     }
     case BHighlightRole:
     {
