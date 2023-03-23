@@ -40,6 +40,8 @@ private:
     int            m_CoordImgWidth{24};
     int            m_CoordIdWidth{36};
 
+    int            m_setNum{0};
+
 };
 
 #endif // CUSERCOORDVIEW_H

@@ -47,22 +47,22 @@ Window {
         }
     }
 
-    AnimatedImage {
-        anchors.left: parent.left
-        anchors.top:title.bottom
-        anchors.bottom: bottomItem.top
-        source: "qrc:/iamge/leftaDorn.gif"
-        z:10
+    //    AnimatedImage {
+    //        anchors.left: parent.left
+    //        anchors.top:title.bottom
+    //        anchors.bottom: bottomItem.top
+    //        source: "qrc:/iamge/leftaDorn.gif"
+    //        z:10
 
-    }
+    //    }
 
-    AnimatedImage {
-        anchors.right: parent.right
-        anchors.top:title.bottom
-        anchors.bottom: bottomItem.top
-        source: "qrc:/iamge/rightDorn.gif"
-        z:10
-    }
+    //    AnimatedImage {
+    //        anchors.right: parent.right
+    //        anchors.top:title.bottom
+    //        anchors.bottom: bottomItem.top
+    //        source: "qrc:/iamge/rightDorn.gif"
+    //        z:10
+    //    }
 
     Component.onCompleted: {
         chart.setOriginCoord(originX ,maxY - originY)
@@ -314,7 +314,7 @@ Window {
 
                     //新收到消息时清理以往的显示
                     onClearDrawCoord:{
-                        chart.clearVecCoord();
+                        //chart.clearVecCoord();
                     }
                 }
 
@@ -396,56 +396,57 @@ Window {
 
 
     //设备显示
-    Item {
-        id: devItem
-        width: mapItem.width
-        height: 30
-        anchors.left: mapItem.left
-        anchors.top: mapItem.bottom
-        anchors.topMargin: 5
+    //    Item {
+    //        id: devItem
+    //        width: mapItem.width
+    //        height: 30
+    //        anchors.left: mapItem.left
+    //        anchors.top: mapItem.bottom
+    //        anchors.topMargin: 5
+    //        visible: false
 
-        Component.onCompleted: {
-            InterAction.loadDevINfo()
-        }
+    //        Component.onCompleted: {
+    //            InterAction.loadDevINfo()
+    //        }
 
-        ListView {
-            width: parent.width
-            height: parent.height
-            model: DevInfoModel
-            orientation: Qt.Horizontal
-            clip: true
-            spacing: -1
-            delegate: Rectangle {
-                id: test
-                width: devWidth / 500
-                height: 30
-                color: model.bLight  ? "#00A000" : "gray"
-                border.color: "#A0A0A0"
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: {
-                        tooltip.visible = true
-                    }
-                    onExited: {
-                        tooltip.visible = false
-                    }
-                }
+    //        ListView {
+    //            width: parent.width
+    //            height: parent.height
+    //            model: DevInfoModel
+    //            orientation: Qt.Horizontal
+    //            clip: true
+    //            spacing: -1
+    //            delegate: Rectangle {
+    //                id: test
+    //                width: devWidth / 500
+    //                height: 30
+    //                color: model.bLight  ? "#00A000" : "gray"
+    //                border.color: "#A0A0A0"
+    //                MouseArea {
+    //                    anchors.fill: parent
+    //                    hoverEnabled: true
+    //                    onEntered: {
+    //                        tooltip.visible = true
+    //                    }
+    //                    onExited: {
+    //                        tooltip.visible = false
+    //                    }
+    //                }
 
-                ToolTip {
-                    id: tooltip
-                    delay: 200
-                    width: 50
-                    y: parent.height
-                    text: model.devName
-                }
+    //                ToolTip {
+    //                    id: tooltip
+    //                    delay: 200
+    //                    width: 50
+    //                    y: parent.height
+    //                    text: model.devName
+    //                }
 
-                Component.onCompleted: {
-                    console.log("devWidth", devWidth)
-                }
-            }
-        }
-    }
+    //                Component.onCompleted: {
+    //                    // console.log("devWidth", devWidth)
+    //                }
+    //            }
+    //        }
+    //    }
 
     //底部栏
     Rectangle{
