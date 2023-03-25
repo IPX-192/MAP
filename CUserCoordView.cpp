@@ -57,3 +57,17 @@ void CUserCoordView::clearVecCoord()
     m_vecTagId.clear();
     update();
 }
+
+void CUserCoordView::updateVecCoord(int x, int y, int tagId)
+{
+    int i=0;
+    if(m_vecTagId.contains(tagId)){
+        i=m_vecTagId.indexOf(tagId);
+        m_vecCoordX.replace(i,x);
+        m_vecCoordY.replace(i,y);
+    }
+    else {
+        setCurCoord(x,y,tagId);
+    }
+    update();
+}

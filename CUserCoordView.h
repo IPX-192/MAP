@@ -26,6 +26,8 @@ public:
 
     Q_INVOKABLE void clearVecCoord();
 
+    Q_INVOKABLE void updateVecCoord(int x, int y, int tagId);
+
 private:
     QPainter *m_painter{nullptr};           //绘制指针
 
