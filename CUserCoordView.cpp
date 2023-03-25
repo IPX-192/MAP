@@ -41,15 +41,7 @@ void CUserCoordView::setCurCoord(int coordX, int coordY,int tagId)
     m_vecCoordX.append(coordX);
     m_vecCoordY.append(coordY);
     m_vecTagId.append(tagId);
-
-    if(m_vecCoordX.size() == 4)
-    {
-        clearVecCoord();
-        m_vecCoordX.append(coordX);
-        m_vecCoordY.append(coordY);
-        m_vecTagId.append(tagId);
-        update();
-    }
+    update();
 }
 
 void CUserCoordView::setOriginCoord(int originX,int originY)
@@ -63,5 +55,5 @@ void CUserCoordView::clearVecCoord()
     m_vecCoordX.clear();
     m_vecCoordY.clear();
     m_vecTagId.clear();
-    // update();
+    update();
 }

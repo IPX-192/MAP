@@ -24,7 +24,6 @@ CWebSocketServer::CWebSocketServer()
 
     QString serverIP = getLocalIP();
 
-    qDebug()<<"sdasdsadasdasdasd"<<serverIP;
 }
 
 CWebSocketServer::~CWebSocketServer()
@@ -186,7 +185,7 @@ void CWebSocketServer::parseLabelMeg(QJsonObject &object)
     int PixelY = coordY / 500;
 
     //查询人的信息
-    qDebug()<<"*********tagId****"<<tagId;
+    //qDebug()<<"*********tagId****"<<tagId;
 
     CDevInfo dev;
     CDevInfo dev1;
@@ -260,59 +259,64 @@ void CWebSocketServer::processTextMessage(QString message)
 {
     //关闭超时定时器
     m_RecvTimer.stop();
-    emit clearDrawCoord();
-
-    //判断是否转发
-    if(m_bTranspond)
+    m_iRecvNum ++;
+    if(m_iRecvNum == 3)
     {
-        m_ClientSystem.sendMeg(message);
-    }
-    //第一次收到数据缓存设备信息
-    if(m_bFirstRev)
-    {
-        CDevInfoTable* pDevInfoTable = CDatabaseManage::GetInstance()->pDevInfo();
-        if(nullptr == pDevInfoTable)
+
+        emit clearDrawCoord();
+
+        //判断是否转发
+        if(m_bTranspond)
         {
-            return;
+            m_ClientSystem.sendMeg(message);
         }
-        pDevInfoTable->getAllDevInfo(m_vecDevInfo);
-        m_bFirstRev = false;
-    }
-    QJsonObject groupObj;
-    QJsonDocument m_document;
-
-    QJsonParseError error;
-    m_document = QJsonDocument::fromJson(message.toUtf8(), &error);
-
-    if (m_document.isObject()) {
-        groupObj = m_document.object();
-    }
-
-    if (groupObj.contains("MsgType")) {
-        //开始判断报文类型
-        int megType =  groupObj.value("MsgType").toInt();
-
-        //报文为基站则暂时不管，为标签卡则处理
-        if(megType == 1)
+        //第一次收到数据缓存设备信息
+        if(m_bFirstRev)
         {
-            return;
-        }
-    }
-
-    //开始解析标签卡数组，数组里面是每个成员的数据包
-    if (groupObj.contains("TagList")) {
-        QJsonArray mesArray = groupObj.value("TagList").toArray();
-        //这里的解析为JSON数组组合JSON对象
-
-        for (int i = 0; i < mesArray.size(); i++) {
-            if (mesArray.at(i).isObject())
+            CDevInfoTable* pDevInfoTable = CDatabaseManage::GetInstance()->pDevInfo();
+            if(nullptr == pDevInfoTable)
             {
-                QJsonObject object = mesArray.at(i).toObject();
-                parseLabelMeg(object);
+                return;
+            }
+            pDevInfoTable->getAllDevInfo(m_vecDevInfo);
+            m_bFirstRev = false;
+        }
+        QJsonObject groupObj;
+        QJsonDocument m_document;
+
+        QJsonParseError error;
+        m_document = QJsonDocument::fromJson(message.toUtf8(), &error);
+
+        if (m_document.isObject()) {
+            groupObj = m_document.object();
+        }
+
+        if (groupObj.contains("MsgType")) {
+            //开始判断报文类型
+            int megType =  groupObj.value("MsgType").toInt();
+
+            //报文为基站则暂时不管，为标签卡则处理
+            if(megType == 1)
+            {
+                return;
             }
         }
-    }
 
+        //开始解析标签卡数组，数组里面是每个成员的数据包
+        if (groupObj.contains("TagList")) {
+            QJsonArray mesArray = groupObj.value("TagList").toArray();
+            //这里的解析为JSON数组组合JSON对象
+
+            for (int i = 0; i < mesArray.size(); i++) {
+                if (mesArray.at(i).isObject())
+                {
+                    QJsonObject object = mesArray.at(i).toObject();
+                    parseLabelMeg(object);
+                }
+            }
+        }
+        m_iRecvNum = 0;
+    }
     m_RecvTimer.start(2000);   //超过两秒没有新数据上发，则认为传输已经结束，清理界面上的坐标
 }
 

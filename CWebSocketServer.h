@@ -91,9 +91,11 @@ private:
     QWebSocket *pSocket;
     vector<CDevInfo> m_vecDevInfo;
     QTimer        m_RecvTimer;
+    QTimer        m_clearTimer;
     bool          m_bConnectStatus{false};
     bool          m_bTranspond{false};
     bool          m_bFirstRev{true};
+    int           m_iRecvNum{0};
 };
 
 #endif // CWEBSOCKETSERVER_H

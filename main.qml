@@ -47,22 +47,24 @@ Window {
         }
     }
 
-    //    AnimatedImage {
-    //        anchors.left: parent.left
-    //        anchors.top:title.bottom
-    //        anchors.bottom: bottomItem.top
-    //        source: "qrc:/iamge/leftaDorn.gif"
-    //        z:10
+    //两边的动图装饰,如果整体不卡顿可以放开
 
-    //    }
+    AnimatedImage {
+        anchors.left: parent.left
+        anchors.top:title.bottom
+        anchors.bottom: bottomItem.top
+        source: "qrc:/iamge/leftaDorn.gif"
+        z:10
 
-    //    AnimatedImage {
-    //        anchors.right: parent.right
-    //        anchors.top:title.bottom
-    //        anchors.bottom: bottomItem.top
-    //        source: "qrc:/iamge/rightDorn.gif"
-    //        z:10
-    //    }
+    }
+
+    AnimatedImage {
+        anchors.right: parent.right
+        anchors.top:title.bottom
+        anchors.bottom: bottomItem.top
+        source: "qrc:/iamge/rightDorn.gif"
+        z:10
+    }
 
     Component.onCompleted: {
         chart.setOriginCoord(originX ,maxY - originY)
@@ -314,7 +316,7 @@ Window {
 
                     //新收到消息时清理以往的显示
                     onClearDrawCoord:{
-                        //chart.clearVecCoord();
+                        chart.clearVecCoord();
                     }
                 }
 
@@ -389,64 +391,66 @@ Window {
         }
     }
 
-    function getDevPosWidth(width)
-    {
-
-    }
-
-
     //设备显示
-    //    Item {
-    //        id: devItem
-    //        width: mapItem.width
-    //        height: 30
-    //        anchors.left: mapItem.left
-    //        anchors.top: mapItem.bottom
-    //        anchors.topMargin: 5
-    //        visible: false
+    Item {
+        id: devItem
+        width: mapItem.width
+        height: 50
+        anchors.left: mapItem.left
+        anchors.top: mapItem.bottom
+        anchors.topMargin: 5
 
-    //        Component.onCompleted: {
-    //            InterAction.loadDevINfo()
-    //        }
+        Component.onCompleted: {
+            InterAction.loadDevINfo()
+        }
 
-    //        ListView {
-    //            width: parent.width
-    //            height: parent.height
-    //            model: DevInfoModel
-    //            orientation: Qt.Horizontal
-    //            clip: true
-    //            spacing: -1
-    //            delegate: Rectangle {
-    //                id: test
-    //                width: devWidth / 500
-    //                height: 30
-    //                color: model.bLight  ? "#00A000" : "gray"
-    //                border.color: "#A0A0A0"
-    //                MouseArea {
-    //                    anchors.fill: parent
-    //                    hoverEnabled: true
-    //                    onEntered: {
-    //                        tooltip.visible = true
-    //                    }
-    //                    onExited: {
-    //                        tooltip.visible = false
-    //                    }
-    //                }
+        ListView {
+            id:devList
+            width: parent.width
+            height: parent.height
+            model: DevInfoModel
+            orientation: Qt.Horizontal
+            clip: true
+            spacing: (1000 - (20 * count )) / (count - 1)
 
-    //                ToolTip {
-    //                    id: tooltip
-    //                    delay: 200
-    //                    width: 50
-    //                    y: parent.height
-    //                    text: model.devName
-    //                }
+            delegate: Rectangle {
+                id: devRect
+                width: 20
+                height: 30
+                color: model.bLight  ? "red" : "gray"
+                border.color: "#A0A0A0"
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onEntered: {
+                        // tooltip.visible = true
+                    }
+                    onExited: {
+                        // tooltip.visible = false
+                    }
+                }
 
-    //                Component.onCompleted: {
-    //                    // console.log("devWidth", devWidth)
-    //                }
-    //            }
-    //        }
-    //    }
+                //                ToolTip {
+                //                    id: tooltip
+                //                    delay: 200
+                //                    width: 20
+                //                    y: parent.height
+                //                    text: model.devName
+                //                }
+
+                Text
+                {
+                    text: model.devName
+                    color: "white"
+                    anchors.top: devRect.bottom
+                    anchors.topMargin: 3
+                    anchors.horizontalCenter: devRect.horizontalCenter
+                    font.pixelSize: 10
+                    font.family: fontName
+                }
+            }
+        }
+    }
 
     //底部栏
     Rectangle{
