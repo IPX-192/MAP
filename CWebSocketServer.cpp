@@ -1,4 +1,5 @@
 #include "CWebSocketServer.h"
+#include "ProcessJsonWorker.h"
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QJsonParseError>
@@ -17,12 +18,54 @@ CWebSocketServer::CWebSocketServer()
     m_WebSocketServer=new QWebSocketServer("server",QWebSocketServer::NonSecureMode);
     m_WebSocketServer->setMaxPendingConnections(20);
 
-    connect(m_WebSocketServer,SIGNAL(newConnection()),this,SLOT(onNewConnection()));
+    //connect(m_WebSocketServer,SIGNAL(newConnection()),this,SLOT(onNewConnection()));
+    connect(m_WebSocketServer,&QWebSocketServer::newConnection,this,[=](){
+        m_bConnectStatus = true;
+        m_RecvTimer.stop();
+       //emit clearDrawCoord();
+       if(m_bFirstRev)
+       {
+           CDevInfoTable* pDevInfoTable = CDatabaseManage::GetInstance()->pDevInfo();
+           if(nullptr == pDevInfoTable)
+           {
+               return;
+           }
+           pDevInfoTable->getAllDevInfo(m_vecDevInfo);
+           m_bFirstRev = false;
+       }
+        QWebSocket *ws=m_WebSocketServer->nextPendingConnection();
+        ProcessJsonWorker *pjw=new ProcessJsonWorker(ws,m_vecDevInfo);
+        pjw->start();
+        connect(pjw,&ProcessJsonWorker::finish,this,[=](int x,int y,int tagId,CTagInfo tagInfo,QString message){
+            emit updateVecCoord(x,y,tagId);
+            emit parseTagIdInfo(tagInfo);
+            if(m_bTranspond)
+            {
+                qDebug()<<m_bTranspond;
+                m_ClientSystem.sendMeg(message);
+                //emit startTrans(m_ClientSystem);
+            }
+
+            pjw->exit();
+            pjw->wait();
+           // pjw->deleteLater();
+        });
+        connect(ws,SIGNAL(disconnected()),this,SLOT(socketDisconnected()));
+        m_RecvTimer.start(10000);
+
+    });
+
+
+
+
     connect(&m_RecvTimer,&QTimer::timeout,this,&CWebSocketServer::onRecvDataFinish);
+
 
     startServer(false);
 
     QString serverIP = getLocalIP();
+
+    qDebug()<<"sdasdsadasdasdasd"<<serverIP;
 
 }
 
@@ -163,6 +206,7 @@ void CWebSocketServer::parseLabelMeg(QJsonArray &array)
 
 void CWebSocketServer::parseLabelMeg(QJsonObject &object)
 {
+#if 0
     //标签卡的数据为7个JSON对象组合而成,依次解析即可
     int tagId = 0;
     int coordX = 0;      //单位毫米
@@ -236,16 +280,19 @@ void CWebSocketServer::parseLabelMeg(QJsonObject &object)
     tagInfo.setIStaticTime(staticTime);
 
     emit parseTagIdInfo(tagInfo);
+#endif
 }
 
 //连接成功
 void CWebSocketServer::onNewConnection()
 {
+# if 0
     m_bConnectStatus = true;
     pSocket = m_WebSocketServer->nextPendingConnection();
     connect(pSocket,SIGNAL(textMessageReceived(QString)),this,SLOT(processTextMessage(QString)));
     connect(pSocket,SIGNAL(binaryMessageReceived(QByteArray)),this,SLOT(processByteArrayMessage(QByteArray)));
     connect(pSocket,SIGNAL(disconnected()),this,SLOT(socketDisconnected()));
+#endif
 }
 
 //连接断开
@@ -257,6 +304,17 @@ void CWebSocketServer::socketDisconnected()
 //后台数据发送的是字符串
 void CWebSocketServer::processTextMessage(QString message)
 {
+
+    m_RecvTimer.stop();
+   //emit clearDrawCoord();
+
+   //判断是否转发
+   if(m_bTranspond)
+   {
+       m_ClientSystem.sendMeg(message);
+       //emit startTrans(m_ClientSystem);
+   }
+#if 0
     //关闭超时定时器
     m_RecvTimer.stop();
     m_iRecvNum ++;
@@ -318,6 +376,7 @@ void CWebSocketServer::processTextMessage(QString message)
         m_iRecvNum = 0;
     }
     m_RecvTimer.start(2000);   //超过两秒没有新数据上发，则认为传输已经结束，清理界面上的坐标
+#endif
 }
 
 //数据是JSON格式，解析后判断是基站相关还是标签卡相关(对象包括数组）

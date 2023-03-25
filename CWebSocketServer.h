@@ -66,6 +66,8 @@ signals:
 
     Q_INVOKABLE void clearDrawCoord();
 
+    Q_INVOKABLE void updateVecCoord(int coordX,int coordY,int tagID);
+
 
 private:
 

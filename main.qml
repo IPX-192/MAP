@@ -314,6 +314,11 @@ Window {
                         chart.setCurCoord(coordX,coordY,tagID);
                     }
 
+                    onUpdateVecCoord:{
+                        chart.updateVecCoord(coordX,coordY,tagID);
+                    }
+
+
                     //新收到消息时清理以往的显示
                     onClearDrawCoord:{
                         chart.clearVecCoord();
@@ -448,7 +453,8 @@ Window {
                     anchors.horizontalCenterOffset: -5
                     font.pixelSize: 10
                     font.family: fontName
-                    visible: Number(model.devName) % 5 === 0
+
+                    visible: (Number(model.devName) % 5 === 0)||(Number(model.devName) ===1)
                 }
             }
         }
