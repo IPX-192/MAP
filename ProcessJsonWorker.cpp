@@ -17,10 +17,10 @@ void ProcessJsonWorker::run()
 
     connect(m_ws,&QWebSocket::textMessageReceived,this,[=](QString message){
         m_message=message;
-      // qDebug()<<m_message;
+        // qDebug()<<m_message;
 
-//        m_ClientSystem.connectToServer("127.0.0.1","1234");
-//        m_ClientSystem.sendMeg(m_message);
+        //        m_ClientSystem.connectToServer("127.0.0.1","1234");
+        //        m_ClientSystem.sendMeg(m_message);
 
         QJsonObject groupObj;
         QJsonDocument m_document;
@@ -48,7 +48,7 @@ void ProcessJsonWorker::run()
             //这里的解析为JSON数组组合JSON对象
             if (mesArray.at(0).isObject())
             {
-                 jObj = mesArray.at(0).toObject();
+                jObj = mesArray.at(0).toObject();
             }
         }
         int tagId = 0;
@@ -59,7 +59,7 @@ void ProcessJsonWorker::run()
         int mapId = 0;
         int battery = 0;
         int devNum = 0;
-       // Mythread *devNumThread=new Mythread;
+        // Mythread *devNumThread=new Mythread;
         tagId = jObj.value("TagId").toInt();
         coordX = jObj.value("X").toInt();
         coordY = jObj.value("Y").toInt();
@@ -73,12 +73,12 @@ void ProcessJsonWorker::run()
         int PixelY = coordY / 340;
 
 
-    //    emit sendDevData(m_vecDevInfo,coordX);
-    //    emit startDevNumThread();
+        //    emit sendDevData(m_vecDevInfo,coordX);
+        //    emit startDevNumThread();
 
 
         //查询人的信息
-        qDebug()<<"*********tagId****"<<tagId;
+        // qDebug()<<"*********tagId****"<<tagId;
 
         CDevInfo dev;
         CDevInfo dev1;
@@ -128,7 +128,7 @@ void ProcessJsonWorker::run()
         emit finish(PixelX,PixelY,tagId,tagInfo,m_message);
     });
     //转发
-  //  qDebug()<<m_message;
+    //  qDebug()<<m_message;
 
 
     exec();

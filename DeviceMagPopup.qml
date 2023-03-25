@@ -367,6 +367,12 @@ Popup {
                         //如果是逆序添加
                         if(!bNext)
                         {
+                            //最大设备号不能大于200
+                            if( Number(maxDevInput.text) > 200)
+                            {
+                                devNumTip.text = "最大设备号不能大于200!"
+                                return
+                            }
                             //添加设备个数不能大于最大设备号
                             if(Number(devNumInput.text) > Number(maxDevInput.text))
                             {
