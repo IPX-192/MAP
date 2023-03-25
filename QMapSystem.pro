@@ -59,6 +59,7 @@ HEADERS += \
     CDataParseThread.h \
     CUserCoordView.h \
     CWebSocketServer.h \
+    ProcessJsonWorker.h\
     MainFrame.h \
     database/CAbstractConfigInfo.h \
     database/CDatabaseManage.h \
@@ -87,6 +88,7 @@ SOURCES += \
         CDataParseThread.cpp \
         CUserCoordView.cpp \
         CWebSocketServer.cpp \
+        ProcessJsonWorker.cpp\
         MainFrame.cpp \
         database/CAbstractConfigInfo.cpp \
         database/CDatabaseManage.cpp \
