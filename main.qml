@@ -450,10 +450,9 @@ Window {
                     anchors.top: devRect.bottom
                     anchors.topMargin: 3
                     anchors.horizontalCenter: devRect.horizontalCenter
-                    anchors.horizontalCenterOffset: -5
-                    font.pixelSize: 10
+                    anchors.horizontalCenterOffset: -1
+                    font.pixelSize: 9
                     font.family: fontName
-
                     visible: (Number(model.devName) % 5 === 0)||(Number(model.devName) ===1)
                 }
             }

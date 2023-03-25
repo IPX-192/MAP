@@ -27,11 +27,10 @@ Item {
         width: 500
         height: 300
         contentWidth: 500
-        contentHeight: 3600
+        contentHeight: 3800
         clip: true
         anchors.verticalCenter: parent.verticalCenter
         ScrollBar.vertical.policy: ScrollBar.AlwaysOn
-
 
         //表格 列头
         Item {
