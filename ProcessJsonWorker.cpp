@@ -27,6 +27,7 @@ void ProcessJsonWorker::run()
             groupObj = m_document.object();
         }
 
+
         if (groupObj.contains("MsgType")) {
             //开始判断报文类型
             int megType =  groupObj.value("MsgType").toInt();
