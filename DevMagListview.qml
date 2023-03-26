@@ -27,7 +27,7 @@ Item {
         width: 500
         height: 300
         contentWidth: 500
-        contentHeight: 3800
+        contentHeight: devInfoListiew.count * itemHeigt
         clip: true
         anchors.verticalCenter: parent.verticalCenter
         ScrollBar.vertical.policy: ScrollBar.AlwaysOn
@@ -37,7 +37,7 @@ Item {
             id: headItem
             width: tableWidth
             height: itemHeigt
-            anchors.left: backgRect.left
+            anchors.left: parent.left
             anchors.leftMargin: 1
             anchors.top: parent.top
 
@@ -94,7 +94,7 @@ Item {
             anchors.left: headItem.left
             model: DevInfoModel
             clip: true
-            maximumFlickVelocity: 200
+            maximumFlickVelocity: itemHeigt * 10
             flickableDirection: Flickable.VerticalFlick
             boundsBehavior: Flickable.StopAtBounds
             interactive:true

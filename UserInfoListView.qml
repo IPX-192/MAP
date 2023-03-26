@@ -10,6 +10,8 @@ Item {
     //列高
     property real itemHeigt: 35
 
+    property var curContenY: 0
+
 
     //表格 列头
     Item {
@@ -218,10 +220,19 @@ Item {
         anchors.left: headItem.left
         model: OnlineTagModel
         clip: true
-        maximumFlickVelocity: itemHeigt * 10
+        maximumFlickVelocity: itemHeigt * 50
         flickableDirection: Flickable.VerticalFlick
         boundsBehavior: Flickable.StopAtBounds
         spacing: -1
+        currentIndex: -1
+
+        onMovementEnded: {
+            curContenY = contentY
+        }
+
+        onContentYChanged: {
+            contentY = curContenY
+        }
 
         delegate: Item {
             id: listItem
