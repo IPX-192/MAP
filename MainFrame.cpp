@@ -629,5 +629,6 @@ void MainFrame::porcOnlineTag(const CTagInfo &tag)
 
 void MainFrame::onClearTagInfoFrom()
 {
+    qDebug()<<"响应清空表格";
     m_onlineTagModel.deleteAll();
 }

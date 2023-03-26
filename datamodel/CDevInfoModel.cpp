@@ -7,7 +7,7 @@ CDevInfoModel::CDevInfoModel(QObject *parent)
     m_roleName.insert(DevWidthRole, "devWidth");
     m_roleName.insert(BHighlightRole, "bLight");
 
-    m_timer.setInterval(800);
+    m_timer.setInterval(500);
 
     // 设置定时器的触发事件
     QObject::connect(&m_timer, &QTimer::timeout, this, [&](){

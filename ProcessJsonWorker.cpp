@@ -14,13 +14,8 @@ ProcessJsonWorker::ProcessJsonWorker(QWebSocket *ws,vector<CDevInfo> &vec,QObjec
 
 void ProcessJsonWorker::run()
 {
-
     connect(m_ws,&QWebSocket::textMessageReceived,this,[=](QString message){
         m_message=message;
-        // qDebug()<<m_message;
-
-        //        m_ClientSystem.connectToServer("127.0.0.1","1234");
-        //        m_ClientSystem.sendMeg(m_message);
 
         QJsonObject groupObj;
         QJsonDocument m_document;
@@ -78,7 +73,7 @@ void ProcessJsonWorker::run()
 
 
         //查询人的信息
-        // qDebug()<<"*********tagId****"<<tagId;
+        //qDebug()<<"*********tagId****"<<tagId;
 
         CDevInfo dev;
         CDevInfo dev1;
@@ -123,7 +118,7 @@ void ProcessJsonWorker::run()
         tagInfo.setITagID(tagId);
         tagInfo.setIBattery(battery);
         tagInfo.setIStaticTime(staticTime);
-        qDebug()<<PixelX<<"+"<<PixelY<<"+"<<tagId<<"+"<<tagInfo.iPosZ();
+        //qDebug()<<PixelX<<"+"<<PixelY<<"+"<<tagId<<"+"<<tagInfo.iPosZ();
 
         emit finish(PixelX,PixelY,tagId,tagInfo,m_message);
     });

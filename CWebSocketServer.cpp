@@ -22,17 +22,17 @@ CWebSocketServer::CWebSocketServer()
     connect(m_WebSocketServer,&QWebSocketServer::newConnection,this,[=](){
         m_bConnectStatus = true;
         m_RecvTimer.stop();
-       //emit clearDrawCoord();
-       if(m_bFirstRev)
-       {
-           CDevInfoTable* pDevInfoTable = CDatabaseManage::GetInstance()->pDevInfo();
-           if(nullptr == pDevInfoTable)
-           {
-               return;
-           }
-           pDevInfoTable->getAllDevInfo(m_vecDevInfo);
-           m_bFirstRev = false;
-       }
+        //emit clearDrawCoord();
+        if(m_bFirstRev)
+        {
+            CDevInfoTable* pDevInfoTable = CDatabaseManage::GetInstance()->pDevInfo();
+            if(nullptr == pDevInfoTable)
+            {
+                return;
+            }
+            pDevInfoTable->getAllDevInfo(m_vecDevInfo);
+            m_bFirstRev = false;
+        }
         QWebSocket *ws=m_WebSocketServer->nextPendingConnection();
         ProcessJsonWorker *pjw=new ProcessJsonWorker(ws,m_vecDevInfo);
         pjw->start();
@@ -48,15 +48,12 @@ CWebSocketServer::CWebSocketServer()
 
             pjw->exit();
             pjw->wait();
-           // pjw->deleteLater();
+            // pjw->deleteLater();
         });
         connect(ws,SIGNAL(disconnected()),this,SLOT(socketDisconnected()));
         m_RecvTimer.start(10000);
 
     });
-
-
-
 
     connect(&m_RecvTimer,&QTimer::timeout,this,&CWebSocketServer::onRecvDataFinish);
 
@@ -306,14 +303,14 @@ void CWebSocketServer::processTextMessage(QString message)
 {
 
     m_RecvTimer.stop();
-   //emit clearDrawCoord();
+    //emit clearDrawCoord();
 
-   //判断是否转发
-   if(m_bTranspond)
-   {
-       m_ClientSystem.sendMeg(message);
-       //emit startTrans(m_ClientSystem);
-   }
+    //判断是否转发
+    if(m_bTranspond)
+    {
+        m_ClientSystem.sendMeg(message);
+        //emit startTrans(m_ClientSystem);
+    }
 #if 0
     //关闭超时定时器
     m_RecvTimer.stop();
@@ -433,6 +430,7 @@ void CWebSocketServer::processByteArrayMessage(QByteArray array)
 
 void CWebSocketServer::onRecvDataFinish()
 {
+    qDebug()<<"超时清空";
     m_bFirstRev = true;
     m_vecDevInfo.clear();
     emit clearDrawCoord();

@@ -190,7 +190,32 @@ void ClientDialog::onSendButtonClicked()
     QJsonObject groupObj;
     groupObj.insert("MsgType",2);
 
+    QJsonObject groupObj1;
+    groupObj.insert("MsgType",2);
+
+    QJsonObject groupObj2;
+    groupObj.insert("MsgType",2);
+
+    QJsonObject groupObj3;
+    groupObj.insert("MsgType",2);
+
+    QJsonObject groupObj4;
+    groupObj.insert("MsgType",2);
+
+    QJsonObject groupObj5;
+    groupObj.insert("MsgType",2);
+
+    QJsonObject groupObj6;
+    groupObj.insert("MsgType",2);
+
     QJsonArray array ;
+    QJsonArray array1 ;
+    QJsonArray array2 ;
+    QJsonArray array3 ;
+    QJsonArray array4 ;
+    QJsonArray array5 ;
+    QJsonArray array6 ;
+
     QJsonObject item1;
     item1.insert("TagId",1001);
     item1.insert("X",100 + flag);
@@ -209,57 +234,57 @@ void ClientDialog::onSendButtonClicked()
     item2.insert("StaticTime",111);
     item2.insert("MapId",11);
     item2.insert("Battery",80);
-    array.append(item2);
+    array1.append(item2);
 
-    //    QJsonObject item3;
-    //    item3.insert("TagId",1003);
-    //    item3.insert("X",14827+flag);
-    //    item3.insert("Y",-13241 + flag1);
-    //    item3.insert("Z",3);
-    //    item3.insert("StaticTime",111);
-    //    item3.insert("MapId",11);
-    //    item3.insert("Battery",80);
-    //    array.append(item3);
+    QJsonObject item3;
+    item3.insert("TagId",1003);
+    item3.insert("X",14827+flag);
+    item3.insert("Y",-13241 + flag1);
+    item3.insert("Z",3);
+    item3.insert("StaticTime",111);
+    item3.insert("MapId",11);
+    item3.insert("Battery",80);
+    array2.append(item3);
 
-    //    QJsonObject item4;
-    //    item4.insert("TagId",1004);
-    //    item4.insert("X",20189+flag);
-    //    item4.insert("Y",6601 + flag1);
-    //    item4.insert("Z",3);
-    //    item4.insert("StaticTime",111);
-    //    item4.insert("MapId",11);
-    //    item4.insert("Battery",80);
-    //    array.append(item4);
+    QJsonObject item4;
+    item4.insert("TagId",1004);
+    item4.insert("X",20189+flag);
+    item4.insert("Y",6601 + flag1);
+    item4.insert("Z",3);
+    item4.insert("StaticTime",111);
+    item4.insert("MapId",11);
+    item4.insert("Battery",80);
+    array3.append(item4);
 
-    //    QJsonObject item5;
-    //    item5.insert("TagId",1005);
-    //    item5.insert("X",21052+flag);
-    //    item5.insert("Y",14210 - flag1);
-    //    item5.insert("Z",3);
-    //    item5.insert("StaticTime",111);
-    //    item5.insert("MapId",11);
-    //    item5.insert("Battery",80);
-    //    array.append(item5);
+    QJsonObject item5;
+    item5.insert("TagId",1005);
+    item5.insert("X",21052+flag);
+    item5.insert("Y",14210 - flag1);
+    item5.insert("Z",3);
+    item5.insert("StaticTime",111);
+    item5.insert("MapId",11);
+    item5.insert("Battery",80);
+    array4.append(item5);
 
-    //    QJsonObject item6;
-    //    item6.insert("TagId",1006);
-    //    item6.insert("X",100000+flag);
-    //    item6.insert("Y",5512 - flag1);
-    //    item6.insert("Z",3);
-    //    item6.insert("StaticTime",111);
-    //    item6.insert("MapId",11);
-    //    item6.insert("Battery",80);
-    //    array.append(item6);
+    QJsonObject item6;
+    item6.insert("TagId",1006);
+    item6.insert("X",100000+flag);
+    item6.insert("Y",5512 - flag1);
+    item6.insert("Z",3);
+    item6.insert("StaticTime",111);
+    item6.insert("MapId",11);
+    item6.insert("Battery",80);
+    array5.append(item6);
 
-    //    QJsonObject item7;
-    //    item7.insert("TagId",1007);
-    //    item7.insert("X",221415+flag);
-    //    item7.insert("Y",3241 - flag1);
-    //    item7.insert("Z",3);
-    //    item7.insert("StaticTime",111);
-    //    item7.insert("MapId",11);
-    //    item7.insert("Battery",80);
-    //    array.append(item7);
+    QJsonObject item7;
+    item7.insert("TagId",1007);
+    item7.insert("X",221415+flag);
+    item7.insert("Y",3241 - flag1);
+    item7.insert("Z",3);
+    item7.insert("StaticTime",111);
+    item7.insert("MapId",11);
+    item7.insert("Battery",80);
+    array6.append(item7);
 
     //    QJsonObject item8;
     //    item8.insert("TagId",1008);
@@ -281,48 +306,14 @@ void ClientDialog::onSendButtonClicked()
     //    item9.insert("Battery",80);
     //    array.append(item9);
 
-    //    QJsonObject item10;
-    //    item10.insert("TagId",1010);
-    //    item10.insert("X",31240+flag);
-    //    item10.insert("Y",1241 - flag1);
-    //    item10.insert("Z",3);
-    //    item10.insert("StaticTime",111);
-    //    item10.insert("MapId",11);
-    //    item10.insert("Battery",80);
-    //    array.append(item10);
 
-    //    QJsonObject item11;
-    //    item11.insert("TagId",1011);
-    //    item11.insert("X",8192+flag);
-    //    item11.insert("Y",812 - flag1);
-    //    item11.insert("Z",3);
-    //    item11.insert("StaticTime",111);
-    //    item11.insert("MapId",11);
-    //    item11.insert("Battery",80);
-    //    array.append(item11);
 
-    //    QJsonArray arr1[20];
-    //    int j=1000;
-    //    for(int i=0;i<arr1->size();i++){
-    //        QJsonObject itemTemp;
-    //        QRandomGenerator rand;
-    //        int x=rand.bounded(0,40000);
-    //        int y=rand.bounded(-2500,2500);
-    //        itemTemp.insert("TagId",j);
-    //        itemTemp.insert("X",x+flag);
-    //        itemTemp.insert("Y",y-flag1);
-    //        itemTemp.insert("Z",0);
-    //        itemTemp.insert("StaticTime",111);
-    //        itemTemp.insert("MapId",11);
-    //        itemTemp.insert("Battery",80);
-    //        arr1->append(itemTemp);
-    //        j++;
-    //    }
 
     //    if(flag<= 400000)
     //    {
     //        flag+=10000;
     //    }
+
     flag+=1000;
 
     flag1 += 100;
@@ -341,14 +332,53 @@ void ClientDialog::onSendButtonClicked()
     }
 
     groupObj.insert("TagList",array);
+    groupObj1.insert("TagList",array1);
+    groupObj2.insert("TagList",array2);
+    groupObj3.insert("TagList",array3);
+    groupObj4.insert("TagList",array4);
+    groupObj5.insert("TagList",array5);
+    groupObj6.insert("TagList",array6);
 
     QJsonDocument document;
-    document.setObject(groupObj);
-    QByteArray array_byte = document.toJson(QJsonDocument::Compact);
-    QString hdwHeartRate(array_byte);
+    QJsonDocument document1;
+    QJsonDocument document2;
+    QJsonDocument document3;
+    QJsonDocument document4;
+    QJsonDocument document5;
+    QJsonDocument document6;
 
+    document.setObject(groupObj);
+    document1.setObject(groupObj1);
+    document2.setObject(groupObj2);
+    document3.setObject(groupObj3);
+    document4.setObject(groupObj4);
+    document5.setObject(groupObj5);
+    document6.setObject(groupObj6);
+
+
+    QByteArray array_byte = document.toJson(QJsonDocument::Compact);
+    QByteArray array_byte1 = document1.toJson(QJsonDocument::Compact);
+    QByteArray array_byte2 = document2.toJson(QJsonDocument::Compact);
+    QByteArray array_byte3 = document3.toJson(QJsonDocument::Compact);
+    QByteArray array_byte4 = document4.toJson(QJsonDocument::Compact);
+    QByteArray array_byte5 = document5.toJson(QJsonDocument::Compact);
+    QByteArray array_byte6 = document6.toJson(QJsonDocument::Compact);
+
+    QString hdwHeartRate(array_byte);
+    QString hdwHeartRate1(array_byte1);
+    QString hdwHeartRate2(array_byte2);
+    QString hdwHeartRate3(array_byte3);
+    QString hdwHeartRate4(array_byte4);
+    QString hdwHeartRate5(array_byte5);
+    QString hdwHeartRate6(array_byte6);
 
     m_websocket.sendTextMessage(hdwHeartRate);
+    m_websocket.sendTextMessage(hdwHeartRate1);
+    m_websocket.sendTextMessage(hdwHeartRate2);
+    m_websocket.sendTextMessage(hdwHeartRate3);
+    m_websocket.sendTextMessage(hdwHeartRate4);
+    m_websocket.sendTextMessage(hdwHeartRate5);
+    m_websocket.sendTextMessage(hdwHeartRate6);
 }
 
 void ClientDialog::onSendButtonClicked2()
