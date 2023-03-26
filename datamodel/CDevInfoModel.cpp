@@ -39,7 +39,7 @@ void CDevInfoModel::loadData(const vector<CDevInfo> &vecTag)
         info.setBHighlight(false);
         m_devInfoData.push_back(info);
 
-        m_devRanges.insert(info.iDevID(), {lastRange, it->iDevPos()});
+        m_devRanges.insert(m_devInfoData.count() - 1, {lastRange, it->iDevPos()});
         lastRange = it->iDevPos() + 1;
     }
 
@@ -86,8 +86,8 @@ bool CDevInfoModel::updateDevStatus(int pos)
     {
        if (pos >= it.value().first && pos < it.value().second)
        {
-           //it.key()是设备编号，此处参数应为index,故减1
-           updateRowData(true, it.key() - 1);
+           //it.key()是index
+           updateRowData(true, it.key());
            return true;
        }
     }
