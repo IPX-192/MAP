@@ -1,4 +1,5 @@
 ﻿import QtQuick 2.0
+import QtQuick.Controls 2.5
 
 Item {
     width: 900
@@ -175,6 +176,9 @@ Item {
         flickableDirection: Flickable.VerticalFlick
         boundsBehavior: Flickable.StopAtBounds
         spacing: -1
+        cacheBuffer: itemHeigt * 10
+
+        ScrollBar.vertical : ScrollBar {}
 
         delegate: Item {
             id: listItem

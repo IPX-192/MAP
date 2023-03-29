@@ -299,6 +299,11 @@ Popup {
         flickableDirection: Flickable.VerticalFlick
         boundsBehavior: Flickable.StopAtBounds
         spacing: -1
+        cacheBuffer: 35 * 10
+
+        ScrollBar.vertical : ScrollBar {
+            minimumSize: 0.05
+        }
 
         delegate: Item {
             id: listItem

@@ -417,6 +417,7 @@ Window {
             orientation: Qt.Horizontal
             clip: true
             spacing: (1000 - (20 * count )) / (count - 1)
+            cacheBuffer: 200
 
             delegate: Rectangle {
                 id: devRect

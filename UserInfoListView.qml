@@ -1,4 +1,5 @@
 ﻿import QtQuick 2.0
+import QtQuick.Controls 2.5
 
 Item {
     width: 1000
@@ -225,6 +226,8 @@ Item {
         boundsBehavior: Flickable.StopAtBounds
         spacing: -1
         currentIndex: -1
+        cacheBuffer: itemHeigt * 10
+        ScrollBar.vertical : ScrollBar {}
 
         onMovementEnded: {
             curContenY = contentY
