@@ -13,8 +13,26 @@ Popup {
         color: "lightblue"
     }
 
+    //当前页码，默认为0
+    property int currentPage: 0
+
+    //当前index
+    property int currentIndex: currentPage * 11
+
     onOpened: {
-        InterAction.loadAllTagData()
+        if(InterAction.totalPage >= 1)
+        {
+            currentPage = 1
+            InterAction.getPageData(currentPage)
+        }
+    }
+
+    onCurrentPageChanged: {
+        if(currentPage >= 1)
+        {
+            currentIndex = (currentPage - 1) * 11
+        }
+        InterAction.getPageData(currentPage)
     }
 
     Text {
@@ -37,7 +55,7 @@ Popup {
         anchors.right: parent.horizontalCenter
         anchors.rightMargin: 30
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 15
+        anchors.bottomMargin: 5
         onClicked: {
             InterAction.delAllTagData()
         }
@@ -51,11 +69,75 @@ Popup {
         anchors.left: parent.horizontalCenter
         anchors.leftMargin: 30
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 15
+        anchors.bottomMargin: 5
         onClicked: {
             dataViewPopup.close()
         }
     }
+
+
+    Row {
+        id: pageNumItem
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: closeBtn.top
+        anchors.bottomMargin: 10
+        spacing: 2
+
+        Text {
+            id: lastPageBtn
+            text: "◀ "
+            font.pixelSize: 25
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if(currentPage > 1)
+                    {
+                        currentPage--
+                    }
+                }
+            }
+        }
+        Text {
+            id: pageNumTitle1
+            text: qsTr("共 ")
+            anchors.verticalCenter: lastPageBtn.verticalCenter
+        }
+        Text {
+            id: curPageNum
+            text: currentPage
+            anchors.verticalCenter: lastPageBtn.verticalCenter
+        }
+        Text {
+            id: partLine
+            text: qsTr("/")
+            anchors.verticalCenter: lastPageBtn.verticalCenter
+        }
+        Text {
+            id: totalPageNum
+            text: InterAction.totalPage
+            anchors.verticalCenter: lastPageBtn.verticalCenter
+        }
+        Text {
+            id: pageNumTitle2
+            text: qsTr(" 页")
+            anchors.verticalCenter: lastPageBtn.verticalCenter
+        }
+        Text {
+            id: nextPageBtn
+            text: " ▶"
+            font.pixelSize: 25
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if(currentPage < InterAction.totalPage)
+                    {
+                        currentPage++
+                    }
+                }
+            }
+        }
+    }
+
 
     Rectangle {
         id: backgRect
@@ -323,7 +405,7 @@ Popup {
 
                 Text {
                     id: numText
-                    text: index + 1
+                    text: currentIndex + index + 1
                     width: parent.width
                     font.pixelSize: 16
                     font.family: "Microsoft YaHei"
@@ -568,6 +650,7 @@ Popup {
                     anchors.fill: parent
                     onClicked: {
                         InterAction.delTagData(dataID)
+                        InterAction.getPageData(currentPage)
                     }
                 }
             }

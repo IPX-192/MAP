@@ -4,6 +4,7 @@
 #include "CAbstractConfigInfo.h"
 #include "../datamanager/CTagData.h"
 
+#define PER_PAGE_COUNT 11
 //历史数据表
 class CTagDataTable : public CAbstractConfigInfo
 {
@@ -25,6 +26,12 @@ public:
 
     //根据条件查找历史数据
     bool getHistoryDataByCondition(const string &strCondition, vector<CTagData> &vecDatas);
+
+    //查询指定范围标签数据
+    bool getPageHistoryData(vector<CTagData> &vecDatas, int &page);
+
+    //获取所有数据count
+    int getAllDataCount();
 
 private:
     MapSysDatabase *m_pDatabase{nullptr};

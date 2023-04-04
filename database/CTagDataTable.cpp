@@ -205,6 +205,20 @@ bool CTagDataTable::getHistoryDataByCondition(const string &strCondition, vector
             TagDataTable table(*m_pDatabase);
             table = *cursor;
 
+            record.setIDataID(table.id);
+            record.setITagID(table.iTagID);
+            record.setIMapID(table.iMapID);
+            record.setIBattery(table.iBattery);
+            record.setIPosX(table.iPosX);
+            record.setIPosY(table.iPosY);
+            record.setIPosZ(table.iPosZ);
+            record.setIStaticTime(table.iStaticTime);
+            record.setStrUserID(table.strUserID);
+            record.setStrRole(table.strRole);
+            record.setStrUsername(table.strUserName);
+            record.setSaveTime(table.saveTime);
+            record.setStrDepartment(table.strDepartment);
+
             vecDatas.push_back(record);
         }
     }
@@ -218,4 +232,123 @@ bool CTagDataTable::getHistoryDataByCondition(const string &strCondition, vector
     unlock();
 
     return bRes;
+}
+
+bool CTagDataTable::getPageHistoryData(vector<CTagData> &vecDatas, int &page)
+{
+    lock();
+
+
+    bool bSuccess = false;
+
+    if(m_pDatabase == nullptr)
+    {
+        qDebug()<<"m_pDatabase == nullptr";
+        return bSuccess;
+    }
+
+    if(page < 1)
+    {
+        return bSuccess;
+    }
+
+    int startPage = PER_PAGE_COUNT * (page - 1);
+
+    m_pDatabase->begin();
+
+    try
+    {
+        QString query = QString("SELECT * FROM  TagDataTable_ LIMIT %1 OFFSET %2").arg(PER_PAGE_COUNT).arg(startPage);
+
+        Records recods = m_pDatabase->query(query.toStdString());
+
+        for (const Record& record : recods) {
+            // 处理查询结果...
+            CTagData tagData;
+            tagData.setIDataID(atoi(record[0]));
+            tagData.setITagID(atoi(record[2]));
+            tagData.setSaveTime(record[4]);
+            tagData.setIMapID(atoi(record[5]));
+            tagData.setIBattery(atoi(record[6]));
+            tagData.setIPosX(atoi(record[7]));
+            tagData.setIPosY(atoi(record[8]));
+            tagData.setIPosZ(atoi(record[9]));
+            tagData.setIStaticTime(atoi(record[10]));
+            tagData.setStrUserID(record[11]);
+            tagData.setStrUsername(record[12]);
+            tagData.setStrDepartment(record[13]);
+            tagData.setStrRole(record[14]);
+
+            vecDatas.push_back(tagData);
+        }
+
+
+        /*
+        auto cursor = select<TagDataTable>(*m_pDatabase, TagDataTable::Id >= startPage && TagDataTable::Id < endPage).cursor();
+
+        for(;cursor.rowsLeft();cursor++)
+        {
+            CTagData record;
+            TagDataTable table(*m_pDatabase);
+            table = *cursor;
+            record.setIDataID(table.id);
+            record.setITagID(table.iTagID);
+            record.setIMapID(table.iMapID);
+            record.setIBattery(table.iBattery);
+            record.setIPosX(table.iPosX);
+            record.setIPosY(table.iPosY);
+            record.setIPosZ(table.iPosZ);
+            record.setIStaticTime(table.iStaticTime);
+            record.setStrUserID(table.strUserID);
+            record.setStrRole(table.strRole);
+            record.setStrUsername(table.strUserName);
+            record.setSaveTime(table.saveTime);
+            record.setStrDepartment(table.strDepartment);
+
+            vecDatas.push_back(record);
+        }
+        */
+    }
+    catch(Except e)
+    {
+        bSuccess = false;
+    }
+
+    m_pDatabase->commit();
+
+    unlock();
+
+    return bSuccess;
+}
+
+int CTagDataTable::getAllDataCount()
+{
+    lock();
+
+    int count = 0;
+    bool bSuccess = false;
+
+    if(m_pDatabase == nullptr)
+    {
+        qDebug()<<"m_pDatabase == nullptr";
+        return bSuccess;
+    }
+
+    m_pDatabase->begin();
+
+    try
+    {
+       count = int(select<TagDataTable>(*m_pDatabase).all().size());
+    }
+
+    catch(Except e)
+    {
+        bSuccess = false;
+    }
+
+    m_pDatabase->commit();
+
+    unlock();
+
+    return count;
 }

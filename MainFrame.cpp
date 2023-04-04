@@ -272,6 +272,8 @@ bool MainFrame::loadAllTagData()
     bFlag = pTagDataTable->getAllHistoryData(vecData);
 
     m_tagDataModel.loadData(vecData);
+
+    return bFlag;
 }
 
 bool MainFrame::delTagData(QString dataID)
@@ -296,6 +298,8 @@ bool MainFrame::delTagData(QString dataID)
     {
         m_tagDataModel.deleteRow(dataID);
     }
+
+    emit sigTotalPageChanged();
 
     return bFlag;
 }
@@ -507,6 +511,21 @@ void MainFrame::updateMaxNumConfig(int maxnum)
     pDevInfoConfig->updateMaxDevNumConfig(maxnum);
 }
 
+void MainFrame::getPageData(int page)
+{
+    CTagDataTable* pTagDataTable = CDatabaseManage::GetInstance()->pTagData();
+
+    if(nullptr == pTagDataTable)
+    {
+        return;
+    }
+
+    vector<CTagData> vecData;
+    pTagDataTable->getPageHistoryData(vecData, page);
+
+    m_tagDataModel.loadData(vecData);
+}
+
 void MainFrame::setDevAddType(bool type)
 {
     m_devAddNext = type;
@@ -589,6 +608,8 @@ bool MainFrame::addHistoryTagData(COnlineTagInfo &info)
 
     bFlag = pTagDataTable->addHistoryData(data);
 
+    emit sigTotalPageChanged();
+
     return bFlag;
 }
 
@@ -616,8 +637,9 @@ void MainFrame::porcOnlineTag(const CTagInfo &tag)
 
         if(m_onlineTagModel.checkTagInfoUpdate(info))
         {
+            qDebug()<<"处理数据";
             m_onlineTagModel.addData(info);
-            m_devInfoModel.updateDevStatus(info.iPosX());
+            //m_devInfoModel.updateDevStatus(info.iPosX());
             addHistoryTagData(info);
         }
         else
@@ -631,4 +653,21 @@ void MainFrame::onClearTagInfoFrom()
 {
     qDebug()<<"响应清空表格";
     m_onlineTagModel.deleteAll();
+}
+
+int MainFrame::getDataTotalPage()
+{
+    CTagDataTable* pTagDataTable = CDatabaseManage::GetInstance()->pTagData();
+
+    int dataPage = 0;
+
+    if(nullptr == pTagDataTable)
+    {
+        dataPage = 0;
+    }
+
+    dataPage = pTagDataTable->getAllDataCount();
+    m_dataPage = dataPage;
+
+    return dataPage;
 }

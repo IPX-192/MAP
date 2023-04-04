@@ -22,6 +22,9 @@
 class MainFrame : public QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY(int totalPage READ getDataTotalPage NOTIFY sigTotalPageChanged)
+
 public:
     MainFrame(QObject *parent = nullptr);
     virtual ~MainFrame();
@@ -96,15 +99,24 @@ public:
     //更新最大设备数量
     Q_INVOKABLE void updateMaxNumConfig(int maxnum);
 
+    //历史数据获取指定页码数据
+    Q_INVOKABLE void getPageData(int page);
+
     //////设备管理相关///////
     Q_INVOKABLE void setDevAddType(bool type);
 
     Q_INVOKABLE bool getDevAddType();
 
     Q_INVOKABLE int  getDevNum();
+
+    //注册给qml提供的接口
+    int getDataTotalPage();
+
 signals:
     Q_INVOKABLE void sigSetDevAddEnable(bool next);
     Q_INVOKABLE void sigSetDevWidth(int width);
+
+    void sigTotalPageChanged();
 
 public slots:
 
@@ -132,6 +144,9 @@ public:
 
     //是否是正向添加设备
     bool                m_devAddNext{true};
+
+    //历史数据总页码
+    int                 m_dataPage{0};
 };
 
 #endif // MAINFRAME_H
