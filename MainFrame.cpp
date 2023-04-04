@@ -666,7 +666,7 @@ int MainFrame::getDataTotalPage()
         dataPage = 0;
     }
 
-    dataPage = pTagDataTable->getAllDataCount();
+    dataPage = pTagDataTable->getAllDataCount() / 11;
     m_dataPage = dataPage;
 
     return dataPage;

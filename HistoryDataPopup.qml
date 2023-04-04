@@ -1,5 +1,5 @@
-﻿import QtQuick 2.0
-import QtQuick.Controls 2.5
+﻿import QtQuick 2.12
+import QtQuick.Controls 2.12
 
 Popup {
     id: dataViewPopup
@@ -142,12 +142,12 @@ Popup {
     Rectangle {
         id: backgRect
         width: 900
-        height: 400
+        height: 410
         color: "transparent"
         border.color: "#1A292D"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: titeText.bottom
-        anchors.topMargin: 40
+        anchors.topMargin: 20
     }
 
     //表格 列头
@@ -371,7 +371,7 @@ Popup {
     ListView{
         id: userInfoListiew
         width: 908
-        height: backgRect.height - headItem.height
+        height: 375
         anchors.top: headItem.bottom
         anchors.topMargin: -1
         anchors.left: headItem.left
@@ -650,11 +650,19 @@ Popup {
                     anchors.fill: parent
                     onClicked: {
                         InterAction.delTagData(dataID)
-                        InterAction.getPageData(currentPage)
                     }
                 }
             }
 
+        }
+
+    }
+
+
+    Connections {
+        target: InterAction
+        onSigTotalPageChanged: {
+            InterAction.getPageData(currentPage)
         }
     }
 
